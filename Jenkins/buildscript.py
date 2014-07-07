@@ -15,7 +15,12 @@ import subprocess as subp
 import sys
 
 # Common variables
-WORKSPACE = os.environ["WORKSPACE"]
+try:
+  WORKSPACE = os.environ["WORKSPACE"]
+except KeyError:
+  print "WORKSPACE environment variable not found.\nThe build script assumes that a WORKSPACE environment variable points at the root of the source directory."
+  sys.exit(1)
+  
 PROJECTS_ROOT = os.path.join(WORKSPACE, "exercises")
 TEMPLATE_DIR_NAME = "template" #skip this directory
 
@@ -67,11 +72,13 @@ def build(build_root):
     Build the code in the build_root directory
     """
     if is_windows():
-        raise NotImplementedError("build is not implemented yet for Windows")
+        msbuild_exe = r'C:\Windows\Microsoft.NET\Framework64\v4.0.30319\msbuild.exe'
+        sln = os.path.join(build_root, "Project.sln")
+        cmd = [msbuild_exe, "/p:Configuration=Release", sln]
     else:
         cmd = ["make", "-C", build_root]
-        print "Running '%s'" % " ".join(cmd)
-        status = subp.call(cmd)
+    print "Running '%s'" % " ".join(cmd)
+    status = subp.call(cmd)
 
 ################### Main #########################################################
 
