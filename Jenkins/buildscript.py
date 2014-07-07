@@ -11,6 +11,7 @@ of the clone repository.
 """
 import os
 import shutil
+import subprocess as subp
 import sys
 
 # Common variables
@@ -28,16 +29,24 @@ BUILDS_ROOT = os.path.join(WORKSPACE, "builds")
 
 ################### Functions #########################################################
 
-def run_cmake(cmakelists_path):
+def is_windows():
     if sys.platform == "win32":
+        return True
+    else:
+        return False
+
+def run_cmake(cmakelists_path):
+
+
+    if is_windows():
         cmake_exe = r"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe"
-        generator = '"Visual Studio 11 Win64"'
+        generator = 'Visual Studio 11 Win64'
     else:
         cmake_exe = "cmake"
-        generator = '"Unix Makefiles"'
-    cmd = "%s %s %s %s" % (cmake_exe, "-G", generator, cmakelists_path)
-    print "Running '%s'" % cmd
-    os.system(cmd)
+        generator = 'Unix Makefiles'
+    cmd = [cmake_exe, "-G", generator, cmakelists_path]
+    print "Running '%s'" % " ".join(cmd)
+    status = subp.call(cmd)
 
 def generate_project(src_root, build_root):
     """
@@ -50,8 +59,19 @@ def generate_project(src_root, build_root):
         run_cmake(src_root)
     except Exception, exc:
         print "Error: %s" % str(exc)
-
+    # Get back to where we started
     os.chdir(saveddir)
+
+def build(build_root):
+    """
+    Build the code in the build_root directory
+    """
+    if is_windows():
+        raise NotImplementedError("build is not implemented yet for Windows")
+    else:
+        cmd = ["make", "-C", build_root]
+        print "Running '%s'" % " ".join(cmd)
+        status = subp.call(cmd)
 
 ################### Main #########################################################
 
@@ -73,4 +93,5 @@ for dirname in dirnames:
     build_root = os.path.join(BUILDS_ROOT, dirname)
     os.mkdir(build_root)
     generate_project(src_root, build_root)
+    build(build_root)
     ##
