@@ -78,7 +78,7 @@ def build(build_root):
     else:
         cmd = ["make", "-C", build_root]
     print "Running '%s'" % " ".join(cmd)
-    status = subp.call(cmd)
+    return subp.call(cmd)
 
 ################### Main #########################################################
 
@@ -94,11 +94,14 @@ dirnames.remove(TEMPLATE_DIR_NAME)
 if len(dirnames) == 0:
     raise RuntimeError("No projects found to build")
 
+statuses = []
 for dirname in dirnames:
     print "Building",dirname
     src_root = os.path.join(PROJECTS_ROOT, dirname)
     build_root = os.path.join(BUILDS_ROOT, dirname)
     os.mkdir(build_root)
     generate_project(src_root, build_root)
-    build(build_root)
+    statuses.append(build(build_root))
     ##
+exit_status = all(map(lambda x: x == 0, statuses))
+sys.exit(exit_status)
