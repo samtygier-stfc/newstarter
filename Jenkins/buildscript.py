@@ -103,5 +103,5 @@ for dirname in dirnames:
     generate_project(src_root, build_root)
     statuses.append(build(build_root))
     ##
-exit_status = all(map(lambda x: x == 0, statuses))
-sys.exit(exit_status)
+all_passed = all(map(lambda x: x == 0, statuses))
+sys.exit(0 if all_passed else 1)
