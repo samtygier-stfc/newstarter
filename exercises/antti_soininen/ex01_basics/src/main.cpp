@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <array>
 #include <cctype>
 #include <fstream>
 #include <iostream>
@@ -9,12 +8,19 @@
 
 bool is_punctuation(char c)
 {
-    const static std::array<char, 9> punctuation{
+    const size_t nPunctuation = 9;
+    const char punctuation[] = {
         '.', ',', '?', '\'', '\"', '!', '(', ')', ':'
     };
-    return std::any_of(punctuation.begin(), punctuation.end(), [c](char p) {
-        return p == c;
-    });
+    for(size_t i = 0; i != nPunctuation; ++i)
+        if(punctuation[i] == c) return true;
+    return false;
+}
+
+typedef std::pair<const std::string*, unsigned> countPair;
+bool count_comparison(const countPair& lhs, const countPair& rhs)
+{
+    return lhs.second > rhs.second;
 }
 
 int main(int argc, char **argv)
@@ -34,16 +40,15 @@ int main(int argc, char **argv)
             w.clear();
         }
     }
-    using countPair = std::pair<const std::string*, unsigned>;
     std::vector<countPair> resorted;
-    for(const auto& item : wordCount) {
-        resorted.push_back(countPair(&item.first, item.second));
+    std::map<std::string, unsigned>::iterator iter = wordCount.begin();
+    for( ; iter != wordCount.end(); ++iter) {
+        resorted.push_back(countPair(&iter->first, iter->second));
     }
-    std::sort(resorted.begin(), resorted.end(), [](const countPair& lhs, const countPair& rhs) {
-        return lhs.second > rhs.second;
-    });
-    for(const auto& item : resorted) {
-        std::cout << *item.first << " " << item.second << std::endl;
+    std::sort(resorted.begin(), resorted.end(), count_comparison);
+    std::vector<countPair>::iterator iter2 = resorted.begin();
+    for( ; iter2 != resorted.end(); ++iter2) {
+        std::cout << *iter2->first << " " << iter2->second << std::endl;
     }
     return EXIT_SUCCESS;
 }
