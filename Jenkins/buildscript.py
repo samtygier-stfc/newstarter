@@ -42,12 +42,10 @@ def is_windows():
 
 def run_cmake(cmakelists_path):
 
-
+    cmake_exe = "cmake"
     if is_windows():
-        cmake_exe = r"C:\Program Files (x86)\CMake 2.8\bin\cmake.exe"
         generator = 'Visual Studio 11 Win64'
     else:
-        cmake_exe = "cmake"
         generator = 'Unix Makefiles'
     cmd = [cmake_exe, "-G", generator, cmakelists_path]
     print "Running '%s'" % " ".join(cmd)
@@ -76,8 +74,9 @@ def build(build_root):
         sln = os.path.join(build_root, "Project.sln")
         cmd = [msbuild_exe, "/p:Configuration=Release", sln]
     else:
-        cmd = ["make", "-C", build_root]
-    print "Running '%s'" % " ".join(cmd)
+        cmd = ["\"", "make", "-C", build_root, "\""]
+        scl_cmd = ["scl", "enable", "devtoolset-2"]
+    print "Running '%s'" % " ".join(scl_cmd)." ".join(cmd)
     return subp.call(cmd)
 
 ################### Main #########################################################
