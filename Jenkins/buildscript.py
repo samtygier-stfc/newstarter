@@ -74,9 +74,9 @@ def build(build_root):
         sln = os.path.join(build_root, "Project.sln")
         cmd = [msbuild_exe, "/p:Configuration=Release", sln]
     else:
-        cmd = ["\"", "make", "-C", build_root, "\""]
-        scl_cmd = ["scl", "enable", "devtoolset-2"]
-    print "Running '%s'" % " ".join(scl_cmd)." ".join(cmd)
+       command_str = " ".join(["\"", "make", "-C", "build_root", "\""])
+       cmd = " ".join(["scl", "enable", "devtoolset-2", "{0}"]).format(command_str)
+    print "Running '%s'" % cmd
     return subp.call(cmd)
 
 ################### Main #########################################################
