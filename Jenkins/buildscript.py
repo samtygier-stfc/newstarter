@@ -10,6 +10,7 @@ It assumes the WORKSPACE environment variable exists and points to the root
 of the clone repository.
 """
 import os
+import platform
 import shutil
 import subprocess as subp
 import sys
@@ -35,9 +36,13 @@ BUILDS_ROOT = os.path.join(WORKSPACE, "builds")
 ################### Functions #########################################################
 
 def make_scl_command(command_list):
-    command_str = " ".join(command_list)
-    quoted_command_str = "\"{0}\"".format(command_str)
+  dist = platform.linux_distribution()
+  command_str = " ".join(command_list)
+  quoted_command_str = "\"{0}\"".format(command_str)
+  if 'Red Hat' in dist[0] and dist[1].startswith('6'):
     return " ".join(["scl", "enable", "devtoolset-2", "{0}".format(quoted_command_str)])
+  else:
+    return command_str
 
 def is_windows():
     if sys.platform == "win32":
