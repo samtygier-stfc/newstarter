@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <string>
 #include <algorithm>
@@ -67,11 +68,16 @@ int main()
 		return left.second < right.second;
 	});
 
-	// write words and associated counts
-	cout << "\n" << endl;
+	// write words and associated counts to text file
+	ofstream writefile;
+	writefile.open("results.txt");
+	writefile << "Word\tUsage\n" << endl;
+
 	for (vector<pair<string, int>>::const_iterator it = sorted_counters.begin();
 		it != sorted_counters.end(); it++)
-		cout << it->first << "\t" << it->second << endl;
+		writefile << it->first << "\t" << it->second << endl;
+
+	writefile.close();
 
 	return 0;
 }
