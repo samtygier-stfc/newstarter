@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 			sorted_counters.push_back(*it);
 
 		std::sort(sorted_counters.begin(), sorted_counters.end(),
-			[](auto &left, auto &right) {
+			[](const pair<string, int> &left, const pair<string, int> &right) {
 			return left.second > right.second;
 		});
 
