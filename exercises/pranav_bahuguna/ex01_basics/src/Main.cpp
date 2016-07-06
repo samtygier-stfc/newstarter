@@ -15,7 +15,7 @@ typedef vector<pair<string, int>>::const_iterator vp_iter;
 // True if character is punctuation/whitespace, otherwise false
 bool is_punct(char c)
 {
-	static const string punct = ".,?'\"!():-";
+	static const string punct = ".,?\"!():-";
 	return (isspace(c) || find(punct.begin(), punct.end(), c) != punct.end());
 }
 
