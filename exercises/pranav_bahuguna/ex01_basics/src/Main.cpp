@@ -2,6 +2,7 @@
 #include <map>
 #include <string>
 #include <algorithm>
+#include <vector>
 
 using namespace std;
 
@@ -56,9 +57,20 @@ int main()
 		}
 	}
 
+	// Sorts map by value into a a new vector sorted_counters
+	vector<pair<string, int>> sorted_counters;
+	for (map_iter it = counters.begin(); it != counters.end(); it++)
+		sorted_counters.push_back(*it);
+
+	sort(sorted_counters.begin(), sorted_counters.end(), 
+		[](auto &left, auto &right) {
+		return left.second < right.second;
+	});
+
 	// write words and associated counts
 	cout << "\n" << endl;
-	for (map_iter it = counters.begin(); it != counters.end(); it++)
+	for (vector<pair<string, int>>::const_iterator it = sorted_counters.begin();
+		it != sorted_counters.end(); it++)
 		cout << it->first << "\t" << it->second << endl;
 
 	return 0;
