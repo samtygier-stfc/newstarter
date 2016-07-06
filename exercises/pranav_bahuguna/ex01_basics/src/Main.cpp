@@ -1,18 +1,29 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
-// Determines whether a character is part of the list of punctuation
+typedef string::iterator str_iter;
+typedef map<string, int>::const_iterator map_iter;
+
+// True if character is punctuation/whitespace, otherwise false
 bool is_punct(char c)
 {
 	static const string punct = ".,?'\"!():-";
-	return (find(punct.begin(), punct.end(), c) != punct.end());
+	return (isspace(c) || find(punct.begin(), punct.end(), c) != punct.end());
+}
+
+// False if character is punctuation/whitespace, otherwise true
+bool not_punct(char c)
+{
+	return !is_punct(c);
 }
 
 int main()
 {
+	str_iter i;
 	string s;
 	map<string, int> counters;
 
@@ -21,34 +32,34 @@ int main()
 	getline(cin, s);
 
 	// all alphanumeric chars set to lowercase (for case insensitivity)
-	for (int i = 0; i < s.size(); i++)
-		s[i] = tolower(s[i]);
-
-	for (int i = 0; i < s.size(); i++)
+	i = s.begin();
+	while (i != s.end()) {
+		*i = tolower(*i);
+		i++;
+	}
+	
+	i = s.begin();
+	while (i != s.end())
 	{
 		// skip over leading blanks or punctuation
-		while (isspace(s[i]) || is_punct(s[i]))
-			i++;
+		i = find_if(i, s.end(), not_punct);
 
 		// find end of next word
-		int j = i;
-		while (j != s.size() && !isspace(s[j]) && !is_punct(s[j]))
-			j++;
+		str_iter j = find_if(i, s.end(), is_punct);
 		
 		// if non-whitespace characters found, it is a word
 		if (i != j) {
 			// only words longer than 4 characters are included
-			if (j - i > 4)
-				counters[s.substr(i, j - i)]++;
+			if (distance(i, j) > 4) 
+				counters[string(i, j)]++;
 			i = j;
 		}
 	}
 
 	// write words and associated counts
-	for (map<string, int>::const_iterator it = counters.begin();
-		it != counters.end(); it++) {
+	cout << "\n" << endl;
+	for (map_iter it = counters.begin(); it != counters.end(); it++)
 		cout << it->first << "\t" << it->second << endl;
-	}
 
 	return 0;
 }
