@@ -27,61 +27,85 @@ bool not_punct(char c)
 
 int main(int argc, char* argv[])
 {
-	str_iter i;
-	string s;
-	map<string, int> counters;
-	ifstream infile(argv[1]);
-	ofstream writefile;
-	writefile.open("results.txt");
+	ifstream infile;
+	ofstream outfile;
 
-	while (getline(infile, s))
+	try 
 	{
-		// all alphanumeric chars set to lowercase (for case insensitivity)
-		i = s.begin();
-		while (i != s.end()) {
-			*i = tolower(*i);
-			i++;
-		}
+		// I/O file exception handling
+		if (argc < 2)
+			throw invalid_argument("Error: ");
 
-		i = s.begin();
-		while (i != s.end())
+		infile.open(argv[1]);
+		if (!infile) 
+			throw ifstream::failure("Error opening input file");
+
+		outfile.open("results.txt");
+		if (!outfile) 
+			throw ofstream::failure("Error opening output file");
+
+		str_iter i;
+		string s;
+		map<string, int> counters;
+
+		while (getline(infile, s))
 		{
-			// skip over leading blanks or punctuation
-			i = find_if(i, s.end(), not_punct);
+			// all alphanumeric chars set to lowercase (for case insensitivity)
+			i = s.begin();
+			while (i != s.end()) {
+				*i = tolower(*i);
+				i++;
+			}
 
-			// find end of next word
-			str_iter j = find_if(i, s.end(), is_punct);
+			i = s.begin();
+			while (i != s.end())
+			{
+				// skip over leading blanks or punctuation
+				i = find_if(i, s.end(), not_punct);
 
-			// if non-whitespace characters found, it is a word
-			if (i != j) {
-				// only words longer than 4 characters are included
-				if (distance(i, j) > 4)
-					counters[string(i, j)]++;
-				i = j;
+				// find end of next word
+				str_iter j = find_if(i, s.end(), is_punct);
+
+				// if non-whitespace characters found, it is a word
+				if (i != j) {
+					// only words longer than 4 characters are included
+					if (distance(i, j) > 4)
+						counters[string(i, j)]++;
+					i = j;
+				}
 			}
 		}
-	}
 
-	// Sorts map by value into a a new vector sorted_counters
-	vector<pair<string, int>> sorted_counters;
-	for (map_iter it = counters.begin(); it != counters.end(); it++)
-		sorted_counters.push_back(*it);
+		// Sorts map by value into a a new vector sorted_counters
+		vector<pair<string, int>> sorted_counters;
+		for (map_iter it = counters.begin(); it != counters.end(); it++)
+			sorted_counters.push_back(*it);
 
-	sort(sorted_counters.begin(), sorted_counters.end(), 
-		[](auto &left, auto &right) {
-		return left.second > right.second;
-	});
+		std::sort(sorted_counters.begin(), sorted_counters.end(),
+			[](auto &left, auto &right) {
+			return left.second > right.second;
+		});
 
-	// write words and associated counts to text file
-	writefile << setw(20) << left << "Word" << setw(20) << "Usage\n" << endl;
-	for (vp_iter it = sorted_counters.begin();
+		// write words and associated counts to text file
+		outfile << setw(20) << left << "Word" << setw(20) << "Usage\n" << endl;
+		for (vp_iter it = sorted_counters.begin();
 		it != sorted_counters.end(); it++) {
-		writefile << left << setw(20) << it->first << setw(20)
-			<< it->second << endl;
-	}
+			outfile << left << setw(20) << it->first << setw(20)
+				<< it->second << endl;
+		}
 
-	writefile.close();
-	infile.close();
+		outfile.close();
+		infile.close();
+	}
+	catch (invalid_argument &err)
+	{
+		cerr << err.what() << "Less than 1 arguments provided" << endl;
+	}
+	catch (ios_base::failure &err)
+	{
+		cerr << err.what() << endl;
+		return -1;
+	}
 
 	return 0;
 }
