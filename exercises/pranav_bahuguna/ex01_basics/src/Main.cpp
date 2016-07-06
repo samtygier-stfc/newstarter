@@ -4,6 +4,7 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -24,12 +25,12 @@ bool not_punct(char c)
 	return !is_punct(c);
 }
 
-int main()
+int main(int argc, char* argv[])
 {
 	str_iter i;
 	string s;
 	map<string, int> counters;
-	ifstream infile("example.txt");
+	ifstream infile(argv[1]);
 	ofstream writefile;
 	writefile.open("results.txt");
 
@@ -72,10 +73,12 @@ int main()
 	});
 
 	// write words and associated counts to text file
-	writefile << "Word\tUsage\n" << endl;
-	for (vp_iter it = sorted_counters.begin(); 
-		it != sorted_counters.end(); it++)
-		writefile << it->first << "\t" << it->second << endl;
+	writefile << setw(20) << left << "Word" << setw(20) << "Usage\n" << endl;
+	for (vp_iter it = sorted_counters.begin();
+		it != sorted_counters.end(); it++) {
+		writefile << left << setw(20) << it->first << setw(20)
+			<< it->second << endl;
+	}
 
 	writefile.close();
 	infile.close();
