@@ -9,6 +9,7 @@ using namespace std;
 
 typedef string::iterator str_iter;
 typedef map<string, int>::const_iterator map_iter;
+typedef vector<pair<string, int>>::const_iterator vp_iter;
 
 // True if character is punctuation/whitespace, otherwise false
 bool is_punct(char c)
@@ -28,33 +29,35 @@ int main()
 	str_iter i;
 	string s;
 	map<string, int> counters;
+	ifstream infile("example.txt");
+	ofstream writefile;
+	writefile.open("results.txt");
 
-	// obtain user input
-	cout << "Type a sentence: ";
-	getline(cin, s);
-
-	// all alphanumeric chars set to lowercase (for case insensitivity)
-	i = s.begin();
-	while (i != s.end()) {
-		*i = tolower(*i);
-		i++;
-	}
-	
-	i = s.begin();
-	while (i != s.end())
+	while (getline(infile, s))
 	{
-		// skip over leading blanks or punctuation
-		i = find_if(i, s.end(), not_punct);
+		// all alphanumeric chars set to lowercase (for case insensitivity)
+		i = s.begin();
+		while (i != s.end()) {
+			*i = tolower(*i);
+			i++;
+		}
 
-		// find end of next word
-		str_iter j = find_if(i, s.end(), is_punct);
-		
-		// if non-whitespace characters found, it is a word
-		if (i != j) {
-			// only words longer than 4 characters are included
-			if (distance(i, j) > 4) 
-				counters[string(i, j)]++;
-			i = j;
+		i = s.begin();
+		while (i != s.end())
+		{
+			// skip over leading blanks or punctuation
+			i = find_if(i, s.end(), not_punct);
+
+			// find end of next word
+			str_iter j = find_if(i, s.end(), is_punct);
+
+			// if non-whitespace characters found, it is a word
+			if (i != j) {
+				// only words longer than 4 characters are included
+				if (distance(i, j) > 4)
+					counters[string(i, j)]++;
+				i = j;
+			}
 		}
 	}
 
@@ -65,19 +68,17 @@ int main()
 
 	sort(sorted_counters.begin(), sorted_counters.end(), 
 		[](auto &left, auto &right) {
-		return left.second < right.second;
+		return left.second > right.second;
 	});
 
 	// write words and associated counts to text file
-	ofstream writefile;
-	writefile.open("results.txt");
 	writefile << "Word\tUsage\n" << endl;
-
-	for (vector<pair<string, int>>::const_iterator it = sorted_counters.begin();
+	for (vp_iter it = sorted_counters.begin(); 
 		it != sorted_counters.end(); it++)
 		writefile << it->first << "\t" << it->second << endl;
 
 	writefile.close();
+	infile.close();
 
 	return 0;
 }
