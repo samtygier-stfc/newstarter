@@ -13,7 +13,6 @@ bool is_punct(char c)
 
 int main()
 {
-	int i = 0;
 	string s;
 	map<string, int> counters;
 
@@ -21,7 +20,11 @@ int main()
 	cout << "Type a sentence: ";
 	getline(cin, s);
 
-	while (i != s.size())
+	// all alphanumeric chars set to lowercase (for case insensitivity)
+	for (int i = 0; i < s.size(); i++)
+		s[i] = tolower(s[i]);
+
+	for (int i = 0; i < s.size(); i++)
 	{
 		// skip over leading blanks or punctuation
 		while (isspace(s[i]) || is_punct(s[i]))
