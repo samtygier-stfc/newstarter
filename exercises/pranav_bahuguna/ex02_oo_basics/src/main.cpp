@@ -137,5 +137,10 @@ double Circle::perimeter()
 
 int main()
 {
+	Rectangle *shape1 = new Rectangle(5, 10);
+	Square    *shape2 = new Square(3);
+	Triangle  *shape3 = new Triangle(4, 7);
+	Circle    *shape4 = new Circle(5);
+
 	return 0;
 }
