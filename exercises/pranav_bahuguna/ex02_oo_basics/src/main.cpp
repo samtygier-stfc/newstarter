@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -141,6 +142,7 @@ struct ShapeSorter
 	static void perimeter_desc(vector<Shape*> shapes);
 };
 
+// Prints shapes matching a specified type
 void ShapeSorter::matches_type(vector<Shape*> shapes, string type)
 {
 	cout << "Shapes matching type \"" << type << "\"..." << endl;
@@ -158,6 +160,7 @@ void ShapeSorter::matches_type(vector<Shape*> shapes, string type)
 	cout << endl;
 }
 
+// Prints shapes matching a specified number of sides
 void ShapeSorter::matches_sides(vector<Shape*> shapes, int sides)
 {
 	cout << "Shapes matching " << sides << " sides..." << endl;
@@ -175,8 +178,45 @@ void ShapeSorter::matches_sides(vector<Shape*> shapes, int sides)
 	cout << endl;
 }
 
-void ShapeSorter::area_desc(vector<Shape*> shapes) {}
-void ShapeSorter::perimeter_desc(vector<Shape*> shapes) {}
+// Prints shapes in area descending order
+void ShapeSorter::area_desc(vector<Shape*> shapes)
+{
+	cout << "Shapes in order of area descending..." << endl;
+
+	sort(shapes.begin(), shapes.end(),
+		[](Shape* left, Shape* right) {
+		return left->area() > right->area();
+	});
+
+	int i = 1;
+	for (shape_iter it = shapes.begin(); it != shapes.end(); it++)
+	{
+		cout << "Shape " << i << " --- ";
+		(*it)->print();
+		i++;
+	}
+	cout << endl;
+}
+
+// Prints shapes in perimeter descending order
+void ShapeSorter::perimeter_desc(vector<Shape*> shapes)
+{
+	cout << "Shapes in order of perimeter descending..." << endl;
+
+	sort(shapes.begin(), shapes.end(),
+		[](Shape* left, Shape* right) {
+		return left->perimeter() > right->perimeter();
+	});
+
+	int i = 1;
+	for (shape_iter it = shapes.begin(); it != shapes.end(); it++)
+	{
+		cout << "Shape " << i << " --- ";
+		(*it)->print();
+		i++;
+	}
+	cout << endl;
+}
 
 int main()
 {
@@ -185,11 +225,13 @@ int main()
 	shapes.push_back(new Rectangle(5, 10));
 	shapes.push_back(new Square(3));
 	shapes.push_back(new Triangle(4, 7));
-	shapes.push_back(new Circle(5));
+	shapes.push_back(new Circle(4.5));
 
 	// call several ShapeSorter functions on the shapes
 	ShapeSorter::matches_type(shapes, "circle");
 	ShapeSorter::matches_sides(shapes, 4);
+	ShapeSorter::area_desc(shapes);
+	ShapeSorter::perimeter_desc(shapes);
 
 	return 0;
 }
