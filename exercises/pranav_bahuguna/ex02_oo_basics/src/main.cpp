@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <cmath>
 #include <vector>
@@ -10,9 +11,37 @@ protected:
 	string type;
 	int sides;
 public:
+	void print();
+	string get_type();
+	int get_sides();
 	virtual double area() = 0;
 	virtual double perimeter() = 0;
+	Shape(string type, int sides);
 };
+
+Shape::Shape(string type, int sides)
+{
+	Shape::type = type;
+	Shape::sides = sides;
+}
+
+void Shape::print()
+{
+	cout << "Type = " << get_type() << ", Sides = " << get_sides() 
+		<< ", Area = " << area() << ", Perimeter = " << perimeter() << endl;
+}
+
+string Shape::get_type()
+{
+	return type;
+}
+
+int Shape::get_sides()
+{
+	return sides;
+}
+
+typedef vector<Shape*>::const_iterator shape_iter;
 
 class Rectangle : public Shape
 {
@@ -22,19 +51,11 @@ protected:
 public:
 	double area();
 	double perimeter();
-	Rectangle();
 	Rectangle(double side1, double side2);
 };
 
-Rectangle::Rectangle()
+Rectangle::Rectangle(double side1, double side2) : Shape("rectangle", 4)
 {
-	type = "rectangle";
-	sides = 4;
-}
-
-Rectangle::Rectangle(double side1, double side2)
-{
-	Rectangle();
 	Rectangle::side1 = side1;
 	Rectangle::side2 = side2;
 }
@@ -52,20 +73,12 @@ double Rectangle::perimeter()
 class Square : public Rectangle
 {
 public:
-	Square();
 	Square(double side1);
 };
 
-Square::Square()
+Square::Square(double side1) : Rectangle(side1, side1)
 {
 	type = "square";
-	sides = 4;
-}
-
-Square::Square(double side1)
-{
-	Rectangle(side1, side1);
-	Square();
 }
 
 class Triangle : public Shape
@@ -76,19 +89,11 @@ protected:
 public:
 	double area();
 	double perimeter();
-	Triangle();
 	Triangle(double base, double height);
 };
 
-Triangle::Triangle()
+Triangle::Triangle(double base, double height) : Shape("triangle", 3)
 {
-	type = "triangle";
-	sides = 3;
-}
-
-Triangle::Triangle(double base, double height)
-{
-	Triangle();
 	Triangle::base = base;
 	Triangle::height = height;
 }
@@ -110,19 +115,11 @@ protected:
 public:
 	double area();
 	double perimeter();
-	Circle();
 	Circle(double radius);
 };
 
-Circle::Circle()
+Circle::Circle(double radius) : Shape("circle", 0)
 {
-	type = "circle";
-	sides = INFINITY;
-}
-
-Circle::Circle(double radius)
-{
-	Circle();
 	Circle::radius = radius;
 }
 
@@ -138,16 +135,48 @@ double Circle::perimeter()
 
 struct ShapeSorter
 {
-	vector<Shape*> matches_type(vector<Shape*> shapes, string type);
-	vector<Shape*> matches_sides(vector<Shape*> shapes, int sides);
-	vector<Shape*> area_desc(vector<Shape*> shapes);
-	vector<Shape*> perimeter_desc(vector<Shape*> shapes);
+	static void matches_type(vector<Shape*> shapes, string type);
+	static void matches_sides(vector<Shape*> shapes, int sides);
+	static void area_desc(vector<Shape*> shapes);
+	static void perimeter_desc(vector<Shape*> shapes);
 };
 
-vector<Shape*> ShapeSorter::matches_type(vector<Shape*> shapes, string type) {}
-vector<Shape*> ShapeSorter::matches_sides(vector<Shape*> shapes, int sides) {}
-vector<Shape*> ShapeSorter::area_desc(vector<Shape*> shapes) {}
-vector<Shape*> ShapeSorter::perimeter_desc(vector<Shape*> shapes) {}
+void ShapeSorter::matches_type(vector<Shape*> shapes, string type)
+{
+	cout << "Shapes matching type \"" << type << "\"..." << endl;
+
+	int i = 1;
+	for (shape_iter it = shapes.begin(); it != shapes.end(); it++)
+	{
+		if ((*it)->get_type() == type)
+		{
+			cout << "Shape " << i << " --- ";
+			(*it)->print();
+			i++;
+		}
+	}
+	cout << endl;
+}
+
+void ShapeSorter::matches_sides(vector<Shape*> shapes, int sides)
+{
+	cout << "Shapes matching " << sides << " sides..." << endl;
+
+	int i = 1;
+	for (shape_iter it = shapes.begin(); it != shapes.end(); it++)
+	{
+		if ((*it)->get_sides() == sides)
+		{
+			cout << "Shape " << i << " --- ";
+			(*it)->print();
+			i++;
+		}
+	}
+	cout << endl;
+}
+
+void ShapeSorter::area_desc(vector<Shape*> shapes) {}
+void ShapeSorter::perimeter_desc(vector<Shape*> shapes) {}
 
 int main()
 {
@@ -157,6 +186,10 @@ int main()
 	shapes.push_back(new Square(3));
 	shapes.push_back(new Triangle(4, 7));
 	shapes.push_back(new Circle(5));
+
+	// call several ShapeSorter functions on the shapes
+	ShapeSorter::matches_type(shapes, "circle");
+	ShapeSorter::matches_sides(shapes, 4);
 
 	return 0;
 }
