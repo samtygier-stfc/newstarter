@@ -1,5 +1,6 @@
 #include <string>
 #include <cmath>
+#include <vector>
 
 using namespace std;
 
@@ -135,12 +136,27 @@ double Circle::perimeter()
 	return 2 * M_PI * radius;
 }
 
+struct ShapeSorter
+{
+	vector<Shape*> matches_type(vector<Shape*> shapes, string type);
+	vector<Shape*> matches_sides(vector<Shape*> shapes, int sides);
+	vector<Shape*> area_desc(vector<Shape*> shapes);
+	vector<Shape*> perimeter_desc(vector<Shape*> shapes);
+};
+
+vector<Shape*> ShapeSorter::matches_type(vector<Shape*> shapes, string type) {}
+vector<Shape*> ShapeSorter::matches_sides(vector<Shape*> shapes, int sides) {}
+vector<Shape*> ShapeSorter::area_desc(vector<Shape*> shapes) {}
+vector<Shape*> ShapeSorter::perimeter_desc(vector<Shape*> shapes) {}
+
 int main()
 {
-	Rectangle *shape1 = new Rectangle(5, 10);
-	Square    *shape2 = new Square(3);
-	Triangle  *shape3 = new Triangle(4, 7);
-	Circle    *shape4 = new Circle(5);
+	// create a vector of several shapes
+	vector<Shape*> shapes;
+	shapes.push_back(new Rectangle(5, 10));
+	shapes.push_back(new Square(3));
+	shapes.push_back(new Triangle(4, 7));
+	shapes.push_back(new Circle(5));
 
 	return 0;
 }
