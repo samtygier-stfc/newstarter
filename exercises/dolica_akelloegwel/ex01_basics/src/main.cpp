@@ -18,7 +18,7 @@ void ReadFile(std::string asciiFilename)
 	std::string word;
 	
 	// Declare a string of punctuation characters
-	std::string unwantedChars = ".,?'\"!():";
+	std::string unwantedChars = ".,?'\"!():;";
 
 	// Attempt to open the file
 	inFile.open(asciiFilename);
