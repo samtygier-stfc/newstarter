@@ -11,6 +11,7 @@
 
 bool ContainsDashes(std::string compositeWord)
 {
+	// Check if a word contains dashes
 	return compositeWord.find("-") != std::string::npos;
 }
 std::vector<std::string> SplitWords(std::string compositeWord)
@@ -31,6 +32,7 @@ std::vector<std::string> SplitWords(std::string compositeWord)
 		if (segment.length() == 0)
 			continue;
 
+		// Add the word to the vector
 		words.push_back(segment);
 	}
 
@@ -75,15 +77,19 @@ void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputF
 		exit(1);
 	}
 
+	// Declare a comparator for sorting the word map by word count
 	auto cmp = [](const auto &p1, const auto &p2)
 	{
 		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
 	};
 
+	// Declare a set for storing words by word count
 	std::set < std::pair<std::string, size_t>, decltype(cmp)> s(wordMap.begin(), wordMap.end(), cmp);
 
+	// Write the first few lines to the output file
 	outFile << "Word" << "\t" << "Usage" << std::endl << std::endl;
 
+	// Write the words and their count to the file using the set
 	for (const auto &p : s)
 	{
 		outFile << p.first << "\t" << p.second << std::endl;
@@ -93,7 +99,7 @@ void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputF
 	outFile.close();
 
 }
-std::map<std::string, int> CountWords(std::string asciiFilename)
+std::map<std::string, int> CountWords(std::string inputFilename)
 {
 	// Declare a hash table for storing the word counts
 	std::map<std::string, int> wordMap;
@@ -105,12 +111,12 @@ std::map<std::string, int> CountWords(std::string asciiFilename)
 	std::string words;
 
 	// Attempt to open the file
-	inFile.open(asciiFilename);
+	inFile.open(inputFilename);
 
 	// Check that the file was opened successfully
 	if (!inFile)
 	{
-		std::cout << "Error: Unable to open the file " << asciiFilename << " for reading." << std::endl;
+		std::cout << "Error: Unable to open the file " << inputFilename << " for reading." << std::endl;
 		exit(1);
 	}
 
@@ -122,7 +128,7 @@ std::map<std::string, int> CountWords(std::string asciiFilename)
 
 		// Create a vector for storing the words after they've been split
 		std::vector<std::string> splitWords;
-		
+
 		if (ContainsDashes(words))
 		{
 			// Remove dashes from the words if any are present
@@ -136,14 +142,14 @@ std::map<std::string, int> CountWords(std::string asciiFilename)
 
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
-			// Make the word suitable for the word map
+			// Make the word suitable for the word map by removing punctuation characters
 			*word = PrepareWord(*word);
 
 			// Check that the word has at least five characters
 			if (word->length() <= 4)
 				continue;
 
-			// Place the word in the hash table
+			// Place the word in the word map
 			wordMap[*word]++;
 		}
 	}
@@ -158,14 +164,14 @@ int main(int argc, char *argv[])
 	// Declare a hash table for storing the word counts
 	std::map<std::string, int> wordMap;
 
-	// Declare a string for the filename
-	std::string asciiFilename;
+	// Declare a string for input/output filenames
+	std::string inputFilename;
 	std::string outputFilename;
 
 	// Check that the correct number of arguments were given
 	if (argc == 3)
 	{
-		asciiFilename = argv[1];
+		inputFilename = argv[1];
 		outputFilename = argv[2];
 	}
 	else
@@ -175,8 +181,8 @@ int main(int argc, char *argv[])
 	}
 
 	// Pass the filename argument to the word count function
-	wordMap = CountWords(asciiFilename);
+	wordMap = CountWords(inputiFilename);
 
+	// Pass the populated word map and the output filename to a function for writing these results to a file
 	SaveWordCountToFile(wordMap,outputFilename);
-
 }
