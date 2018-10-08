@@ -4,7 +4,33 @@
 #include <map>
 #include <cctype>
 #include <algorithm>
+#include <vector>
 
+std::vector<std::string> SplitWords(std::string compositeWord)
+{
+	std::vector<std::string> words;
+
+	std::string twoDash = "--";
+	std::string oneDash = "-";
+
+	size_t twoDashLoc = compositeWord.find(twoDash);
+	size_t oneDashLoc = compositeWord.find(oneDash);
+
+	if (twoDashLoc != std::string::npos)
+	{
+
+	}
+	else if (oneDashLoc != std::string::npos)
+	{
+
+	}
+	else
+	{
+		// Place a single word in the vector
+		words.push_back(compositeWord);
+	}
+	return words;
+}
 std::string PrepareWord(std::string rawWord)
 {
 	// Declare a string of punctuation characters
@@ -22,6 +48,7 @@ std::string PrepareWord(std::string rawWord)
 		rawWord[i] = std::tolower(rawWord[i]);
 	}
 
+	// Return a word that is now suitable for the word map
 	return rawWord;
 }
 void ReadFile(std::string asciiFilename)
@@ -33,7 +60,7 @@ void ReadFile(std::string asciiFilename)
 	std::ifstream inFile;
 
 	// Declare a string for the words in the text 
-	std::string word;
+	std::string words;
 
 	// Attempt to open the file
 	inFile.open(asciiFilename);
@@ -49,16 +76,17 @@ void ReadFile(std::string asciiFilename)
 	while (!inFile.eof())
 	{
 		// Store the word in a string
-		inFile >> word;
+		inFile >> words;
 
-		word = PrepareWord(word);
+		// Make the word suitable for the word map
+		words = PrepareWord(words);
 
 		// Check that the word has at least five characters
-		if (word.length() <= 4)
+		if (words.length() <= 4)
 			continue;
 
 		// Place the word in the hash table
-		wordMap[word]++;
+		wordMap[words]++;
 	}
 
 	// Close the file
