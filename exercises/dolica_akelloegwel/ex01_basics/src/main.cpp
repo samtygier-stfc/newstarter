@@ -13,19 +13,26 @@ bool ContainsDashes(std::string compositeWord)
 }
 std::vector<std::string> SplitWords(std::string compositeWord)
 {
+	// Declare a vector for the seperated words
 	std::vector<std::string> words;
+
+	// Declare a string for a segment
 	std::string segment;
 
+	// Convert the composite word to a stream
 	std::stringstream wordStream(compositeWord);
 
+	// Split the elements of the dream using the '-' character and place these in the vector
 	while (std::getline(wordStream, segment, '-'))
 	{
+		// Ignore empty words
 		if (segment.length() == 0)
 			continue;
 
 		words.push_back(segment);
 	}
 
+	// Return the vector of words that have been seperated by dashes
 	return words;
 }
 std::string PrepareWord(std::string rawWord)
@@ -75,39 +82,31 @@ void ReadFile(std::string asciiFilename)
 		// Store the word in a string
 		inFile >> words;
 
+		// Create a vector for storing the words after they've been split
 		std::vector<std::string> splitWords;
 		
 		if (ContainsDashes(words))
 		{
+			// Remove dashes from the words if any are present
 			splitWords = SplitWords(words);
-			
-			std::cout << "Output from splitWords: " << std::endl;
-			for (auto word = begin(splitWords); word != end(splitWords); ++word)
-			{
-				
-				std::cout << *word << std::endl;
-				
-			}
-			std::cout << std::endl;
 		}
 		else
 		{
+			// Place the single word in the vector when no dashes are present
 			splitWords.push_back(words);
 		}
 
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
 			// Make the word suitable for the word map
-			words = PrepareWord(words);
-
-			// std::cout << words << std::endl;
+			*word = PrepareWord(*word);
 
 			// Check that the word has at least five characters
-			if (words.length() <= 4)
+			if (word->length() <= 4)
 				continue;
 
 			// Place the word in the hash table
-			wordMap[words]++;
+			wordMap[*word]++;
 		}
 	}
 
