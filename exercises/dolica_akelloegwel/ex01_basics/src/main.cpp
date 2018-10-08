@@ -23,6 +23,9 @@ void ReadFile(std::string asciiFilename)
 	{
 		inFile >> word;
 
+		if (word.length() <= 4)
+			continue;
+
 		for (unsigned int i = 0; i < word.length(); ++i) 
 		{
 			word[i] = std::tolower(word[i]);
