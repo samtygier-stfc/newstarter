@@ -62,21 +62,17 @@ void SaveWordCountToFile(std::map<std::string, int> wordMap)
 	// Declaring the type of Predicate that accepts 2 pairs and return a bool
 	typedef std::function<bool(std::pair<std::string, int>, std::pair<std::string, int>)> Comparator;
 
-	// Defining a lambda function to compare two pairs. It will compare two pairs using second field
-	Comparator compFunctor =
-		[](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2)
+	auto cmp = [](const auto &p1, const auto &p2)
 	{
-		return elem1.second > elem2.second;
+		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
 	};
 
-	// Declaring a set that will store the pairs using above comparision logic
-	std::set<std::pair<std::string, int>, Comparator> setOfWords(
-		wordMap.begin(), wordMap.end(), compFunctor);
+	std::set < std::pair<std::string, size_t>, decltype(cmp)> s(wordMap.begin(), wordMap.end(), cmp);
 
-	// Iterate over a set using range base for loop
-	// It will display the items in sorted order of values
-	for (std::pair<std::string, int> element : setOfWords)
-		std::cout << element.first << " :: " << element.second << std::endl;
+	for (const auto &p : s)
+	{
+		std::cout << "{ " << p.first << ", " << p.second << " }\n";
+	}
 
 }
 std::map<std::string, int> CountWords(std::string asciiFilename)
