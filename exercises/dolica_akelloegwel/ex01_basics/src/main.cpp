@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <cctype>
 
 
 void ReadFile(std::string asciiFilename)
@@ -21,8 +22,13 @@ void ReadFile(std::string asciiFilename)
 	while (!inFile.eof())
 	{
 		inFile >> word;
+
+		for (unsigned int i = 0; i < word.length(); ++i) 
+		{
+			word[i] = std::tolower(word[i]);
+		}
+
 		wordMap[word]++;
-		// std::cout << word << std::endl;
 	}
 
 	inFile.close();
