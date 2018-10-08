@@ -110,7 +110,7 @@ std::map<std::string, int> CountWords(std::string asciiFilename)
 	// Check that the file was opened successfully
 	if (!inFile)
 	{
-		std::cout << "Error: Unable to load the file " << asciiFilename << "." << std::endl;
+		std::cout << "Error: Unable to open the file " << asciiFilename << " for reading." << std::endl;
 		exit(1);
 	}
 
@@ -170,7 +170,7 @@ int main(int argc, char *argv[])
 	}
 	else
 	{
-		std::cout << "Error: Incorrect number of arguments given. Expected 2." << std::endl;
+		std::cout << "Error: Incorrect number of arguments given. Expected 3." << std::endl;
 		exit(1);
 	}
 
