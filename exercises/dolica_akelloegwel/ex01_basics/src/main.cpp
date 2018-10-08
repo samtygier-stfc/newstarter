@@ -4,8 +4,9 @@
 #include <map>
 
 
-void ReadFile(std::map<std::string, int> wordMap, std::string asciiFilename)
+void ReadFile(std::string asciiFilename)
 {
+	std::map<std::string, int> wordMap;
 	std::ifstream inFile;
 	std::string word;
 
@@ -26,10 +27,15 @@ void ReadFile(std::map<std::string, int> wordMap, std::string asciiFilename)
 
 	inFile.close();
 
+	for (auto it = wordMap.cbegin(); it != wordMap.cend(); ++it)
+	{
+		std::cout << it->first << " - " << it->second << std::endl;
+	}
+
 }
 int main(int argc, char *argv[])
 {
-	std::map<std::string, int> wordMap;
+	
 	std::string asciiFilename;
 
 	if (argc == 2)
@@ -42,6 +48,8 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	ReadFile(wordMap,asciiFilename);
+	ReadFile(asciiFilename);
+
+	
 
 }
