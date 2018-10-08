@@ -3,6 +3,7 @@
 #include <fstream>
 #include <map>
 #include <cctype>
+#include <algorithm>
 
 
 void ReadFile(std::string asciiFilename)
@@ -10,6 +11,8 @@ void ReadFile(std::string asciiFilename)
 	std::map<std::string, int> wordMap;
 	std::ifstream inFile;
 	std::string word;
+	
+	std::string unwantedChars = ".,?'\"!():";
 
 	inFile.open(asciiFilename);
 
@@ -22,6 +25,11 @@ void ReadFile(std::string asciiFilename)
 	while (!inFile.eof())
 	{
 		inFile >> word;
+
+		for (int i = 0; i < unwantedChars.length(); i++)
+		{
+			word.erase(std::remove(word.begin(), word.end(), unwantedChars[i]), word.end());
+		}
 
 		if (word.length() <= 4)
 			continue;
@@ -58,7 +66,5 @@ int main(int argc, char *argv[])
 	}
 
 	ReadFile(asciiFilename);
-
-	
 
 }
