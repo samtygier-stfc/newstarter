@@ -57,10 +57,23 @@ std::string PrepareWord(std::string rawWord)
 	// Return a word that is now suitable for the word map
 	return rawWord;
 }
-void SaveWordCountToFile(std::map<std::string, int> wordMap)
+void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputFilename)
 {
 	// Declaring the type of Predicate that accepts 2 pairs and return a bool
 	typedef std::function<bool(std::pair<std::string, int>, std::pair<std::string, int>)> Comparator;
+
+	// Declare a file stream for the results file
+	std::ofstream outFile;
+
+	// Open the results file 
+	outFile.open(outputFilename);
+
+	// Check that the file was opened successfully
+	if (!outFile)
+	{
+		std::cout << "Error: Unable to open the file " << outputFilename << " for writing." << std::endl;
+		exit(1);
+	}
 
 	auto cmp = [](const auto &p1, const auto &p2)
 	{
@@ -69,10 +82,15 @@ void SaveWordCountToFile(std::map<std::string, int> wordMap)
 
 	std::set < std::pair<std::string, size_t>, decltype(cmp)> s(wordMap.begin(), wordMap.end(), cmp);
 
+	outFile << "Word" << "\t" << "Usage" << std::endl << std::endl;
+
 	for (const auto &p : s)
 	{
-		std::cout << "{ " << p.first << ", " << p.second << " }\n";
+		outFile << p.first << "\t" << p.second << std::endl;
 	}
+
+	// Close the file
+	outFile.close();
 
 }
 std::map<std::string, int> CountWords(std::string asciiFilename)
@@ -142,11 +160,13 @@ int main(int argc, char *argv[])
 
 	// Declare a string for the filename
 	std::string asciiFilename;
+	std::string outputFilename;
 
 	// Check that the correct number of arguments were given
-	if (argc == 2)
+	if (argc == 3)
 	{
 		asciiFilename = argv[1];
+		outputFilename = argv[2];
 	}
 	else
 	{
@@ -157,6 +177,6 @@ int main(int argc, char *argv[])
 	// Pass the filename argument to the word count function
 	wordMap = CountWords(asciiFilename);
 
-	SaveWordCountToFile(wordMap);
+	SaveWordCountToFile(wordMap,outputFilename);
 
 }
