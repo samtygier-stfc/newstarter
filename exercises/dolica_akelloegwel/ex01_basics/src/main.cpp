@@ -1,27 +1,27 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-/**
- * Skeleton main routine
- */
+#include <map>
 
-void ReadFile(std::string ascii_filename)
+
+void ReadFile(std::map<std::string, int> wordMap, std::string asciiFilename)
 {
 	std::ifstream inFile;
-	std::string line;
+	std::string word;
 
-	inFile.open(ascii_filename);
+	inFile.open(asciiFilename);
 
 	if (!inFile)
 	{
-		std::cout << "Error: Unable to load the file " << ascii_filename << "." << std::endl;
+		std::cout << "Error: Unable to load the file " << asciiFilename << "." << std::endl;
 		exit(1);
 	}
 
 	while (!inFile.eof())
 	{
-		inFile >> line;
-		std::cout << line;
+		inFile >> word;
+		wordMap[word]++;
+		// std::cout << word << std::endl;
 	}
 
 	inFile.close();
@@ -29,11 +29,12 @@ void ReadFile(std::string ascii_filename)
 }
 int main(int argc, char *argv[])
 {
-	std::string ascii_filename;
+	std::map<std::string, int> wordMap;
+	std::string asciiFilename;
 
 	if (argc == 2)
 	{
-		ascii_filename = argv[1];
+		asciiFilename = argv[1];
 	}
 	else
 	{
@@ -41,6 +42,6 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	ReadFile(ascii_filename);
+	ReadFile(wordMap,asciiFilename);
 
 }
