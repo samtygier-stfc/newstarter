@@ -1,34 +1,31 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <map>
 #include <cctype>
 #include <algorithm>
 #include <vector>
 
+bool ContainsDashes(std::string compositeWord)
+{
+	return compositeWord.find("-") != std::string::npos;
+}
 std::vector<std::string> SplitWords(std::string compositeWord)
 {
 	std::vector<std::string> words;
+	std::string segment;
 
-	std::string twoDash = "--";
-	std::string oneDash = "-";
+	std::stringstream wordStream(compositeWord);
 
-	size_t twoDashLoc = compositeWord.find(twoDash);
-	size_t oneDashLoc = compositeWord.find(oneDash);
-
-	if (twoDashLoc != std::string::npos)
+	while (std::getline(wordStream, segment, '-'))
 	{
+		if (segment.length() == 0)
+			continue;
 
+		words.push_back(segment);
 	}
-	else if (oneDashLoc != std::string::npos)
-	{
 
-	}
-	else
-	{
-		// Place a single word in the vector
-		words.push_back(compositeWord);
-	}
 	return words;
 }
 std::string PrepareWord(std::string rawWord)
@@ -78,15 +75,40 @@ void ReadFile(std::string asciiFilename)
 		// Store the word in a string
 		inFile >> words;
 
-		// Make the word suitable for the word map
-		words = PrepareWord(words);
+		std::vector<std::string> splitWords;
+		
+		if (ContainsDashes(words))
+		{
+			splitWords = SplitWords(words);
+			
+			std::cout << "Output from splitWords: " << std::endl;
+			for (auto word = begin(splitWords); word != end(splitWords); ++word)
+			{
+				
+				std::cout << *word << std::endl;
+				
+			}
+			std::cout << std::endl;
+		}
+		else
+		{
+			splitWords.push_back(words);
+		}
 
-		// Check that the word has at least five characters
-		if (words.length() <= 4)
-			continue;
+		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
+		{
+			// Make the word suitable for the word map
+			words = PrepareWord(words);
 
-		// Place the word in the hash table
-		wordMap[words]++;
+			// std::cout << words << std::endl;
+
+			// Check that the word has at least five characters
+			if (words.length() <= 4)
+				continue;
+
+			// Place the word in the hash table
+			wordMap[words]++;
+		}
 	}
 
 	// Close the file
