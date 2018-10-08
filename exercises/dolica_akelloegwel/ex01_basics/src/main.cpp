@@ -5,7 +5,25 @@
 #include <cctype>
 #include <algorithm>
 
+std::string PrepareWord(std::string rawWord)
+{
+	// Declare a string of punctuation characters
+	std::string unwantedChars = ".,?'\"!():;";
 
+	// Remove the unwanted characters from the string
+	for (int i = 0; i < unwantedChars.length(); i++)
+	{
+		rawWord.erase(std::remove(rawWord.begin(), rawWord.end(), unwantedChars[i]), rawWord.end());
+	}
+
+	// Convert the word to lower case
+	for (unsigned int i = 0; i < rawWord.length(); ++i)
+	{
+		rawWord[i] = std::tolower(rawWord[i]);
+	}
+
+	return rawWord;
+}
 void ReadFile(std::string asciiFilename)
 {
 	// Declare a hash table for storing the word counts
@@ -16,9 +34,6 @@ void ReadFile(std::string asciiFilename)
 
 	// Declare a string for the words in the text 
 	std::string word;
-	
-	// Declare a string of punctuation characters
-	std::string unwantedChars = ".,?'\"!():;";
 
 	// Attempt to open the file
 	inFile.open(asciiFilename);
@@ -36,21 +51,11 @@ void ReadFile(std::string asciiFilename)
 		// Store the word in a string
 		inFile >> word;
 
-		// Remove the unwanted characters from the string
-		for (int i = 0; i < unwantedChars.length(); i++)
-		{
-			word.erase(std::remove(word.begin(), word.end(), unwantedChars[i]), word.end());
-		}
+		word = PrepareWord(word);
 
 		// Check that the word has at least five characters
 		if (word.length() <= 4)
 			continue;
-
-		// Convert the word to lower case
-		for (unsigned int i = 0; i < word.length(); ++i) 
-		{
-			word[i] = std::tolower(word[i]);
-		}
 
 		// Place the word in the hash table
 		wordMap[word]++;
