@@ -6,6 +6,8 @@
 #include <cctype>
 #include <algorithm>
 #include <vector>
+#include <functional>
+#include <set>
 
 bool ContainsDashes(std::string compositeWord)
 {
@@ -55,7 +57,29 @@ std::string PrepareWord(std::string rawWord)
 	// Return a word that is now suitable for the word map
 	return rawWord;
 }
-void ReadFile(std::string asciiFilename)
+void SaveWordCountToFile(std::map<std::string, int> wordMap)
+{
+	// Declaring the type of Predicate that accepts 2 pairs and return a bool
+	typedef std::function<bool(std::pair<std::string, int>, std::pair<std::string, int>)> Comparator;
+
+	// Defining a lambda function to compare two pairs. It will compare two pairs using second field
+	Comparator compFunctor =
+		[](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2)
+	{
+		return elem1.second > elem2.second;
+	};
+
+	// Declaring a set that will store the pairs using above comparision logic
+	std::set<std::pair<std::string, int>, Comparator> setOfWords(
+		wordMap.begin(), wordMap.end(), compFunctor);
+
+	// Iterate over a set using range base for loop
+	// It will display the items in sorted order of values
+	for (std::pair<std::string, int> element : setOfWords)
+		std::cout << element.first << " :: " << element.second << std::endl;
+
+}
+std::map<std::string, int> CountWords(std::string asciiFilename)
 {
 	// Declare a hash table for storing the word counts
 	std::map<std::string, int> wordMap;
@@ -113,15 +137,13 @@ void ReadFile(std::string asciiFilename)
 	// Close the file
 	inFile.close();
 
-	// Print the contents of the wordmap
-	for (auto it = wordMap.cbegin(); it != wordMap.cend(); ++it)
-	{
-		std::cout << it->first << " - " << it->second << std::endl;
-	}
-
+	return wordMap;
 }
 int main(int argc, char *argv[])
 {
+	// Declare a hash table for storing the word counts
+	std::map<std::string, int> wordMap;
+
 	// Declare a string for the filename
 	std::string asciiFilename;
 
@@ -137,6 +159,8 @@ int main(int argc, char *argv[])
 	}
 
 	// Pass the filename argument to the word count function
-	ReadFile(asciiFilename);
+	wordMap = CountWords(asciiFilename);
+
+	SaveWordCountToFile(wordMap);
 
 }
