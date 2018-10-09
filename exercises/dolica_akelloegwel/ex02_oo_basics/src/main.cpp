@@ -6,6 +6,7 @@
 #include "Square.h"
 #include "Rectangle.h"
 #include "Circle.h"
+#include "Triangle.h"
 
 int main(int, char **)
 {
@@ -21,4 +22,9 @@ int main(int, char **)
 	double circleRadius = 5;
 	Circle myCircle = Circle::Circle(circleRadius);
 	std::cout << myCircle.GetArea() << std::endl;
+
+	double triangleBase = 3;
+	double triangleHeight = 4;
+	Triangle myTriangle = Triangle::Triangle(triangleBase, triangleHeight);
+	std::cout << myTriangle.GetArea() << std::endl;
 }
