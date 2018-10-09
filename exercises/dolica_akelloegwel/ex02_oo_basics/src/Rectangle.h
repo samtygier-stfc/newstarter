@@ -10,4 +10,6 @@ private:
 
 public:
 	Rectangle(double w, double h);
+	double GetWidth();
+	double GetHeight();
 };

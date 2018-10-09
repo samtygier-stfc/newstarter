@@ -14,6 +14,6 @@ public:
 	Shape(double a, double p, std::string t, int s);
 	double GetPerimeter();
 	double GetArea();
-	std::string getType();
-	int getSides();
+	std::string GetType();
+	int GetSides();
 };

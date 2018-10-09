@@ -9,4 +9,5 @@ class Square : public Shape
 
 	public:
 		Square(double s);
+		double GetSide();
 };

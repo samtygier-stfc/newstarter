@@ -15,11 +15,11 @@ double Shape::GetArea()
 {
 	return area;
 }
-std::string Shape::getType()
+std::string Shape::GetType()
 {
 	return type;
 }
-int Shape::getSides()
+int Shape::GetSides()
 {
 	return numSides;
 }
