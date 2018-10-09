@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
 class Shape
 {
@@ -16,4 +17,6 @@ public:
 	double GetArea();
 	std::string GetType();
 	int GetSides();
+	virtual void write(std::ostream &os) const;
+	friend std::ostream &operator<<(std::ostream & os, const Shape &shape);
 };

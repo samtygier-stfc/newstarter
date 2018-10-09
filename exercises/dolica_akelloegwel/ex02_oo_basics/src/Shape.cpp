@@ -23,4 +23,12 @@ int Shape::GetSides()
 {
 	return numSides;
 }
-
+void Shape::write(std::ostream& os) const
+{
+	// Do nothing
+}
+std::ostream & operator<<(std::ostream & os, const Shape & shape)
+{
+	shape.write(os);
+	return os;
+}

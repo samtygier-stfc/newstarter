@@ -13,5 +13,6 @@ public:
 	Triangle(double b, double h);
 	double GetBase();
 	double GetHeight();
+	void write(std::ostream& os) const;
 };
 

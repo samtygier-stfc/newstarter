@@ -13,3 +13,7 @@ double Triangle::GetHeight()
 {
 	return height;
 }
+void Triangle::write(std::ostream & os) const
+{
+	os << "This is a triangle." << std::endl;
+}

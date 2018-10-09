@@ -4,10 +4,11 @@
 
 class Square : public Shape
 {
-	private:
-		double side;
+private:
+	double side;
 
-	public:
-		Square(double s);
-		double GetSide();
+public:
+	Square(double s);
+	double GetSide();
+	void write(std::ostream& os) const;
 };

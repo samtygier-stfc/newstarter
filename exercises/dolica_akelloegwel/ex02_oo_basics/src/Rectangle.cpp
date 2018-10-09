@@ -13,3 +13,15 @@ double Rectangle::GetHeight()
 {
 	return height;
 }
+
+void Rectangle::write(std::ostream & os) const
+{
+	os << "This is a rectangle." << std::endl;
+}
+
+/**
+std::ostream & Rectangle::operator<<(std::ostream & os)
+{
+	return os << " is a " << this->GetType() << " with height " << this->GetHeight() << " and width " << this->GetWidth() << "." << std::endl;
+}
+**/
