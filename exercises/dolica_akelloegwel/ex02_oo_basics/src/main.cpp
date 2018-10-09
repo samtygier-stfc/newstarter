@@ -38,7 +38,10 @@ int main(int, char **)
 	myShapes.push_back(myTriangle);
 
 	ShapeSorter shapeSorter = ShapeSorter::ShapeSorter();
-	shapeSorter.PrintType(myShapes,"Circle");
+	shapeSorter.PrintBasedOnType(myShapes,"Circle");
+	shapeSorter.PrintBasedOnNSides(myShapes, 3);
+	shapeSorter.SortByAreaDesc(myShapes);
+	shapeSorter.SortByPerimeterDesc(myShapes);
 }
 
 #endif
