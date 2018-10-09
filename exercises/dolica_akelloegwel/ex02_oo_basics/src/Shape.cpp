@@ -1,11 +1,12 @@
 #include "Shape.h"
 
-Shape::Shape(double p, double a, std::string t, int n)
+Shape::Shape(double p, double a, std::string t, int n, std::string msg)
 {
 	perimeter = p;
 	area = a;
 	type = t;
 	numSides = n;
+	printMessage = msg;
 }
 double Shape::GetPerimeter() const
 {
@@ -23,12 +24,12 @@ int Shape::GetSides() const
 {
 	return numSides;
 }
-void Shape::write(std::ostream& os) const
+std::string Shape::GetMessage() const
 {
-	// Do nothing
+	return printMessage;
 }
 std::ostream & operator<<(std::ostream & os, const Shape & shape)
 {
-	shape.write(os);
+	os << shape.GetMessage();
 	return os;
 }

@@ -37,12 +37,8 @@ int main(int, char **)
 	myShapes.push_back(myCircle);
 	myShapes.push_back(myTriangle);
 
-	for (std::vector<Shape>::iterator it = myShapes.begin(); it != myShapes.end(); it++) {
-		std::cout << it->GetType() << std::endl;
-	}
-
 	ShapeSorter shapeSorter = ShapeSorter::ShapeSorter();
-	shapeSorter.PrintType(myShapes,"Triangle");
+	shapeSorter.PrintType(myShapes,"Circle");
 }
 
 #endif

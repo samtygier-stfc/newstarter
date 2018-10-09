@@ -12,5 +12,4 @@ public:
 	Rectangle(double w, double h);
 	double GetWidth();
 	double GetHeight();
-	void write(std::ostream& os) const;
 };

@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(double w, double h) : Shape(w * 2 + h * 2, w * h, "Rectangle", 4)
+Rectangle::Rectangle(double w, double h) : Shape(w * 2 + h * 2, w * h, "Rectangle", 4, "This is a rectangle.")
 {
 	width = w;
 	height = h;
@@ -12,11 +12,6 @@ double Rectangle::GetWidth()
 double Rectangle::GetHeight()
 {
 	return height;
-}
-
-void Rectangle::write(std::ostream & os) const
-{
-	os << "This is a rectangle." << std::endl;
 }
 
 /**

@@ -10,6 +10,5 @@ private:
 
 public:
 	Circle(double r);
-	double GetRadius();
-	void write(std::ostream& os) const;
+	double GetRadius() const;
 };
