@@ -10,7 +10,7 @@
 
 int main(int, char **)
 {
-	double squareSide = 3.5;
+	double squareSide = 2;
 	Square mySquare = Square::Square(squareSide);
 	std::cout << mySquare.GetPerimeter() << std::endl;
 

@@ -11,7 +11,7 @@ protected:
 	int numSides;
 
 public:
-	Shape(double a, double p, std::string t, int s);
+	Shape(double p, double a, std::string t, int s);
 	double GetPerimeter();
 	double GetArea();
 	std::string GetType();

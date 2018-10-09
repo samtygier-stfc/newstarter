@@ -1,9 +1,9 @@
 #include "Shape.h"
 
-Shape::Shape(double a, double p, std::string t, int n)
+Shape::Shape(double p, double a, std::string t, int n)
 {
-	area = a;
 	perimeter = p;
+	area = a;
 	type = t;
 	numSides = n;
 }
