@@ -18,14 +18,16 @@ void ShapeSorter::PrintBasedOnNSides(std::vector<Shape> shapes, int numSides)
 }
 void ShapeSorter::SortByAreaDesc(std::vector<Shape> shapes)
 {
+	std::vector<Shape> copyShapes(shapes);
+
 	auto areaCompare = [](const Shape &s1, const Shape &s2)
 	{
 		return s2.GetArea() < s1.GetArea() || !(s1.GetArea() < s2.GetArea()) && s1.GetArea() < s2.GetArea();
 	};
 
-	std::sort(shapes.begin(), shapes.end(), areaCompare);
+	std::sort(copyShapes.begin(), copyShapes.end(), areaCompare);
 
-	for (std::vector<Shape>::iterator it = shapes.begin(); it != shapes.end(); it++)
+	for (std::vector<Shape>::iterator it = copyShapes.begin(); it != copyShapes.end(); it++)
 	{
 		std::cout << it->GetArea() << std::endl;
 	}

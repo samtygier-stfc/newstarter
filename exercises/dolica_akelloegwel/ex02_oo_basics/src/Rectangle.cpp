@@ -2,12 +2,25 @@
 
 Rectangle::Rectangle(double w, double h) : Shape("Rectangle", 4)
 {
+	// Set width and height information
 	width = w;
 	height = h;
 
-	SetPerimeter(w * 2 + h * 2);
-	SetArea(w * h);
-	SetMessage("This is a rectangle.");
+	// Set perimeter value
+	double perim = w * 2 + h * 2;
+	SetPerimeter(perim);
+
+	// Set area value
+	double ar = w * h;
+	SetArea(ar);
+
+	// Construct and set the message that will be displayed when the object is printed
+	std::string rectMessage = "Rectangle Properties: \n";
+	rectMessage += "  Width: " + std::to_string(w) + "\n";
+	rectMessage += "  Height: " + std::to_string(h);
+	rectMessage += CreateBaseMessage();
+
+	SetMessage(rectMessage);
 }
 double Rectangle::GetWidth()
 {
@@ -17,10 +30,3 @@ double Rectangle::GetHeight()
 {
 	return height;
 }
-
-/**
-std::ostream & Rectangle::operator<<(std::ostream & os)
-{
-	return os << " is a " << this->GetType() << " with height " << this->GetHeight() << " and width " << this->GetWidth() << "." << std::endl;
-}
-**/

@@ -2,12 +2,25 @@
 
 Triangle::Triangle(double b, double h) : Shape("Triangle", 3)
 {
+	// Set the base and height values
 	base = b;
 	height = h;
 
-	SetPerimeter(b + 2 * std::sqrt(h * h + b * b * 0.25));
+	// Compute and set perimeter
+	double perim = b + 2 * std::sqrt(h * h + b * b * 0.25);
+	SetPerimeter(perim);
+
+	// Compute and set area
+	double area = b * 0.5 * h;
 	SetArea(b * 0.5 * h);
-	SetMessage("This is a triangle.");
+
+	// Construct and set a message for use when overloading <<
+	std::string triangleMessage = "Triangle Properties:\n";
+	triangleMessage += "  Base: " + std::to_string(b) + "\n";
+	triangleMessage += " Height: " + std::to_string(h);
+	triangleMessage += CreateBaseMessage();
+
+	SetMessage(triangleMessage);
 }
 double Triangle::GetBase() const
 {

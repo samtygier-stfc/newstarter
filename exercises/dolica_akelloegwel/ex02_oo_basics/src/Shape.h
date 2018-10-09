@@ -14,6 +14,7 @@ protected:
 	void SetPerimeter(double p);
 	void SetArea(double a);
 	void SetSides(int s);
+	std::string CreateBaseMessage();
 	void SetMessage(std::string msg);
 
 public:
