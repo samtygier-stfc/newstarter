@@ -7,19 +7,19 @@ Shape::Shape(double p, double a, std::string t, int n)
 	type = t;
 	numSides = n;
 }
-double Shape::GetPerimeter()
+double Shape::GetPerimeter() const
 {
 	return perimeter;
 }
-double Shape::GetArea()
+double Shape::GetArea() const
 {
 	return area;
 }
-std::string Shape::GetType()
+std::string Shape::GetType() const
 {
 	return type;
 }
-int Shape::GetSides()
+int Shape::GetSides() const
 {
 	return numSides;
 }

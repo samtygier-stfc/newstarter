@@ -11,8 +11,8 @@ private:
 
 public:
 	Triangle(double b, double h);
-	double GetBase();
-	double GetHeight();
+	double GetBase() const;
+	double GetHeight() const;
 	void write(std::ostream& os) const;
 };
 

@@ -9,6 +9,6 @@ private:
 
 public:
 	Square(double s);
-	double GetSide();
+	double GetSide() const;
 	void write(std::ostream& os) const;
 };

@@ -5,15 +5,16 @@ Triangle::Triangle(double b, double h) : Shape(b + 2 * std::sqrt(h * h + b * b *
 	base = b;
 	height = h;
 }
-double Triangle::GetBase()
+double Triangle::GetBase() const
 {
 	return base;
 }
-double Triangle::GetHeight()
+double Triangle::GetHeight() const
 {
 	return height;
 }
 void Triangle::write(std::ostream & os) const
 {
 	os << "This is a triangle." << std::endl;
+	os << this->GetBase() << std::endl;
 }

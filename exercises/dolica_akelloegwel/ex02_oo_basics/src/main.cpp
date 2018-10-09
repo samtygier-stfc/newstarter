@@ -9,6 +9,7 @@
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Triangle.h"
+#include "ShapeSorter.h"
 
 #ifndef _Shape_h
 #define _Shape_h
@@ -39,6 +40,9 @@ int main(int, char **)
 	for (std::vector<Shape>::iterator it = myShapes.begin(); it != myShapes.end(); it++) {
 		std::cout << it->GetType() << std::endl;
 	}
+
+	ShapeSorter shapeSorter = ShapeSorter::ShapeSorter();
+	shapeSorter.PrintType(myShapes,"Triangle");
 }
 
 #endif
