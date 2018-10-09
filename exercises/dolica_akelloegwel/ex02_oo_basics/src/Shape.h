@@ -11,9 +11,13 @@ protected:
 	std::string type;
 	int numSides;
 	std::string printMessage;
+	void SetPerimeter(double p);
+	void SetArea(double a);
+	void SetSides(int s);
+	void SetMessage(std::string msg);
 
 public:
-	Shape(double p, double a, std::string t, int s, std::string msg);
+	Shape(std::string t, int n);
 	double GetPerimeter() const;
 	double GetArea() const;
 	std::string GetType() const;

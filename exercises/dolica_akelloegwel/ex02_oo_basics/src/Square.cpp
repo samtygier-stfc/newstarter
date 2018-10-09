@@ -1,8 +1,12 @@
 #include "Square.h"
 
-Square::Square(double s) : Shape(s * 4, s * s, "Square", 4, "This is a square.")
+Square::Square(double s) : Shape("Square", 4)
 {
 	side = s;
+
+	SetPerimeter(s * 4);
+	SetArea(s * s);
+	SetMessage("This is a square.");
 }
 double Square::GetSide() const
 {

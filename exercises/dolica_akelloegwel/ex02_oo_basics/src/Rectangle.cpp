@@ -1,9 +1,13 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(double w, double h) : Shape(w * 2 + h * 2, w * h, "Rectangle", 4, "This is a rectangle.")
+Rectangle::Rectangle(double w, double h) : Shape("Rectangle", 4)
 {
 	width = w;
 	height = h;
+
+	SetPerimeter(w * 2 + h * 2);
+	SetArea(w * h);
+	SetMessage("This is a rectangle.");
 }
 double Rectangle::GetWidth()
 {

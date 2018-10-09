@@ -1,9 +1,13 @@
 #include "Triangle.h"
 
-Triangle::Triangle(double b, double h) : Shape(b + 2 * std::sqrt(h * h + b * b * 0.25), b * 0.5 * h, "Triangle", 3, "This is a triangle.")
+Triangle::Triangle(double b, double h) : Shape("Triangle", 3)
 {
 	base = b;
 	height = h;
+
+	SetPerimeter(b + 2 * std::sqrt(h * h + b * b * 0.25));
+	SetArea(b * 0.5 * h);
+	SetMessage("This is a triangle.");
 }
 double Triangle::GetBase() const
 {
