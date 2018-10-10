@@ -35,12 +35,6 @@ std::vector<std::string> SplitWords(const std::string &compositeWord)
 
 	return words;
 }
-std::string RemovePunctuation(const std::string &rawWord)
-{
-	// Remove punctuation characters
-	std::regex unwantedChars("[.,?'\"!():;]");
-	return std::regex_replace(rawWord, unwantedChars, "");
-}
 void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::string &outputFilename)
 {
 	// Attempt to open a file
@@ -103,6 +97,9 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 	// Declare a map for storing the word counts
 	std::map<std::string, int> wordMap;
 
+	// Remove punctuation characters
+	std::regex unwantedChars("[.,?'\"!():;]");
+
 	// Traverse through the file
 	while (!inFile.eof())
 	{
@@ -132,7 +129,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
 			// Make the word suitable for the word map by removing punctuation characters
-			*word = RemovePunctuation(*word);
+			*word = std::regex_replace(*word, unwantedChars, "");
 
 			// Check that the word has at least five characters
 			if (word->length() <= 4)
