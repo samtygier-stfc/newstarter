@@ -5,7 +5,7 @@
 class Circle : public Shape
 {
 private:
-	double radius;
+	double m_radius;
 
 public:
 	Circle(double r);

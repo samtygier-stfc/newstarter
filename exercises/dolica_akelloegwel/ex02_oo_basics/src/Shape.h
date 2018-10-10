@@ -9,11 +9,11 @@
 class Shape
 {
 protected:
-	double area;
-	double perimeter;
-	std::string type;
-	int numSides;
-	std::string printMessage;
+	double m_area;
+	double m_perimeter;
+	std::string m_type;
+	int m_numSides;
+	std::string m_printMessage;
 	void SetPerimeter(double p);
 	void SetArea(double a);
 	void SetSides(int s);

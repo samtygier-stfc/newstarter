@@ -5,8 +5,8 @@
 class Rectangle : public Shape
 {
 private:
-	double width;
-	double height;
+	double m_width;
+	double m_height;
 
 public:
 	Rectangle(double w, double h);

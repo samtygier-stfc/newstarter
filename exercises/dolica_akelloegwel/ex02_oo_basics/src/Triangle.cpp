@@ -3,8 +3,8 @@
 Triangle::Triangle(double b, double h) : Shape("Triangle", 3)
 {
 	// Set the base and height values
-	base = b;
-	height = h;
+	m_base = b;
+	m_height = h;
 
 	// Compute and set perimeter
 	double perim = b + 2 * std::sqrt(h * h + b * b * 0.25);
@@ -24,9 +24,9 @@ Triangle::Triangle(double b, double h) : Shape("Triangle", 3)
 }
 double Triangle::GetBase() const
 {
-	return base;
+	return m_base;
 }
 double Triangle::GetHeight() const
 {
-	return height;
+	return m_height;
 }

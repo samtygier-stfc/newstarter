@@ -3,56 +3,56 @@
 Shape::Shape(std::string t, int n)
 {
 	// Set type and number of sides
-	type = t;
-	numSides = n;
+	m_type = t;
+	m_numSides = n;
 
 	// Set default member variable values
 	// Compute during subclass initialisation
-	perimeter = 0;
-	area = 0;
-	printMessage = "";
+	m_perimeter = 0;
+	m_area = 0;
+	m_printMessage = "";
 }
 double Shape::GetPerimeter() const
 {
-	return perimeter;
+	return m_perimeter;
 }
 void Shape::SetPerimeter(double p)
 {
-	perimeter = p;
+	m_perimeter = p;
 }
 double Shape::GetArea() const
 {
-	return area;
+	return m_area;
 }
 void Shape::SetArea(double a)
 {
-	area = a;
+	m_area = a;
 }
 std::string Shape::GetType() const
 {
-	return type;
+	return m_type;
 }
 int Shape::GetSides() const
 {
-	return numSides;
+	return m_numSides;
 }
 void Shape::SetSides(int s)
 {
-	numSides = s;
+	m_numSides = s;
 }
 std::string Shape::CreateBaseMessage()
 {
 	// Create a basic message without subclass info to act as a template when overloading <<
-	return "\n  Perimeter: " + std::to_string(perimeter) + "\n  Area: " + std::to_string(area) + "\n";
+	return "\n  Perimeter: " + std::to_string(m_perimeter) + "\n  Area: " + std::to_string(m_area) + "\n";
 }
 std::string Shape::GetMessage() const
 {
-	return printMessage;
+	return m_printMessage;
 }
 void Shape::SetMessage(std::string msg)
 {
 	// Set the print message after it has been constructed in the subclass
-	printMessage = msg;
+	m_printMessage = msg;
 }
 std::ostream & operator<<(std::ostream & os, const Shape & shape)
 {

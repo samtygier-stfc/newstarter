@@ -5,7 +5,7 @@
 class Square : public Shape
 {
 private:
-	double side;
+	double m_side;
 
 public:
 	Square(double s);

@@ -3,7 +3,7 @@
 Square::Square(double s) : Shape("Square", 4)
 {
 	// Set the side value
-	side = s;
+	m_side = s;
 
 	// Compute and set the perimeter value
 	double perim = s * 4;
@@ -22,5 +22,5 @@ Square::Square(double s) : Shape("Square", 4)
 }
 double Square::GetSide() const
 {
-	return side;
+	return m_side;
 }

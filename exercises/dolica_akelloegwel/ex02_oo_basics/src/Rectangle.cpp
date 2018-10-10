@@ -3,8 +3,8 @@
 Rectangle::Rectangle(double w, double h) : Shape("Rectangle", 4)
 {
 	// Set width and height information
-	width = w;
-	height = h;
+	m_width = w;
+	m_height = h;
 
 	// Set perimeter value
 	double perim = w * 2 + h * 2;
@@ -24,9 +24,9 @@ Rectangle::Rectangle(double w, double h) : Shape("Rectangle", 4)
 }
 double Rectangle::GetWidth()
 {
-	return width;
+	return m_width;
 }
 double Rectangle::GetHeight()
 {
-	return height;
+	return m_height;
 }

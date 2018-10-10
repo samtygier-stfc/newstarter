@@ -3,7 +3,7 @@
 Circle::Circle(double r) : Shape("Circle", 1)
 {
 	// Set the radius
-	radius = r;
+	m_radius = r;
 
 	// Compute and set circle perimeter
 	double perim = 2 * M_PI * r;
@@ -22,5 +22,5 @@ Circle::Circle(double r) : Shape("Circle", 1)
 }
 double Circle::GetRadius() const
 {
-	return radius;
+	return m_radius;
 }
