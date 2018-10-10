@@ -1,10 +1,10 @@
 #include "Shape.h"
 
-Shape::Shape(std::string t, int n)
+Shape::Shape(std::string type, int numSides)
 {
 	// Set type and number of sides
-	m_type = t;
-	m_numSides = n;
+	m_type = type;
+	m_numSides = numSides;
 
 	// Set default member variable values
 	// Compute during subclass initialisation

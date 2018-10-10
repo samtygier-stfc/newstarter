@@ -86,9 +86,6 @@ void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::s
 }
 std::map<std::string, int> CountWords(std::string inputFilename)
 {
-	// Declare a map for storing the word counts
-	std::map<std::string, int> wordMap;
-
 	// Declare a string for the words in the text 
 	std::string words;
 
@@ -102,6 +99,9 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		std::cout << "Error: Unable to open the file " << inputFilename << " for reading." << std::endl;
 		exit(1);
 	}
+	
+	// Declare a map for storing the word counts
+	std::map<std::string, int> wordMap;
 
 	// Traverse through the file
 	while (!inFile.eof())

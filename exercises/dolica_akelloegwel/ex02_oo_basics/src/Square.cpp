@@ -1,21 +1,21 @@
 #include "Square.h"
 
-Square::Square(double s) : Shape("Square", 4)
+Square::Square(double side) : Shape("Square", 4)
 {
 	// Set the side value
-	m_side = s;
+	m_side = side;
 
 	// Compute and set the perimeter value
-	double perim = s * 4;
+	double perim = side * 4;
 	SetPerimeter(perim);
 
 	// Compute and set the area value
-	double area = s * s;
-	SetArea(s * s);
+	double area = side * side;
+	SetArea(side * side);
 
 	// Construct and set a message used for overloading <<
 	std::string squareMessage = "Square Properties:\n";
-	squareMessage += "  Side: " + std::to_string(s);
+	squareMessage += "  Side: " + std::to_string(side);
 	squareMessage += CreateBaseMessage();
 
 	SetMessage(squareMessage);
