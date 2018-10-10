@@ -6,7 +6,6 @@
 #include <cctype>
 #include <algorithm>
 #include <vector>
-//#include <functional>
 #include <set>
 
 bool ContainsDashes(std::string compositeWord)

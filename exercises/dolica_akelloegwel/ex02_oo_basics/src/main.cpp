@@ -1,6 +1,3 @@
-#include <iostream>
-#include <vector>
-
 #include "Square.h"
 #include "Rectangle.h"
 #include "Circle.h"
