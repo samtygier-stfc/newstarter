@@ -7,8 +7,9 @@
 #include <algorithm>
 #include <vector>
 #include <set>
+#include <regex>
 
-bool ContainsDashes(std::string compositeWord)
+bool ContainsDashes(const std::string &compositeWord)
 {
 	return compositeWord.find("-") != std::string::npos;
 }
@@ -34,16 +35,11 @@ std::vector<std::string> SplitWords(const std::string &compositeWord)
 
 	return words;
 }
-void PrepareWord(std::string &rawWord)
+std::string RemovePunctuation(const std::string &rawWord)
 {
-	// Declare a string of punctuation characters
-	std::string unwantedChars = ".,?'\"!():;";
-
-	// Remove the unwanted characters from the string
-	for (int i = 0; i < unwantedChars.length(); i++)
-	{
-		rawWord.erase(std::remove(rawWord.begin(), rawWord.end(), unwantedChars[i]), rawWord.end());
-	}
+	// Remove punctuation characters
+	std::regex unwantedChars("[.,?'\"!():;]");
+	return std::regex_replace(rawWord, unwantedChars, "");
 }
 void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::string &outputFilename)
 {
@@ -64,8 +60,17 @@ void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::s
 		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
 	};
 
+	/*
+	auto cmp = [](std::pair<std::string, int> const & a, std::pair<std::string, int> const & b)
+	{
+		return a.second != b.second ? a.second < b.second : a.first < b.first;
+	};
+	*/
+
 	// Declare a set for storing words by word count
 	std::set < std::pair<std::string, size_t>, decltype(cmp)> s(wordMap.begin(), wordMap.end(), cmp);
+
+	// std::sort(wordMap.begin(), wordMap.end(), cmp);
 
 	// Write the first few lines to the output file
 	outFile << "Word" << "\t" << "Usage" << std::endl << std::endl;
@@ -127,7 +132,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
 			// Make the word suitable for the word map by removing punctuation characters
-			PrepareWord(*word);
+			*word = RemovePunctuation(*word);
 
 			// Check that the word has at least five characters
 			if (word->length() <= 4)
