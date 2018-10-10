@@ -12,7 +12,7 @@ bool ContainsDashes(std::string compositeWord)
 {
 	return compositeWord.find("-") != std::string::npos;
 }
-std::vector<std::string> SplitWords(std::string compositeWord)
+std::vector<std::string> SplitWords(const std::string &compositeWord)
 {
 	// Containers for splitting up words
 	std::vector<std::string> words;
@@ -34,7 +34,7 @@ std::vector<std::string> SplitWords(std::string compositeWord)
 
 	return words;
 }
-std::string PrepareWord(std::string rawWord)
+void PrepareWord(std::string &rawWord)
 {
 	// Declare a string of punctuation characters
 	std::string unwantedChars = ".,?'\"!():;";
@@ -44,10 +44,8 @@ std::string PrepareWord(std::string rawWord)
 	{
 		rawWord.erase(std::remove(rawWord.begin(), rawWord.end(), unwantedChars[i]), rawWord.end());
 	}
-
-	return rawWord;
 }
-void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputFilename)
+void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::string &outputFilename)
 {
 	// Attempt to open a file
 	std::ofstream outFile;
@@ -129,7 +127,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
 			// Make the word suitable for the word map by removing punctuation characters
-			*word = PrepareWord(*word);
+			PrepareWord(*word);
 
 			// Check that the word has at least five characters
 			if (word->length() <= 4)
@@ -146,9 +144,6 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 }
 int main(int argc, char *argv[])
 {
-	// Declare a map for storing the word counts
-	std::map<std::string, int> wordMap;
-
 	// Declare a string for input/output filenames
 	std::string inputFilename;
 	std::string outputFilename;
@@ -165,8 +160,8 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	// Pass the filename argument to the word count function
-	wordMap = CountWords(inputFilename);
+	// Pass the filename argument to the word count function to obtain a word map
+	std::map<std::string, int> wordMap = CountWords(inputFilename);
 
 	// Pass the populated word map and the output filename to a function for writing these results to a file
 	SaveWordCountToFile(wordMap,outputFilename);
