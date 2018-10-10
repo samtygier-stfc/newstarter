@@ -45,12 +45,6 @@ std::string PrepareWord(std::string rawWord)
 		rawWord.erase(std::remove(rawWord.begin(), rawWord.end(), unwantedChars[i]), rawWord.end());
 	}
 
-	// Convert the word to lower case
-	for (unsigned int i = 0; i < rawWord.length(); ++i)
-	{
-		rawWord[i] = std::tolower(rawWord[i]);
-	}
-
 	return rawWord;
 }
 void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputFilename)
@@ -111,6 +105,12 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 	{
 		// Store the word in a string
 		inFile >> words;
+
+		// Convert the word(s) to lower case
+		for (unsigned int i = 0; i < words.length(); ++i)
+		{
+			words[i] = std::tolower(words[i]);
+		}
 
 		// Create a vector for storing the words after they've been split
 		std::vector<std::string> splitWords;
