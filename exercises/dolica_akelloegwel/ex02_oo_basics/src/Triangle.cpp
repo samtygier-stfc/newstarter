@@ -17,7 +17,7 @@ Triangle::Triangle(double b, double h) : Shape("Triangle", 3)
 	// Construct and set a message for use when overloading <<
 	std::string triangleMessage = "Triangle Properties:\n";
 	triangleMessage += "  Base: " + std::to_string(b) + "\n";
-	triangleMessage += " Height: " + std::to_string(h);
+	triangleMessage += "  Height: " + std::to_string(h);
 	triangleMessage += CreateBaseMessage();
 
 	SetMessage(triangleMessage);

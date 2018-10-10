@@ -15,7 +15,7 @@ Square::Square(double s) : Shape("Square", 4)
 
 	// Construct and set a message used for overloading <<
 	std::string squareMessage = "Square Properties:\n";
-	squareMessage += " Side: " + std::to_string(s);
+	squareMessage += "  Side: " + std::to_string(s);
 	squareMessage += CreateBaseMessage();
 
 	SetMessage(squareMessage);

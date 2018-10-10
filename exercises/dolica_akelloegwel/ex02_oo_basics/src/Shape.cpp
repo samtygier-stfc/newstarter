@@ -6,7 +6,8 @@ Shape::Shape(std::string t, int n)
 	type = t;
 	numSides = n;
 
-	// Compute extra shape information outside of superclass constructor
+	// Set default member variable values
+	// Compute during subclass initialisation
 	perimeter = 0;
 	area = 0;
 	printMessage = "";
@@ -50,6 +51,7 @@ std::string Shape::GetMessage() const
 }
 void Shape::SetMessage(std::string msg)
 {
+	// Set the print message after it has been constructed in the subclass
 	printMessage = msg;
 }
 std::ostream & operator<<(std::ostream & os, const Shape & shape)

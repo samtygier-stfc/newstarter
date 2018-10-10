@@ -1,7 +1,3 @@
-/**
- * Skeleton main routine
- */
-
 #include <iostream>
 #include <vector>
 
@@ -16,7 +12,8 @@
 
 int main(int, char **)
 {
-	double squareSide = 2;
+	// Create various shapes
+	double squareSide = 2.5;
 	Square mySquare = Square::Square(squareSide);
 
 	double recWidth = 2;
@@ -30,6 +27,7 @@ int main(int, char **)
 	double triangleHeight = 4;
 	Triangle myTriangle = Triangle::Triangle(triangleBase, triangleHeight);
 
+	// Create a vector and place the shapes in it
 	std::vector<Shape> myShapes;
 
 	myShapes.push_back(mySquare);
@@ -37,6 +35,7 @@ int main(int, char **)
 	myShapes.push_back(myCircle);
 	myShapes.push_back(myTriangle);
 
+	// Examine behaviour of the shape sorter
 	ShapeSorter shapeSorter = ShapeSorter::ShapeSorter();
 	shapeSorter.PrintBasedOnType(myShapes, "Circle");
 	shapeSorter.PrintBasedOnType(myShapes, "Triangle");
