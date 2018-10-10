@@ -12,7 +12,7 @@ Triangle::Triangle(double base, double height) : Shape("Triangle", 3)
 
 	// Compute and set area
 	double area = base * 0.5 * height;
-	SetArea(base * 0.5 * height);
+	SetArea(area);
 
 	// Construct and set a message for use when overloading <<
 	std::string triangleMessage = "Triangle Properties:\n";
