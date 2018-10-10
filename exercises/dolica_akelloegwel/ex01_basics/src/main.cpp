@@ -6,26 +6,23 @@
 #include <cctype>
 #include <algorithm>
 #include <vector>
-#include <functional>
+//#include <functional>
 #include <set>
 
 bool ContainsDashes(std::string compositeWord)
 {
-	// Check if a word contains dashes
 	return compositeWord.find("-") != std::string::npos;
 }
 std::vector<std::string> SplitWords(std::string compositeWord)
 {
-	// Declare a vector for the seperated words
+	// Containers for splitting up words
 	std::vector<std::string> words;
-
-	// Declare a string for a segment
 	std::string segment;
 
 	// Convert the composite word to a stream
 	std::stringstream wordStream(compositeWord);
 
-	// Split the elements of the dream using the '-' character and place these in the vector
+	// Split the elements of the stream using the '-' character and place these in the vector
 	while (std::getline(wordStream, segment, '-'))
 	{
 		// Ignore empty words
@@ -59,10 +56,8 @@ std::string PrepareWord(std::string rawWord)
 }
 void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputFilename)
 {
-	// Declare a file stream for the results file
+	// Attempt to open a file
 	std::ofstream outFile;
-
-	// Open the results file 
 	outFile.open(outputFilename);
 
 	// Check that the file was opened successfully
@@ -72,7 +67,7 @@ void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputF
 		exit(1);
 	}
 
-	// Declare a comparator for sorting the word map by word count
+	// Declare a comparator for sorting the map by word count
 	auto cmp = [](const auto &p1, const auto &p2)
 	{
 		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
@@ -84,28 +79,25 @@ void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputF
 	// Write the first few lines to the output file
 	outFile << "Word" << "\t" << "Usage" << std::endl << std::endl;
 
-	// Write the words and their count to the file using the set
+	// Write the words and their count to the file using the sorted set
 	for (const auto &p : s)
 	{
 		outFile << p.first << "\t" << p.second << std::endl;
 	}
 
-	// Close the file
 	outFile.close();
 
 }
 std::map<std::string, int> CountWords(std::string inputFilename)
 {
-	// Declare a hash table for storing the word counts
+	// Declare a map for storing the word counts
 	std::map<std::string, int> wordMap;
-
-	// Declare a stream for the text file
-	std::ifstream inFile;
 
 	// Declare a string for the words in the text 
 	std::string words;
 
-	// Attempt to open the file
+	// Attempt to open the text file
+	std::ifstream inFile;
 	inFile.open(inputFilename);
 
 	// Check that the file was opened successfully
@@ -115,7 +107,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		exit(1);
 	}
 
-	// Traverse through the words in the file
+	// Traverse through the file
 	while (!inFile.eof())
 	{
 		// Store the word in a string
@@ -149,14 +141,13 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		}
 	}
 
-	// Close the file
 	inFile.close();
 
 	return wordMap;
 }
 int main(int argc, char *argv[])
 {
-	// Declare a hash table for storing the word counts
+	// Declare a map for storing the word counts
 	std::map<std::string, int> wordMap;
 
 	// Declare a string for input/output filenames
