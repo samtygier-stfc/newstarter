@@ -36,7 +36,6 @@ std::vector<std::string> SplitWords(std::string compositeWord)
 		words.push_back(segment);
 	}
 
-	// Return the vector of words that have been seperated by dashes
 	return words;
 }
 std::string PrepareWord(std::string rawWord)
@@ -56,14 +55,10 @@ std::string PrepareWord(std::string rawWord)
 		rawWord[i] = std::tolower(rawWord[i]);
 	}
 
-	// Return a word that is now suitable for the word map
 	return rawWord;
 }
 void SaveWordCountToFile(std::map<std::string, int> wordMap, std::string outputFilename)
 {
-	// Declaring the type of Predicate that accepts 2 pairs and return a bool
-	typedef std::function<bool(std::pair<std::string, int>, std::pair<std::string, int>)> Comparator;
-
 	// Declare a file stream for the results file
 	std::ofstream outFile;
 
@@ -181,7 +176,7 @@ int main(int argc, char *argv[])
 	}
 
 	// Pass the filename argument to the word count function
-	wordMap = CountWords(inputiFilename);
+	wordMap = CountWords(inputFilename);
 
 	// Pass the populated word map and the output filename to a function for writing these results to a file
 	SaveWordCountToFile(wordMap,outputFilename);
