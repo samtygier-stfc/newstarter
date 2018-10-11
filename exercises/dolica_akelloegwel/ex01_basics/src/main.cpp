@@ -54,13 +54,6 @@ void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::s
 		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
 	};
 
-	/*
-	auto cmp = [](std::pair<std::string, int> const & a, std::pair<std::string, int> const & b)
-	{
-		return a.second != b.second ? a.second < b.second : a.first < b.first;
-	};
-	*/
-
 	// Declare a set for storing words by word count
 	std::set < std::pair<std::string, size_t>, decltype(cmp)> s(wordMap.begin(), wordMap.end(), cmp);
 
@@ -107,10 +100,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		inFile >> words;
 
 		// Convert the word(s) to lower case
-		for (unsigned int i = 0; i < words.length(); ++i)
-		{
-			words[i] = std::tolower(words[i]);
-		}
+		std::transform(words.begin(), words.end(), words.begin(), static_cast<int(*)(int)>(std::tolower));
 
 		// Create a vector for storing the words after they've been split
 		std::vector<std::string> splitWords;
