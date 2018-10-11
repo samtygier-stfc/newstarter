@@ -20,6 +20,7 @@ set ( SRC_FILES
   src/Shape.cpp
   src/Square.cpp
   src/Rectangle.cpp
+  src/Triangle.cpp
   src/Circle.cpp
   src/ShapeSorter.cpp
   src/main.cpp
@@ -30,6 +31,7 @@ set ( HDR_FILES
   src/Shape.h
   src/Square.h
   src/Rectangle.h
+  src/Triangle.h
   src/Circle.h
   src/ShapeSorter.h
   # add any additional header files here
