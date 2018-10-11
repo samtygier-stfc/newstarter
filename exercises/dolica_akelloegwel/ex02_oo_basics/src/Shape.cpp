@@ -12,6 +12,9 @@ Shape::Shape(std::string type, int numSides)
 	m_area = 0;
 	m_printMessage = "";
 }
+Shape::~Shape()
+{
+}
 double Shape::GetPerimeter() const
 {
 	return m_perimeter;

@@ -8,6 +8,7 @@
 #include <vector>
 #include <set>
 #include <regex>
+#include <boost/bimap.hpp>
 
 bool ContainsDashes(const std::string &compositeWord)
 {
@@ -90,7 +91,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 	// Declare a map for storing the word counts
 	std::map<std::string, int> wordMap;
 
-	// Remove punctuation characters
+	// Declare regex for removing punctuation characters
 	std::regex unwantedChars("[.,?'\"!():;]");
 
 	// Traverse through the file

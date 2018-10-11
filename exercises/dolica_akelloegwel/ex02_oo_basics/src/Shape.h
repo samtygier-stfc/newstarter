@@ -22,6 +22,7 @@ protected:
 
 public:
 	Shape(std::string t, int n);
+	~Shape();
 	double GetPerimeter() const;
 	double GetArea() const;
 	std::string GetType() const;
