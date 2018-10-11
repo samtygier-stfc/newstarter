@@ -8,7 +8,14 @@
 #include <vector>
 #include <set>
 #include <regex>
-#include <boost/bimap.hpp>
+
+struct CountCompare
+{
+	bool operator() (const std::pair<std::string, size_t>&p1, const std::pair<std::string, size_t>&p2) const
+	{
+		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
+	}
+} cmp;
 
 bool ContainsDashes(const std::string &compositeWord)
 {
@@ -48,23 +55,17 @@ void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::s
 		std::cout << "Error: Unable to open the file " << outputFilename << " for writing." << std::endl;
 		exit(1);
 	}
-
-	// Declare a comparator for sorting the map by word count
-	auto cmp = [](const auto &p1, const auto &p2)
-	{
-		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
-	};
-
+	
 	// Declare a set for storing words by word count
-	std::set < std::pair<std::string, size_t>, decltype(cmp)> s(wordMap.begin(), wordMap.end(), cmp);
+	std::vector < std::pair<std::string, size_t>> wordSet(wordMap.begin(), wordMap.end());
 
-	// std::sort(wordMap.begin(), wordMap.end(), cmp);
+	std::sort(wordSet.begin(), wordSet.end(), cmp);
 
 	// Write the first few lines to the output file
 	outFile << "Word" << "\t" << "Usage" << std::endl << std::endl;
 
 	// Write the words and their count to the file using the sorted set
-	for (const auto &p : s)
+	for (const auto &p : wordSet)
 	{
 		outFile << p.first << "\t" << p.second << std::endl;
 	}

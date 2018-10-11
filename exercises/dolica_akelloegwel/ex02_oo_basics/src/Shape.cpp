@@ -19,17 +19,17 @@ double Shape::GetPerimeter() const
 {
 	return m_perimeter;
 }
-void Shape::SetPerimeter(double p)
+void Shape::SetPerimeter(double perimeter)
 {
-	m_perimeter = p;
+	m_perimeter = perimeter;
 }
 double Shape::GetArea() const
 {
 	return m_area;
 }
-void Shape::SetArea(double a)
+void Shape::SetArea(double area)
 {
-	m_area = a;
+	m_area = area;
 }
 std::string Shape::GetType() const
 {
@@ -39,9 +39,9 @@ int Shape::GetSides() const
 {
 	return m_numSides;
 }
-void Shape::SetSides(int s)
+void Shape::SetSides(int numSides)
 {
-	m_numSides = s;
+	m_numSides = numSides;
 }
 std::string Shape::CreateBaseMessage()
 {
@@ -52,10 +52,10 @@ std::string Shape::GetMessage() const
 {
 	return m_printMessage;
 }
-void Shape::SetMessage(std::string msg)
+void Shape::SetMessage(std::string printMessage)
 {
 	// Set the print message after it has been constructed in the subclass
-	m_printMessage = msg;
+	m_printMessage = printMessage;
 }
 std::ostream & operator<<(std::ostream & os, const Shape & shape)
 {

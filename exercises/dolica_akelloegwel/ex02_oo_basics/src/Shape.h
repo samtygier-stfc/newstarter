@@ -14,9 +14,9 @@ protected:
 	std::string m_type;
 	int m_numSides;
 	std::string m_printMessage;
-	void SetPerimeter(double p);
-	void SetArea(double a);
-	void SetSides(int s);
+	void SetPerimeter(double perimeter);
+	void SetArea(double area);
+	void SetSides(int sides);
 	std::string CreateBaseMessage();
 	void SetMessage(std::string msg);
 
