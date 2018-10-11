@@ -122,7 +122,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
 			// Make the word suitable for the word map by removing punctuation characters
-			*word = std::regex_replace(*word, unwantedChars, emptyString);
+			*word = std::regex_replace(*word, unwantedChars, "");
 
 			// Check that the word has at least five characters
 			if (word->length() <= 4)
