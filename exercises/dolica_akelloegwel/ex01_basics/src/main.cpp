@@ -94,6 +94,8 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 	// Declare regex for removing punctuation characters
 	std::regex unwantedChars("[.,?'\"!():;]");
 
+	char emptyChar = 0;
+
 	// Traverse through the file
 	while (!inFile.eof())
 	{
@@ -120,7 +122,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
 			// Make the word suitable for the word map by removing punctuation characters
-			*word = std::regex_replace(*word, unwantedChars, "");
+			*word = std::regex_replace(*word, unwantedChars, emptyChar);
 
 			// Check that the word has at least five characters
 			if (word->length() <= 4)
