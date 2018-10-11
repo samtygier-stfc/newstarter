@@ -6,7 +6,6 @@
 #include <cctype>
 #include <algorithm>
 #include <vector>
-#include <set>
 #include <regex>
 
 struct CountCompare
