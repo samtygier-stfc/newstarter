@@ -11,18 +11,18 @@ int main(int, char **)
 {
 	// Create various shapes
 	double squareSide = 2.5;
-	Square mySquare = Square::Square(squareSide);
+	Square mySquare = Square(squareSide);
 
 	double recWidth = 2;
 	double recHeight = 5;
-	Rectangle myRectangle = Rectangle::Rectangle(recWidth, recHeight);
+	Rectangle myRectangle = Rectangle(recWidth, recHeight);
 
 	double circleRadius = 5;
-	Circle myCircle = Circle::Circle(circleRadius);
+	Circle myCircle = Circle(circleRadius);
 
 	double triangleBase = 3;
 	double triangleHeight = 4;
-	Triangle myTriangle = Triangle::Triangle(triangleBase, triangleHeight);
+	Triangle myTriangle = Triangle(triangleBase, triangleHeight);
 
 	// Create a vector and place the shapes in it
 	std::vector<Shape> myShapes;
@@ -33,7 +33,7 @@ int main(int, char **)
 	myShapes.push_back(myTriangle);
 
 	// Examine behaviour of the shape sorter
-	ShapeSorter shapeSorter = ShapeSorter::ShapeSorter();
+	ShapeSorter shapeSorter = ShapeSorter();
 	shapeSorter.PrintBasedOnType(myShapes, "Circle");
 	shapeSorter.PrintBasedOnType(myShapes, "Triangle");
 	shapeSorter.PrintBasedOnNSides(myShapes, 4);

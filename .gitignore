@@ -24,3 +24,11 @@ builds/*
 *.app
 
 *.TMP
+*.cmake
+
+# 
+*.swp
+CMakeCache.txt
+*Makefile*
+*CMakeFiles*
+*bin*
