@@ -26,3 +26,6 @@ set ( HDR_FILES
 )
 
 add_executable ( WordCounter ${SRC_FILES} ${HDR_FILES} )
+
+target_link_libraries(WordCounter ${Boost_LIBRARIES})
+

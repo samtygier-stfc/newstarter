@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <vector>
 #include <regex>
+#include <boost/regex.hpp>
 
 struct CountCompare
 {
@@ -54,9 +55,9 @@ void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::s
 		std::cout << "Error: Unable to open the file " << outputFilename << " for writing." << std::endl;
 		exit(1);
 	}
-	
+
 	// Declare a set for storing words by word count
-	std::vector < std::pair<std::string, size_t>> wordSet(wordMap.begin(), wordMap.end());
+	std::vector <std::pair<std::string, size_t>> wordSet(wordMap.begin(), wordMap.end());
 
 	std::sort(wordSet.begin(), wordSet.end(), cmp);
 
@@ -87,14 +88,12 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		std::cout << "Error: Unable to open the file " << inputFilename << " for reading." << std::endl;
 		exit(1);
 	}
-	
+
 	// Declare a map for storing the word counts
 	std::map<std::string, int> wordMap;
 
 	// Declare regex for removing punctuation characters
-	std::regex unwantedChars("[.,?'\"!():;]");
-
-	std::basic_string<char> emptyString = "";
+	boost::regex unwantedChars("[.,?'\"!():;]");
 
 	// Traverse through the file
 	while (!inFile.eof())
@@ -122,7 +121,7 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 		for (auto word = begin(splitWords); word != end(splitWords); ++word) 
 		{
 			// Make the word suitable for the word map by removing punctuation characters
-			*word = std::regex_replace(*word, unwantedChars, "");
+			//*word = boost::regex_replace(*word, unwantedChars, "");
 
 			// Check that the word has at least five characters
 			if (word->length() <= 4)
