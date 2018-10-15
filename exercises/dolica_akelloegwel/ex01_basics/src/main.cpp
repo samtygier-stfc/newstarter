@@ -93,7 +93,6 @@ std::map<std::string, int> CountWords(std::string inputFilename)
 
 	// Declare regex for removing punctuation characters
 	std::regex unwantedChars("[.,?'\"!():;]");
-
 	char emptyChar = 0;
 
 	// Traverse through the file
