@@ -42,7 +42,7 @@ def make_scl_command(command_list):
   if 'Red Hat' in dist[0]:
     if dist[1].startswith('6') or dist[1].startswith('7'):
       devtoolset = '7' if dist[1].startswith('7') else '2'
-      return " ".join(["scl", "enable", "devtoolset-{0}", "{1}".format(devtoolset, quoted_command_str)])
+      return " ".join(["scl", "enable", "devtoolset-{0}".format(devtoolset), "{0}".format(quoted_command_str)])
     else:
       return command_str
   else:
