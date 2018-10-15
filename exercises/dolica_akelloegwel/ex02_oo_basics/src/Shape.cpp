@@ -15,18 +15,6 @@ Shape::Shape(std::string type, int numSides)
 Shape::~Shape()
 {
 }
-double Shape::GetPerimeter() const
-{
-	return m_perimeter;
-}
-void Shape::SetPerimeter(double perimeter)
-{
-	m_perimeter = perimeter;
-}
-double Shape::GetArea() const
-{
-	return m_area;
-}
 void Shape::SetArea(double area)
 {
 	m_area = area;

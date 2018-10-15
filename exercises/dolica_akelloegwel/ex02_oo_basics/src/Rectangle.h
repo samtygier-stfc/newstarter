@@ -10,6 +10,8 @@ private:
 
 public:
 	Rectangle(double w, double h);
+	double GetPerimeter() const;
+	double GetArea() const;
 	double GetWidth();
 	double GetHeight();
 };

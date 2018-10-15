@@ -9,5 +9,7 @@ private:
 
 public:
 	Square(double s);
+	double GetPerimeter() const;
+	double GetArea() const;
 	double GetSide() const;
 };

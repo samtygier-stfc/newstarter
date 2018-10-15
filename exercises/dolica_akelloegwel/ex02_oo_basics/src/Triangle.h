@@ -10,6 +10,8 @@ private:
 
 public:
 	Triangle(double b, double h);
+	double GetPerimeter() const;
+	double GetArea() const;
 	double GetBase() const;
 	double GetHeight() const;
 };

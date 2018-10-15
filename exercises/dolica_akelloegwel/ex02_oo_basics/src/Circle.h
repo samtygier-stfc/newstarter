@@ -9,5 +9,7 @@ private:
 
 public:
 	Circle(double r);
+	double GetPerimeter() const;
+	double GetArea() const;
 	double GetRadius() const;
 };
