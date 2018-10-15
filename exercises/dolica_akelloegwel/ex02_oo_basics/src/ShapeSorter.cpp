@@ -14,7 +14,7 @@ void ShapeSorter::PrintBasedOnNSides(std::vector<std::reference_wrapper<Shape>> 
 		if (shapes[i].get().GetSides() == numSides)
 			std::cout << shapes[i].get() << std::endl;
 }
-void ShapeSorter::SortByAreaDesc(std::vector<std::reference_wrapper<Shape>> shapes)
+std::vector<std::reference_wrapper<Shape>> ShapeSorter::SortByAreaDesc(std::vector<std::reference_wrapper<Shape>> shapes)
 {
 	// Create a copy of the shapes vector
 	std::vector<std::reference_wrapper<Shape>> copyShapes(shapes);
@@ -28,11 +28,9 @@ void ShapeSorter::SortByAreaDesc(std::vector<std::reference_wrapper<Shape>> shap
 	// Sort the copied vector
 	std::sort(copyShapes.begin(), copyShapes.end(), areaCompare);
 
-	// Print the elements in the sorted vector
-	for (int i = 0; i < copyShapes.size(); i++)
-		std::cout << copyShapes[i].get() << std::endl;
+	return copyShapes;
 }
-void ShapeSorter::SortByPerimeterDesc(std::vector<std::reference_wrapper<Shape>> shapes)
+std::vector<std::reference_wrapper<Shape>> ShapeSorter::SortByPerimeterDesc(std::vector<std::reference_wrapper<Shape>> shapes)
 {
 	// Create a copy of the shapes vector
 	std::vector<std::reference_wrapper<Shape>> copyShapes(shapes);
@@ -46,7 +44,10 @@ void ShapeSorter::SortByPerimeterDesc(std::vector<std::reference_wrapper<Shape>>
 	// Sort the copied vector
 	std::sort(copyShapes.begin(), copyShapes.end(), perimCompare);
 
-	// Print the sorted vector
-	for (int i = 0; i < copyShapes.size(); i++)
-		std::cout << copyShapes[i].get() << std::endl;
+	return copyShapes;
+}
+void ShapeSorter::PrintShapes(std::vector<std::reference_wrapper<Shape>> shapes)
+{
+	for (int i = 0; i < shapes.size(); i++)
+		std::cout << shapes[i].get() << std::endl;
 }
