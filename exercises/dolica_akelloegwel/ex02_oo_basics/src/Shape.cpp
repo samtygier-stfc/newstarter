@@ -7,16 +7,10 @@ Shape::Shape(int numSides)
 
 	// Set default member variable values
 	// Compute during subclass initialisation
-	m_perimeter = 0;
-	m_area = 0;
 	m_printMessage = "";
 }
 Shape::~Shape()
 {
-}
-void Shape::SetArea(double area)
-{
-	m_area = area;
 }
 int Shape::GetSides() const
 {
