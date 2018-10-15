@@ -21,11 +21,11 @@ protected:
 	void SetMessage(std::string msg);
 
 public:
-	Shape(std::string t, int n);
+	Shape(int n);
 	~Shape();
 	virtual double GetPerimeter() const = 0;
 	virtual double GetArea() const = 0;
-	std::string GetType() const;
+	virtual std::string GetType() const = 0;
 	int GetSides() const;
 	std::string GetMessage() const;
 	friend std::ostream &operator<<(std::ostream & os, const Shape &shape);

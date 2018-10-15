@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(double width, double height) : Shape("Rectangle", 4)
+Rectangle::Rectangle(double width, double height) : Shape(4)
 {
 	// Set width and height information
 	m_width = width;
@@ -21,6 +21,10 @@ double Rectangle::GetPerimeter() const
 double Rectangle::GetArea() const
 {
 	return m_width * m_height;
+}
+std::string Rectangle::GetType() const
+{
+	return "Rectangle";
 }
 double Rectangle::GetWidth()
 {

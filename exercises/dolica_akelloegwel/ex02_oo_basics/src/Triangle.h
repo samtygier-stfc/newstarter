@@ -12,6 +12,7 @@ public:
 	Triangle(double b, double h);
 	double GetPerimeter() const;
 	double GetArea() const;
+	std::string GetType() const;
 	double GetBase() const;
 	double GetHeight() const;
 };

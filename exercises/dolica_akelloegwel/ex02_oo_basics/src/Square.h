@@ -11,5 +11,6 @@ public:
 	Square(double s);
 	double GetPerimeter() const;
 	double GetArea() const;
+	std::string GetType() const;
 	double GetSide() const;
 };

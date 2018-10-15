@@ -12,6 +12,7 @@ public:
 	Rectangle(double w, double h);
 	double GetPerimeter() const;
 	double GetArea() const;
+	std::string GetType() const;
 	double GetWidth();
 	double GetHeight();
 };

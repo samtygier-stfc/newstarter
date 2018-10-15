@@ -1,9 +1,8 @@
 #include "Shape.h"
 
-Shape::Shape(std::string type, int numSides)
+Shape::Shape(int numSides)
 {
 	// Set type and number of sides
-	m_type = type;
 	m_numSides = numSides;
 
 	// Set default member variable values
@@ -18,10 +17,6 @@ Shape::~Shape()
 void Shape::SetArea(double area)
 {
 	m_area = area;
-}
-std::string Shape::GetType() const
-{
-	return m_type;
 }
 int Shape::GetSides() const
 {

@@ -11,5 +11,6 @@ public:
 	Circle(double r);
 	double GetPerimeter() const;
 	double GetArea() const;
+	std::string GetType() const;
 	double GetRadius() const;
 };

@@ -1,6 +1,6 @@
 #include "Square.h"
 
-Square::Square(double side) : Shape("Square", 4)
+Square::Square(double side) : Shape(4)
 {
 	// Set the side value
 	m_side = side;
@@ -19,6 +19,10 @@ double Square::GetPerimeter() const
 double Square::GetArea() const
 {
 	return m_side * m_side;
+}
+std::string Square::GetType() const
+{
+	return "Square";
 }
 double Square::GetSide() const
 {
