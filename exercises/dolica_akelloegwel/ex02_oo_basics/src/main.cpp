@@ -25,7 +25,7 @@ int main(int, char **)
 	Triangle myTriangle = Triangle(triangleBase, triangleHeight);
 
 	// Create a vector and place the shapes in it
-	std::vector<Shape> myShapes;
+	std::vector<std::reference_wrapper<Shape> > myShapes;
 
 	myShapes.push_back(mySquare);
 	myShapes.push_back(myRectangle);

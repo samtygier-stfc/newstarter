@@ -1,27 +1,23 @@
 #include "ShapeSorter.h"
 
-void ShapeSorter::PrintBasedOnType(std::vector<Shape> shapes, std::string type)
+void ShapeSorter::PrintBasedOnType(std::vector<std::reference_wrapper<Shape>> shapes, std::string type)
 {
 	// Print shapes that have a given type
-	for (std::vector<Shape>::iterator it = shapes.begin(); it != shapes.end(); it++) 
-	{
-		if (it->GetType().compare(type) == 0)
-			std::cout << *it << std::endl;
-	}
+	for (int i = 0; i < shapes.size(); i++)
+		if (shapes[i].get().GetType().compare(type) == 0)
+			std::cout << shapes[i].get() << std::endl;
 }
-void ShapeSorter::PrintBasedOnNSides(std::vector<Shape> shapes, int numSides)
+void ShapeSorter::PrintBasedOnNSides(std::vector<std::reference_wrapper<Shape>> shapes, int numSides)
 {
 	// Print shapes that have a given number of sides
-	for (std::vector<Shape>::iterator it = shapes.begin(); it != shapes.end(); it++)
-	{
-		if (it->GetSides() == numSides)
-			std::cout << *it << std::endl;
-	}
+	for (int i = 0; i < shapes.size(); i++)
+		if (shapes[i].get().GetSides() == numSides)
+			std::cout << shapes[i].get() << std::endl;
 }
-void ShapeSorter::SortByAreaDesc(std::vector<Shape> shapes)
+void ShapeSorter::SortByAreaDesc(std::vector<std::reference_wrapper<Shape>> shapes)
 {
 	// Create a copy of the shapes vector
-	std::vector<Shape> copyShapes(shapes);
+	std::vector<std::reference_wrapper<Shape>> copyShapes(shapes);
 
 	// Create a lambda expression for comparing area values
 	auto areaCompare = [](const Shape &s1, const Shape &s2)
@@ -33,15 +29,13 @@ void ShapeSorter::SortByAreaDesc(std::vector<Shape> shapes)
 	std::sort(copyShapes.begin(), copyShapes.end(), areaCompare);
 
 	// Print the elements in the sorted vector
-	for (std::vector<Shape>::iterator it = copyShapes.begin(); it != copyShapes.end(); it++)
-	{
-		std::cout << it->GetArea() << std::endl;
-	}
+	for (int i = 0; i < copyShapes.size(); i++)
+		std::cout << copyShapes[i].get() << std::endl;
 }
-void ShapeSorter::SortByPerimeterDesc(std::vector<Shape> shapes)
+void ShapeSorter::SortByPerimeterDesc(std::vector<std::reference_wrapper<Shape>> shapes)
 {
 	// Create a copy of the shapes vector
-	std::vector<Shape> copyShapes(shapes);
+	std::vector<std::reference_wrapper<Shape>> copyShapes(shapes);
 
 	// Create a lambda expression for sorting by perimeter values
 	auto perimCompare = [](const Shape &s1, const Shape &s2)
@@ -53,8 +47,6 @@ void ShapeSorter::SortByPerimeterDesc(std::vector<Shape> shapes)
 	std::sort(copyShapes.begin(), copyShapes.end(), perimCompare);
 
 	// Print the sorted vector
-	for (std::vector<Shape>::iterator it = copyShapes.begin(); it != copyShapes.end(); it++)
-	{
-		std::cout << it->GetPerimeter() << std::endl;
-	}
+	for (int i = 0; i < copyShapes.size(); i++)
+		std::cout << copyShapes[i].get() << std::endl;
 }
