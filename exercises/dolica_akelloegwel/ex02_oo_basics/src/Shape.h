@@ -9,9 +9,7 @@
 class Shape
 {
 protected:
-	std::string m_printMessage;
 	std::string CreateBaseMessage() const;
-	void SetMessage(std::string msg);
 
 public:
 	Shape();

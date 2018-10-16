@@ -2,9 +2,6 @@
 
 Shape::Shape()
 {
-	// Set default member variable values
-	// Compute during subclass initialisation
-	m_printMessage = "";
 }
 Shape::~Shape()
 {
