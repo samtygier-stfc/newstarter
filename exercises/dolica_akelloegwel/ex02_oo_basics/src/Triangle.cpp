@@ -5,14 +5,6 @@ Triangle::Triangle(double base, double height) : Shape()
 	// Set the base and height values
 	m_base = base;
 	m_height = height;
-
-	// Construct and set a message for use when overloading <<
-	std::string triangleMessage = "Triangle Properties:\n";
-	triangleMessage += "  Base: " + std::to_string(base) + "\n";
-	triangleMessage += "  Height: " + std::to_string(height);
-	triangleMessage += CreateBaseMessage();
-
-	SetMessage(triangleMessage);
 }
 double Triangle::GetPerimeter() const
 {
@@ -37,4 +29,13 @@ double Triangle::GetBase() const
 double Triangle::GetHeight() const
 {
 	return m_height;
+}
+std::string Triangle::GetMessage() const
+{
+	// Construct and set a message for use when overloading <<
+	std::string triangleMessage = "Triangle Properties:\n";
+	triangleMessage += "  Base: " + std::to_string(m_base) + "\n";
+	triangleMessage += "  Height: " + std::to_string(m_height);
+	triangleMessage += CreateBaseMessage();
+	return triangleMessage;
 }

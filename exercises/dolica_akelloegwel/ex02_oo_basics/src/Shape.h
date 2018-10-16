@@ -10,7 +10,7 @@ class Shape
 {
 protected:
 	std::string m_printMessage;
-	std::string CreateBaseMessage();
+	std::string CreateBaseMessage() const;
 	void SetMessage(std::string msg);
 
 public:
@@ -20,6 +20,6 @@ public:
 	virtual double GetArea() const = 0;
 	virtual std::string GetType() const = 0;
 	virtual int GetNumSides() const = 0;
-	std::string GetMessage() const;
+	virtual std::string GetMessage() const = 0;
 	friend std::ostream &operator<<(std::ostream & os, const Shape &shape);
 };

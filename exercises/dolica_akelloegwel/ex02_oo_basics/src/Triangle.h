@@ -16,5 +16,6 @@ public:
 	int GetNumSides() const;
 	double GetBase() const;
 	double GetHeight() const;
+	std::string GetMessage() const;
 };
 

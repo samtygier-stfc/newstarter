@@ -9,19 +9,10 @@ Shape::Shape()
 Shape::~Shape()
 {
 }
-std::string Shape::CreateBaseMessage()
+std::string Shape::CreateBaseMessage() const
 {
 	// Create a basic message without subclass info to act as a template when overloading <<
 	return "\n  Perimeter: " + std::to_string(GetPerimeter()) + "\n  Area: " + std::to_string(GetArea()) + "\n";
-}
-std::string Shape::GetMessage() const
-{
-	return m_printMessage;
-}
-void Shape::SetMessage(std::string printMessage)
-{
-	// Set the print message after it has been constructed in the subclass
-	m_printMessage = printMessage;
 }
 std::ostream & operator<<(std::ostream & os, const Shape & shape)
 {

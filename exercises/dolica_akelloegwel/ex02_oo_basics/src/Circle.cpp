@@ -4,13 +4,6 @@ Circle::Circle(double radius) : Shape()
 {
 	// Set the radius
 	m_radius = radius;
-
-	// Construct a message for use when overloading <<
-	std::string circleMessage = "Circle Properties: \n";
-	circleMessage += "  Radius: " + std::to_string(radius);
-	circleMessage += CreateBaseMessage();
-
-	SetMessage(circleMessage);
 }
 double Circle::GetPerimeter() const
 {
@@ -31,4 +24,12 @@ int Circle::GetNumSides() const
 double Circle::GetRadius() const
 {
 	return m_radius;
+}
+std::string Circle::GetMessage() const
+{
+	// Construct a message for use when overloading <<
+	std::string circleMessage = "Circle Properties: \n";
+	circleMessage += "  Radius: " + std::to_string(m_radius);
+	circleMessage += CreateBaseMessage();
+	return circleMessage;
 }

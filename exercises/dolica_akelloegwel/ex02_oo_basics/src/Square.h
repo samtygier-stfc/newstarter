@@ -14,4 +14,5 @@ public:
 	std::string GetType() const;
 	int GetNumSides() const;
 	double GetSide() const;
+	std::string GetMessage() const;
 };

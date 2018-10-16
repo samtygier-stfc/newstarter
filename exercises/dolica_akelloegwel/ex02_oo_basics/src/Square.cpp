@@ -4,13 +4,6 @@ Square::Square(double side) : Shape()
 {
 	// Set the side value
 	m_side = side;
-
-	// Construct and set a message used for overloading <<
-	std::string squareMessage = "Square Properties:\n";
-	squareMessage += "  Side: " + std::to_string(side);
-	squareMessage += CreateBaseMessage();
-
-	SetMessage(squareMessage);
 }
 double Square::GetPerimeter() const
 {
@@ -31,4 +24,12 @@ int Square::GetNumSides() const
 double Square::GetSide() const
 {
 	return m_side;
+}
+std::string Square::GetMessage() const
+{
+	// Construct and set a message used for overloading <<
+	std::string squareMessage = "Square Properties:\n";
+	squareMessage += "  Side: " + std::to_string(m_side);
+	squareMessage += CreateBaseMessage();
+	return squareMessage;
 }
