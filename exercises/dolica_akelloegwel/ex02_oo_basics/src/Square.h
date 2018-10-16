@@ -12,5 +12,6 @@ public:
 	double GetPerimeter() const;
 	double GetArea() const;
 	std::string GetType() const;
+	int GetNumSides() const;
 	double GetSide() const;
 };

@@ -1,6 +1,6 @@
 #include "Circle.h"
 
-Circle::Circle(double radius) : Shape(1)
+Circle::Circle(double radius) : Shape()
 {
 	// Set the radius
 	m_radius = radius;
@@ -23,6 +23,10 @@ double Circle::GetArea() const
 std::string Circle::GetType() const
 {
 	return "Circle";
+}
+int Circle::GetNumSides() const
+{
+	return 1;
 }
 double Circle::GetRadius() const
 {

@@ -13,6 +13,7 @@ public:
 	double GetPerimeter() const;
 	double GetArea() const;
 	std::string GetType() const;
-	double GetWidth();
-	double GetHeight();
+	int GetNumSides() const;
+	double GetWidth() const;
+	double GetHeight() const;
 };

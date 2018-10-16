@@ -1,10 +1,7 @@
 #include "Shape.h"
 
-Shape::Shape(int numSides)
+Shape::Shape()
 {
-	// Set type and number of sides
-	m_numSides = numSides;
-
 	// Set default member variable values
 	// Compute during subclass initialisation
 	m_printMessage = "";
@@ -12,18 +9,10 @@ Shape::Shape(int numSides)
 Shape::~Shape()
 {
 }
-int Shape::GetSides() const
-{
-	return m_numSides;
-}
-void Shape::SetSides(int numSides)
-{
-	m_numSides = numSides;
-}
 std::string Shape::CreateBaseMessage()
 {
 	// Create a basic message without subclass info to act as a template when overloading <<
-	return "\n  Perimeter: " + std::to_string(m_perimeter) + "\n  Area: " + std::to_string(m_area) + "\n";
+	return "\n  Perimeter: " + std::to_string(GetPerimeter()) + "\n  Area: " + std::to_string(GetArea()) + "\n";
 }
 std::string Shape::GetMessage() const
 {

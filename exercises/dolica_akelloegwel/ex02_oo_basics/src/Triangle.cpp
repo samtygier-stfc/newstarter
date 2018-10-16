@@ -1,6 +1,6 @@
 #include "Triangle.h"
 
-Triangle::Triangle(double base, double height) : Shape(3)
+Triangle::Triangle(double base, double height) : Shape()
 {
 	// Set the base and height values
 	m_base = base;
@@ -25,6 +25,10 @@ double Triangle::GetArea() const
 std::string Triangle::GetType() const
 {
 	return "Triangle";
+}
+int Triangle::GetNumSides() const
+{
+	return 3;
 }
 double Triangle::GetBase() const
 {

@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(double width, double height) : Shape(4)
+Rectangle::Rectangle(double width, double height) : Shape()
 {
 	// Set width and height information
 	m_width = width;
@@ -26,11 +26,15 @@ std::string Rectangle::GetType() const
 {
 	return "Rectangle";
 }
-double Rectangle::GetWidth()
+int Rectangle::GetNumSides() const
+{
+	return 4;
+}
+double Rectangle::GetWidth() const
 {
 	return m_width;
 }
-double Rectangle::GetHeight()
+double Rectangle::GetHeight() const
 {
 	return m_height;
 }

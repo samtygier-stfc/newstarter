@@ -11,7 +11,7 @@ void ShapeSorter::PrintBasedOnNSides(std::vector<std::reference_wrapper<Shape>> 
 {
 	// Print shapes that have a given number of sides
 	for (int i = 0; i < shapes.size(); i++)
-		if (shapes[i].get().GetSides() == numSides)
+		if (shapes[i].get().GetNumSides() == numSides)
 			std::cout << shapes[i].get() << std::endl;
 }
 std::vector<std::reference_wrapper<Shape>> ShapeSorter::SortByAreaDesc(std::vector<std::reference_wrapper<Shape>> shapes)
