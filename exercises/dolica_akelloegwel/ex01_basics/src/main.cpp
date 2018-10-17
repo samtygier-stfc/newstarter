@@ -12,13 +12,13 @@ struct CountCompare
 {
 	bool operator() (const std::pair<std::string, size_t>&p1, const std::pair<std::string, size_t>&p2) const
 	{
-		return p2.second < p1.second || !(p1.second < p2.second) && p1.first < p2.first;
+		return p2.second < p1.second || (p1.second >= p2.second && p1.first < p2.first);
 	}
 } cmp;
 
 bool ContainsDashes(const std::string &compositeWord)
 {
-	return compositeWord.find("-") != std::string::npos;
+	return std::string::npos != compositeWord.find('-');
 }
 std::vector<std::string> SplitWords(const std::string &compositeWord)
 {
@@ -72,7 +72,7 @@ void SaveWordCountToFile(const std::map<std::string, int> &wordMap, const std::s
 	outFile.close();
 
 }
-std::map<std::string, int> CountWords(std::string inputFilename)
+std::map<std::string, int> CountWords(const std::string &inputFilename)
 {
 	// Declare a string for the words in the text 
 	std::string words;

@@ -2,7 +2,6 @@
 
 Circle::Circle(double radius) : Shape()
 {
-	// Set the radius
 	m_radius = radius;
 }
 double Circle::GetPerimeter() const

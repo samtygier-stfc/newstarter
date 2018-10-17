@@ -8,11 +8,11 @@ private:
 	double m_radius;
 
 public:
-	Circle(double r);
-	double GetPerimeter() const;
-	double GetArea() const;
-	std::string GetType() const;
-	int GetNumSides() const;
+	explicit Circle(double r);
+	double GetPerimeter() const override;
+	double GetArea() const override;
+	std::string GetType() const override;
+	int GetNumSides() const override;
 	double GetRadius() const;
-	std::string GetMessage() const;
+	std::string GetMessage() const override;
 };

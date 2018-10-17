@@ -27,10 +27,10 @@ int main(int, char **)
 	// Create a vector and place the shapes in it
 	std::vector<std::reference_wrapper<Shape> > myShapes;
 
-	myShapes.push_back(mySquare);
-	myShapes.push_back(myRectangle);
-	myShapes.push_back(myCircle);
-	myShapes.push_back(myTriangle);
+	myShapes.emplace_back(mySquare);
+	myShapes.emplace_back(myRectangle);
+	myShapes.emplace_back(myCircle);
+	myShapes.emplace_back(myTriangle);
 
 	// Examine behaviour of the shape sorter
 	ShapeSorter shapeSorter = ShapeSorter();
