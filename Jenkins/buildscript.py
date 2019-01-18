@@ -91,7 +91,8 @@ def build(build_root):
     Build the code in the build_root directory
     """
     if is_windows():
-        cmd = ["cmake", "--build", build_root, "/nologo", "/verbosity:minimal /p:Configuration=Release"]
+        cmd = ["cmake", "--build", build_root, "--", "/nologo",
+               "/verbosity:minimal /p:Configuration=Release"]
     else:
         cmd = make_scl_command(["make", "-C", build_root])
     print "Running '%s'" % cmd
