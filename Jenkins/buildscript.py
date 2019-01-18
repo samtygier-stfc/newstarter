@@ -57,7 +57,7 @@ def is_windows():
 def run_cmake(cmakelists_path):
     if is_windows():
         cmake_exe = "cmake"
-        generator = 'Visual Studio 14 Win64'
+        generator = 'Visual Studio 15 2017 Win64'
         cmd = [cmake_exe, "-G", generator, cmakelists_path]
         print "Running '%s'" % " ".join(cmd)
     else:
@@ -91,9 +91,7 @@ def build(build_root):
     Build the code in the build_root directory
     """
     if is_windows():
-        sln = os.path.join(build_root, "Project.sln")
-        msbuildscript = os.path.join(os.path.dirname(os.path.realpath(__file__)), "msbuildscript.bat")
-        cmd = [msbuildscript, "Release", sln]
+        cmd = ["cmake", "--build", build_root, "/nologo", "/verbosity:minimal /p:Configuration=Release"]
     else:
         cmd = make_scl_command(["make", "-C", build_root])
     print "Running '%s'" % cmd
