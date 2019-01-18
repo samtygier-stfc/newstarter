@@ -92,7 +92,7 @@ def build(build_root):
     """
     if is_windows():
         cmd = ["cmake", "--build", build_root, "--", "/nologo",
-               "/verbosity:minimal /p:Configuration=Release"]
+               "/verbosity:minimal", "/p:Configuration=Release"]
     else:
         cmd = make_scl_command(["make", "-C", build_root])
     print "Running '%s'" % cmd
