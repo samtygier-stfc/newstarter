@@ -1,135 +1,167 @@
 #include "main.h"
 
-int main(int argc, char* argv[])
-{
-    std::string filename{};
-    std::map<std::string, int> wordCounter{};
-    std::vector<std::pair<int, std::string>> sorted{};
-    const int correctNumberArguments{ 2 };
+int main(int argc, char *argv[]) {
+  const int CORRECT_NUMBER_ARGUMENTS{4};
+  std::string inputFilename;
+  std::string outputFilename;
+  int minWordLength;
+  std::map<std::string, int> wordsAndCounts;
+  std::vector<std::pair<int, std::string>> sorted;
+  bool success{false};
 
-    // checks that the user has provided only one filename
-    if (argc != correctNumberArguments) {
-        std::cerr << "Wrong number of arguments provided. "
-            "Provide only one filename.";
-        return 0;
-    }
-    else {
-        filename = argv[1];
-    }
+  // checks that the user has provided the correct number of arguments
+  if (argc != CORRECT_NUMBER_ARGUMENTS) {
+    std::cerr
+        << "Wrong number of arguments provided. "
+           "Provide two filenames (input and output) and minimum word length."
+        << "\n";
+    return 1;
+  }
 
-    countWords(filename, wordCounter);
+  inputFilename = argv[1];
+  outputFilename = argv[2];
 
-    sorted = orderByUsage(wordCounter);
+  // the inputted min word length is converted to int
+  minWordLength = atoi(argv[3]);
 
-    writeToFile(sorted);
+  success = countWords(inputFilename, wordsAndCounts, minWordLength);
+
+  if (success) {
+    sorted = orderByUsage(wordsAndCounts);
+    writeToFile(sorted, outputFilename);
 
     return 0;
+  }
+
+  return 1;
 }
 
-// opens file with the provided filename
-// populates a map with each word in the file
-// and the number of occurences
-void countWords(std::string filename,
-    std::map<std::string, int>& wordCounter) {
+/** Opens a text file and populates a map with every unique word in the file and
+ * the number of times the word occurs
+ *
+ * @param filename The name of the input file to read
+ * @param wordsAndCounts The map to be populated
+ * @param minWordLength The minimum length of words to be added to the map
+ * @return A boolean for whether or not the map was successfully populated
+ *
+ */
+bool countWords(const std::string &inputFilename,
+                std::map<std::string, int> &wordsAndCounts,
+                const int &minWordLength) {
 
-    std::ifstream file{ filename };
+  std::ifstream file{inputFilename};
 
-    // checks the file has been opened
-    if (!file.is_open()) {
-        std::cerr << "Unable to open file.";
-        return;
+  // checks the file has been opened
+  if (!file.is_open()) {
+    std::cerr << "Unable to open input file for reading. Check that the file "
+                 "exists and its name is spelt correctly."
+              << "/n";
+    return false;
+  }
+
+  // goes through each word in the file
+  std::string word;
+  while (file >> word) {
+
+    word = cleanUpWord(word);
+
+    // only words of length at least the inputted minimum are added to the map
+    if (word.length() >= minWordLength) {
+      ++wordsAndCounts[word];
     }
+  }
 
-    // goes through each word in the file
-    std::string word;
-    while (file >> word) {
-        const int minWordLength{ 5 };
+  file.close();
 
-        word = cleanUpWord(word);
-
-        // only words of length at least 5 are added to the map
-        if (word.length() >= minWordLength) {
-            ++wordCounter[word];
-        }
-    }
-
-    file.close();
+  return true;
 }
 
-// given a word, removes punctuation and converts to lowercase
-// returns the changed word
-std::string cleanUpWord(std::string word) {
-    std::string newWord{};
-    std::string punctuation{ ".,?'\"!():" };
+/** Converts a word to lowercase and removes punctuation
+ *
+ * @param word The word to be cleaned up
+ * @return The cleaned up word
+ *
+ */
+std::string cleanUpWord(std::string &word) {
+  std::string newWord{};
+  std::string punctuation{".,?'\"!():"};
 
-    // iterates through each character in the word
-    for (char c : word) {
-        // increase uppercase ascii value by 32 to make it lowercase
-        const int upperToLower{ 32 };
+  // iterates through each character in the word
+  for (char &c : word) {
 
-        // if the character is uppercase, it is converted to lowercase
-        if (c >= 'A' && c <= 'Z') {
-            c += upperToLower;
-        }
-        // punctuation characters are discarded
-        else if (punctuation.find(c) != std::string::npos) {
-            continue;
-        }
+    // punctuation characters are discarded
+    if (punctuation.find(c) == std::string::npos) {
 
-        newWord += c;
+      // converts uppercase characters to lowercase
+      newWord += std::tolower(c);
     }
+  }
 
-    return newWord;
+  return newWord;
 }
 
-// converts the map to a vector of pairs so it can be sorted
+/** Converts the map to a vector of pairs and sorts it
+ *
+ * @param wordsAndCounts The map of words and number of occurences
+ * @return The sorted vector of pairs of words and occurrecnes
+ *
+ */
 std::vector<std::pair<int, std::string>>
-orderByUsage(std::map<std::string, int>& wordCounter) {
+orderByUsage(std::map<std::string, int> &wordsAndCounts) {
 
-    std::vector<std::pair<int, std::string>> pairs{};
+  std::vector<std::pair<int, std::string>> pairs{};
 
-    // each word-usage pair in the map is added to the vector
-    // as a usage-word pair (swapped for easy sorting)
-    for (auto word : wordCounter) {
-        std::pair<int, std::string> pair;
-        pair.second = word.first;
-        pair.first = word.second;
+  // each word-usage pair in the map is added to the vector
+  // as a usage-word pair (swapped for easy sorting)
+  for (auto &word : wordsAndCounts) {
+    std::pair<int, std::string> pair;
+    pair.second = word.first;
+    pair.first = word.second;
 
-        pairs.push_back(pair);
-    }
+    pairs.push_back(pair);
+  }
 
-    // sorted in descending order of word usage
-    std::sort(pairs.begin(), pairs.end(),
-        std::greater<std::pair<int, std::string>>());
+  // sorted in descending order of word usage
+  std::sort(pairs.begin(), pairs.end(),
+            std::greater<std::pair<int, std::string>>());
 
-    return pairs;
+  return pairs;
 }
 
-// writes each word-usage pair to a file
-void writeToFile(std::vector<std::pair<int, std::string>> wordCounter) {
-    std::ofstream outputFile{ "output.txt" };
+/** Writes all of the word-usage pairs to an output file
+ *
+ * @param wordsAndCounts The vector of word-usage pairs to be written
+ * @param outputFilename The name of the file to be written to
+ *
+ */
+void writeToFile(std::vector<std::pair<int, std::string>> &wordsAndCounts,
+                 const std::string &outputFilename) {
+  std::ofstream outputFile{outputFilename};
 
-    // checks the file has been opened
-    if (!outputFile.is_open()) {
-        std::cerr << "Unable to open file.";
-        return;
-    }
+  const int PADDED_WORD_LENGTH{32};
 
-    // headings are written to the file
-    outputFile << "Word\t\t\t\tUsage\n\n";
+  // checks the file has been opened
+  if (!outputFile.is_open()) {
+    std::cerr << "Unable to open output file for writing."
+              << "\n";
+    return;
+  }
 
-    // iterates through the vector of pairs
-    for (std::pair<int, std::string> wordAndUsage : wordCounter) {
-        const int paddedWordLength{ 32 };
-        std::string word{ wordAndUsage.second };
+  // headings are written to the file
+  outputFile << "Word\t\t\t\tUsage\n\n";
 
-        // each word is padded with spaces to make the file look neat
-        word.append(paddedWordLength - word.length(), ' ');
+  // iterates through the vector of pairs
+  for (std::pair<int, std::string> wordAndUsage : wordsAndCounts) {
+    std::string word{wordAndUsage.second};
 
-        outputFile << word << wordAndUsage.first << "\n";
-    }
+    // each word is padded with spaces to make the file look neat
+    word.append(PADDED_WORD_LENGTH - word.length(), ' ');
 
-    std::cout << "output.txt successfully created.";
+    outputFile << word << wordAndUsage.first << "\n";
+  }
 
-    outputFile.close();
+  std::cout << "Output file successfully created."
+            << "\n";
+
+  outputFile.close();
 }
