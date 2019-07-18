@@ -12,10 +12,10 @@ public:
   Square(double sideLength);
 
   /// Calculates the perimeter of the square
-  double getPerimeter() override;
+  double getPerimeter() const override;
 
   /// Calculates the area of the square
-  double getArea() override;
+  double getArea() const override;
 };
 
 #endif // SQUARE_H

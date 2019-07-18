@@ -1,6 +1,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <iostream>
 #include <string>
 
 class Shape {
@@ -14,14 +15,16 @@ public:
 
   /// Pure abstract functions
   /// Shape cannot be instansiated
-  virtual double getPerimeter() = 0;
-  virtual double getArea() = 0;
+  virtual double getPerimeter() const = 0;
+  virtual double getArea() const = 0;
 
   /// Returns the type of shape
-  std::string getType() { return m_type; }
+  std::string getType() const { return m_type; }
 
   /// Returns the number of sides the shape has
-  int getSides() { return m_sidesNumber; }
+  int getSides() const { return m_sidesNumber; }
+
+  void printInfo() const;
 };
 
 #endif // SHAPE_H

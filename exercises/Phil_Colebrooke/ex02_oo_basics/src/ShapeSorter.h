@@ -16,10 +16,10 @@ public:
   ShapeSorter(std::vector<Shape *> shapes);
 
   /// Prints shapes that match a given type
-  void printByType(std::string type);
+  void printByType(std::string type) const;
 
   /// Prints shapes that match a given number of sides
-  void printBySides(int sides);
+  void printBySides(int sides) const;
 
   /// Prints all shapes in order of area descending
   void printByArea();

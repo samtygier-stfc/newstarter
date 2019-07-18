@@ -15,10 +15,10 @@ public:
   Triangle(double height, double base);
 
   /// Calculates the perimeter of the triangle
-  double getPerimeter() override;
+  double getPerimeter() const override;
 
   /// Calculates the area of the triangle
-  double getArea() override;
+  double getArea() const override;
 };
 
 #endif // TRIANGLE_H

@@ -16,10 +16,10 @@ public:
   Circle(double radius);
 
   /// Calculates the circumference of the circle
-  double getPerimeter() override;
+  double getPerimeter() const override;
 
   /// Calculates the area of the circle
-  double getArea() override;
+  double getArea() const override;
 };
 
 #endif // CIRCLE_H

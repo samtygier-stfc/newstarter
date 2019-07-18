@@ -7,12 +7,10 @@ ShapeSorter::ShapeSorter(std::vector<Shape *> shapes) : m_shapes{shapes} {}
  * @param type The Shape type
  *
  */
-void ShapeSorter::printByType(std::string type) {
+void ShapeSorter::printByType(std::string type) const {
   for (Shape *shape : m_shapes) {
     if (shape->getType() == type) {
-      std::cout << shape->getType() + " with perimeter "
-                << shape->getPerimeter() << " and area " << shape->getArea()
-                << "\n";
+      shape->printInfo();
     }
   }
 }
@@ -22,12 +20,10 @@ void ShapeSorter::printByType(std::string type) {
  * @param sides The number of sides
  *
  */
-void ShapeSorter::printBySides(int sides) {
+void ShapeSorter::printBySides(int sides) const {
   for (Shape *shape : m_shapes) {
     if (shape->getSides() == sides) {
-      std::cout << shape->getType() + " with perimeter "
-                << shape->getPerimeter() << " and area " << shape->getArea()
-                << "\n";
+      shape->printInfo();
     }
   }
 }
@@ -36,7 +32,7 @@ bool comparePerimeters(Shape *lhs, Shape *rhs) {
   return lhs->getPerimeter() > rhs->getPerimeter();
 }
 
-bool compareAreas(Shape *lhs, Shape * rhs) {
+bool compareAreas(Shape *lhs, Shape *rhs) {
   return lhs->getArea() > rhs->getArea();
 }
 
@@ -50,8 +46,7 @@ void ShapeSorter::printByArea() {
 
   // prints each Shape
   for (Shape *shape : m_shapes) {
-    std::cout << shape->getType() + " with perimeter " << shape->getPerimeter()
-              << " and area " << shape->getArea() << "\n";
+    shape->printInfo();
   }
 }
 
@@ -65,7 +60,6 @@ void ShapeSorter::printByPerimeter() {
 
   // prints each shape
   for (Shape *shape : m_shapes) {
-    std::cout << shape->getType() + " with perimeter " << shape->getPerimeter()
-              << " and area " << shape->getArea() << "\n";
+    shape->printInfo();
   }
 }

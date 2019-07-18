@@ -8,7 +8,7 @@ Rectangle::Rectangle(double length, double width)
  * @return The perimeter of the rectangle
  *
  */
-double Rectangle::getPerimeter() {
+double Rectangle::getPerimeter() const {
   // perimeter is the sum of each side multiplied by 2
   return (m_length * 2) + (m_width * 2);
 }
@@ -18,7 +18,7 @@ double Rectangle::getPerimeter() {
  * @return The area of the rectangle
  *
  */
-double Rectangle::getArea() {
+double Rectangle::getArea() const {
   // area is length multiplied by width
   return m_length * m_width;
 }

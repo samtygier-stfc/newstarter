@@ -8,7 +8,7 @@ Square::Square(double sideLength)
  * @return The perimeter of the square
  *
  */
-double Square::getPerimeter() {
+double Square::getPerimeter() const {
   // the perimeter is the side length multiplied by 4
   const int NUMBER_OF_SIDES = 4;
   return m_sideLength * NUMBER_OF_SIDES;
@@ -19,7 +19,7 @@ double Square::getPerimeter() {
  * @return The area of the square
  *
  */
-double Square::getArea() {
+double Square::getArea() const {
   // area is the side length squared
   return m_sideLength * m_sideLength;
 }

@@ -13,10 +13,10 @@ public:
   Rectangle(double length, double width);
 
   /// Calculates the perimeter of the rectangle
-  double getPerimeter() override;
+  double getPerimeter() const override;
 
   /// Calculates the area of the rectangle
-  double getArea() override;
+  double getArea() const override;
 };
 
 #endif // RECTANGLE_H
