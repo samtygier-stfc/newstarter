@@ -2,12 +2,6 @@
 
 int main(int argc, char *argv[]) {
   const int CORRECT_NUMBER_ARGUMENTS{4};
-  std::string inputFilename;
-  std::string outputFilename;
-  int minWordLength;
-  std::map<std::string, int> wordsAndCounts;
-  std::vector<std::pair<int, std::string>> sorted;
-  bool success{false};
 
   // checks that the user has provided the correct number of arguments
   if (argc != CORRECT_NUMBER_ARGUMENTS) {
@@ -18,16 +12,18 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  inputFilename = argv[1];
-  outputFilename = argv[2];
+  std::string inputFilename{argv[1]};
+  std::string outputFilename{argv[2]};
 
   // the inputted min word length is converted to int
-  minWordLength = atoi(argv[3]);
+  int minWordLength{atoi(argv[3])};
 
+  bool success{false};
+  std::map<std::string, int> wordsAndCounts;
   success = countWords(inputFilename, wordsAndCounts, minWordLength);
 
   if (success) {
-    sorted = orderByUsage(wordsAndCounts);
+    auto sorted{orderByUsage(wordsAndCounts)};
     writeToFile(sorted, outputFilename);
 
     return 0;
@@ -55,12 +51,12 @@ bool countWords(const std::string &inputFilename,
   if (!file.is_open()) {
     std::cerr << "Unable to open input file for reading. Check that the file "
                  "exists and its name is spelt correctly."
-              << "/n";
+              << "\n";
     return false;
   }
 
   // goes through each word in the file
-  std::string word;
+  std::string word{};
   while (file >> word) {
 
     word = cleanUpWord(word);
@@ -84,13 +80,13 @@ bool countWords(const std::string &inputFilename,
  */
 std::string cleanUpWord(std::string &word) {
   std::string newWord{};
-  std::string punctuation{".,?'\"!():"};
+  const std::string PUNCTUATION{".,?'\"!():"};
 
   // iterates through each character in the word
   for (char &c : word) {
 
     // punctuation characters are discarded
-    if (punctuation.find(c) == std::string::npos) {
+    if (PUNCTUATION.find(c) == std::string::npos) {
 
       // converts uppercase characters to lowercase
       newWord += std::tolower(c);
@@ -113,8 +109,8 @@ orderByUsage(std::map<std::string, int> &wordsAndCounts) {
 
   // each word-usage pair in the map is added to the vector
   // as a usage-word pair (swapped for easy sorting)
+  std::pair<int, std::string> pair;
   for (auto &word : wordsAndCounts) {
-    std::pair<int, std::string> pair;
     pair.second = word.first;
     pair.first = word.second;
 
@@ -151,7 +147,7 @@ void writeToFile(std::vector<std::pair<int, std::string>> &wordsAndCounts,
   outputFile << "Word\t\t\t\tUsage\n\n";
 
   // iterates through the vector of pairs
-  for (std::pair<int, std::string> wordAndUsage : wordsAndCounts) {
+  for (auto wordAndUsage : wordsAndCounts) {
     std::string word{wordAndUsage.second};
 
     // each word is padded with spaces to make the file look neat
