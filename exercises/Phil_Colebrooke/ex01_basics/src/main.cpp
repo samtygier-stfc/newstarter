@@ -12,19 +12,19 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  std::string inputFilename{argv[1]};
-  std::string outputFilename{argv[2]};
+  const std::string inputFilename{argv[1]};
+  const std::string outputFilename{argv[2]};
 
   // the inputted min word length is converted to int
-  int minWordLength{atoi(argv[3])};
+  const int minWordLength{atoi(argv[3])};
 
   bool success{false};
   std::map<std::string, int> wordsAndCounts;
   success = countWords(inputFilename, wordsAndCounts, minWordLength);
 
   if (success) {
-    auto sorted{orderByUsage(wordsAndCounts)};
-    writeToFile(sorted, outputFilename);
+    auto wordsSortedByUsage{orderByUsage(wordsAndCounts)};
+    writeToFile(wordsSortedByUsage, outputFilename);
 
     return 0;
   }
