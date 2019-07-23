@@ -3,12 +3,13 @@
 #include <string>
 #include <map>
 
-typedef std::map<std::string, int> maptype
+// define map type which stores values in descending order
+typedef std::map<std::string, int, greater <int> > maptype
 
 int main(int argc, char **argv) {
 	// prompt user for filename
 	std::cout << "Please enter the name of a file you wish to read: ";
-	std::string file_name; // ------------------------------------- only allow alphanumeric and specific filename symbols
+	std::string file_name;
 	std::cin >> file_name;
 
 	// create map
@@ -30,7 +31,7 @@ int main(int argc, char **argv) {
  *
  * @param filename: name of the input file to read
  * @param inputmap: map which will store all unique words and instances
- * @param 
+ * @param char_min: default variable to limit the length of words
  * @return 
  *
  */
@@ -38,6 +39,7 @@ int main(int argc, char **argv) {
 /* return type */ readFile(const std::string& filename, maptype& inputmap, std::size_t char_min = 4) {
 	// attempt to open file
 	ifstream inFile;
+	// could use regex here...
 	inFile.open(filename + ".txt");
 	if (!inFile) {
 		std::cerr << "Unable to open requested file: " << filename << "\n";
@@ -56,7 +58,7 @@ int main(int argc, char **argv) {
 
 /** Writes the results contained within the map to file
  *
- * @param 
+ * @param outputmap: map to write to file
  * @param 
  * @param 
  * @return 
@@ -65,6 +67,7 @@ int main(int argc, char **argv) {
 
 /* return type */ writeFile(maptype& outputmap) {
 	std::ofstream outfile("word_counts.txt");
+	outfile << "Word\tUsage\n";
 	for (maptype::const_iterator it = outputmap.begin();
 		it != outputmap.end(); ++it) {
 		outfile << it->first << ' ' << it->second << "\n";
@@ -73,4 +76,4 @@ int main(int argc, char **argv) {
 
 // make case and punctuation insensitive
 // clean .,?'"!(): (use backslash for ")
-// sort in decreasing order
+// edit header file
