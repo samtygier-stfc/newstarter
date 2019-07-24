@@ -1,7 +1,6 @@
 /**
  * Program to count words from a ascii file
  */
-
 #include <iomanip>
 #include <iostream>
 #include <fstream>
@@ -9,6 +8,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 void remove_punctuation_in_string(std::string &data)
 {
@@ -18,6 +18,7 @@ void remove_punctuation_in_string(std::string &data)
 			data.replace(data.find(x), 1, " ");
 		}
 	}
+	std::transform(data.begin(), data.end(), data.begin(), ::tolower);
 	return;
 }
 
@@ -59,13 +60,11 @@ void main(int argc, char* argv[])
 		std::cerr << "Unable to open file " << argv[1];
 		exit(1);   // call system to stop
 	}
-
 	while (std::getline(ascii_file, line)) {
 		remove_punctuation_in_string(line);
 		str_strm << line << " ";
 	}
 	ascii_file.close();
-
 	while (str_strm >> tmp) {
 		words.push_back(tmp);
 	}
