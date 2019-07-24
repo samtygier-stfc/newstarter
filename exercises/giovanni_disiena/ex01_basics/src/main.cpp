@@ -1,10 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <map>
-
-// define map type which stores values in descending order
-typedef std::map<std::string, int, greater <int> > maptype
+#include "main.h"
 
 int main(int argc, char **argv) {
 	// prompt user for filename
@@ -26,6 +20,23 @@ int main(int argc, char **argv) {
 			  << "Open output file for more detail\n";
 }
 
+/** Takes a string from which to clean specified characters from
+ *	appearing after words
+ *
+ * @param words: string to be cleaned
+ * @return 
+ *
+ */
+
+void cleanWords(std::string& word) {
+	std::regex string_regex("[^\\.,:;!?()\"-]+");
+	auto string_begin = std::sregex_iterator(word.begin(), word.end(), string_regex);
+	auto string_end = std::sregex_iterator();
+
+	for (std::sregex_iterator it = string_begin; it != string_end; ++it)
+		std::remove_copy(word.begin(), word.end(), std::back_inserter(cleaned), string_regex);
+}
+
 /** Loads a .txt file, checking for success. Subsequently reads the file
  *	storing all unique words and their numbers of occurrence
  *
@@ -36,24 +47,26 @@ int main(int argc, char **argv) {
  *
  */
 
-/* return type */ readFile(const std::string& filename, maptype& inputmap, std::size_t char_min = 4) {
+void readFile(const std::string& filename, maptype& inputmap, std::size_t char_min = 4) {
 	// attempt to open file
-	ifstream inFile;
+	std::ifstream inFile;
 	// could use regex here...
 	inFile.open(filename + ".txt");
 	if (!inFile) {
-		std::cerr << "Unable to open requested file: " << filename << "\n";
-		std::exit(1); // terminate with error -------------------- maybe use try/except?
+		std::cerr << "Unable to open requested file: " << filename << '\n';
+		std::exit(1); // terminate with error ------------------------------------ maybe use try/except?
 	}
 	else {
 		// read contents to map
 		std::string word;
 		while (inFile >> word) {
 			// lower limit number of chars
-			strlen(word.c_str()) > char_min ? ++inputmap[word];
+			if (strlen(word.c_str()) > char_min) {
+				cleanWords(word);
+				++inputmap[word];
+			}
 		}
 	}
-	return True
 }
 
 /** Writes the results contained within the map to file
@@ -65,15 +78,19 @@ int main(int argc, char **argv) {
  *
  */
 
-/* return type */ writeFile(maptype& outputmap) {
+void writeFile(maptype& outputmap) {
 	std::ofstream outfile("word_counts.txt");
 	outfile << "Word\tUsage\n";
 	for (maptype::const_iterator it = outputmap.begin();
 		it != outputmap.end(); ++it) {
-		outfile << it->first << ' ' << it->second << "\n";
+		outfile << it->first << '\t' << it->second << '\n';
 	}
 }
 
 // make case and punctuation insensitive
 // clean .,?'"!(): (use backslash for ")
+// treat hypenated words as a different word
+// presereve apostrophe inside word
 // edit header file
+// writeFile error message check
+// research transform and tolower

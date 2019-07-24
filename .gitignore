@@ -24,3 +24,5 @@ builds/*
 *.app
 
 exercises/giovanni_disiena/ex01_basics/src/\.vs/
+
+\.vs/
