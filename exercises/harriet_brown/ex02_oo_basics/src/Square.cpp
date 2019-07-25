@@ -3,7 +3,8 @@
 
 Square::Square(double side)
 {
-	setShape("Square");
+	setShape("square");
+	setN_sides(4);
 	setSide1(side);
 }
 

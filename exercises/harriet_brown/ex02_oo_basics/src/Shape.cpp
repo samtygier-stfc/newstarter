@@ -15,6 +15,16 @@ std::string Shape::getShape()
 	return shape;
 }
 
+void Shape::setN_sides(int n)
+{
+	n_sides = n;
+}
+
+int Shape::getN_sides()
+{
+	return n_sides;
+}
+
 void Shape::setSide1(double side)
 {
 	side1 = side;

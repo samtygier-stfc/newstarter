@@ -3,7 +3,8 @@
 
 Rectangle::Rectangle(double width, double height)
 {
-	setShape("Rectangle");
+	setShape("rectangle");
+	setN_sides(4);
 	setSide1(width);
 	setSide2(height);
 }

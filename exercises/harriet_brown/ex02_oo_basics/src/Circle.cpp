@@ -3,7 +3,8 @@
 
 Circle::Circle(double radius)
 {
-	setShape("Circle");
+	setShape("circle");
+	setN_sides(1);
 	setSide1(radius);
 }
 

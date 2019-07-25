@@ -3,7 +3,8 @@
 
 Triangle::Triangle(double base, double height)
 {
-	setShape("Triangle");
+	setShape("triangle");
+	setN_sides(3);
 	setSide1(base);
 	setSide2(height);
 }
