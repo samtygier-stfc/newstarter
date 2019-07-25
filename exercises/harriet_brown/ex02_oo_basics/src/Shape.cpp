@@ -1,40 +1,13 @@
-#include "Shape.h"
+#include "../inc/Shape.h"
 
 
 Shape::Shape()
 {
 }
 
-void Shape::setShape(std::string type)
+void Shape::setShape(const std::string type)
 {
 	shape = type;
-}
-
-void Shape::setHeight(double high)
-{
-	height = high;
-	if (shape == "Square" || shape == "circle") {
-		width = height;
-	}
-}
-
-void Shape::setWidth(double wid)
-{
-	width = wid;
-	if (shape == "Square" || shape == "circle") {
-		height = width;
-	}
-}
-
-void Shape::setSides(double side1, double side2)
-{
-	width = side1;
-	if (shape == "square" || shape == "circle") {
-		height = width;
-	}
-	else {
-		height = side2;
-	}
 }
 
 std::string Shape::getShape()
@@ -42,37 +15,22 @@ std::string Shape::getShape()
 	return shape;
 }
 
-double Shape::getHeight()
+void Shape::setSide1(double side)
 {
-	return height;
+	side1 = side;
 }
 
-double Shape::getWidth()
+double Shape::getSide1()
 {
-	return width;
+	return side1;
 }
 
-std::vector<double> Shape::getSides()
+void Shape::setSide2(double side)
 {
-	std::vector<double> sides;
-	sides.push_back(height);
-	if (shape == "triangle" || shape == "rectangle") {
-		sides.push_back(width);
-	}
-	return sides;
+	side2 = side;
 }
 
-double Shape::getPerimeter()
+double Shape::getSide2()
 {
-	double parimiter;
-	if (shape == "square" || shape == "rectangle") {
-		parimiter = 4.0*height;
-	}
-	if (shape == "circle") {
-		parimiter = 2.0*height*M_PI;
-	}
-	if (shape == "triangle") {
-		parimiter = width + 2.0*sqrt(height*height+(width*width)/4.0);
-	}
-	return parimiter;
+	return side2;
 }
