@@ -49,7 +49,7 @@ void print_option_text()
 	std::cout << std::endl << std::endl;
 }
 
-void main()
+int main()
 {
 	bool exit = false;
 	int option;
@@ -65,5 +65,5 @@ void main()
 		else if (option == 5) {sorter.print_shapes_in_order_of_perimiter(shapes);}
 		else if (option == 0) {exit = true;}
 	}
-	return;
+	return 0;
 }

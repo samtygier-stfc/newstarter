@@ -42,7 +42,7 @@ void print_map_by_value(std::map<std::string, int> map_to_print)
 	return;
 }
 
-void main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
 	std::ifstream ascii_file;
 	std::string line;
@@ -80,5 +80,5 @@ void main(int argc, char* argv[])
 		}
 	}
 	print_map_by_value(word_count_map);
-	return;
+	return 0;
 }
