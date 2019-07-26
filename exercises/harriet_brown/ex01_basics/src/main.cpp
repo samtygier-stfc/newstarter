@@ -24,7 +24,10 @@ void remove_punctuation_in_string(std::string &data)
 
 void print_map_by_value(std::map<std::string, int> map_to_print)
 {
+	std::ofstream result_file;
+	result_file.open("word_count.txt");
 	std::cout << std::setw(18) << "Word" << std::setw(12) << "Count" << std::endl;
+	result_file << std::setw(18) << "Word" << std::setw(12) << "Count" << std::endl;
 	std::string max_key;
 	int max_val;
 	while (map_to_print.size() > 0) {
@@ -36,6 +39,7 @@ void print_map_by_value(std::map<std::string, int> map_to_print)
 			}
 		}
 		std::cout << std::setw(18) << max_key << std::setw(12) << max_val << std::endl;
+		result_file << std::setw(18) << max_key << std::setw(12) << max_val << std::endl;
 		map_to_print.erase(max_key);
 		max_val = 0;
 	}
