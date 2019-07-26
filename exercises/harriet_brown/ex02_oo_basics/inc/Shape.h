@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <math.h>
+#include <iomanip>
+#include <iostream>
 
 class Shape
 {
@@ -19,6 +21,7 @@ class Shape
 		double getSide1();
 		void setSide2(double side);
 		double getSide2();
+		virtual void printSelf() = 0;
 		virtual double getPerimeter() = 0;
 		virtual double getVolume() = 0;
 };

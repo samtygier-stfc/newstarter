@@ -3,6 +3,10 @@
 
 Shape::Shape()
 {
+	shape = "shape";
+	side1 = 0.0;
+	side2 = 0.0;
+	n_sides = 0;
 }
 
 void Shape::setShape(const std::string type)

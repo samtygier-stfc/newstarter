@@ -7,6 +7,7 @@ class Triangle : public Shape
 	private:
 	public:
 		Triangle(double base, double height);
-		double getPerimeter();
-		double getVolume();
+		void printSelf() override;
+		double getPerimeter() override;
+		double getVolume() override;
 };

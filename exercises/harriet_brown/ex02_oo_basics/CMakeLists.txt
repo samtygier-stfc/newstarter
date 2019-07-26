@@ -17,6 +17,7 @@ include ( CommonSetup )
 ###############################################################################
 
 set ( SRC_FILES
+  src/getInput.cpp
   src/Shape.cpp
   src/Square.cpp
   src/Rectangle.cpp
@@ -28,6 +29,7 @@ set ( SRC_FILES
 )
 
 set ( HDR_FILES
+  inc/getInput.h
   inc/Shape.h
   inc/Square.h
   inc/Rectangle.h

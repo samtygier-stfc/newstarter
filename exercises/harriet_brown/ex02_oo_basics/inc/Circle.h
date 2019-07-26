@@ -7,6 +7,7 @@ class Circle : public Shape
 	private:
 	public:
 		Circle(double radius);
-		double getPerimeter();
-		double getVolume();
+		void printSelf() override;
+		double getPerimeter() override;
+		double getVolume() override;
 };

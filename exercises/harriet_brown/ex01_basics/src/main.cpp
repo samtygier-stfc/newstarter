@@ -69,7 +69,7 @@ void main(int argc, char* argv[])
 		words.push_back(tmp);
 	}
 	
-	for (int i = 0; i<words.size(); i++) {
+	for (unsigned int i = 0; i < words.size(); i++) {
 		if (words[i].size() > 4) {
 			if (word_count_map.find(words[i]) != word_count_map.end()) {
 				word_count_map[words[i]]++;

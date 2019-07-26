@@ -7,6 +7,7 @@ class Rectangle : public Shape
 	private:
 	public:
 		Rectangle(double width, double height);
-		double getPerimeter();
-		double getVolume();
+		void printSelf() override;
+		double getPerimeter() override;
+		double getVolume() override;
 };
