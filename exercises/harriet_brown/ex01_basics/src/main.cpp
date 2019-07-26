@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 	// Check the number of parameters
 	if (argc < 2) {
 		std::cerr << argv[0] << " needs to be given a file directory as an argument" << std::endl;
-		return;
+		return 0;
 	}
 	ascii_file.open(argv[1]);
 	if (!ascii_file) {
