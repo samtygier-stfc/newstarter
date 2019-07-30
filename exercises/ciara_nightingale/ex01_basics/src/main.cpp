@@ -10,19 +10,23 @@
 
 // replaces the hypens with whitespace - used in clean_word
 bool replace_hyphens(std::string& word) {
-  for (std::string::size_type i = 0; i != word.size(); ++i) {
+	bool test = false; //so the whole word is checked rather than stopping at the first instance of a hyphen
+	for (std::string::size_type i = 0; i != word.size(); ++i) {
 		//check through each character in the word
-    if (word[i] == '-') {
-      word[i] = ' ';
-      return true;
-    }
+		if (word[i] == '-') {
+				word[i] = ' ';
+				test = true;
+		}
   }
+	if (test == true) {
+			return true;
+	}
   return false;
 }
 
 // determine if a character is punctuation - used in clean_word
 bool is_punc(char const c) {
-  static const std::string punc = ".,?\'\"!();";
+  static const std::string punc = ".,?\'\"!();:";
   for (std::string::size_type i = 0; i != punc.size(); ++i) {
     if (c == punc[i]) {
       return true;
@@ -51,20 +55,20 @@ void processWord(std::string& word, std::map<std::string, int>& counter, std::st
 }
 
 // convert a map to a vector of pairs
-std::vector<std::pair<std::string, int>>
+std::vector<std::pair<std::string, int>> const
 mapToVector(const std::map<std::string, int> &map) {
   return std::vector<std::pair<std::string, int>>(map.begin(), map.end());
 }
 
 // determine which pair is greater
-bool compare(const std::pair<std::string, int> pair_1,
-             const std::pair<std::string, int> pair_2) {
+bool compare(std::pair<std::string, int> const pair_1,
+             std::pair<std::string, int> const pair_2) {
   return pair_1.second > pair_2.second;
 }
 
-void Vector_to_File(std::vector<std::pair<std::string, int>> counter,
-                    std::string::size_type pad) {
-  std::ofstream Results("text.txt");
+void Vector_to_File(std::vector<std::pair<std::string, int>> const counter,
+                    std::string::size_type const pad) {
+	std::ofstream Results("text.txt");
   // write the titles of the columns to the file
   Results << "Word" << std::string(pad - 3, ' ') << "Usage"
           << "\n\n";
@@ -88,24 +92,22 @@ void uniqueWordCounter(std::string::size_type const min_word_length) {
 	if (!in) {
 			std::cerr << "failed to load file! Incorrect file name specified";
 	}
-  
   while (in >> word) {
     if (replace_hyphens(word)) {
-				//if the word contains a hyphen, remove the hyphen, split into two words.
+				//if the word contains a hyphen, remove the hyphen, split into words.
 				std::stringstream stream_word(word);
-				std::string word_1, word_2;
-				stream_word >> word_1;
-				stream_word >> word_2;
-				processWord(word_1, counter, maxlen, min_word_length);
-				processWord(word_2, counter, maxlen, min_word_length);
+				std::string more_word = "";
+				while (stream_word >> more_word) {
+						processWord(more_word, counter, maxlen, min_word_length);
+				}
+				stream_word.clear();
     }
 		else {
-				processWord(word, counter, maxlen, min_word_length);
+  		processWord(word, counter, maxlen, min_word_length);
 		}
   }
 	//vector containing the word and usage pairs from the map.
-  std::vector<std::pair<std::string, int>> count;
-  count = mapToVector(counter);
+  std::vector<std::pair<std::string, int>> count = mapToVector(counter);
   std::sort(count.begin(), count.end(), compare); // reorder the vector in descending order
   Vector_to_File(count, maxlen); // write the vector to a file
 }
