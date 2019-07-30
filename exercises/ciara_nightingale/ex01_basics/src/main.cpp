@@ -8,10 +8,10 @@
 #include <vector>
 #include <sstream>
 
-// replaces the hypens with whitespace
+// replaces the hypens with whitespace - used in clean_word
 bool replace_hyphens(std::string& word) {
-  // std::cout << path[6] << std::endl;
   for (std::string::size_type i = 0; i != word.size(); ++i) {
+		//check through each character in the word
     if (word[i] == '-') {
       word[i] = ' ';
       return true;
@@ -20,7 +20,7 @@ bool replace_hyphens(std::string& word) {
   return false;
 }
 
-// determine if a character is punctuation
+// determine if a character is punctuation - used in clean_word
 bool is_punc(char const c) {
   static const std::string punc = ".,?\'\"!();";
   for (std::string::size_type i = 0; i != punc.size(); ++i) {
@@ -32,7 +32,7 @@ bool is_punc(char const c) {
   return false;
 }
 
-// deal with punctuation and case sensitivity
+// deal with punctuation and case sensitivity - used in process_word
 void clean_word(std::string& word) {
   // remove characters if they are puctuation
   word.erase(remove_if(word.begin(), word.end(), is_punc), word.end());
@@ -40,22 +40,32 @@ void clean_word(std::string& word) {
   transform(word.begin(), word.end(), word.begin(), tolower);
 }
 
-// convert a map to a vector of pairs
-std::vector<std::pair<std::string, double>>
-mapToVector(const std::map<std::string, double> &map) {
-  return std::vector<std::pair<std::string, double>>(map.begin(), map.end());
+//clean the words, count them and put them into the map
+void processWord(std::string& word, std::map<std::string, int>& counter, std::string::size_type& maxlen, std::string::size_type const min_word_length) {
+		clean_word(word);
+		maxlen = std::max(maxlen, word.size()); //find the longest word.
+		if (word.size() > min_word_length) {
+				++counter[word];
+				// add the word to the map and the no. of appearances in the text.
+		}
 }
 
-// determine which pair is larger
-bool compare(const std::pair<std::string, double> pair_1,
-             const std::pair<std::string, double> pair_2) {
+// convert a map to a vector of pairs
+std::vector<std::pair<std::string, int>>
+mapToVector(const std::map<std::string, int> &map) {
+  return std::vector<std::pair<std::string, int>>(map.begin(), map.end());
+}
+
+// determine which pair is greater
+bool compare(const std::pair<std::string, int> pair_1,
+             const std::pair<std::string, int> pair_2) {
   return pair_1.second > pair_2.second;
 }
 
-void Vector_to_File(std::vector<std::pair<std::string, double>> counter,
+void Vector_to_File(std::vector<std::pair<std::string, int>> counter,
                     std::string::size_type pad) {
   std::ofstream Results("text.txt");
-  // writing the titles of the columns to the file
+  // write the titles of the columns to the file
   Results << "Word" << std::string(pad - 3, ' ') << "Usage"
           << "\n\n";
   // write the results to the file, padded to make room for the longest word
@@ -66,47 +76,41 @@ void Vector_to_File(std::vector<std::pair<std::string, double>> counter,
   }
 }
 
-// std::ifstream Load_file()
-
-void process_word(std::string& word, std::map<std::string, double>& counter, std::string::size_type& maxlen, std::string::size_type const word_length) {
-		clean_word(word);
-		maxlen = std::max(maxlen, word.size());
-		if (word.size() > word_length) {
-				++counter[word];
-		}
-}
-
-void Unique(std::string::size_type const word_length) {
-  std::map<std::string, double> counter;
+//counts the number of unique words no. of instances
+void uniqueWordCounter(std::string::size_type const min_word_length) {
+  std::map<std::string, int> counter;
   std::string path;
-  std::cout << "enter file name: " << std::endl;
-  std::cin >> path;
-  std::ifstream in(path);
+	std::string::size_type maxlen = 0;
+	std::string word;
+	std::cout << "enter file name: ";
+	std::cin >> path;
+	std::ifstream in(path);
 	if (!in) {
-		std::cerr << "failed to load file! Incorrect file name specified";
+			std::cerr << "failed to load file! Incorrect file name specified";
 	}
-  std::string::size_type maxlen = 0;
-  std::string word;
+  
   while (in >> word) {
     if (replace_hyphens(word)) {
+				//if the word contains a hyphen, remove the hyphen, split into two words.
 				std::stringstream stream_word(word);
 				std::string word_1, word_2;
 				stream_word >> word_1;
 				stream_word >> word_2;
-				process_word(word_1, counter, maxlen, word_length);
-				process_word(word_2, counter, maxlen, word_length);
+				processWord(word_1, counter, maxlen, min_word_length);
+				processWord(word_2, counter, maxlen, min_word_length);
     }
 		else {
-				process_word(word, counter, maxlen, word_length);
+				processWord(word, counter, maxlen, min_word_length);
 		}
   }
-  std::vector<std::pair<std::string, double>> count;
+	//vector containing the word and usage pairs from the map.
+  std::vector<std::pair<std::string, int>> count;
   count = mapToVector(counter);
-  std::sort(count.begin(), count.end(), compare);
-  Vector_to_File(count, maxlen);
+  std::sort(count.begin(), count.end(), compare); // reorder the vector in descending order
+  Vector_to_File(count, maxlen); // write the vector to a file
 }
 
 int main() {
-  Unique(4);
+  uniqueWordCounter(4);
   return 0;
 }
