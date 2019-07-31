@@ -90,7 +90,8 @@ bool readFile(const std::string& filename, MapType& inputmap, std::size_t& max_l
 		while (inFile >> word) {
 			// clean words
 			std::vector<std::string> cleaned_words;
-			cleanWord(str_tolower(word), cleaned_words);
+			std::string lowered = str_tolower(word);
+			cleanWord(lowered, cleaned_words);
 			for (auto it = cleaned_words.begin(); it != cleaned_words.end(); ++it) {
 				if ((*it).size() > char_min) {
 					++inputmap[*it];
