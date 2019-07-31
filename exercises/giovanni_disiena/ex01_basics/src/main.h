@@ -12,13 +12,14 @@
 // declare map/lamba/pair/set types which will store values
 // in non-increasing order unsing comparison logic
 typedef std::map<std::string, int> MapType;
-typedef std::pair<std::string, int> pair;
-typedef std::function<bool(pair, pair)> Comparator;
+typedef std::pair<std::string, int> Pair;
+typedef const std::function<bool(Pair, Pair)>& Comparator;
 
 std::string str_tolower(std::string&);
 void cleanWord(std::string&, std::vector<std::string>&);
-void orderWords(const MapType&, std::vector<pair>&, Comparator&);
-void readFile(const std::string&, MapType&, const std::size_t = 4);
-void writeFile(const std::vector<pair>&);
+void orderWords(const MapType&, std::vector<Pair>&, const Comparator&);
+const std::string formatWhitespace(const std::string&, const std::size_t&);
+bool readFile(const std::string&, MapType&, std::size_t&, const std::size_t = 4);
+const void writeFile(const std::vector<Pair>&, const std::size_t&, bool&);
 
 #endif // MAIN_H
