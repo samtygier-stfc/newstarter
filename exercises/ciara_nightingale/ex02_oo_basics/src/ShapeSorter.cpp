@@ -1,51 +1,59 @@
-#include <vector>
 #include "ShapeSorter.h"
-#include <iostream>
-#include "Shape.h"
-#include "Triangle.h"
-#include "Rectangle.h"
-#include "Circle.h"
-#include "ShapeSorter.h"
-#include <algorithm>
 
-ShapeSorter::ShapeSorter() :m_shapes(0) {}
+ShapeSorter::ShapeSorter() : m_shapes(0) {}
 
-ShapeSorter::ShapeSorter(std::vector<Shape> shapes) :m_shapes(shapes) {}
+ShapeSorter::ShapeSorter(std::vector<Shape *> shapes) : m_shapes(shapes) {}
+
+void printShape(Shape *shape) {
+  std::cout << "The shape " << shape->getType() << " has " << shape->getSides()
+            << " sides, a perimeter of " << shape->perimeter() << " and area "
+            << shape->area() << "\n";
+}
 
 void ShapeSorter::printType() const {
-		for (unsigned i = 0; i != m_shapes.size(); ++i) {
-				std::cout << m_shapes[i].getType() << "\n";
-		}
+  std::cout << "TYPES"
+            << "\n";
+  for (auto const &shape : m_shapes) {
+    printShape(shape);
+  }
+  std::cout << "\n";
 }
 
 void ShapeSorter::printSide(int side) const {
-		for (unsigned i = 0; i != m_shapes.size(); ++i) {
-				if (m_shapes[i].getSides() == side) {
-						std::cout << m_shapes[i].getType << m_shapes[i].getSides() << "\n";
-				}
-		}
+  std::cout << "SHAPES WITH MORE THAN " << side << " SIDES"
+            << "\n";
+  for (auto const &shape : m_shapes) {
+    if (shape->getSides() == side) {
+      printShape(shape);
+    }
+  }
+  std::cout << "\n";
 }
 
-bool ShapeSorter::compareShapesArea(Shape* shape1, Shape* shape2) const {
-		return shape1->area() < shape2->area();
+bool compareShapesArea(Shape *shape1, Shape *shape2) {
+  return shape1->area() < shape2->area();
 }
 
-bool ShapeSorter::compareShapesPerimeter(Shape* shape1, Shape* shape2) const {
-		return shape1->perimeter() < shape2->perimeter();
+bool compareShapesPerimeter(Shape *shape1, Shape *shape2) {
+  return shape1->perimeter() < shape2->perimeter();
 }
 
-void ShapeSorter::printAreaDescending() const {
-		std::cout << "SHAPE AREA" << "\n";
-		std::sort(m_shapes.begin(), m_shapes.end(), compareShapesArea);
-		for (unsigned i = 0; i != m_shapes.size(); ++i) {
-				std::cout << m_shapes[i].getType << m_shapes[i].area() << "\n";
-		} 
+void ShapeSorter::printAreaDescending() {
+  std::cout << "SHAPE AREA"
+            << "\n";
+  std::sort(m_shapes.begin(), m_shapes.end(), compareShapesArea);
+  for (auto const &shape : m_shapes) {
+    printShape(shape);
+  }
+  std::cout << "\n";
 }
 
-void ShapeSorter::printPerimeterDescending() const {
-		std::cout << "SHAPE Perimeter" << "\n";
-		std::sort(m_shapes.begin(), m_shapes.end(), compareShapesPerimeter);
-		for (unsigned i = 0; i != m_shapes.size(); ++i) {
-				std::cout << m_shapes[i].getType << m_shapes[i].perimeter();
-		}
+void ShapeSorter::printPerimeterDescending() {
+  std::cout << "SHAPE PERIMETER"
+            << "\n";
+  std::sort(m_shapes.begin(), m_shapes.end(), compareShapesPerimeter);
+  for (auto const &shape : m_shapes) {
+    printShape(shape);
+  }
+  std::cout << "\n";
 }
