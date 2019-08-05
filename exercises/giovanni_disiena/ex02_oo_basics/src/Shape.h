@@ -2,6 +2,7 @@
 #define SHAPE_H
 
 #include "ShapeBase.h"
+#include "Use.h"
 
 class Shape {
 public:
@@ -10,7 +11,9 @@ public:
   ~Shape();
   Shape &operator=(const Shape &);
   void makeUnique();
-  private:
+
+private:
+  Use m_useObj;
   ShapeBase *m_shapeBasePointer;
 };
 
