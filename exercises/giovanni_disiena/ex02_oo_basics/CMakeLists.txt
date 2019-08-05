@@ -19,7 +19,6 @@ include ( CommonSetup )
 set ( SRC_FILES
   src/Circle.cpp
   src/main.cpp
-  src/Polygon.cpp
   src/Rectangle.cpp
   src/Shape.cpp
   src/ShapeBase.cpp
@@ -31,7 +30,6 @@ set ( SRC_FILES
 
 set ( HDR_FILES
   src/Circle.h
-  src/Polygon.h
   src/Rectangle.h
   src/Shape.h
   src/ShapeBase.h

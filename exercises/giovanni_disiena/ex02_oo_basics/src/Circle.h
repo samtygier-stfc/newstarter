@@ -5,12 +5,13 @@
 
 class Circle : public ShapeBase {
 public:
+  Circle(double);
   ShapeBase *clone() const override;
-  double calculatePerimeter() override;
-  double calculateArea() override;
+  double calculatePerimeter() const override;
+  double calculateArea() const override;
 
 private:
-  double m_radius;
+  const double m_radius;
 };
 
 #endif // CIRCLE_H

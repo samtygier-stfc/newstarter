@@ -1,17 +1,18 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include "Polygon.h"
+#include "ShapeBase.h"
 
-class Rectangle : public Polygon {
+class Rectangle : public ShapeBase {
 public:
+  Rectangle(double, double);
   ShapeBase *clone() const override;
-  double calculatePerimeter() override;
-  double calculateArea() override;
+  double calculatePerimeter() const override;
+  double calculateArea() const override;
 
 private:
-  double m_side1;
-  double m_side2;
+  const double m_length;
+  const double m_width;
 };
 
 #endif // RECTANGLE_H

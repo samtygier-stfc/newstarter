@@ -1,17 +1,18 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include "Polygon.h"
+#include "ShapeBase.h"
 
-class Triangle : public Polygon {
+class Triangle : public ShapeBase {
 public:
+  Triangle(double, double);
   ShapeBase *clone() const override;
-  double calculatePerimeter() override;
-  double calculateArea() override;
+  double calculatePerimeter() const override;
+  double calculateArea() const override;
 
 private:
-  double m_base;
-  double m_height;
+  const double m_base;
+  const double m_height;
 };
 
 #endif // TRIANGLE_H
