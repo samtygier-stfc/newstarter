@@ -9,6 +9,7 @@ public:
   Shape(const Shape &);
   ~Shape();
   Shape &operator=(const Shape &);
+  void makeUnique();
   private:
   ShapeBase *m_shapeBasePointer;
 };
