@@ -1,6 +1,7 @@
 #ifndef SHAPEBASE_H
 #define SHAPEBASE_H
 
+#include <math.h>
 #include <string>
 
 class ShapeBase {

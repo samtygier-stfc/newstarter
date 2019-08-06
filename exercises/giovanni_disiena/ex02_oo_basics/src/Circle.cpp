@@ -1,5 +1,4 @@
 #include "Circle.h"
-#include <math.h>
 
 Circle::Circle(double radius) : ShapeBase(1, "Circle"), m_radius(radius){};
 

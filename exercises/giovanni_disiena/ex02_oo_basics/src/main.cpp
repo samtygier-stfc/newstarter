@@ -21,6 +21,7 @@ int main() {
   vecShape.push_back(r1);
   vecShape.push_back(r2);
 
+  // print sorted data
   ShapeSorter shapeSort = ShapeSorter(vecShape);
   shapeSort.printType("Circle");
   shapeSort.printType("Triangle");
