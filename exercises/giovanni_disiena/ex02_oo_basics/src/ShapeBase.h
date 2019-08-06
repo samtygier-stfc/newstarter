@@ -8,7 +8,6 @@ class ShapeBase {
 public:
   ShapeBase(unsigned sides, std::string name) : m_sides(sides), m_name(name), m_refCount(0){};
   virtual ShapeBase *clone() const = 0;
-  virtual ~ShapeBase(); // needs to be defined to avoid compiler error
   virtual double calculatePerimeter() const = 0;
   virtual double calculateArea() const = 0;
 
