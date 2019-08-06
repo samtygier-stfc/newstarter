@@ -7,7 +7,6 @@ class Rectangle : public ShapeBase {
 public:
   Rectangle(double, double);
   Rectangle(double);
-  ShapeBase *clone() const override;
   double getPerimeter() const override;
   double getArea() const override;
   double getLength() const;

@@ -6,8 +6,6 @@ Rectangle::Rectangle(double length, double width)
 Rectangle::Rectangle(double length)
     : ShapeBase(4, "Square"), m_length(length), m_width(length){};
 
-ShapeBase *Rectangle::clone() const { return new Rectangle(*this); }
-
 double Rectangle::getPerimeter() const {
   return 2*m_length + 2*m_width;
 }

@@ -24,7 +24,6 @@ set ( SRC_FILES
   src/ShapeBase.cpp
   src/ShapeSorter.cpp
   src/Triangle.cpp
-  src/Use.cpp
   # add any additional source files here
 )
 
@@ -36,7 +35,6 @@ set ( HDR_FILES
   src/ShapeBase.h
   src/ShapeSorter.h
   src/Triangle.h
-  src/Use.h
   # add any additional header files here
 )
 

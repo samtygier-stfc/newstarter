@@ -4,13 +4,13 @@ int main() {
   std::vector<Shape> vecShape;
 
   // create shapes
-  Shape c1 = new Circle(4);
-  Shape c2 = new Circle(4);
-  Shape c3 = new Circle(10);
-  Shape t1 = new Triangle(4, 7);
-  Shape t2 = new Triangle(0, 2);
-  Shape r1 = new Rectangle(5, 3);
-  Shape r2 = new Rectangle(4);
+  Shape c1(std::make_shared<Circle>(4));
+  Shape c2(std::make_shared <Circle>(4));
+  Shape c3(std::make_shared <Circle>(10));
+  Shape t1(std::make_shared <Triangle>(4, 7));
+  Shape t2(std::make_shared <Triangle>(0, 2));
+  Shape r1(std::make_shared <Rectangle>(5, 3));
+  Shape r2(std::make_shared <Rectangle>(4));
 
   // populate vector
   vecShape.push_back(c1);

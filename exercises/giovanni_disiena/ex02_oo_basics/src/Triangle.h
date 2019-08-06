@@ -6,7 +6,6 @@
 class Triangle : public ShapeBase {
 public:
   Triangle(double, double);
-  ShapeBase *clone() const override;
   double getPerimeter() const override;
   double getArea() const override;
   double getBase() const;

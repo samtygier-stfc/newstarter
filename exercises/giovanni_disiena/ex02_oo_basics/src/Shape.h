@@ -1,20 +1,18 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <memory>
 #include "ShapeBase.h"
-#include "Use.h"
 
 class Shape {
 public:
-  Shape(ShapeBase *);
-  Shape(const Shape &);
+  Shape(std::shared_ptr<ShapeBase>);
+  //Shape(const Shape &);
   ~Shape();
   Shape &operator=(const Shape &);
-  void makeUnique();
-  ShapeBase *getBase() const;
+  std::shared_ptr<ShapeBase> getBase() const;
 private:
-  Use m_useObj;
-  ShapeBase *m_shapeBasePointer;
+  std::shared_ptr<ShapeBase> m_shapeBasePointer;
 };
 
 #endif // SHAPE_H
