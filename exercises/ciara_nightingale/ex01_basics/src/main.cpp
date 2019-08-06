@@ -1,19 +1,12 @@
-#include <algorithm>
-#include <ctype.h>
-#include <fstream>
-#include <iostream>
-#include <map>
-#include <ostream>
-#include <sstream>
-#include <string>
-#include <vector>
+#include "Header.h"
 
-// replaces the hypens with whitespace
+/// Replaces the hyphens in a string with a whitespace character
 bool replaceHyphens(std::string &word) {
-  bool hyphenReplaced = false; // so the whole word is checked rather than stopping at the
-                     // first instance of a hyphen
+  bool hyphenReplaced = false;
+  // The whole word is checked rather than stopping at the first instance of a
+  // hyphen
   for (std::string::size_type i = 0; i != word.size(); ++i) {
-    // check through each character in the word
+    // Check each character in the word
     if (word[i] == '-') {
       word[i] = ' ';
       hyphenReplaced = true;
@@ -25,8 +18,8 @@ bool replaceHyphens(std::string &word) {
   return false;
 }
 
-// determine if a character is punctuation - used in clean_word
-bool isPunc(char& const c) {
+/// Determines if a character is punctuation
+bool isPunc(char &const c) {
   static const std::string PUNC = ".,?\'\"!();:";
   for (std::string::size_type i = 0; i != PUNC.size(); ++i) {
     if (c == PUNC[i]) {
@@ -37,45 +30,49 @@ bool isPunc(char& const c) {
   return false;
 }
 
-// deal with punctuation and case sensitivity - used in process_word
+/// Removes the punctuation
 void cleanWord(std::string &word) {
-  // remove characters if they are puctuation
+  // Remove characters if they are puctuation
   word.erase(remove_if(word.begin(), word.end(), isPunc), word.end());
-  // convert characters to lowercase if they are uppercase
+  // Convert characters to lowercase if they are uppercase
   transform(word.begin(), word.end(), word.begin(), tolower);
 }
 
-// clean the words, count them and put them into the map
+/// Cleans the word using the cleanWord function, adds word to a map, stores the
+/// no. of instances and caluclates the longest word
 void processWord(std::string &word, std::map<std::string, int> &counter,
                  std::string::size_type &maxlen,
-                 std::string::size_type const min_word_length) {
+                 std::string::size_type const minWordLength) {
   cleanWord(word);
-  maxlen = std::max(maxlen, word.size()); // find the longest word.
-  if (word.size() > min_word_length) {
+  if (word.size() > minWordLength) {
     ++counter[word];
-    // add the word to the map and the no. of appearances in the text.
+    maxlen = std::max(maxlen, word.size());
+    // Find the longest word.
+    // Add the word to the map and the no. of appearances in the text.
   }
 }
 
-// convert a map to a vector of pairs
+/// Converts a map to a vector of pairs to contain the unique words and their
+/// number of usages
 std::vector<std::pair<std::string, int>> const
 mapToVector(const std::map<std::string, int> &map) {
   return std::vector<std::pair<std::string, int>>(map.begin(), map.end());
 }
 
-// determine which pair is greater
-bool pairValueIsGreater(std::pair<std::string, int> const pair_1,
-             std::pair<std::string, int> const pair_2) {
-  return pair_1.second > pair_2.second;
+/// Determines which word has more usages
+bool pairValueIsGreater(std::pair<std::string, int> const pair1,
+                        std::pair<std::string, int> const pair2) {
+  return pair1.second > pair2.second;
 }
 
+/// Prints the vector into a file
 void vectortoFile(std::vector<std::pair<std::string, int>> const counter,
-                    std::string::size_type const pad) {
+                  std::string::size_type const pad) {
   std::ofstream results("text.txt");
-  // write the titles of the columns to the file
+  // Write the titles of the columns to the file
   results << "Word" << std::string(pad - 3, ' ') << "Usage"
           << "\n\n";
-  // write the results to the file, padded to make room for the longest word
+  // Write the results to the file, padded to make room for the longest word
   for (std::string::size_type i = 0; i != counter.size(); ++i) {
     results << counter[i].first
             << std::string(pad + 1 - counter[i].first.size(), ' ')
@@ -83,8 +80,8 @@ void vectortoFile(std::vector<std::pair<std::string, int>> const counter,
   }
 }
 
-// counts the number of unique words no. of instances
-void uniqueWordCounter(std::string::size_type const min_word_length) {
+/// Caluclates the number of instances of unique words and prints it into a file
+void uniqueWordCounter(std::string::size_type const minWordLength) {
   std::string path;
   std::cout << "enter file name: ";
   std::cin >> path;
@@ -92,27 +89,27 @@ void uniqueWordCounter(std::string::size_type const min_word_length) {
   if (!in) {
     std::cerr << "failed to load file! Incorrect file name specified";
   }
-	std::string word;
-	std::map<std::string, int> counter;
-	std::string::size_type maxlen = 0;
+  std::string word;
+  std::map<std::string, int> counter;
+  std::string::size_type maxlen = 0;
   while (in >> word) {
     if (replaceHyphens(word)) {
-      // if the word contains a hyphen, remove the hyphen, split into words.
+      // Ff the word contains a hyphen, remove the hyphen, split into words.
       std::stringstream streamWord(word);
       std::string moreWord = "";
       while (streamWord >> moreWord) {
-        processWord(moreWord, counter, maxlen, min_word_length);
+        processWord(moreWord, counter, maxlen, minWordLength);
       }
       streamWord.clear();
     } else {
-      processWord(word, counter, maxlen, min_word_length);
+      processWord(word, counter, maxlen, minWordLength);
     }
   }
-  // vector containing the word and usage pairs from the map.
+  // Vector containing the word and usage pairs from the map.
   auto count = mapToVector(counter);
-  std::sort(count.begin(), count.end(),
-            pairValueIsGreater);            // reorder the vector in descending order
-  vectortoFile(count, maxlen); // write the vector to a file
+  std::sort(count.begin(), count.end(), pairValueIsGreater);
+  // Reorder the vector in descending order
+  vectortoFile(count, maxlen); // Write the vector to a file
 }
 
 int main() {
