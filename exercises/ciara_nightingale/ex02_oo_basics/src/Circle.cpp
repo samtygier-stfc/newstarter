@@ -2,16 +2,28 @@
 #include "Shape.h"
 #include <math.h>
 
-//constructor to initialise the circle if no arguments are given
+// Constructor to initialise the circle if no arguments are given
 Circle::Circle() 
 		: Shape("Circle", 1), m_radius(0) {}
 
-//constructor to initialise the circle of the required radius
-Circle::Circle(double radius) 
+/** Constructor to initialise the circle of the required radius
+*
+* @param radius The radius of the circle
+*
+*/
+Circle::Circle(double radius)
 		: Shape("Circle", 1), m_radius(radius) {}
 
-//function to caluclate the perimeter of a circle and return value of type double
+/** Caluclate the perimeter of a circle
+*
+* @return the perimeter as a double
+*
+*/
 double Circle::perimeter() const { return M_PI * 2 * m_radius; }
 
-//function to caluclate the area of a circle and return value of type double
+/** Caluclate the area of a circle
+*
+* @return the area as a double
+*
+*/
 double Circle::area() const { return M_PI * pow(m_radius, 2); }

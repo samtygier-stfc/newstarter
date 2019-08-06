@@ -1,13 +1,25 @@
 #include "Shape.h"
 
-//construct a shape if no arguments are given with type Nul and zero sides
+// Construct a shape if no arguments are given with type Nul and zero sides
 Shape::Shape() : m_type("Nul"), m_sides(0) {}
 
-//construct a shape of the required type
+/** Construct a shape of the required type
+*
+* @param type The type of shape 
+* @param sides The number of sides
+*/
 Shape::Shape(std::string type, int sides) : m_type(type), m_sides(sides) {}
 
-//function to obtain the type of the shape (read only)
+/** Obtain the type of the shape (read only)
+*
+* @return A string for the type of the shape
+*
+*/
 std::string Shape::getType() const { return m_type; }
 
-//function to obtain the number of sides (read only)
+/** Obtain the number of sides (read only)
+*
+* @return an integer for the number of sides of the shape
+*
+*/
 int Shape::getSides() const { return m_sides; }

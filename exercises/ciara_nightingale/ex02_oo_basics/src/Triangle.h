@@ -4,13 +4,13 @@
 
 class Triangle : public Shape {
 public:
-  //default constructor to initialise the triangle to zero if no arguments are given
+  ///default constructor to initialise the triangle to zero if no arguments are given
   Triangle();
-	//constructor to initialise a triangle with required dimentions
+	///constructor to initialise a triangle with required dimentions
   Triangle(double base, double height);
-	//calulate the perimeter and return the value
+	///calulate the perimeter and return the value
   double perimeter() const override;
-	//calculate the area and return the value
+	///calculate the area and return the value
   double area() const override;
 
 private:
