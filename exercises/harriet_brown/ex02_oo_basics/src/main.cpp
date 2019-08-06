@@ -8,29 +8,29 @@
 #include "../inc/getInput.h"
 
 
-void setup_new_shape(std::vector<Shape*> &shapes)
+void setup_new_shape(std::vector<std::unique_ptr<Shape>> &shapes)
 {
 	std::string shape_type;
 	double side1;
 	double side2;
-	getInput("Shape: ", shape_type);
+	shape_type = getInput<std::string>("Shape: ");
 	if (shape_type == "square") {
-		getInput("Side size: ", side1);
-		shapes.push_back(new Square(side1));
+		side1 = getInput<double>("Side size: ");
+		shapes.push_back(std::make_unique <Square>(side1));
 	}
 	else if (shape_type == "rectangle") {
-		getInput("Width size: ", side1);
-		getInput("Height size: ", side2);
-		shapes.push_back(new Rectangle(side1, side2));
+		side1 = getInput<double>("Width size: ");
+		side2 = getInput<double>("Height size: ");
+		shapes.push_back(std::make_unique <Rectangle>(side1, side2));
 	}
 	else if (shape_type == "triangle") {
-		getInput("Base size: ", side1);
-		getInput("Height size: ", side2);
-		shapes.push_back(new Triangle(side1, side2));
+		side1 = getInput<double>("Base size: ");
+		side2 = getInput<double>("Height size: ");
+		shapes.push_back(std::make_unique <Triangle>(side1, side2));
 	}
 	else if (shape_type == "circle") {
-		getInput("Radius size: ", side1);
-		shapes.push_back(new Circle(side1));
+		side1 = getInput<double>("Radius size: ");
+		shapes.push_back(std::make_unique <Circle>(side1));
 	}
 }
 
@@ -54,10 +54,10 @@ int main()
 	bool exit = false;
 	int option;
 	ShapeSorter sorter;
-	std::vector<Shape*> shapes;
+	std::vector<std::unique_ptr<Shape>> shapes;
 	while (exit == false) {
 		print_option_text();
-		getInput("option: ", option);
+		option = getInput<int>("option: ");
 		if (option == 1) {setup_new_shape(shapes);}
 		else if (option == 2) {sorter.print_shapes_of_given_type(shapes);}
 		else if (option == 3) {sorter.print_shapes_of_given_number_of_sides(shapes);}

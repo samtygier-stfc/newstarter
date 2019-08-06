@@ -1,20 +1,19 @@
-#pragma once
+#ifndef SHAPE_H
+#define SHAPE_H
+
 #include <string>
-#include <math.h>
-#include <iomanip>
-#include <iostream>
 
 class Shape
 {
 	private:
-		std::string shape;
+		std::string shapeName;
 		double side1;
 		double side2;
 		int n_sides;
 	public:
 		Shape();
-		void setShape(const std::string type);
-		std::string getShape();
+		void setShapeName(const std::string type);
+		std::string getShapeName();
 		void setN_sides(int n);
 		int getN_sides();
 		void setSide1(double side);
@@ -25,3 +24,5 @@ class Shape
 		virtual double getPerimeter() = 0;
 		virtual double getVolume() = 0;
 };
+
+#endif

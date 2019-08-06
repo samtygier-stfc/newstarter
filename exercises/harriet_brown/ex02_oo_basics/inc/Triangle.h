@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
+
 #include "Shape.h"
 
 
@@ -11,3 +13,5 @@ class Triangle : public Shape
 		double getPerimeter() override;
 		double getVolume() override;
 };
+
+#endif

@@ -1,6 +1,7 @@
 /**
  * Program to count words from a ascii file
  */
+
 #include <iomanip>
 #include <iostream>
 #include <fstream>
@@ -9,6 +10,13 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <exception>
+
+struct InvalidArguments : public std::exception {
+	const char* what() const throw () {
+		return "Invalid number of arguments, WordCounter.exe takes only a ascii text file as argument.";
+	}
+};
 
 void remove_punctuation_in_string(std::string &data)
 {
@@ -32,8 +40,13 @@ void print_map_by_value(std::map<std::string, int> map_to_print)
 	std::ofstream result_file;
 	result_file.open("word_count.txt");
 	if (!result_file) {
-		std::cerr << "Unable to open results file word_count.txt";
-		exit(1);   // call system to stop
+		try {
+			throw "Unable to open results file word_count.txt";
+		}
+		catch (const char* errtext) {
+			std::cout << errtext;
+			abort();
+		}
 	}
 	result_file << std::setw(18) << "Word" << std::setw(12) << "Count" << std::endl;
 	while (map_to_print.size() > 0) {
@@ -65,18 +78,24 @@ int main(int argc, char* argv[])
 	std::vector<std::string> words;
 	std::map<std::string, int> word_count_map;
 	// Check the number of parameters
-	if (argc < 2) {
-		std::cerr << argv[0] << " needs to be given a file directory as an argument" << std::endl;
-		exit(1);   // call system to stop
+	try {
+		if (argc != 2) {
+			throw InvalidArguments();
+		}
 	}
-	if (argc > 2) {
-		std::cerr << "Too many arguments, " << argv[0] << " needs to be given a file directory as an argument" << std::endl;
-		exit(1);   // call system to stop
+	catch(InvalidArguments& e) {
+		std::cout << e.what() << std::endl;
+		abort();
 	}
 	ascii_file.open(argv[1]);
 	if (!ascii_file) {
-		std::cerr << "Unable to open file " << argv[1];
-		exit(1);   // call system to stop
+		try {
+			throw "Unable to open file ";
+		}
+		catch (const char* errtext) {
+			std::cout << errtext << argv[1];
+			abort();
+		}
 	}
 	while (std::getline(ascii_file, line)) {
 		remove_punctuation_in_string(line);

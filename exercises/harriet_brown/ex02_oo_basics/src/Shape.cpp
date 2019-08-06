@@ -3,20 +3,20 @@
 
 Shape::Shape()
 {
-	shape = "shape";
+	shapeName = "shape";
 	side1 = 0.0;
 	side2 = 0.0;
 	n_sides = 0;
 }
 
-void Shape::setShape(const std::string type)
+void Shape::setShapeName(const std::string type)
 {
-	shape = type;
+	shapeName = type;
 }
 
-std::string Shape::getShape()
+std::string Shape::getShapeName()
 {
-	return shape;
+	return shapeName;
 }
 
 void Shape::setN_sides(int n)
