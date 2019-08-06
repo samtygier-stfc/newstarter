@@ -8,7 +8,11 @@ Rectangle::Rectangle(double length)
 
 ShapeBase *Rectangle::clone() const { return new Rectangle(*this); }
 
-double Rectangle::calculatePerimeter() const {
+double Rectangle::getPerimeter() const {
   return 2*m_length + 2*m_width;
 }
-double Rectangle::calculateArea() const { return m_length * m_width; }
+double Rectangle::getArea() const { return m_length * m_width; }
+
+double Rectangle::getLength() const { return m_length; }
+
+double Rectangle::getWidth() const { return m_width; }

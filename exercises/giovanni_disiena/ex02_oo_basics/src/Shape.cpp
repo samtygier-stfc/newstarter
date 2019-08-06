@@ -22,3 +22,5 @@ void Shape::makeUnique() {
   m_shapeBasePointer = m_shapeBasePointer->clone();
   m_useObj = new_useObj;
 }
+
+ShapeBase *Shape::getBase() const { return m_shapeBasePointer; }

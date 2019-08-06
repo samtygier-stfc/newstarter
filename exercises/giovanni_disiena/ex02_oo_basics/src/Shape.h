@@ -11,7 +11,7 @@ public:
   ~Shape();
   Shape &operator=(const Shape &);
   void makeUnique();
-
+  ShapeBase *getBase() const;
 private:
   Use m_useObj;
   ShapeBase *m_shapeBasePointer;

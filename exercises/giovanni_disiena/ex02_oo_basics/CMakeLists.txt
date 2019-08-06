@@ -22,7 +22,7 @@ set ( SRC_FILES
   src/Rectangle.cpp
   src/Shape.cpp
   src/ShapeBase.cpp
-  src/Square.cpp
+  src/ShapeSorter.cpp
   src/Triangle.cpp
   src/Use.cpp
   # add any additional source files here
@@ -30,10 +30,11 @@ set ( SRC_FILES
 
 set ( HDR_FILES
   src/Circle.h
+  src/main.h
   src/Rectangle.h
   src/Shape.h
   src/ShapeBase.h
-  src/Square.h
+  src/ShapeSorter.h
   src/Triangle.h
   src/Use.h
   # add any additional header files here

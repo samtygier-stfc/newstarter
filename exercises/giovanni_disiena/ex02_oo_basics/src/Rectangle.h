@@ -8,9 +8,10 @@ public:
   Rectangle(double, double);
   Rectangle(double);
   ShapeBase *clone() const override;
-  double calculatePerimeter() const override;
-  double calculateArea() const override;
-
+  double getPerimeter() const override;
+  double getArea() const override;
+  double getLength() const;
+  double getWidth() const;
 private:
   const double m_length;
   const double m_width;

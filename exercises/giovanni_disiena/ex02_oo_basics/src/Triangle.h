@@ -7,9 +7,10 @@ class Triangle : public ShapeBase {
 public:
   Triangle(double, double);
   ShapeBase *clone() const override;
-  double calculatePerimeter() const override;
-  double calculateArea() const override;
-
+  double getPerimeter() const override;
+  double getArea() const override;
+  double getBase() const;
+  double getHeight() const;
 private:
   const double m_base;
   const double m_height;
