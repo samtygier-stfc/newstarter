@@ -17,7 +17,6 @@ include ( CommonSetup )
 ###############################################################################
 
 set ( SRC_FILES
-  src/getInput.cpp
   src/Shape.cpp
   src/Square.cpp
   src/Rectangle.cpp
