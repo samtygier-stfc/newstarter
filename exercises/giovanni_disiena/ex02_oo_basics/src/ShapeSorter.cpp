@@ -1,64 +1,102 @@
 #include "ShapeSorter.h"
 
-ShapeSorter::ShapeSorter(std::vector<Shape> vecShape) : m_vecShape(vecShape), m_vecShapeSorted(vecShape){};
-
-void ShapeSorter::printType(std::string type) const {
-  unsigned counter = 0;
+/** Prints shapes of given type
+ *
+ * @param vecShape: vector of unique pointers to ShapeBase objects
+ * @param type: type of shape
+ *
+ */
+void ShapeSorter::printType(vecPtr & vecShape, std::string type) {
+  unsigned int matchCounter = 0;
   std::cout << std::string(80, '*') << "\n";
-  for (std::vector<Shape>::const_iterator it = m_vecShape.begin();
-       it != m_vecShape.end(); ++it) {
-    if (it->getBase()->getName() == type) {
-      std::cout << "Shape " << ++counter << ":\n\tShape is of type "
+
+  // loop through vector of pointers to ShapeBase objects
+  for (std::vector<std::unique_ptr<ShapeBase>>::const_iterator it = vecShape.begin();
+       it != vecShape.end(); ++it) {
+    // check for match
+    if ((*it)->getName() == type) {
+      std::cout << "Shape " << ++matchCounter << ":\n\tShape is of type "
                 << type
-                << ", with area " << it->getBase()->getArea()
-                << " and perimeter " << it->getBase()->getPerimeter()
+                << ", with area " << (*it)->getArea()
+                << " and perimeter " << (*it)->getPerimeter()
                 << "\n\n";
     }
   }
+  // report no matches
+  if (matchCounter == 0) {
+    std::cout << "No instance of shape type " << type << "\n\n";
+  }
 }
 
-void ShapeSorter::printSides(unsigned sides) const {
-  unsigned counter = 0;
+/** Prints shapes of given number of sides
+ *
+ * @param vecShape: vector of unique pointers to ShapeBase objects
+ * @param sides: number of sides
+ *
+ */
+void ShapeSorter::printSides(vecPtr & vecShape, unsigned int sides) {
+  unsigned int matchCounter = 0;
   std::cout << std::string(80, '*') << "\n";
-  for (std::vector<Shape>::const_iterator it = m_vecShape.begin();
-     it != m_vecShape.end(); ++it) {
-    if (it->getBase()->getSides() == sides) {
-      std::cout << "Shape " << ++counter << ":\n\tShape is of type "
-                << it->getBase()->getName() << ", with area "
-                << it->getBase()->getArea() << " and perimeter "
-                << it->getBase()->getPerimeter() << "\n\n";
+
+  // loop through vector of pointers to ShapeBase objects
+  for (std::vector<std::unique_ptr<ShapeBase>>::const_iterator it = vecShape.begin();
+     it != vecShape.end(); ++it) {
+    // check for match
+    if ((*it)->getSides() == sides) {
+      std::cout << "Shape " << ++matchCounter << ":\n\tShape is of type "
+                << (*it)->getName() << ", with area "
+                << (*it)->getArea() << " and perimeter "
+                << (*it)->getPerimeter() << "\n\n";
     }
   }
-}
-
-void ShapeSorter::printAreaDescending() {
-  std::cout << std::string(80, '*') << "\n";
-  std::sort(m_vecShapeSorted.begin(), m_vecShapeSorted.end(),
-            [](Shape a, Shape b) {
-              return a.getBase()->getArea() > b.getBase()->getArea();
-            });
-  unsigned counter = 0;
-  for (std::vector<Shape>::const_iterator it = m_vecShapeSorted.begin();
-       it != m_vecShapeSorted.end(); ++it) {
-    std::cout << "Shape " << ++counter << ":\n\tShape is of type "
-              << it->getBase()->getName() << ", with area "
-              << it->getBase()->getArea() << " and perimeter "
-              << it->getBase()->getPerimeter() << "\n\n";
+  // repot no matches
+  if (matchCounter == 0) {
+    std::cout << "No instance of shape with " << sides << " sides\n\n";
   }
 }
 
-void ShapeSorter::printPerimeterDescending() {
+/** Prints shapes in order of descending area
+ *
+ * @param vecShape: vector of unique pointers to ShapeBase objects
+ *
+ */
+void ShapeSorter::printAreaDescending(vecPtr & vecShape) {
   std::cout << std::string(80, '*') << "\n";
-  std::sort(m_vecShapeSorted.begin(), m_vecShapeSorted.end(),
-            [](Shape a, Shape b) {
-              return a.getBase()->getPerimeter() > b.getBase()->getPerimeter();
+  // sort pointed-to vector objects into descending order of area
+  std::sort(vecShape.begin(), vecShape.end(),
+            [](const std::unique_ptr<ShapeBase> &a,
+               const std::unique_ptr<ShapeBase> &b) {
+              return a->getArea() > b->getArea();
             });
-  unsigned counter = 0;
-  for (std::vector<Shape>::const_iterator it = m_vecShapeSorted.begin();
-       it != m_vecShapeSorted.end(); ++it) {
+  unsigned int counter = 0;
+  for (std::vector<std::unique_ptr<ShapeBase>>::iterator it = vecShape.begin();
+       it != vecShape.end(); ++it) {
     std::cout << "Shape " << ++counter << ":\n\tShape is of type "
-              << it->getBase()->getName() << ", with area "
-              << it->getBase()->getArea() << " and perimeter "
-              << it->getBase()->getPerimeter() << "\n\n";
+              << (*it)->getName() << ", with area "
+              << (*it)->getArea() << " and perimeter "
+              << (*it)->getPerimeter() << "\n\n";
+  }
+}
+
+/** Prints shapes in order of descending perimeter
+ *
+ * @param vecShape: vector of unique pointers to ShapeBase objects
+ *
+ */
+void ShapeSorter::printPerimeterDescending(vecPtr & vecShape) {
+  std::cout << std::string(80, '*') << "\n";
+  // sort pointed-to vector objects into descending order of area
+  std::sort(vecShape.begin(), vecShape.end(),
+            [](const std::unique_ptr<ShapeBase> &a,
+               const std::unique_ptr<ShapeBase> &b) {
+              return a->getPerimeter() > b->getPerimeter();
+            });
+  unsigned int counter = 0;
+  for (std::vector<std::unique_ptr<ShapeBase>>::iterator it = vecShape.begin();
+       it != vecShape.end(); ++it) {
+    std::cout << "Shape " << ++counter << ":\n\tShape is of type "
+              << (*it)->getName() << ", with area "
+              << (*it)->getArea() << " and perimeter "
+              << (*it)->getPerimeter() << "\n\n";
   }
 }

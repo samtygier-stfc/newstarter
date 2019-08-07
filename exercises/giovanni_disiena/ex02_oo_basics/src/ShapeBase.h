@@ -2,19 +2,19 @@
 #define SHAPEBASE_H
 
 #include <math.h>
-#include <memory>
 #include <string>
 
 class ShapeBase {
-  friend class Shape;
 public:
-  ShapeBase(unsigned sides, std::string name) : m_sides(sides), m_name(name){};
+  // constructs and initialises ShapeBase object
+  ShapeBase(unsigned int, std::string);
+  // functions to get member variables
   virtual double getPerimeter() const = 0;
   virtual double getArea() const = 0;
   std::string getName() const;
-  unsigned getSides() const;
+  unsigned int getSides() const;
 private:
-  unsigned m_sides;
+  unsigned int m_sides;
   std::string m_name;
 };
 

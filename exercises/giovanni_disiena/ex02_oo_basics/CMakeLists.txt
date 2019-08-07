@@ -20,7 +20,6 @@ set ( SRC_FILES
   src/Circle.cpp
   src/main.cpp
   src/Rectangle.cpp
-  src/Shape.cpp
   src/ShapeBase.cpp
   src/ShapeSorter.cpp
   src/Triangle.cpp
@@ -31,7 +30,6 @@ set ( HDR_FILES
   src/Circle.h
   src/main.h
   src/Rectangle.h
-  src/Shape.h
   src/ShapeBase.h
   src/ShapeSorter.h
   src/Triangle.h

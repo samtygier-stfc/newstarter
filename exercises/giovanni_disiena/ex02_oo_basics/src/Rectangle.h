@@ -5,8 +5,10 @@
 
 class Rectangle : public ShapeBase {
 public:
+  // constructs Rectangle object
   Rectangle(double, double);
   Rectangle(double);
+  // overriden functions
   double getPerimeter() const override;
   double getArea() const override;
   double getLength() const;

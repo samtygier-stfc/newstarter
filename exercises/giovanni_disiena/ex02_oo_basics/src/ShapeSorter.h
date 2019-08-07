@@ -5,19 +5,19 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Shape.h"
+#include "ShapeBase.h"
+
+typedef std::vector<std::unique_ptr<ShapeBase>> vecPtr;
 
 class ShapeSorter {
 public:
-  ShapeSorter(std::vector<Shape>);
-  void printType(std::string) const;
-  void printSides(unsigned) const;
-  void printAreaDescending();
-  void printPerimeterDescending();
+  // member functions to print data
+  static void printType(vecPtr &, std::string);
+  static void printSides(vecPtr &, unsigned int);
+  static void printAreaDescending(vecPtr &);
+  static void printPerimeterDescending(vecPtr &);
 
 private:
-  std::vector<Shape> m_vecShape;
-  std::vector<Shape> m_vecShapeSorted;
 };
 
 #endif // SHAPESORTER_H

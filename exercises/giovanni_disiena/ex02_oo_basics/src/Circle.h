@@ -5,7 +5,9 @@
 
 class Circle : public ShapeBase {
 public:
+  // constructs Circle object
   Circle(double);
+  // overriden functions
   double getPerimeter() const override;
   double getArea() const override;
   double getRadius() const;

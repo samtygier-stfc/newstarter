@@ -5,7 +5,9 @@
 
 class Triangle : public ShapeBase {
 public:
+  // constructs Triangle object
   Triangle(double, double);
+  // overriden functions
   double getPerimeter() const override;
   double getArea() const override;
   double getBase() const;

@@ -7,8 +7,7 @@
 class Shape {
 public:
   Shape(std::shared_ptr<ShapeBase>);
-  //Shape(const Shape &);
-  ~Shape();
+  Shape(const Shape &);
   Shape &operator=(const Shape &);
   std::shared_ptr<ShapeBase> getBase() const;
 private:

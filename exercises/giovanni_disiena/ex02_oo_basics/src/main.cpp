@@ -1,34 +1,24 @@
 #include "main.h"
 
 int main() {
-  std::vector<Shape> vecShape;
-
-  // create shapes
-  Shape c1(std::make_shared<Circle>(4));
-  Shape c2(std::make_shared <Circle>(4));
-  Shape c3(std::make_shared <Circle>(10));
-  Shape t1(std::make_shared <Triangle>(4, 7));
-  Shape t2(std::make_shared <Triangle>(0, 2));
-  Shape r1(std::make_shared <Rectangle>(5, 3));
-  Shape r2(std::make_shared <Rectangle>(4));
-
-  // populate vector
-  vecShape.push_back(c1);
-  vecShape.push_back(c2);
-  vecShape.push_back(c3);
-  vecShape.push_back(t1);
-  vecShape.push_back(t2);
-  vecShape.push_back(r1);
-  vecShape.push_back(r2);
+  // populate vector with unique pointers to ShapeBase objects
+  std::vector<std::unique_ptr<ShapeBase>> vecShape;
+  vecShape.emplace_back(std::make_unique<Circle>(4));
+  vecShape.emplace_back(std::make_unique<Circle>(4));
+  vecShape.emplace_back(std::make_unique<Circle>(10));
+  vecShape.emplace_back(std::make_unique<Triangle>(4, 7));
+  vecShape.emplace_back(std::make_unique<Triangle>(0, 2));
+  vecShape.emplace_back(std::make_unique<Rectangle>(5, 3));
+  vecShape.emplace_back(std::make_unique<Rectangle>(4));
 
   // print sorted data
-  ShapeSorter shapeSort = ShapeSorter(vecShape);
-  shapeSort.printType("Circle");
-  shapeSort.printType("Triangle");
-  shapeSort.printType("Rectangle");
-  shapeSort.printSides(1);
-  shapeSort.printSides(3);
-  shapeSort.printSides(4);
-  shapeSort.printAreaDescending();
-  shapeSort.printPerimeterDescending();
+  ShapeSorter::printType(vecShape, "Circle");
+  ShapeSorter::printType(vecShape, "Triangle");
+  ShapeSorter::printType(vecShape, "Rectangle");
+  ShapeSorter::printSides(vecShape, 1);
+  ShapeSorter::printSides(vecShape, 3);
+  ShapeSorter::printSides(vecShape, 4);
+  ShapeSorter::printSides(vecShape, 13);
+  ShapeSorter::printAreaDescending(vecShape);
+  ShapeSorter::printPerimeterDescending(vecShape);
 }
