@@ -3,22 +3,22 @@
 int main(int argc, char **argv) {
   // prompt user for filename
   std::cout << "Please enter the name of a file you wish to read: ";
-  std::string file_name;
-  std::cin >> file_name;
+  std::string filename;
+  std::cin >> filename;
 
   // create map
   StrIntMap wordCounts;
 
   // declare file read boolean and unsigned max length
-  bool read_bool;
-  std::size_t max_len = 0;
+  bool readBool;
+  std::size_t maxWordLength = 0;
 
   // read file
   try {
-    read_bool = readFile(file_name, wordCounts, max_len);
+    readBool = readFile(filename, wordCounts, maxWordLength);
   } catch (const char *msg) {
     std::cerr << msg << std::endl;
-    read_bool = false;
+    readBool = false;
   }
 
   // define lambda for comparison logic
@@ -28,14 +28,14 @@ int main(int argc, char **argv) {
   };
 
   // declare vector
-  std::vector<StrIntPair> ordered_vector;
+  std::vector<StrIntPair> orderedVector;
 
   // order words
-  orderWords(wordCounts, ordered_vector, compFunctor);
+  orderWords(wordCounts, orderedVector, compFunctor);
 
   // write file
   try {
-    writeFile(ordered_vector, max_len, read_bool);
+    writeFile(orderedVector, maxWordLength, readBool);
   } catch (const char *msg) {
     std::cerr << msg << std::endl;
   }
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
  * @return word: string with all capitals lowered
  *
  */
-std::string str_tolower(std::string &word) {
+std::string strTolower(std::string &word) {
   std::transform(word.begin(), word.end(), word.begin(),
                  [](unsigned char c) { return std::tolower(c); });
   return word;
@@ -57,16 +57,16 @@ std::string str_tolower(std::string &word) {
  *	appearing after words
  *
  * @param word: string to be cleaned
- * @param cleaned_words: empty vector to store cleaned strings
+ * @param cleanedWords: empty vector to store cleaned strings
  * @return void
  *
  */
-void cleanWord(std::string &word, std::vector<std::string> &cleaned_words) {
-  static const std::regex string_regex("(\\B'\b|\b'\\B)|([\\.,:;!?()\"-]+)");
+void cleanWord(const std::string &word, std::vector<std::string> &cleanedWords) {
+  static const std::regex stringRegex("(\\B'\b|\b'\\B)|([\\.,:;!?()\"-]+)");
   auto first =
-      std::sregex_token_iterator(word.begin(), word.end(), string_regex, -1);
+      std::sregex_token_iterator(word.begin(), word.end(), stringRegex, -1);
   std::copy(first, std::sregex_token_iterator(),
-            std::back_inserter(cleaned_words));
+            std::back_inserter(cleanedWords));
 }
 
 /** Loads a .txt file, checking for success. Subsequently reads the file
@@ -74,12 +74,12 @@ void cleanWord(std::string &word, std::vector<std::string> &cleaned_words) {
  *
  * @param filename: name of the input file to read
  * @param inputmap: map which will store all unique words and instances
- * @param char_min: default variable to limit the length of words
+ * @param minWordLength: default variable to limit the length of words
  * @return bool: check for read success
  *
  */
 bool readFile(const std::string &filename, StrIntMap &inputmap,
-              std::size_t &max_len, const std::size_t char_min) {
+              std::size_t &maxWordLength, const std::size_t minWordLength) {
   // attempt to open file
   std::ifstream inFile;
   inFile.open(filename + ".txt");
@@ -90,14 +90,14 @@ bool readFile(const std::string &filename, StrIntMap &inputmap,
     std::string word;
     while (inFile >> word) {
       // clean words
-      std::vector<std::string> cleaned_words;
-      std::string lowered = str_tolower(word);
-      cleanWord(lowered, cleaned_words);
-      for (auto it = cleaned_words.begin(); it != cleaned_words.end(); ++it) {
-        if ((*it).size() > char_min) {
-          ++inputmap[*it];
-          if ((*it).size() > max_len) {
-            max_len = (*it).size();
+      std::vector<std::string> cleanedWords;
+      std::string lowered = strTolower(word);
+      cleanWord(lowered, cleanedWords);
+      for (auto & cleanWord : cleanedWords) {
+        if (cleanWord.size() > minWordLength) {
+          ++inputmap[cleanWord];
+          if (cleanWord.size() > maxWordLength) {
+            maxWordLength = cleanWord.size();
           }
         }
       }
@@ -124,36 +124,36 @@ void orderWords(const StrIntMap &cleanedMap,
 
 /** Determines whitespace formatting of output file
  *
- * @param str_1: lhs string
- * @param max_len: maximun length of strings
+ * @param str1: lhs string
+ * @param maxWordLength: maximun length of strings
  * @return ws: string of appropriate number of white spaces
  *
  */
-const std::string formatWhitespace(const std::string &str_1,
-                                   const std::size_t &max_len) {
-  std::string ws(max_len - str_1.length(), ' ');
+const std::string formatWhitespace(const std::string &str1,
+                                   const std::size_t &maxWordLength) {
+  std::string ws(maxWordLength - str1.length(), ' ');
   return ws;
 }
 
 /** Writes the results extracted from the map, into vector of pairs, to file
  *
  * @param orderedPair: ordered vector to write to file
- * @param max_len: maximun length of strings
- * @param read_bool: boolean to check file was read successfully
+ * @param maxWordLength: maximun length of strings
+ * @param readBool: boolean to check file was read successfully
  * @return void
  *
  */
 const void writeFile(const std::vector<StrIntPair> &orderedPair,
-                     const std::size_t &max_len, bool &readBool) {
+                     const std::size_t &maxWordLength, bool &readBool) {
   if (!readBool) {
     throw "Unable to write file";
   } else {
     std::ofstream outfile("word_counts.txt");
-    std::string header_1 = "Word", header_2 = "Usage";
-    outfile << header_1 << formatWhitespace(header_1, max_len) << header_2
+    std::string header1 = "Word", header2 = "Usage";
+    outfile << header1 << formatWhitespace(header1, maxWordLength) << header2
             << "\n\n";
     for (auto it = orderedPair.begin(); it != orderedPair.end(); ++it) {
-      outfile << it->first << formatWhitespace(it->first, max_len) << it->second
+      outfile << it->first << formatWhitespace(it->first, maxWordLength) << it->second
               << '\n';
     }
   }
