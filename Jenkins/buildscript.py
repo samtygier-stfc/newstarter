@@ -57,8 +57,9 @@ def is_windows():
 def run_cmake(cmakelists_path):
     if is_windows():
         cmake_exe = "cmake"
-        generator = 'Visual Studio 15 2017 Win64'
-        cmd = [cmake_exe, "-G", generator, cmakelists_path]
+        generator = 'Visual Studio 16 2019'
+        arch = 'x64'
+        cmd = [cmake_exe, "-G", generator, "-A", arch, cmakelists_path]
         print "Running '%s'" % " ".join(cmd)
     else:
         try:
