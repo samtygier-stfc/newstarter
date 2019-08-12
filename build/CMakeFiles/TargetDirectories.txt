@@ -1,0 +1,3 @@
+C:/Users/gmo84564/Documents/Training/c++/newstarter/build/CMakeFiles/Shapes.dir
+C:/Users/gmo84564/Documents/Training/c++/newstarter/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/gmo84564/Documents/Training/c++/newstarter/build/CMakeFiles/ZERO_CHECK.dir

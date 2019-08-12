@@ -1,0 +1,9 @@
+﻿  Building Custom Rule C:/Users/gmo84564/Documents/Training/c++/newstarter/exercises/giovanni_disiena/ex02_oo_basics/CMakeLists.txt
+  Circle.cpp
+  main.cpp
+  Rectangle.cpp
+  ShapeBase.cpp
+  ShapeSorter.cpp
+  Triangle.cpp
+  Generating Code...
+  Shapes.vcxproj -> C:\Users\gmo84564\Documents\Training\c++\newstarter\build\bin\Debug\Shapes.exe

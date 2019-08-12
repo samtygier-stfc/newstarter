@@ -1,0 +1,10 @@
+^C:\USERS\GMO84564\DOCUMENTS\TRAINING\C++\NEWSTARTER\BUILD\CMAKEFILES\6EBF5506AB0423FDF274986FE8E10D97\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/gmo84564/Documents/Training/c++/newstarter/exercises/giovanni_disiena/ex02_oo_basics -BC:/Users/gmo84564/Documents/Training/c++/newstarter/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/gmo84564/Documents/Training/c++/newstarter/build/Shapes.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

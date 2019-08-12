@@ -62,9 +62,9 @@ std::string strTolower(std::string &word) {
  *
  */
 void cleanWord(const std::string &word, std::vector<std::string> &cleanedWords) {
-  static const std::regex stringRegex("(\\B'\b|\b'\\B)|([\\.,:;!?()\"-]+)");
+  static const std::regex STRING_REGEX("(\\B'\b|\b'\\B)|([\\.,:;!?()\"-]+)");
   auto first =
-      std::sregex_token_iterator(word.begin(), word.end(), stringRegex, -1);
+      std::sregex_token_iterator(word.begin(), word.end(), STRING_REGEX, -1);
   std::copy(first, std::sregex_token_iterator(),
             std::back_inserter(cleanedWords));
 }
