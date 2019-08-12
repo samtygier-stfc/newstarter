@@ -19,7 +19,7 @@ bool replaceHyphens(std::string &word) {
 }
 
 /// Determines if a character is punctuation
-bool isPunc(char &const c) {
+bool isPunc(char const &c) {
   static const std::string PUNC = ".,?\'\"!();:";
   for (std::string::size_type i = 0; i != PUNC.size(); ++i) {
     if (c == PUNC[i]) {

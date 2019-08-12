@@ -22,7 +22,7 @@ bool replaceHyphens(std::string &word);
  * @return bool as to whether the character was punctuation
  *
  */
-bool isPunc(char &const c);
+bool isPunc(char const &c);
 
 /* Removes the punctuation
  *
@@ -83,4 +83,4 @@ void vectortoFile(std::vector<std::pair<std::string, int>> const counter,
  * word
  *
  */
-void uniqueWordCounter(std::string::size_type const minWordLength);
+int uniqueWordCounter(std::string::size_type const minWordLength);
