@@ -10,7 +10,7 @@
 #include <string>
 
 // declare map/lamba/pair/set types which will store values
-// in non-increasing order unsing comparison logic
+// in non-increasing order using comparison logic
 typedef std::map<std::string, int> StrIntMap;
 typedef std::pair<std::string, int> StrIntPair;
 typedef const std::function<bool(StrIntPair, StrIntPair)> &Comparator;
@@ -24,6 +24,6 @@ const std::string formatWhitespace(const std::string &str1,
 bool readFile(const std::string &filename, StrIntMap &inputmap,
 							std::size_t &maxWordLength, const std::size_t minWordLength = 4);
 const void writeFile(const std::vector<StrIntPair> &orderedPair,
-										 const std::size_t &, bool &readBool);
+                     const std::size_t &maxWordLength);
 
 #endif // MAIN_H

@@ -9,16 +9,15 @@ int main(int argc, char **argv) {
   // create map
   StrIntMap wordCounts;
 
-  // declare file read boolean and unsigned max length
-  bool readBool;
+  // declare unsigned max length
   std::size_t maxWordLength = 0;
 
   // read file
   try {
-    readBool = readFile(filename, wordCounts, maxWordLength);
-  } catch (const char *msg) {
-    std::cerr << msg << std::endl;
-    readBool = false;
+    readFile(filename, wordCounts, maxWordLength);
+  } catch (std::exception &e) {
+    std::cerr << "Exception caught: " << e.what() << std::endl;
+    exit(1);
   }
 
   // define lambda for comparison logic
@@ -35,9 +34,9 @@ int main(int argc, char **argv) {
 
   // write file
   try {
-    writeFile(orderedVector, maxWordLength, readBool);
-  } catch (const char *msg) {
-    std::cerr << msg << std::endl;
+    writeFile(orderedVector, maxWordLength);
+  } catch (std::exception &e) {
+    std::cerr << "Exception caught: " << e.what() << std::endl;
   }
 }
 
@@ -61,7 +60,8 @@ std::string strTolower(std::string &word) {
  * @return void
  *
  */
-void cleanWord(const std::string &word, std::vector<std::string> &cleanedWords) {
+void cleanWord(const std::string &word,
+               std::vector<std::string> &cleanedWords) {
   static const std::regex STRING_REGEX("(\\B'\b|\b'\\B)|([\\.,:;!?()\"-]+)");
   auto first =
       std::sregex_token_iterator(word.begin(), word.end(), STRING_REGEX, -1);
@@ -84,7 +84,7 @@ bool readFile(const std::string &filename, StrIntMap &inputmap,
   std::ifstream inFile;
   inFile.open(filename + ".txt");
   if (!inFile) {
-    throw "Unable to open requested file";
+    throw std::runtime_error("Unable to open requested file");
   } else {
     // read contents to map
     std::string word;
@@ -93,7 +93,7 @@ bool readFile(const std::string &filename, StrIntMap &inputmap,
       std::vector<std::string> cleanedWords;
       std::string lowered = strTolower(word);
       cleanWord(lowered, cleanedWords);
-      for (auto & cleanWord : cleanedWords) {
+      for (auto &cleanWord : cleanedWords) {
         if (cleanWord.size() > minWordLength) {
           ++inputmap[cleanWord];
           if (cleanWord.size() > maxWordLength) {
@@ -144,17 +144,17 @@ const std::string formatWhitespace(const std::string &str1,
  *
  */
 const void writeFile(const std::vector<StrIntPair> &orderedPair,
-                     const std::size_t &maxWordLength, bool &readBool) {
-  if (!readBool) {
-    throw "Unable to write file";
+                     const std::size_t &maxWordLength) {
+  std::ofstream outfile("word_counts.txt");
+  if (!outfile) {
+    throw std::runtime_error("Unable to write file");
   } else {
-    std::ofstream outfile("word_counts.txt");
     std::string header1 = "Word", header2 = "Usage";
     outfile << header1 << formatWhitespace(header1, maxWordLength) << header2
             << "\n\n";
     for (auto it = orderedPair.begin(); it != orderedPair.end(); ++it) {
-      outfile << it->first << formatWhitespace(it->first, maxWordLength) << it->second
-              << '\n';
+      outfile << it->first << formatWhitespace(it->first, maxWordLength)
+              << it->second << '\n';
     }
   }
 }
