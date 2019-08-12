@@ -81,13 +81,14 @@ void vectortoFile(std::vector<std::pair<std::string, int>> const counter,
 }
 
 /// Caluclates the number of instances of unique words and prints it into a file
-void uniqueWordCounter(std::string::size_type const minWordLength) {
+int uniqueWordCounter(std::string::size_type const minWordLength) {
   std::string path;
   std::cout << "enter file name: ";
   std::cin >> path;
   std::ifstream in(path);
   if (!in) {
     std::cerr << "failed to load file! Incorrect file name specified";
+		return 1;
   }
   std::string word;
   std::map<std::string, int> counter;
@@ -110,6 +111,7 @@ void uniqueWordCounter(std::string::size_type const minWordLength) {
   std::sort(count.begin(), count.end(), pairValueIsGreater);
   // Reorder the vector in descending order
   vectortoFile(count, maxlen); // Write the vector to a file
+	return 0;
 }
 
 int main() {
