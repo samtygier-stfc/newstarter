@@ -26,3 +26,5 @@ builds/*
 exercises/giovanni_disiena/ex01_basics/src/\.vs/
 
 \.vs/
+
+build/

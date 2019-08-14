@@ -9,22 +9,12 @@
 Rectangle::Rectangle(double length, double width)
     : ShapeBase(4, "Rectangle"), m_length(length), m_width(width){};
 
-/** Constructs Rectangle (Square) object, setting width=length
- *
- * @param length: rectangle length
- *
- */
-Rectangle::Rectangle(double length)
-    : ShapeBase(4, "Square"), m_length(length), m_width(length) {}
-
 /** Calculates rectangle perimeter
  *
  * @return perimeter
  *
  */
-double Rectangle::getPerimeter() const {
-  return 2*m_length + 2*m_width;
-}
+double Rectangle::getPerimeter() const { return 2 * m_length + 2 * m_width; }
 
 /** Calculates rectangle area
  *

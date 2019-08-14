@@ -2,12 +2,12 @@
 
 /** Constructs ShapeBase object
  *
- * @param sides: number of sides of the shape
+ * @param numberOfSides: number of sides of the shape
  * @param name: name of shape type
  *
  */
-ShapeBase::ShapeBase(unsigned int sides, std::string name)
-    : m_sides(sides), m_name(name){};
+ShapeBase::ShapeBase(unsigned int numberOfSides, std::string name)
+    : m_numberOfSides(numberOfSides), m_name(name){};
 
 /** Retrieves shape type name member variable
  *
@@ -18,7 +18,7 @@ std::string ShapeBase::getName() const { return m_name; }
 
 /** Retrieves shape number of sides member variable
  *
- * @return m_sides: sides member variable
+ * @return m_numberOfSides: number of sides member variable
  *
  */
-unsigned ShapeBase::getSides() const { return m_sides; }
+unsigned ShapeBase::getNumberOfSides() const { return m_numberOfSides; }

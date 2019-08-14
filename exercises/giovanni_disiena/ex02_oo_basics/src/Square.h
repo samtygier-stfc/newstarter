@@ -1,12 +1,12 @@
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
+#ifndef SQUARE_H
+#define SQUARE_H
 
 #include "ShapeBase.h"
 
-class Rectangle : public ShapeBase {
+class Square : public ShapeBase {
 public:
-  // constructs Rectangle object
-  Rectangle(double length, double width);
+  // constructs Square object
+  Square(double length);
   // overriden functions
   double getPerimeter() const override;
   double getArea() const override;
@@ -15,7 +15,6 @@ public:
 
 private:
   const double m_length;
-  const double m_width;
 };
 
-#endif // RECTANGLE_H
+#endif // SQUARE_H

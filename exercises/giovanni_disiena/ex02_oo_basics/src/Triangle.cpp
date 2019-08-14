@@ -6,14 +6,17 @@
  * @param height: triangle height
  *
  */
-Triangle::Triangle(double base, double height) : ShapeBase(3, "Triangle"), m_base(base), m_height(height){};
+Triangle::Triangle(double base, double height)
+    : ShapeBase(3, "Triangle"), m_base(base), m_height(height){};
 
 /** Calculates triangle perimeter
  *
  * @return perimeter
  *
  */
-double Triangle::getPerimeter() const { return m_base+2*sqrt(pow(m_height, 2) + pow(m_base, 2)*0.25); }
+double Triangle::getPerimeter() const {
+  return m_base + 2 * sqrt(pow(m_height, 2) + pow(m_base, 2) * 0.25);
+}
 
 /** Calculates triangle area
  *

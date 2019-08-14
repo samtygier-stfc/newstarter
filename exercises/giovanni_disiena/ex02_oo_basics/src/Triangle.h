@@ -6,12 +6,13 @@
 class Triangle : public ShapeBase {
 public:
   // constructs Triangle object
-  Triangle(double, double);
+  Triangle(double base, double height);
   // overriden functions
   double getPerimeter() const override;
   double getArea() const override;
   double getBase() const;
   double getHeight() const;
+
 private:
   const double m_base;
   const double m_height;
