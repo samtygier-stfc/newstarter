@@ -1,8 +1,5 @@
 #include "ShapeSorter.h"
 
-// Construct the object if no arguments are given
-ShapeSorter::ShapeSorter() : m_shapes(0) {}
-
 /* Construct the object to organise different shapes
 *
 * @param shapes A vector of different shapes

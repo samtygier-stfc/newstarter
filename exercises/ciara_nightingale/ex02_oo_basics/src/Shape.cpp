@@ -1,8 +1,5 @@
 #include "Shape.h"
 
-// Construct a shape if no arguments are given with type Nul and zero sides
-Shape::Shape() : m_type("Nul"), m_sides(0) {}
-
 /** Construct a shape of the required type
 *
 * @param type The type of shape 

@@ -1,17 +1,12 @@
 #ifndef SHAPESORTER_H
 #define SHAPESORTER_H
-#include "Circle.h"
-#include "Rectangle.h"
 #include "Shape.h"
-#include "Triangle.h"
 #include <algorithm>
 #include <iostream>
 #include <vector>
 
 class ShapeSorter {
 public:
-	///constructor for if no arguments are given
-  ShapeSorter();
 	///constructor for the given vector
   ShapeSorter(std::vector<Shape *> shapes);
 	///function to print the type of the shapes in the vector

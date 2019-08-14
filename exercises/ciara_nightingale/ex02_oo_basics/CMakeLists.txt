@@ -23,6 +23,7 @@ set ( SRC_FILES
 		src/Rectangle.cpp
 		src/ShapeSorter.cpp
 		src/Shape.cpp
+		src/Square.cpp
 )
 
 set ( HDR_FILES
@@ -31,6 +32,7 @@ set ( HDR_FILES
 		src/Rectangle.h
 		src/ShapeSorter.h
 		src/Shape.h
+		src/Square.h
 )
 message(STATUS ${HDR_FILES})
 message(STATUS ${SRC_FILES})

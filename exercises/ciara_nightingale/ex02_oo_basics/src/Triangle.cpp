@@ -1,10 +1,5 @@
 #include "Triangle.h"
-#include "Shape.h"
 #include <cmath>
-
-// Construct the triangle withdimentions set to zero if no arguments are given
-Triangle::Triangle() 
-		: Shape("Triangle", 3), m_base(0), m_height(0) {}
 
 /**construct the triangle
 *

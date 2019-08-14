@@ -1,10 +1,5 @@
 #include "Circle.h"
-#include "Shape.h"
 #include <math.h>
-
-// Constructor to initialise the circle if no arguments are given
-Circle::Circle() 
-		: Shape("Circle", 1), m_radius(0) {}
 
 /** Constructor to initialise the circle of the required radius
 *
