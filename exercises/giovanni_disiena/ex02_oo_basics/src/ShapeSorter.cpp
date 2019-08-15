@@ -65,11 +65,10 @@ void ShapeSorter::printAreaDescending(vecPtr &vecShape) {
               return a->getArea() > b->getArea();
             });
   unsigned int counter = 0;
-  for (std::vector<std::unique_ptr<ShapeBase>>::iterator it = vecShape.begin();
-       it != vecShape.end(); ++it) {
+  for (const auto &it : vecShape) {
     std::cout << "Shape " << ++counter << ":\n\tShape is of type "
-              << (*it)->getName() << ", with area " << (*it)->getArea()
-              << " and perimeter " << (*it)->getPerimeter() << "\n\n";
+              << it->getName() << ", with area " << it->getArea()
+              << " and perimeter " << it->getPerimeter() << "\n\n";
   }
 }
 
@@ -87,10 +86,9 @@ void ShapeSorter::printPerimeterDescending(vecPtr &vecShape) {
               return a->getPerimeter() > b->getPerimeter();
             });
   unsigned int counter = 0;
-  for (std::vector<std::unique_ptr<ShapeBase>>::iterator it = vecShape.begin();
-       it != vecShape.end(); ++it) {
+  for (const auto &it : vecShape) {
     std::cout << "Shape " << ++counter << ":\n\tShape is of type "
-              << (*it)->getName() << ", with area " << (*it)->getArea()
-              << " and perimeter " << (*it)->getPerimeter() << "\n\n";
+              << it->getName() << ", with area " << it->getArea()
+              << " and perimeter " << it->getPerimeter() << "\n\n";
   }
 }
