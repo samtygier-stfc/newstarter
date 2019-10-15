@@ -12,6 +12,7 @@
 #include <map>
 #include <sstream>
 #include <string>
+#include <string.h>
 #include <vector>
 
 bool compare(const std::pair<std::string,int>& x, const std::pair<std::string,int>& y) {
