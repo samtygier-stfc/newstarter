@@ -6,6 +6,7 @@
 // SPDX - License - Identifier: GPL - 3.0 +
 
 #include "Square.h"
+#include <math.h>
 
 /**
  * Calculates perimeter of the square
