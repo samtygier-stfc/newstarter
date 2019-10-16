@@ -12,12 +12,12 @@
 
 class Rectangle : public Shape {
 public:
+  Rectangle(double side1, double side2) : Shape("Rectangle", 4), m_side1(side1), m_side2(side2) {};
   double perimeter() const override;
   double area() const override;
-  Rectangle(double side1, double side2) : Shape("Rectangle", 4), side1(side1), side2(side2) {};
 private:
-  double side1;
-  double side2;
+  double m_side1;
+  double m_side2;
 };
 
 #endif /* RECTANGLE_H_*/

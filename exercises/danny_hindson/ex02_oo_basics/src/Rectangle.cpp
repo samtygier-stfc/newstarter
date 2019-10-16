@@ -11,12 +11,12 @@
  * Calculates perimeter of the rectangle
   */
 double Rectangle::perimeter() const {
-  return 2 * side1 + 2 * side2;
+  return 2 * m_side1 + 2 * m_side2;
 }
 
 /**
  * Calculates perimeter of the rectangle
   */
 double Rectangle::area() const {
-  return side1 * side2;
+  return m_side1 * m_side2;
 }

@@ -15,7 +15,7 @@
  * Print list of shapes of a given type
  * @param shapeType A string describing what sort of shapes should be printed eg Circle
   */
-void ShapeSorter::printShapes(std::string shapeType) const {
+void ShapeSorter::printShapes(const std::string& shapeType) const {
   for (std::vector<Shape*>::const_iterator it = shapeVec.begin(); it != shapeVec.end(); it++) {
     if ((*it)->getShapeType() == shapeType) {
       std::cout << (*it)->getShapeDetails() << std::endl;

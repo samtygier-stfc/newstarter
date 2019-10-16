@@ -12,11 +12,11 @@
 
 class Triangle : public Shape {
 public:
+  Triangle(double height, double base) : Shape("Triangle", 3), m_height(height), m_base(base) {};
   double perimeter() const override;
   double area() const override;
-  Triangle(double height, double base) : Shape("Triangle", 3), height(height), base(base) {};
 private:
-  double height, base;
+  double m_height, m_base;
 };
 
 #endif /* TRIANGLE_H_*/

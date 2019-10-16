@@ -13,7 +13,7 @@
 class Shape {
 public:
   Shape(std::string ShapeType, int nsides) : ShapeType(ShapeType), nsides(nsides) {};
-  virtual ~Shape() {};
+  virtual ~Shape() = default;
   std::string getShapeType() const;
   int getShapeSides() const;
   virtual std::string getShapeDetails() const;

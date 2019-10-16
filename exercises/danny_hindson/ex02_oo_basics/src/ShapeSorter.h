@@ -13,9 +13,9 @@
 
 class ShapeSorter {
 public:
-  ShapeSorter(std::vector<Shape*> v) : shapeVec(v) {};
+  ShapeSorter(std::vector<Shape*> v) : shapeVec(std::move(v)) {}; //move semantics - if passed rvalue in here would be 0 copies, if pass lvalue then 1 copy
   virtual ~ShapeSorter() {};
-  void printShapes(std::string ShapeType) const;
+  void printShapes(const std::string& ShapeType) const;
   void printShapes(int nSides) const;
   void printOrderedByArea() const;
   void printOrderedByPerimeter() const;

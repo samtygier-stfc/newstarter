@@ -12,12 +12,12 @@
  * Calculates perimeter of the triangle
   */
 double Triangle::perimeter() const {
-  return 0.5 * height * base;
+  return 0.5 * m_height * m_base;
 }
 
 /**
  * Calculates perimeter of the triangle
   */
 double Triangle::area() const {
-  return base + 2 * sqrt(pow(height, 2) + (pow(base, 2) / 4));
+  return m_base + 2 * sqrt(pow(m_height, 2) + (pow(m_base, 2) / 4));
 }

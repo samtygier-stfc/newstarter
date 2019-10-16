@@ -15,7 +15,21 @@
 #include <string.h>
 #include <vector>
 
-bool compare(const std::pair<std::string,int>& x, const std::pair<std::string,int>& y) {
+using WordCount = std::pair<std::string, int>;
+using WordCounts = std::map<std::string, int>;
+
+namespace {
+  constexpr auto FOLDER_NAME = "D:\\newstarter\\builds\\WordCountDataFiles\\";
+  constexpr auto CHARS_TO_REMOVE = ".,?'\"!():";
+}
+
+/**
+ * Returns the sort order of the Word Counts - sort descending
+ * @param x First word count
+ * @param y Second word count
+ * @return boolean which is true if the first word count is bigger than the second
+ */
+bool compare(const WordCount& x, const WordCount& y) {
   return x.second > y.second;
 }
 
@@ -25,45 +39,46 @@ int main(int argc, char ** argv)
   if (argc == 2) {
     fileName = argv[1];
 
-    std::string folderName ="D:\\newstarter\\builds\\WordCountDataFiles\\";
-    std::ifstream inFile(folderName + fileName);
+    std::ifstream inFile(FOLDER_NAME + fileName);
     
     if (inFile) {
-      std::string s_withhyphens,s;
-      std::map<std::string, int> counters;
+      std::string word_withhyphens;
+      WordCounts counters;
 
       // read file in one word at a time
-      while (inFile >> s_withhyphens) {
-        std::istringstream ss(s_withhyphens);
+      while (inFile >> word_withhyphens) {
+        std::istringstream ss(word_withhyphens);
         // split any words containing hyphens into two
-        while (std::getline(ss, s, '-')) {
-          for (int i = 0; i < s.length(); i++) {
-            s[i] = tolower(s[i]);
+        std::string word;
+        while (std::getline(ss, word, '-')) {
+          for (int i = 0; i < word.length(); i++) {
+            word[i] = tolower(word[i]);
           }
-          char charsToRemove[] = ".,?'\"!():";
-          for (int i = 0; i < strlen(charsToRemove); i++) {
-            s.erase(std::remove(s.begin(), s.end(), charsToRemove[i]), s.end());
+          for (int i = 0; i < strlen(CHARS_TO_REMOVE); i++) {
+            word.erase(std::remove(word.begin(), word.end(), CHARS_TO_REMOVE[i]), word.end());
           }
-          if (s.length() > 4) {
-            counters[s]++;
+          if (word.length() > 4) {
+            counters[word]++;
           }
         }
       }
 
-      std::vector<std::pair<std::string, int>> vec;
+      std::vector<WordCount> countersVec;
 
       //sort(counters.begin(),counters.end(),Compare); // not possible on a map because doesn't have random access
 
       // copy to vector of pairs so can sort. Could have copied to another map (multimap) instead
-      std::copy(counters.begin(), counters.end(), std::back_inserter<std::vector<std::pair<std::string, int>>>(vec));
-      sort(vec.begin(), vec.end(), compare);
+      std::copy(counters.begin(), counters.end(), std::back_inserter<std::vector<WordCount>>(countersVec));
+      sort(countersVec.begin(), countersVec.end(), compare);
 
-      std::ofstream outFile(folderName + "results.txt");
+      std::ofstream outFile(std::string(FOLDER_NAME) + "results.txt");
       if (outFile) {
         outFile << "Word" << "\t" << "Usage" << std::endl;
-        for (std::vector<std::pair<std::string, int>>::const_iterator it = vec.begin(); it != vec.end(); ++it) {
-          outFile << it->first << "\t" << it->second << std::endl;
+
+        for (const auto& WordAndCount : countersVec) {
+          outFile << WordAndCount.first << "\t" << WordAndCount.second << std::endl;
         }
+
       }
       else {
         std::cout << "Cannot open specified output file" << std::endl;

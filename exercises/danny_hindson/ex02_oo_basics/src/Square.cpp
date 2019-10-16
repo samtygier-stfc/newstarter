@@ -12,12 +12,12 @@
  * Calculates perimeter of the square
   */
 double Square::perimeter() const {
-  return 4 * side;
+  return 4 * m_side;
 }
 
 /**
  * Calculates perimeter of the square
   */
 double Square::area() const {
-  return pow(side, 2);
+  return pow(m_side, 2);
 }

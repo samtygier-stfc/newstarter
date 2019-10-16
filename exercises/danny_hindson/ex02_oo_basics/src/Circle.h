@@ -12,11 +12,11 @@
 
 class Circle : public Shape {
 public:
+  Circle(double radius) : Shape("Circle", 1), m_radius(radius) {};
   double perimeter() const override;
   double area() const override;
-  Circle(double radius) : Shape("Circle", 1), radius(radius) {};
 private:
-  double radius;
+  double m_radius;
 };
 
 #endif /* CIRCLE_H_*/

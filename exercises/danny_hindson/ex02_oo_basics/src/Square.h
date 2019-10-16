@@ -12,11 +12,11 @@
 
 class Square : public Shape {
 public:
+  Square(double side) : Shape("Square", 4), m_side(side) {};
   double perimeter() const override;
   double area() const override;
-  Square(double side) : Shape("Square", 4), side(side) {};
 private:
-  double side;
+  double m_side;
 };
 
 #endif /* SQUARE_H_*/

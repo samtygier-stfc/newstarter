@@ -12,12 +12,12 @@
  * Calculates perimeter of the circle
   */
 double Circle::perimeter() const {
-  return 2 * M_PI * radius;
+  return 2 * M_PI * m_radius;
 }
 
 /**
  * Calculates area of the circle
   */
 double Circle::area() const {
-  return M_PI * pow(radius, 2);
+  return M_PI * pow(m_radius, 2);
 }
