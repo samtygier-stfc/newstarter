@@ -19,6 +19,43 @@ bool notHyphen(char c) {
 	return !isHyphen(c);
 }
 
+struct key {
+	/*
+	to be used as key for a map
+	*/
+	int count = 0;
+	std::string word = "";
+};
+
+bool operator<(const key& k1, const key& k2)
+{
+	/*
+	Overload < operator for key struct with key1.count > key2.count)
+	As want keys to be sorted in map by descending order (default is ascending)
+	*/
+	return (k1.count > k2.count);
+}
+
+std::map<key, int> convertMap(std::map<std::string, int> map_in) {
+	/*
+	Function takes a map and returns a new map object
+	where the key is s struct datatype key that can be sorted as desired
+	*/
+
+	key akey;
+	std::map<key, int> map_out;
+
+	for (std::map<std::string, int>::const_iterator it = map_in.begin();
+		it != map_in.end(); ++it) {
+
+		akey.count = it->second;
+		akey.word = it->first;
+
+		map_out[akey] = 0; // doesn't matter what the value is...
+	}
+	return map_out;
+}
+
 std::vector<std::string> hyphenSplit(const std::string& str) {
 	/*
 	Function to split a string by a delimiter char (e.g. space)
@@ -52,8 +89,6 @@ std::vector<std::string> hyphenSplit(const std::string& str) {
 	return ret;
 }
 
-// function to sort keys in map by value
-
 
 int main(int argc, char** argv)
 {
@@ -70,7 +105,7 @@ int main(int argc, char** argv)
 	// read file to istream-like thing
 	std::ifstream infile(filename.c_str());
 
-	// punctuation to accept
+	// punctuation to remove
 	static const std::string punctuation = ".,?'\"!():";
 
 	std::string s;
@@ -99,7 +134,7 @@ int main(int argc, char** argv)
 			while (it != (*it_substr).end()) {
 
 				// check if char is acceptable
-				if (isalnum(*it) ||
+				if (isalpha(*it) ||
 					std::find(punctuation.begin(),
 						punctuation.end(), *it) == punctuation.end()) {
 
@@ -117,6 +152,7 @@ int main(int argc, char** argv)
 					// no need to increment it here
 				}
 			}
+
 			if ( (*it_substr).size() >= minlen) {
 				++counters[*it_substr];
 				// update max length of strings so far
@@ -125,19 +161,23 @@ int main(int argc, char** argv)
 		}		
 	}
 
+	// need to write word in descending order of appearence
+	// convert map to another map with a struct as the key
+	std::map<key, int> sortmap = convertMap(counters);
+
 	// write results to stdout
 	// header row
 	std::cout << "Word\tUsage" << std::endl;
-	// write the key/counts stored in maps
+	key akey;
+	std::string word;
+	// write the key/counts stored in sortmap
+	for (std::map<key, int>::const_iterator it = sortmap.begin();
+		it != sortmap.end(); ++it) {
 
-	for (std::map<std::string, int>::const_iterator it = counters.begin();
-		it != counters.end(); ++it) {
-		// need to pad words with spaces to length of max word
-		//          key					  value
-		std::cout << it->first << "\t" << it->second << std::endl;
+		akey = it->first;
+		word = (akey.word);
+
+		std::cout << word.append(maxlen-size(word),' ')  << akey.count << std::endl;
 	}
-	std::cout << "max length:\t" << maxlen;
+	std::cout << "Max word length is:\t" << maxlen << std::endl;
 }
-
-// need to ignore punctuation and b put all in lower case
-// cf 03_FindURL in Ch6
