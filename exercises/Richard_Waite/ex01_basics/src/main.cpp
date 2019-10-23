@@ -76,6 +76,7 @@ int main(int argc, char** argv)
 	std::string s;
 	std::vector<std::string> substrs;
 	const std::string::size_type minlen = 5;
+	std::string::size_type maxlen = minlen;
 	std::map<std::string, int> counters;
 
 	// read each word in file
@@ -100,7 +101,7 @@ int main(int argc, char** argv)
 				// check if char is acceptable
 				if (isalnum(*it) ||
 					std::find(punctuation.begin(),
-						punctuation.end(), *it) != punctuation.end()) {
+						punctuation.end(), *it) == punctuation.end()) {
 
 					// change char to lower casee
 					*it = std::tolower(*it);
@@ -118,6 +119,8 @@ int main(int argc, char** argv)
 			}
 			if ( (*it_substr).size() >= minlen) {
 				++counters[*it_substr];
+				// update max length of strings so far
+				maxlen = std::max(maxlen,(*it_substr).size());
 			}
 		}		
 	}
@@ -133,7 +136,7 @@ int main(int argc, char** argv)
 		//          key					  value
 		std::cout << it->first << "\t" << it->second << std::endl;
 	}
-
+	std::cout << "max length:\t" << maxlen;
 }
 
 // need to ignore punctuation and b put all in lower case
