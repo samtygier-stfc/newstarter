@@ -17,13 +17,7 @@ public:
 	// member functions
 	virtual double calcPerimiter() const = 0;
 	virtual double calcArea() const = 0; // why did I have to add 0 is it a null value?
-	void print() const {
-		// std::ostream& out
-		// -> is to access members of object to which pointer points...
-		std::cout << "Type: " << this->getShapeName() << "\t" <<
-			"Area: " << this->calcArea() << "\t" <<
-			"Perimiter: " << this->calcPerimiter() << std::endl;
-	}
+	void print();
 
 private:
 	std::string m_shapeName;
