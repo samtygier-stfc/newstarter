@@ -51,7 +51,8 @@ std::map<key, int> convertMap(std::map<std::string, int> map_in) {
 		akey.count = it->second;
 		akey.word = it->first;
 
-		map_out[akey] = 0; // doesn't matter what the value is...
+		// doesn't matter what the value is, all info is in key
+		map_out[akey] = 0;
 	}
 	return map_out;
 }
@@ -179,5 +180,5 @@ int main(int argc, char** argv)
 
 		std::cout << word.append(maxlen-size(word),' ')  << akey.count << std::endl;
 	}
-	std::cout << "Max word length is:\t" << maxlen << std::endl;
+	// std::cout << "Max word length is:\t" << maxlen << std::endl;
 }
