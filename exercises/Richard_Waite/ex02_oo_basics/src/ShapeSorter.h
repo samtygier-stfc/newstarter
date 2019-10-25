@@ -17,7 +17,6 @@ public:
 	void printShapesArea(std::vector<Shape*>& in_shapes);
 	void printShapesPerimiter(std::vector<Shape*>& in_shapes);
 
-
 };
 
 #endif 
