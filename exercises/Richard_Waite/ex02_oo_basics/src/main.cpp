@@ -1,4 +1,4 @@
-#include<vector>
+#include "ShapeSorter.h"
 #include "Shape.h"
 #include "Rectangle.h"
 #include "Square.h"
@@ -13,10 +13,13 @@ int main(int, char **)
 	// new allocates memory before class initilisation and returns a pointer
 	all_shapes.push_back(new Square(2.0));
 	all_shapes.push_back(new Rectangle(2.0,4.0));
+	all_shapes.push_back(new Rectangle(3.0, 4.0));
 	all_shapes.push_back(new Circle(1.0));
 	all_shapes.push_back(new Triangle(1.0,3.0));
 
-	Square s(2);
-	s.print();
+	//all_shapes[0]->print();
+
+	ShapeSorter ss;
+	ss.printShapes(all_shapes, "Square");
 
 }

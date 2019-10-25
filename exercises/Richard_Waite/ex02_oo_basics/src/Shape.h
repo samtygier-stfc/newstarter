@@ -19,8 +19,10 @@ public:
 	virtual double calcArea() const = 0; // why did I have to add 0 is it a null value?
 	void print() const {
 		// std::ostream& out
-		std::cout << "Area = " << this->calcArea() << 
-			"\tPerimiter = " << this->calcPerimiter() << std::endl;
+		// -> is to access members of object to which pointer points...
+		std::cout << "Type: " << this->getShapeName() << "\t" <<
+			"Area: " << this->calcArea() << "\t" <<
+			"Perimiter: " << this->calcPerimiter() << std::endl;
 	}
 
 private:
