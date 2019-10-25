@@ -20,6 +20,7 @@ int main(int, char **)
 	//all_shapes[0]->print();
 
 	ShapeSorter ss;
-	ss.printShapes(all_shapes, "Square");
+	ss.printShapesType(all_shapes, "Square");
+	ss.printShapesNsides(all_shapes, 4);
 
 }

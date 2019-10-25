@@ -6,7 +6,7 @@
 class Circle : public Shape {
 public:
 	// constructor
-	Circle(double radius) : Shape("Circle", 4), m_radius(radius) {}
+	Circle(double radius) : Shape("Circle", 1), m_radius(radius) {}
 	// deconstructor
 	virtual ~Circle() {}
 

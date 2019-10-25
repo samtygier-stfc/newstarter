@@ -6,7 +6,7 @@
 class Triangle : public Shape {
 public:
 	// constructor
-	Triangle(double base, double height) : Shape("Triangle", 4), m_base(base), m_height(height) {}
+	Triangle(double base, double height) : Shape("Triangle", 3), m_base(base), m_height(height) {}
 	// deconstructor
 	virtual ~Triangle() {}
 
