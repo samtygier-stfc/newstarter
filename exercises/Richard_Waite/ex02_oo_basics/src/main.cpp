@@ -22,5 +22,7 @@ int main(int, char **)
 	ShapeSorter ss;
 	ss.printShapesType(all_shapes, "Square");
 	ss.printShapesNsides(all_shapes, 4);
+	ss.printShapesArea(all_shapes);
+	ss.printShapesPerimiter(all_shapes);
 
 }
