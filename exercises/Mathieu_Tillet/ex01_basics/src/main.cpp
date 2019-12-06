@@ -5,6 +5,9 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <vector>
+#include <algorithm>
+#include <tuple>
 
 using namespace std;
 
@@ -49,12 +52,20 @@ int main(int argc, char **argv)
     }
     in.close();
 
+    // we store the elements of word_counts in a vector so they can be sorted
+    vector<tuple<int, string>> vec_count;
+    for (map<string, int>::iterator it = word_count.begin(); it != word_count.end(); ++it){
+        vec_count.push_back(tuple<int, string>(it->second, it->first));
+    }
+    sort(vec_count.begin(), vec_count.end());
+
     ofstream out;
     out.open(out_name);
-
-    for (map<string, int>::iterator it = word_count.begin(); it != word_count.end(); ++it){
-        out << it->first << "   "  << it->second << endl;
+    out << "Word     Usage" << endl;
+    for (vector<tuple<int, string>>::iterator it = vec_count.end(); it != vec_count.begin(); --it){
+        out << get<1>(*it) << "  " << get<0>(*it) << endl;
     }
+
     out.close();
 
     return 0;
