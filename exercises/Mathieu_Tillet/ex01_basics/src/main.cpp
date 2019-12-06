@@ -38,12 +38,12 @@ int main(int argc, char **argv)
     }
 
     string word;
-    int max_length = 6; // size of "Usage", which we systematically write
+    int max_length = 4; // size of "Word", which we systematically write
     size_t word_size;
 
     while (in >> word){
         word_size = word.size();
-        if (word_size >= 4){
+        if (word_size >= 5){
             word_count[word]++;
             if (word_size > max_length){
                 max_length = word_size;
