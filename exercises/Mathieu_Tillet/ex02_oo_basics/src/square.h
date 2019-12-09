@@ -2,6 +2,9 @@
 #define SQUARE_H
 
 #include "shape.h"
+#include<ostream>
+
+using namespace std;
 
 class Square : public Shape
 {
@@ -14,5 +17,6 @@ public:
     double perimeter();
     double area();
 };
+ostream& operator<<(ostream &os, const Square &s);
 
 #endif // SQUARE_H

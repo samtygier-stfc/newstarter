@@ -2,6 +2,9 @@
 #define RECTANGLE_H
 
 #include "shape.h"
+#include<ostream>
+
+using namespace std;
 
 class Rectangle : public Shape
 {
@@ -14,6 +17,9 @@ public:
 
     double area();
     double perimeter();
+
 };
+ostream& operator<<(ostream &os, const Rectangle &r);
+
 
 #endif // RECTANGLE_H

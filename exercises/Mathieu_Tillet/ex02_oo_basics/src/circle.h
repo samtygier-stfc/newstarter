@@ -5,6 +5,8 @@
 
 #include "shape.h"
 
+using namespace std;
+
 class Circle : public Shape
 {
 public:
@@ -16,5 +18,7 @@ public:
     double area();
     double perimeter();
 };
+
+ostream& operator<<(ostream &os, const Circle &c);
 
 #endif // CIRCLE_H

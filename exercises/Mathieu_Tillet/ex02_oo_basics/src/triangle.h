@@ -2,8 +2,11 @@
 #define TRIANGLE_H
 
 #include<math.h>
+#include<ostream>
 
 #include "shape.h"
+
+using namespace std;
 
 class Triangle: public Shape
 {
@@ -18,5 +21,6 @@ public:
     double area();
     double perimeter();
 };
+ostream& operator<<(ostream &os, const Triangle &t);
 
 #endif // TRIANGLE_H

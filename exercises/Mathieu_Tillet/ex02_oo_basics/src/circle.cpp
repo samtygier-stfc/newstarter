@@ -1,4 +1,7 @@
 #include "circle.h"
+#include<ostream>
+
+using namespace std;
 
 Circle::Circle(): radius(0){
     sides = 1;
@@ -16,4 +19,8 @@ double Circle::area(){
 
 double Circle::perimeter(){
     return 2*M_PI*radius;
+}
+
+ostream& operator<<(ostream &os, const Circle &c){
+    os << c.shape_type << " Radius: " << c.radius << endl;
 }

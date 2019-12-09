@@ -1,5 +1,7 @@
 #include "triangle.h"
 
+using namespace std;
+
 Triangle::Triangle(): base(0), height(0){
     sides = 3;
     shape_type = "Triangle";
@@ -16,4 +18,8 @@ double Triangle::area(){
 
 double Triangle::perimeter(){
     return base + 2*sqrt(height*height + base*base/4);
+}
+
+ostream& operator<<(ostream &os, const Triangle &t){
+    os << t.shape_type << " Base: " << t.base << " Height: " << t.height << endl;
 }
