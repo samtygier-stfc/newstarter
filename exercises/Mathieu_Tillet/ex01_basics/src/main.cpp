@@ -69,7 +69,7 @@ int main(int argc, char **argv)
             }
             // if the last character was invalid, we reached the end of a word
             if (should_split){
-                int length_of_word = i - start;
+                size_t length_of_word = i - start;
                 if (length_of_word >= 5){
                     // if long enough, the word is added to the map
                     word_count[block.substr(start, length_of_word)]++;
