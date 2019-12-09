@@ -21,6 +21,6 @@ double Circle::perimeter(){
     return 2*M_PI*radius;
 }
 
-ostream& operator<<(ostream &os, const Circle &c){
-    os << c.shape_type << " Radius: " << c.radius << endl;
+ostream& Circle::display(ostream &os){
+    os << shape_type << " Radius: " << radius << endl;
 }

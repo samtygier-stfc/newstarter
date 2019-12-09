@@ -1,3 +1,5 @@
+/* Circle shape */
+
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
@@ -17,8 +19,7 @@ public:
 
     double area();
     double perimeter();
+    ostream& display(ostream &os);
 };
-
-ostream& operator<<(ostream &os, const Circle &c);
 
 #endif // CIRCLE_H

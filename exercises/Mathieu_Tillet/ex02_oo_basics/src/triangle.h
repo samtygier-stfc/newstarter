@@ -1,8 +1,9 @@
+/* Triangle shape */
+
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include<math.h>
-#include<ostream>
+#include<cmath>
 
 #include "shape.h"
 
@@ -20,7 +21,7 @@ public:
 
     double area();
     double perimeter();
+    ostream& display(ostream &os);
 };
-ostream& operator<<(ostream &os, const Triangle &t);
 
 #endif // TRIANGLE_H

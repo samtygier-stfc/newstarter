@@ -1,8 +1,9 @@
+/* Square shape */
+
 #ifndef SQUARE_H
 #define SQUARE_H
 
 #include "shape.h"
-#include<ostream>
 
 using namespace std;
 
@@ -16,7 +17,7 @@ public:
 
     double perimeter();
     double area();
+    ostream& display(ostream &os);
 };
-ostream& operator<<(ostream &os, const Square &s);
 
 #endif // SQUARE_H

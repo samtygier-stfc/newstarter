@@ -1,8 +1,9 @@
+/* Rectangle shape*/
+
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
 #include "shape.h"
-#include<ostream>
 
 using namespace std;
 
@@ -17,9 +18,8 @@ public:
 
     double area();
     double perimeter();
+    ostream& display(ostream &os);
 
 };
-ostream& operator<<(ostream &os, const Rectangle &r);
-
 
 #endif // RECTANGLE_H

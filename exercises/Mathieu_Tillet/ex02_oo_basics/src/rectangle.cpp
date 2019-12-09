@@ -18,6 +18,6 @@ double Rectangle::perimeter(){
     return 2*(side_1 + side_2);
 }
 
-ostream& operator<<(ostream &os, const Rectangle &r){
-    os << r.shape_type << " Side 1: " << r.side_1 << " Side 2: " << r.side_2 << endl;
+ostream& Rectangle::display(ostream &os){
+    os << shape_type << " Side 1: " << side_1 << " Side 2: " << side_2 << endl;
 }

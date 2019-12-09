@@ -18,6 +18,6 @@ double Square::perimeter(){
     return 4*side_length;
 }
 
-ostream& operator<<(ostream &os, const Square &s){
-    os << s.shape_type << " Side length: " << s.side_length << endl;
+ostream& Square::display(ostream &os){
+    os << shape_type << " Side length: " << side_length << endl;
 }

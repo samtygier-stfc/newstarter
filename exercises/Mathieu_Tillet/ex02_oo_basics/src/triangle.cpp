@@ -20,6 +20,6 @@ double Triangle::perimeter(){
     return base + 2*sqrt(height*height + base*base/4);
 }
 
-ostream& operator<<(ostream &os, const Triangle &t){
-    os << t.shape_type << " Base: " << t.base << " Height: " << t.height << endl;
+ostream& Triangle::display(ostream &os){
+    os << shape_type << " Base: " << base << " Height: " << height << endl;
 }
