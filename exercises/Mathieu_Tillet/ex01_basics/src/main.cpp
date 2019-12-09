@@ -60,7 +60,7 @@ int main(int argc, char **argv)
             // convert to lowercase so it is case insensitive
             block[i] = tolower(block[i]);
 
-            // iterate on every delimiter to check if it is a valid part of a word
+            // iterate on every delimiter to check if the current character is a letter
             for (int j = 0; j != delimiters.size(); j++){
                 if (delimiters[j] == block[i]){
                     should_split = true;
@@ -105,11 +105,17 @@ int main(int argc, char **argv)
     sort(vec_count.begin(), vec_count.end());
 
     ofstream out;
+    int spaces;
     out.open(out_name);
     out << "Word     Usage" << endl;
     // we go through the elements of the vector in reverse order so that they are sorted decreasingly in the output
     for (vector<tuple<int, string>>::iterator it = vec_count.end(); it != vec_count.begin(); --it){
-        out << get<1>(*it) << "  " << get<0>(*it) << endl;
+        spaces = max_length + 2 - get<1>(*it).size();
+        out << get<1>(*it);
+        for (int i = 0; i < spaces; i++){
+            out << " ";
+        }
+        out << get<0>(*it) << endl;
     }
 
     out.close();
