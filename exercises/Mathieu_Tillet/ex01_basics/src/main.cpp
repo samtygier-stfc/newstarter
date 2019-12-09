@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     }
 
     string block;
-    int max_length = 4; // size of "Word", which we systematically write
+    size_t max_length = 4; // size of "Word", which we systematically write
     size_t block_size;
     bool should_split;
 
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
             block[i] = tolower(block[i]);
 
             // iterate on every delimiter to check if the current character is a letter
-            for (int j = 0; j != delimiters.size(); j++){
+            for (size_t j = 0; j != delimiters.size(); j++){
                 if (delimiters[j] == block[i]){
                     should_split = true;
                     break;
@@ -105,7 +105,7 @@ int main(int argc, char **argv)
     sort(vec_count.begin(), vec_count.end());
 
     ofstream out;
-    int spaces;
+    size_t spaces;
     out.open(out_name);
     out << "Word     Usage" << endl;
     // we go through the elements of the vector in reverse order so that they are sorted decreasingly in the output
