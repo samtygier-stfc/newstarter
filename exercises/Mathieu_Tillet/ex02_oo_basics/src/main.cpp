@@ -20,6 +20,9 @@ int main(int, char **)
     Circle();
     Rectangle(1,2);
 
+    Square sq = Square(5);
+    cout << sq << endl;
+
     std::vector<Shape*> shapes;
     shapes.push_back(new Triangle(1,1));
     shapes.push_back(new Rectangle(1,1));

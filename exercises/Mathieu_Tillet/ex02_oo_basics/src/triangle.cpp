@@ -21,5 +21,5 @@ double Triangle::perimeter(){
 }
 
 ostream& Triangle::display(ostream &os){
-    os << shape_type << " Base: " << base << " Height: " << height << endl;
+    os << shape_type << " Base: " << base << " Height: " << height;
 }
