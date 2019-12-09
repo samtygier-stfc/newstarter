@@ -22,5 +22,5 @@ double Circle::perimeter(){
 }
 
 ostream& Circle::display(ostream &os){
-    os << shape_type << " Radius: " << radius;
+    return os << shape_type << " Radius: " << radius;
 }

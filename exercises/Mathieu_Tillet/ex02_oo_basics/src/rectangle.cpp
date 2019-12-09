@@ -19,5 +19,5 @@ double Rectangle::perimeter(){
 }
 
 ostream& Rectangle::display(ostream &os){
-    os << shape_type << " Side 1: " << side_1 << " Side 2: " << side_2;
+    return os << shape_type << " Side 1: " << side_1 << " Side 2: " << side_2;
 }

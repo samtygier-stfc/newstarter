@@ -19,5 +19,5 @@ double Square::perimeter(){
 }
 
 ostream& Square::display(ostream &os){
-    os << shape_type << " Side length: " << side_length;
+    return os << shape_type << " Side length: " << side_length;
 }
