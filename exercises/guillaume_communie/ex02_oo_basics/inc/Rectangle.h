@@ -27,6 +27,12 @@ public:
      */
     double getArea(void);
 
+    /**
+     * Print the rectangle
+     * @return A string that contains rectangle data
+     */
+    std::string print(void);
+
 private:
     /**
      * Store the rectangle height

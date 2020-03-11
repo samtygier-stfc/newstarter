@@ -44,6 +44,12 @@ public:
      */
     virtual double getArea(void) =0;
 
+    /**
+     * Print the shape
+     * @return A string that contains the shape data
+     */
+    virtual std::string print(void) = 0;
+
 private:
     /**
      * Store the shape type name

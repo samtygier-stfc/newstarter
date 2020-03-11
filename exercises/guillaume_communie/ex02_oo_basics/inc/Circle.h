@@ -26,6 +26,12 @@ public:
      */
     double getArea(void);
 
+    /**
+     * Print the circle
+     * @return A string that contains the circle data
+     */
+    std::string print(void);
+
 private:
     /**
      * Store the circle radius

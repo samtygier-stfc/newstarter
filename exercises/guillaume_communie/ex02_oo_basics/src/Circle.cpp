@@ -1,6 +1,7 @@
 #include "Circle.h"
 
 #include <cmath>
+#include <sstream>
 
 Circle::Circle(double r)
     : Shape("circle", 1),
@@ -14,5 +15,12 @@ double Circle::getPerimeter(void) {
 
 double Circle::getArea(void) {
     return M_PI * radius * radius;
+}
+
+std::string Circle::print(void) {
+    std::ostringstream ss;
+    ss << "[Circle] radius: "
+       << radius;
+    return ss.str();
 }
 

@@ -27,6 +27,12 @@ public:
      */
     double getArea(void);
 
+    /**
+     * Print the triangle
+     * @return A string that contains the triangle data
+     */
+    std::string print(void);
+
 private:
     /**
      * Store the triangle height

@@ -1,6 +1,7 @@
 #include "Triangle.h"
 
 #include <cmath>
+#include <sstream>
 
 Triangle::Triangle(double h, double b)
     : Shape("triangle", 3),
@@ -15,5 +16,14 @@ double Triangle::getPerimeter(void) {
 
 double Triangle::getArea(void) {
     return height * base / 2;
+}
+
+std::string Triangle::print(void) {
+    std::ostringstream ss;
+    ss << "[Triangle] base: "
+       << base
+       << " - height: "
+       << height;
+    return ss.str();;
 }
 

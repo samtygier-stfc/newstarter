@@ -26,6 +26,12 @@ public:
      */
     double getArea(void);
 
+    /**
+     * Print the square
+     * @return A string that contains the square data
+     */
+    std::string print(void);
+
 private:
     /**
      * Store the square side length
