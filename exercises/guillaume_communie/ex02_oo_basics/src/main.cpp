@@ -2,6 +2,9 @@
  * Skeleton main routine
  */
 
-int main(int, char **)
-{
+#include "Square.h"
+
+int main(int, char **) {
+    Square s1(10);
 }
+
