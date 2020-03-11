@@ -24,6 +24,20 @@ public:
      * @param[in] n The number of sides to match
      */
     static void printMatchSides(std::vector<Shape*> v, int n);
+
+    /**
+     * Print the shapes sorted by descending perimeter value. The methods first
+     * modifies the vector by sorting its elements
+     * @param[in,out] v The vector of shapes
+     */
+    static void printSortedByPerimeter(std::vector<Shape*> v);
+
+    /**
+     * Print the shapes sorted by descending area value. The methods first
+     * modifies the vector by sorting its elements
+     * @param[in,out] v The vector of shapes
+     */
+    static void printSortedByArea(std::vector<Shape*> v);
 };
 
 #endif

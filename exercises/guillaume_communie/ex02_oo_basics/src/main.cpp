@@ -10,6 +10,7 @@
 #include "ShapeSorter.h"
 
 #include <vector>
+#include <iostream>
 
 int main(int, char **) {
     Square s1(10), s2(14), s3(18);
@@ -30,7 +31,19 @@ int main(int, char **) {
     v.push_back(&t2);
     v.push_back(&t3);
 
+    std::cout << "Elements that correspond to type 'circle':" << std::endl;
     ShapeSorter::printMatchType(v, "circle");
+    std::cout << std::endl;
+
+    std::cout << "Elements that have 3 sides:" << std::endl;
     ShapeSorter::printMatchSides(v, 3);
+    std::cout << std::endl;
+
+    std::cout << "Elements sorted by decreasing perimeter value:" << std::endl;
+    ShapeSorter::printSortedByPerimeter(v);
+    std::cout << std::endl;
+
+    std::cout << "Elements sorted by decreasing area value:" << std::endl;
+    ShapeSorter::printSortedByArea(v);
 }
 
