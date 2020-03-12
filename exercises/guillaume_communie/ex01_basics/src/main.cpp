@@ -11,11 +11,12 @@
 #include <set>
 
 const std::string RESULTS_FILENAME("word_counts.data");
+const std::string INTERWORD_CHAR = " .,?'\"!():\n-";
 
 /**
  * Print the program usage.
  */
-void usage(void) {
+void usage() {
   std::cout << "Usage: WordCounter <file_name>" << std::endl;
   exit(1);
 }
@@ -25,10 +26,8 @@ void usage(void) {
  * @param[in] c The character to test
  * @return      True if the character is an interword character
  */
-bool isInterWord(int c) {
-    return (c == ' ') || (c == '.') || (c == ',') || (c == '?') || (c == '\'')
-        || (c == '"') || (c == '!') || (c == '(') || (c == ')') || (c == ':')
-        || (c == '\n') || (c== '-');
+bool isInterWord(char c) {
+    return INTERWORD_CHAR.find(c) != std::string::npos;
 }
 
 int main(int argc, char *argv[])
@@ -46,20 +45,15 @@ int main(int argc, char *argv[])
 
     // read the words
     std::map<std::string, int> dictionnary;
-    int character;
+    char character;
     std::string word;
     do {
         character = f.get();
         if (isalpha(character)) {
-            word.push_back((char) tolower(character));
+            word.push_back(tolower(character));
           } else if (isInterWord(character)) {
               if ((!word.empty()) && (word.size() > 4)) {
-                  auto it = dictionnary.find(word);
-                  if (it != dictionnary.end()) {
-                      it->second++;
-                  } else {
-                      dictionnary[word] = 1;
-                  }
+                  dictionnary[word]++;
               }
               word.clear();
           }
@@ -81,10 +75,10 @@ int main(int argc, char *argv[])
     std::ofstream out_file(RESULTS_FILENAME);
     out_file << std::setw(15) << std::left;
     out_file << "Words" << "Usage" << std::endl;
-    for (auto it = sorted_dic.begin() ; it != sorted_dic.end() ; it++) {
+    for (auto w : sorted_dic) {
         out_file << std::setw(15) << std::left
-                 << it->first
-                 << it->second
+                 << w.first
+                 << w.second
                  << std::endl;
     }
 
