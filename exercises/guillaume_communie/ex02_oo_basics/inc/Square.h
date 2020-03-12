@@ -1,5 +1,4 @@
-#ifndef SQUARE_H
-#define SQUARE_H
+#pragma once
 
 #include "Shape.h"
 
@@ -18,26 +17,24 @@ public:
      * Get the perimeter
      * @return The square perimeter
      */
-    double getPerimeter(void);
+    double getPerimeter() const override;
 
     /**
      * Get the area
      * @return The square area
      */
-    double getArea(void);
+    double getArea() const override;
 
     /**
      * Print the square
      * @return A string that contains the square data
      */
-    std::string print(void);
+    std::string print() const override;
 
 private:
     /**
      * Store the square side length
      */
-    double size;
+    double m_size;
 };
-
-#endif
 

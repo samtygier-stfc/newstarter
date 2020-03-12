@@ -3,14 +3,20 @@
 #include <iostream>
 #include <algorithm>
 
-void ShapeSorter::printMatchType(std::vector<Shape*> v,
-                                                std::string t) {
-    for (auto it = v.begin() ; it != v.end() ; it++)
-        if ((*it)->getType() == t)
-            std::cout << (*it)->print() << std::endl;
+void ShapeSorter::printMatchType(const std::vector<Shape*> &v,
+                                 const std::string &t) {
+    std::vector<Shape*> match(v.size());
+    auto it = std::copy_if(v.begin(), v.end(), match.begin(),
+                           [] (Shape *s) -> bool
+                           {
+                               return s->getType() == "circle";
+                           });
+    match.resize(std::distance(match.begin(), it));
+
+    printVector(match);
 }
 
-void ShapeSorter::printMatchSides(std::vector<Shape*> v, int n) {
+void ShapeSorter::printMatchSides(const std::vector<Shape*> &v, int n) {
     for (auto it = v.begin() ; it != v.end() ; it++)
         if ((*it)->getSides() == n)
             std::cout << (*it)->print() << std::endl;
@@ -23,8 +29,7 @@ void ShapeSorter::printSortedByPerimeter(std::vector<Shape*> v) {
                   return (e1->getPerimeter() > e2->getPerimeter());
               });
 
-    for (auto it = v.begin() ; it != v.end() ; it++)
-        std::cout << (*it)->print() << std::endl;
+    printVector(v);
 }
 
 void ShapeSorter::printSortedByArea(std::vector<Shape*> v) {
@@ -34,7 +39,11 @@ void ShapeSorter::printSortedByArea(std::vector<Shape*> v) {
                   return (e1->getArea() > e2->getArea());
               });
 
-    for (auto it = v.begin() ; it != v.end() ; it++)
-        std::cout << (*it)->print() << std::endl;
+    printVector(v);
+}
+
+void ShapeSorter::printVector(const std::vector<Shape*> &v) {
+    for (auto e : v)
+        std::cout << e->print() << std::endl;
 }
 

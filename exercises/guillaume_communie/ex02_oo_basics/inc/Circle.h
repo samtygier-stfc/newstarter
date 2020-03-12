@@ -1,5 +1,4 @@
-#ifndef CIRCLE_H
-#define CIRCLE_H
+#pragma once
 
 #include "Shape.h"
 
@@ -18,26 +17,24 @@ public:
      * Get the perimeter
      * @return The circle perimeter
      */
-    double getPerimeter(void);
+    double getPerimeter() const override;
 
     /**
      * Get the area
      * @return The circle area
      */
-    double getArea(void);
+    double getArea() const override;
 
     /**
      * Print the circle
      * @return A string that contains the circle data
      */
-    std::string print(void);
+    std::string print() const override;
 
 private:
     /**
      * Store the circle radius
      */
-    double radius;
+    double m_radius;
 };
-
-#endif
 

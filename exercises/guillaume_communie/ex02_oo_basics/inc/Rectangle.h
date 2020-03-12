@@ -1,5 +1,4 @@
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
+#pragma once
 
 #include "Shape.h"
 
@@ -19,31 +18,29 @@ public:
      * Get the perimeter
      * @return The rectangle perimeter
      */
-    double getPerimeter(void);
+    double getPerimeter() const override;
 
     /**
      * Get the area
      * @return The rectangle area
      */
-    double getArea(void);
+    double getArea() const override;
 
     /**
      * Print the rectangle
      * @return A string that contains rectangle data
      */
-    std::string print(void);
+    std::string print() const override;
 
 private:
     /**
      * Store the rectangle height
      */
-    double height;
+    double m_height;
 
     /**
      * Store the rectangle width
      */
-    double width;
+    double m_width;
 };
-
-#endif
 

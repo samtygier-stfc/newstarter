@@ -1,5 +1,4 @@
-#ifndef SHAPE_H
-#define SHAPE_H
+#pragma once
 
 #include <string>
 
@@ -18,49 +17,47 @@ public:
     /**
      * Delete a shape
      */
-    //~Shape(void);
+    virtual ~Shape(void);
 
     /**
      * Get the type name of the shape
      * @return The type name
      */
-    std::string getType(void);
+    std::string getType() const;
 
     /**
      * Get the number of sides
      * @return The shape number of sides
      */
-    int getSides(void);
+    int getSides() const;
 
     /**
      * Get the perimeter
      * @return The shape perimeter
      */
-    virtual double getPerimeter(void) = 0;
+    virtual double getPerimeter() const = 0;
 
     /**
      * Get the area
      * @return The shape area
      */
-    virtual double getArea(void) =0;
+    virtual double getArea() const = 0;
 
     /**
      * Print the shape
      * @return A string that contains the shape data
      */
-    virtual std::string print(void) = 0;
+    virtual std::string print() const = 0;
 
 private:
     /**
      * Store the shape type name
      */
-    std::string type;
+    std::string m_type;
 
     /**
      * Store the shape number of sides
      */
-    int numberOfSides;
+    int m_numberOfSides;
 };
-
-#endif
 

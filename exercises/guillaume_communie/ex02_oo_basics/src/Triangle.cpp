@@ -5,25 +5,25 @@
 
 Triangle::Triangle(double h, double b)
     : Shape("triangle", 3),
-      height(h),
-      base(b) {
+      m_height(h),
+      m_base(b) {
     /* nothing to do */
 }
 
-double Triangle::getPerimeter(void) {
-    return base + 2 * sqrt(height * height + (base * base / 4));
+double Triangle::getPerimeter() const {
+    return m_base + 2 * sqrt(m_height * m_height + (m_base * m_base / 4));
 }
 
-double Triangle::getArea(void) {
-    return height * base / 2;
+double Triangle::getArea() const {
+    return m_height * m_base / 2;
 }
 
-std::string Triangle::print(void) {
+std::string Triangle::print() const {
     std::ostringstream ss;
     ss << "[Triangle] base: "
-       << base
+       << m_base
        << " - height: "
-       << height;
-    return ss.str();;
+       << m_height;
+    return ss.str();
 }
 

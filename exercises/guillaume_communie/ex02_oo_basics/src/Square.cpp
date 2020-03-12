@@ -4,22 +4,22 @@
 
 Square::Square(double s)
     : Shape("square", 4),
-      size(s) {
+      m_size(s) {
     /* nothing to do */
 }
 
-double Square::getPerimeter(void) {
-    return 4 * size;
+double Square::getPerimeter() const {
+    return 4 * m_size;
 }
 
-double Square::getArea(void) {
-    return size * size;
+double Square::getArea() const {
+    return m_size * m_size;
 }
 
-std::string Square::print(void) {
+std::string Square::print() const {
     std::ostringstream ss;
     ss << "[Square] side length: "
-       << size;
+       << m_size;
     return ss.str();
 }
 

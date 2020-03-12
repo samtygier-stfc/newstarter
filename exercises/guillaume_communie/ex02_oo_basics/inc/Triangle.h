@@ -1,5 +1,4 @@
-#ifndef TRIANGLE_H
-#define TRIANGLE_H
+#pragma once
 
 #include "Shape.h"
 
@@ -19,31 +18,29 @@ public:
      * Get the perimeter
      * @return The triangle perimeter
      */
-    double getPerimeter(void);
+    double getPerimeter() const override;
 
     /**
      * Get the area
      * @return The triangle area
      */
-    double getArea(void);
+    double getArea() const override;
 
     /**
      * Print the triangle
      * @return A string that contains the triangle data
      */
-    std::string print(void);
+    std::string print() const override;
 
 private:
     /**
      * Store the triangle height
      */
-    double height;
+    double m_height;
 
     /**
      * Store the triangle base length
      */
-    double base;
+    double m_base;
 };
-
-#endif
 

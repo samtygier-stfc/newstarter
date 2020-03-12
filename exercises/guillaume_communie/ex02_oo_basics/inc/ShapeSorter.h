@@ -1,5 +1,4 @@
-#ifndef SHAPE_SORTER_H
-#define SHAPE_SORTER_H
+#pragma once
 
 #include "Shape.h"
 
@@ -16,29 +15,33 @@ public:
      * @param[in] v The vector of shapes
      * @param[in] t The type to match
      */
-    static void printMatchType(std::vector<Shape*> v, std::string t);
+    static void printMatchType(const std::vector<Shape*> &v,
+                               const std::string &t);
 
     /**
      * Print shape that match a certain number of sides
      * @param[in] v The vector of shapes
      * @param[in] n The number of sides to match
      */
-    static void printMatchSides(std::vector<Shape*> v, int n);
+    static void printMatchSides(const std::vector<Shape*> &v, int n);
 
     /**
-     * Print the shapes sorted by descending perimeter value. The methods first
-     * modifies the vector by sorting its elements
-     * @param[in,out] v The vector of shapes
+     * Print the shapes sorted by descending perimeter value
+     * @param[in] v The vector of shapes
      */
     static void printSortedByPerimeter(std::vector<Shape*> v);
 
     /**
-     * Print the shapes sorted by descending area value. The methods first
-     * modifies the vector by sorting its elements
-     * @param[in,out] v The vector of shapes
+     * Print the shapes sorted by descending area value
+     * @param[in] v The vector of shapes
      */
     static void printSortedByArea(std::vector<Shape*> v);
-};
 
-#endif
+private:
+    /**
+     * Print a verctor on std::cout
+     * @param[in] v The vector
+     */
+    static void printVector(const std::vector<Shape*> &v);
+};
 

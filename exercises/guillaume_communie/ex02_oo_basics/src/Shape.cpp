@@ -1,16 +1,20 @@
 #include "Shape.h"
 
 Shape::Shape(std::string t, int n)
-    : type(t),
-      numberOfSides(n) {
+    : m_type(t),
+      m_numberOfSides(n) {
     /* nothing to do */
 }
 
-std::string Shape::getType(void) {
-    return type;
+Shape::~Shape() {
+    /* nothing to do */
 }
 
-int Shape::getSides(void) {
-    return numberOfSides;
+std::string Shape::getType() const {
+    return m_type;
+}
+
+int Shape::getSides() const {
+    return m_numberOfSides;
 }
 
