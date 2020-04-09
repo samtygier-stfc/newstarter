@@ -1,0 +1,64 @@
+/**
+ * Skeleton main routine
+ */
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iostream>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <functional>
+
+std::string RemovePunctuation(std::string word) {
+  const char punctuation[] = {'.', ',', '?', '!', '"', '\'', ')', '('};
+  for (auto punc : punctuation) {
+    if(word.find(punc) < 100) {
+      word = word.substr(0, word.find(punc)) +  word.substr(word.find(punc)+1, word.size());
+    }
+  }
+  return word;
+}
+
+
+int main(int argn, char **argc)
+{
+  if (argn < 2) {
+    throw std::runtime_error("File name not provided.");
+  }
+  else if (argn > 2) {
+    throw std::runtime_error("More than one input file has been provided. Please provide only one file name.");
+  }
+  
+  std::fstream inputFile;
+  inputFile.open(argc[1], std::fstream::in);
+  if (!inputFile) {
+    throw std::runtime_error("Could not open file");
+  }
+
+  std::map<std::string, int> wordOccurences;
+  std::string word;
+  while(inputFile >> word) {
+    if (word.size() < 4 ) {
+      continue;
+    }
+    word = RemovePunctuation(word);
+    
+    std::transform(word.begin(), word.end(), word.begin(), [](const unsigned char c){ return std::tolower(c); });
+    wordOccurences[word] += 1;
+  }
+    
+  typedef std::function<bool(std::pair<std::string, int>, std::pair<std::string, int>)> Comparator;
+  Comparator compFunctor = [](std::pair<std::string, int> elem1, std::pair<std::string, int> elem2) {
+    return elem1.second < elem2.second;
+  };
+  
+  std::set<std::pair<std::string, int>, Comparator> orderedMap(wordOccurences.begin(), wordOccurences.end(), compFunctor);
+ 
+  for (std::pair<std::string, int> element : orderedMap)
+    std::cout << element.first << " : " << element.second << std::endl;
+ 
+
+  return 0;
+}
