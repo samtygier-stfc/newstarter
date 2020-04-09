@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <algorithm>
 
 class Shape {
 
@@ -11,11 +12,16 @@ protected:
 
 public:
   
-  std::string GetType() { return this->type;};
-  int GetSides() { return this->nSides;};
+  std::string GetType() const { return type;};
+  int GetSides() const { return nSides;};
   
-  virtual double CalculatePerimeter() {};  
-  virtual double CalculateArea() {};  
+  virtual double CalculatePerimeter() const {};  
+  virtual double CalculateArea() const {};  
+
+  friend std::ostream& operator<<(std::ostream& out, const Shape& shape) {
+    return out << shape.GetType() << "\t" << shape.GetSides() << "\t" << shape.CalculateArea() << "\t" << shape.CalculatePerimeter();
+  }
+  
 };
 
 class Triangle : public virtual Shape {
@@ -28,12 +34,13 @@ public:
     nSides = 3;
   }
   
-  double CalculatePerimeter() {
+  double CalculatePerimeter() const {
     return base + 2.0 * sqrt(pow(height, 2) + 0.25 * pow(base, 2));
   }
-  double CalculateArea() {
+  double CalculateArea() const {
     return 0.5 * base * height;
   }
+
 };
 
 class Circle : public virtual Shape {
@@ -45,10 +52,10 @@ public:
     nSides = 0;
   }
 
-  double CalculatePerimeter() {
+  double CalculatePerimeter() const {
     return 2.0 * M_PI * radius;
   }
-  double CalculateArea() {
+  double CalculateArea() const {
     return M_PI * pow(radius, 2);
   }
 };
@@ -63,10 +70,10 @@ public:
     nSides = 4;
   }
 
-  double CalculatePerimeter() {
+  double CalculatePerimeter() const {
     return 2 * side1 + 2 * side2;
   }
-  double CalculateArea() {
+  double CalculateArea() const {
     return side1 * side2;
   }
   
@@ -78,7 +85,49 @@ public:
     side2 = side1;
     type = "Square";
   }
+};
 
+class ShapeSorter {
+
+public:
+  void PrintByArea(std::vector<Shape*> vec) {
+    sort(vec.begin(), vec.end(), [](const Shape* lhs, const Shape* rhs) {
+	  return lhs->CalculateArea() > rhs->CalculateArea();
+      });
+    std::cout << "Type\tNumber of sides\tArea\tPerimeter" << std::endl;    
+    for (auto shape : vec) {
+  	std::cout << *shape << std::endl;   
+    }
+  }
+  
+  void PrintByPerimeter(std::vector<Shape*> vec) {
+    sort(vec.begin(), vec.end(), [](const Shape* lhs, const Shape* rhs) {
+	return lhs->CalculatePerimeter() > rhs->CalculatePerimeter();
+      });
+    std::cout << "Type\tNumber of sides\tArea\tPerimeter" << std::endl;
+    for (auto shape : vec) {
+  	std::cout << *shape << std::endl;   
+    }
+  }
+  
+  
+  void PrintMatchingShapes(std::vector<Shape*> vec, std::string type) {
+  std::cout << "Type\tNumber of sides\tArea\tPerimeter" << std::endl;
+    for (auto shape : vec) {
+      if (!type.compare(shape->GetType())) {
+  	std::cout << *shape << std::endl;
+      }      
+    }
+  }
+  
+  void PrintMatchingShapes(std::vector<Shape*> vec, int nSides) {
+    std::cout << "Type\tNumber of sides\tArea\tPerimeter" << std::endl;
+    for (auto shape : vec) {
+      if (nSides == shape->GetSides()) {
+	std::cout << *shape << std::endl;
+      }     
+    }
+  }
 };
 
 int main(int argn, const char **argc) {
@@ -90,4 +139,16 @@ int main(int argn, const char **argc) {
   vec.push_back(new Square(5));
   vec.push_back(new Triangle(2.223, 1.127));
   
+  ShapeSorter sorter;
+
+  std::cout << "Printing shapes with three sides:" << std::endl;
+  sorter.PrintMatchingShapes(vec, 3);
+  std::cout << "Printing shapes that match 'circle':" << std::endl;
+  sorter.PrintMatchingShapes(vec, "Circle");
+  std::cout << "Printing shapes by area:" << std::endl;
+  sorter.PrintByArea(vec);
+  std::cout << "Printing shapes by perimeter:" << std::endl;
+  sorter.PrintByPerimeter(vec);
+
+  return 0;
 }
