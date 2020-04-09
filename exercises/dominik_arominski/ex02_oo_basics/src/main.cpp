@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <vector>
 
 class Shape {
 
@@ -14,7 +15,7 @@ public:
   int GetSides() { return this->nSides;};
   
   virtual double CalculatePerimeter() {};  
-  
+  virtual double CalculateArea() {};  
 };
 
 class Triangle : public virtual Shape {
@@ -22,8 +23,16 @@ private:
   double height;
   double base;
 public:
+  Triangle(double fHeight, double fBase) : height(fHeight), base(fBase) {
+    type = "Triangle";
+    nSides = 3;
+  }
+  
   double CalculatePerimeter() {
     return base + 2.0 * sqrt(pow(height, 2) + 0.25 * pow(base, 2));
+  }
+  double CalculateArea() {
+    return 0.5 * base * height;
   }
 };
 
@@ -33,11 +42,14 @@ private:
 public:
   Circle(double fRadius=0) : radius(fRadius) {
     type = "Circle";
-    nSides =  FP_INFINITE;
+    nSides = 0;
   }
 
   double CalculatePerimeter() {
-    return radius;
+    return 2.0 * M_PI * radius;
+  }
+  double CalculateArea() {
+    return M_PI * pow(radius, 2);
   }
 };
 
@@ -52,7 +64,10 @@ public:
   }
 
   double CalculatePerimeter() {
-    return 0.5 * sqrt(pow(side1, 2) + pow(side2, 2));
+    return 2 * side1 + 2 * side2;
+  }
+  double CalculateArea() {
+    return side1 * side2;
   }
   
 };
@@ -66,6 +81,13 @@ public:
 
 };
 
-int main(int argn, const char ** argc) {
+int main(int argn, const char **argc) {
 
+  std::vector<Shape*> vec;
+  vec.push_back(new Circle(1.0));
+  vec.push_back(new Rectangle(2.1, 1.2));
+  vec.push_back(new Circle(3.0));
+  vec.push_back(new Square(5));
+  vec.push_back(new Triangle(2.223, 1.127));
+  
 }
