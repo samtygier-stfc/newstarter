@@ -15,8 +15,8 @@ public:
   std::string GetType() const { return type;};
   int GetSides() const { return nSides;};
   
-  virtual double CalculatePerimeter() const {};  
-  virtual double CalculateArea() const {};  
+  virtual double CalculatePerimeter() const { return 0;};  
+  virtual double CalculateArea() const { return 0;};  
 
   friend std::ostream& operator<<(std::ostream& out, const Shape& shape) {
     return out << shape.GetType() << "\t" << shape.GetSides() << "\t" << shape.CalculateArea() << "\t" << shape.CalculatePerimeter();
