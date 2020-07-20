@@ -7,6 +7,7 @@
 #include <filesystem>
 #include <string>
 #include <vector>
+#include <ctype.h>
 
 /*
   Currently assumes arg is a path to the file directly
@@ -14,7 +15,8 @@
 
 // TEST_PATH : /Users/Matt/STFC Placement/C++ Introduction/newstarter/exercises/matthew_cumber/ex01_basics/tst_files/Holmes.txt
 
-char const PUNCTUATION[9] = {'.',',','?','\'','\"','!','(',')',':'};
+int const PUNCTUATION_COUNT = 9;
+char const PUNCTUATION[PUNCTUATION_COUNT] = {'.',',','?','\'','\"','!','(',')',':'};
 
 /*
   Stores data for each unique word found in a txt file
@@ -30,7 +32,8 @@ public:
     count = _count;
   }
 
-  std::string getWord() { return word; }
+  std::string getWord() const { return word; }
+
   void setWord(std::string _word) 
   {
     if(_word.length() == 0)
@@ -43,7 +46,8 @@ public:
     }
   }
 
-  int getCount() { return count; }
+  int getCount() const { return count; }
+
   void setCount(int _count)
   {
     if(_count < 0) 
@@ -55,9 +59,16 @@ public:
       count = _count; 
     }
   }
+
   void incrementCount()
   {
     ++count;
+  }
+
+  // Overload "<" operator used in std::sort call to sort objects UniqueWord by count in descending order
+  bool operator<(const UniqueWord &w) const
+  {
+    return getCount() > w.getCount();
   }
 
 private:
@@ -76,6 +87,16 @@ bool InUniqueWords(std::vector<UniqueWord> &uniqueWords,std::string word)
       w.incrementCount();
       return true;
     }
+  }
+
+  return false;
+}
+
+bool IsPunctuation(const char letter)
+{
+  for(int i = 0; i < PUNCTUATION_COUNT; ++i)
+  {
+    if(letter == PUNCTUATION[i]) return true;
   }
 
   return false;
@@ -107,6 +128,37 @@ int main(int argc, char const **argv)
   // Loop file word by word, reads characters spearated by spaces
   while(file >> word)
   {
+    // Remove Punctuation
+    for(int i = 0; i < word.length(); ++i)
+    {
+      if(IsPunctuation(word[i])) word.erase(i);
+    }
+
+    std::string firstWord = "";
+
+    // Separate Hyphen words
+    for(char &letter : word)
+    { 
+
+      // If not hyphen add letter to string
+      if(letter != '-') 
+      {
+        firstWord.append(letter);
+        continue;
+      }
+
+    }
+
+    std::cout << word << std::endl;
+
+    // Convert to lower case
+    for (char &letter : word)
+    {
+      letter = tolower(letter);
+    }
+
+    std::cout << word << std::endl;
+
     // If not in vector already, create new word
     if(!InUniqueWords(uniqueWords,word))
     {
@@ -121,7 +173,15 @@ int main(int argc, char const **argv)
     std::cout << w.getWord() << " - " << w.getCount() << std::endl;
   }
 
-  // Close the file
+  // Sort Vector by count
+  std::sort(uniqueWords.begin(),uniqueWords.end());
+  std::cout << "Sorted" << std::endl;
+
+  for(auto &w : uniqueWords)
+  {
+    std::cout << w.getWord() << " - " << w.getCount() << std::endl;
+  }
+
   file.close();
 
   return 0;
