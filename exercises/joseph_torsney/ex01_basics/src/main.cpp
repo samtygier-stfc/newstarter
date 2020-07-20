@@ -1,16 +1,17 @@
 #include <iostream> 
 #include <fstream>
 #include <vector>
+#include <map>
 
 bool myIsPunct(char c) {
   return(
-    c == '.' &&
-    c == ',' &&
-    c == '?' &&
-    c == '\'' &&
-    c == '\"' &&
-    c == '!' &&
-    c == ')' &&
+    c == '.' ||
+    c == ',' ||
+    c == '?' ||
+    c == '\'' ||
+    c == '\"' ||
+    c == '!' ||
+    c == ')' ||
     c == '('
   );
 }
@@ -44,6 +45,9 @@ std::string removePunct(std::string str)
   return(str);
 }
 
+/*
+* split takes a string and splits it by spaces and hyphens into a string vector
+*/
 std::vector<std::string> split(const std::string& s)
 {
   std::vector<std::string> ret;
@@ -77,17 +81,38 @@ std::vector<std::string> split(const std::string& s)
   return(ret);
 }
 
+/*
+* countWords takes a string vector and returns a map where each key is a string
+* in words, mapping to the number of occurrences of that string in the vector.
+*/
+std::map<std::string, int> countWords(std::vector<std::string> words) {
+  std::map<std::string, int> usage;
+  std::map<std::string, int>::iterator it;
+
+  for (int i = 0; i < words.size(); i++) {
+    it = usage.find(words[i]);
+
+    // if we haven't seen this world already, add it to the count.
+    if (it == usage.end()) {
+      usage.insert(std::make_pair(words[i], 1));
+      continue;
+    }
+    it->second++;
+  }
+  return(usage);
+}
+
 int main(int argc, char** argv)
 { 
-  std::cout << "Reading file" << std::endl;
   std::string text = readFile(argv[1]);
-
-  std::cout << "Removing punctuation" << std::endl;
   text = removePunct(text);
 
-  std::cout << "Splitting string" << std::endl;
   std::vector<std::string> words = split(text);
-  for (int i = 0; i < words.size(); i++) {
-    std::cout << words[i];
+  std::map<std::string, int> usage = countWords(words);
+
+  std::cout << "Word\tUsage\n" << std::endl;
+  // print everything out using the iterator :)
+  for (std::map<std::string, int>::iterator it = usage.begin(); it != usage.end(); it++) {
+    std::cout << it-> first << "\t" << it -> second << std::endl;
   }
 }
