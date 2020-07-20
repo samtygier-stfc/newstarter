@@ -6,6 +6,7 @@
 #include <fstream>
 #include <filesystem>
 #include <string>
+#include <vector>
 
 /*
   Currently assumes arg is a path to the file directly
@@ -15,6 +16,11 @@
 
 char const PUNCTUATION[9] = {'.',',','?','\'','\"','!','(',')',':'};
 
+/*
+  Stores data for each unique word found in a txt file
+  word : Stores the string of the word
+  count : Stores the number of occurences of word in the file
+*/
 class UniqueWord
 {
 public:
@@ -49,27 +55,36 @@ public:
       count = _count; 
     }
   }
+  void incrementCount()
+  {
+    ++count;
+  }
 
 private:
   std::string word;
   int count;
 };
 
-bool CharIsPunctuation(const char c)
+// Return true if word exixts, false otherwise
+bool InUniqueWords(std::vector<UniqueWord> &uniqueWords,std::string word)
 {
-  std::cout << c << std::endl;
-  for (int i = 0; i < strlen(PUNCTUATION)-1; ++i)
+  // Loop unique words, if word exists increment it's count
+  for(auto &w : uniqueWords)
   {
-    std::cout << PUNCTUATION[i] << std::endl;
-    if(c == PUNCTUATION[i]) return true;
+    if(word == w.getWord())
+    {
+      w.incrementCount();
+      return true;
+    }
   }
 
-  std::cout << "Not Punct" << std::endl;
   return false;
 }
 
 int main(int argc, char const **argv)
 {
+  std::vector<UniqueWord> uniqueWords; // Stores words and counts as objects in a vector
+
 	// Check a file path has been provided as an argument on cl
 	if(argc != 2)
 	{
@@ -79,8 +94,6 @@ int main(int argc, char const **argv)
     return 1;
 	}
 
-  std::cout << argv[1] << std::endl;
-
   // Attempt to open file
   std::ifstream file(argv[1]);
   if(!file.is_open())
@@ -89,11 +102,27 @@ int main(int argc, char const **argv)
     return 1;
   }
 
-  UniqueWord word1 = UniqueWord("apple",1);
-  UniqueWord word2 = UniqueWord("pear",3);
+  std::string word;
 
-  std::cout << word1.getWord() << " - " << word1.getCount() << std::endl;
-  std::cout << word2.getWord() << " - " << word2.getCount() << std::endl;
+  // Loop file word by word, reads characters spearated by spaces
+  while(file >> word)
+  {
+    // If not in vector already, create new word
+    if(!InUniqueWords(uniqueWords,word))
+    {
+      auto newWord = UniqueWord(word,1);
+      uniqueWords.push_back(newWord);
+    }
+  }
 
+  // Print all words and counts
+  for(auto &w : uniqueWords)
+  {
+    std::cout << w.getWord() << " - " << w.getCount() << std::endl;
+  }
+
+  // Close the file
   file.close();
+
+  return 0;
 }
