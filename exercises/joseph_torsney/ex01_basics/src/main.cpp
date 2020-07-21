@@ -139,7 +139,7 @@ std::vector<std::pair<std::string, int>> sortByValue(std::map<std::string, int> 
   return(v);
 }
 
-int main(int argc, char** argv)
+int main(int argc, const char** argv)
 { 
   std::string text = readFile(argv[1]);
   text = removePunct(text);
@@ -149,9 +149,12 @@ int main(int argc, char** argv)
   // count and sort the usage
   auto usage = sortByValue(countWords(words));
 
-  std::cout << "Word\tUsage\n" << std::endl;
+  std::ofstream outdata;
+  outdata.open(argv[2]);
+
+  outdata << "Word\tUsage\n" << std::endl;
   // print everything out using the iterator :)
   for (auto it = usage.begin(); it != usage.end(); it++) {
-    std::cout << it-> first << "\t" << it -> second << std::endl;
+    outdata << it-> first << "\t" << it -> second << std::endl;
   }
 }
