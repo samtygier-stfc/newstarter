@@ -1,0 +1,7 @@
+Word          Usage
+
+apple         4
+cheese        1
+strawberry    1
+cheeses       1
+banana        1

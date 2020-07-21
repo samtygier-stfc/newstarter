@@ -1,5 +1,6 @@
 #pragma once
 
+// Gap between writing in output file
 int const FIELD_WIDTH = 15;
 
 // Punctuation to be removed from the text
@@ -7,10 +8,10 @@ int const PUNCTUATION_COUNT = 9;
 char const PUNCTUATION[PUNCTUATION_COUNT] = {'.',',','?','\'','\"','!','(',')',':'};
 
 /*
-  Stores data for each unique word found in a txt file
-  word : Stores the string of the word
-  count : Stores the number of occurences of word in the file
-*/
+ * Stores data for each unique word found in a txt file
+ * word : Stores the string of the word
+ * count : Stores the number of occurences of word in the file
+ */
 class UniqueWord
 {
 public:
@@ -32,7 +33,7 @@ public:
   /// Increments the value of count by 1
   void incrementCount();
 
-  // Overload "<" operator used in std::sort call to sort objects UniqueWord by count in descending order
+  /// Overload "<" operator used in std::sort call to sort objects UniqueWord by count in descending order
   bool operator<(const UniqueWord &w) const;
 
 private:

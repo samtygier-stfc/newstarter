@@ -10,7 +10,8 @@
 #include <ctype.h>
 #include "UniqueWord.h"
 
-// TEST_PATH : /Users/Matt/STFC Placement/C++ Introduction/newstarter/exercises/matthew_cumber/ex01_basics/tst_files/Holmes.txt
+// Default path for output file reading files from
+std::string const PATH = "/Users/Matt/STFC Placement/C++ Introduction/newstarter/exercises/matthew_cumber/ex01_basics/";
 
 /** Tests if a word has already been found the increments it's count
  * @param uniqueWords The vector of existing unique words found
@@ -52,7 +53,8 @@ bool isPunctuation(const char letter)
  */
 void writeUniqueWordsToFile(std::vector<UniqueWord> const uniqueWords)
 {
-  std::ofstream file("output.txt");
+  // Try to opne the output file
+  std::ofstream file(PATH+"/src/output.txt");
   if(!file.is_open())
   {
     std::cout << "Error opening file \"output.txt\", exiting ..." << std::endl;
@@ -67,8 +69,9 @@ void writeUniqueWordsToFile(std::vector<UniqueWord> const uniqueWords)
   // To write words in descending order need to loop vector in reverse
   for(auto w = uniqueWords.rbegin(); w != uniqueWords.rend(); ++w)
   {
+    // Format the output to align count values
     fieldWidth = FIELD_WIDTH-w->getWord().length();
-    if(fieldWidth < 0) file << w->getWord() << "          " << w->getCount() << std::endl;
+    if(fieldWidth <= 0) file << w->getWord() << " " << w->getCount() << std::endl;
     else file << w->getWord() << std::setw(fieldWidth) << w->getCount() << std::endl;
   }
 
@@ -84,7 +87,7 @@ int main(int argc, char const **argv)
   std::vector<UniqueWord> uniqueWords; // Stores words and counts as objects in a vector
 
 	// Check a file path has been provided as an argument on cl
-	if(argc != 2)
+	if(argc < 2)
 	{
 		std::cout << "Please provide a path to the file to be read as a command line argument." << std::endl;
     std::cout << "Example usage:" << std::endl;
@@ -92,23 +95,29 @@ int main(int argc, char const **argv)
     return 1;
 	}
 
-  // Attempt to open file
-  std::ifstream file(argv[1]);
+  // Try to open file from current directory, then try as if path passed as argument
+  std::ifstream file(PATH+"/tst_files/"+argv[1]);
   if(!file.is_open())
   {
-    std::cout << "Error opening file \"" + std::string(argv[1]) + "\", exiting ..." << std::endl;
-    return 1;
+    file.open(argv[1]);
+    if(!file.is_open())
+    {
+      std::cout << "Error opening file \"" + std::string(argv[1]) + "\", exiting ..." << std::endl;
+      return 1;
+    }
   }
+  
+  std::cout << "Reading file " + std::string(argv[1]) << std::endl;
 
   std::string word;
 
   // Loop file word by word, reads characters spearated by spaces
   while(file >> word)
   {
-    // Skip words less than four characters
-    if(word.length() < 4) continue;
+    // Skip words less than five characters
+    if(word.length() < 5) continue;
 
-    // Remove Punctuation, Convert all letters to lower case
+    // Remove Punctuation, Convert all letters to lower case, and Remove hyphens
     for(int i = 0; i < word.length(); ++i)
     {
       // Erase letter if punctuation
@@ -120,17 +129,47 @@ int main(int argc, char const **argv)
 
       if(i >= word.length()) break; // Check not at end of word
 
+      // Separate hyphenated words
+      if(word[i] == '-')
+      {
+        // Get first word before hyphen
+        std::string subWord = word.substr(0,i);
+        word.erase(0,i+1); // removing first word and first found hyphen
+
+        i = 0; // Reset to beginning of string
+
+        // Remove any extra hyphens following original
+        while(word[i] == '-')
+        {
+          word.erase(i,1);
+        }
+
+        // Add the sub word if its length is greater than 4
+        if(subWord.length() > 4)
+        {
+          if(!inUniqueWords(uniqueWords,subWord))
+          {
+            auto newWord = UniqueWord(subWord,1);
+            uniqueWords.push_back(newWord);
+          }
+        }
+      }
+
+      if(i >= word.length()) break; // Check not at end of word
+
       // Convert next letter to lower case
       word[i] = tolower(word[i]);
     }
 
-    // Separate Hyphen words
-
-    // If not in vector of found words already, create new word
-    if(!inUniqueWords(uniqueWords,word))
+    // Final word may be less than 4 from hyphenated block so must do additionally check
+    if(word.length() > 4)
     {
-      auto newWord = UniqueWord(word,1);
-      uniqueWords.push_back(newWord);
+      // If not in vector of found words already, create new word
+      if(!inUniqueWords(uniqueWords,word))
+      {
+        auto newWord = UniqueWord(word,1);
+        uniqueWords.push_back(newWord);
+      }
     }
   }
 
@@ -139,13 +178,21 @@ int main(int argc, char const **argv)
   // Sort Vector by count (In ascending order after this line)
   std::sort(uniqueWords.begin(),uniqueWords.end());
 
-  // Print to terminal
-  for(auto &w : uniqueWords)
+  // Print to terminal if added as argument
+  if(argc > 2)
   {
-    std::cout << w.getWord() << " - " << w.getCount() << std::endl;
+    if(std::string(argv[2]) == "print")
+    {
+      // Print to terminal
+      for(auto w = uniqueWords.rbegin(); w != uniqueWords.rend(); ++w)
+      {
+        // Format the output to align count values
+        std::cout << w->getWord() << " - " << w->getCount() << std::endl;
+      }
+    }
   }
 
-  writeUniqueWordsToFile(uniqueWords);
+  writeUniqueWordsToFile(uniqueWords); // Found in "output.txt"
 
   return 0;
 }
