@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <map>
+#include <bits/stdc++.h> 
 
 bool myIsPunct(char c) {
   return(
@@ -102,17 +103,41 @@ std::map<std::string, int> countWords(std::vector<std::string> words) {
   return(usage);
 }
 
+/*
+* sortByValue sorts a map by its second value in descending order. Returns the
+* sorted map as a pair vector.
+*/
+std::vector<std::pair<std::string, int>> sortByValue(std::map<std::string, int> map) {
+
+  // declare and create a vector of pairs
+  std::vector<std::pair<std::string, int>> v;
+  for (auto& it : map) {
+    v.push_back(it);
+  }
+
+  // then, the vector by the second value descending.
+  std::sort(v.begin(), v.end(), 
+    [](std::pair<std::string, int>& a, std::pair<std::string, int>& b) {
+      return(a.second > b.second);
+    }
+  );
+
+  return(v);
+}
+
 int main(int argc, char** argv)
 { 
   std::string text = readFile(argv[1]);
   text = removePunct(text);
 
   std::vector<std::string> words = split(text);
-  std::map<std::string, int> usage = countWords(words);
+
+  // count and sort the usage
+  std::vector<std::pair<std::string, int>> usage = sortByValue(countWords(words));
 
   std::cout << "Word\tUsage\n" << std::endl;
   // print everything out using the iterator :)
-  for (std::map<std::string, int>::iterator it = usage.begin(); it != usage.end(); it++) {
+  for (std::vector<std::pair<std::string, int>>::iterator it = usage.begin(); it != usage.end(); it++) {
     std::cout << it-> first << "\t" << it -> second << std::endl;
   }
 }
