@@ -1,3 +1,0 @@
-C:/Users/Tolu/Documents/Work/newstarter/exercises/Toluwalase_Agoro/ex01_basics/out/build/x64-Debug (default)/CMakeFiles/WordCounter.dir
-C:/Users/Tolu/Documents/Work/newstarter/exercises/Toluwalase_Agoro/ex01_basics/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
-C:/Users/Tolu/Documents/Work/newstarter/exercises/Toluwalase_Agoro/ex01_basics/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
