@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <map>
-#include <bits/stdc++.h> 
+#include <algorithm>
 
 /** Checks whether a character is punctuation
  * 
@@ -35,6 +35,7 @@ std::string readFile(const std::string filepath)
     (std::istreambuf_iterator<char>(ifs)),
     (std::istreambuf_iterator<char>())
   );
+  
   return(text);
 }
 
