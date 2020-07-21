@@ -127,12 +127,12 @@ void printOrderedMap(std::map<std::string, int> wordCountMap) {
     std::cout << "Unable to open the file.";
     exit(1);
   }
-  int size = freq_vect.size();
+  size_t size = freq_vect.size();
 
   outFile << "Word           Usage" << endl << endl;
   for(int i = 0; i < size; i++) {
     std::string outString = freq_vect[i].first;
-    int noToPad = 15 - outString.length();
+    size_t noToPad = 15 - outString.length();
     outFile << outString;
     for(int i = 0; i < noToPad; i++) {
       outFile << " ";
