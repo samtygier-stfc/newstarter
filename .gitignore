@@ -23,4 +23,6 @@ builds/*
 *.out
 *.app
 
+# vs code and data directory
 settings.json
+data/*
