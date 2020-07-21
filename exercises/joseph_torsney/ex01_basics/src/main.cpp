@@ -4,6 +4,12 @@
 #include <map>
 #include <bits/stdc++.h> 
 
+/** Checks whether a character is punctuation
+ * 
+ * @param c 
+ * @return true if c is punctuation
+ * @return false otherwise
+ */
 bool myIsPunct(char c) {
   return(
     c == '.' ||
@@ -17,12 +23,14 @@ bool myIsPunct(char c) {
   );
 }
 
-/*
-* readFile takes a filename of a txt file and returns its contents as a string.
-*/
-std::string readFile(const std::string filename)
+/** Reads the contents of a .txt file at filepath
+ * 
+ * @param filepath the path to the file
+ * @return std::string of the file contents
+ */
+std::string readFile(const std::string filepath)
 {
-  std::ifstream ifs(filename);
+  std::ifstream ifs(filepath);
   std::string text(
     (std::istreambuf_iterator<char>(ifs)),
     (std::istreambuf_iterator<char>())
@@ -30,9 +38,11 @@ std::string readFile(const std::string filename)
   return(text);
 }
 
-/*
-* removePunct takes a string and returns that string with no punctuation.
-*/
+/** Removes punctuation from a string
+ * 
+ * @param str the string to process
+ * @return std::string with no punctuation
+ */
 std::string removePunct(std::string str)
 {
   for (int i = 0, len = str.size(); i < len; i++) {
@@ -46,9 +56,11 @@ std::string removePunct(std::string str)
   return(str);
 }
 
-/*
-* split takes a string and splits it by spaces and hyphens into a string vector
-*/
+/** Splits a string by spaces and hyphens into a string vector.
+ * 
+ * @param s the string to split
+ * @return std::vector<std::string> of 'words' contained in s.
+ */
 std::vector<std::string> split(const std::string& s)
 {
   std::vector<std::string> ret;
@@ -82,10 +94,11 @@ std::vector<std::string> split(const std::string& s)
   return(ret);
 }
 
-/*
-* countWords takes a string vector and returns a map where each key is a string
-* in words, mapping to the number of occurrences of that string in the vector.
-*/
+/** Counts the number of times a word appears (usage) in a given string vector.
+ * 
+ * @param words the string vector to count
+ * @return std::map<std::string, int> maps each word to the number of usages.
+ */
 std::map<std::string, int> countWords(std::vector<std::string> words) {
   std::map<std::string, int> usage;
   std::map<std::string, int>::iterator it;
@@ -103,10 +116,11 @@ std::map<std::string, int> countWords(std::vector<std::string> words) {
   return(usage);
 }
 
-/*
-* sortByValue sorts a map by its second value in descending order. Returns the
-* sorted map as a pair vector.
-*/
+/** Sorts a map by its second value descending into a pair vector.
+ * 
+ * @param map the map to sort
+ * @return std::vector<std::pair<std::string, int>> sorted key, value pairs from map.
+ */
 std::vector<std::pair<std::string, int>> sortByValue(std::map<std::string, int> map) {
 
   // declare and create a vector of pairs
@@ -133,11 +147,11 @@ int main(int argc, char** argv)
   std::vector<std::string> words = split(text);
 
   // count and sort the usage
-  std::vector<std::pair<std::string, int>> usage = sortByValue(countWords(words));
+  auto usage = sortByValue(countWords(words));
 
   std::cout << "Word\tUsage\n" << std::endl;
   // print everything out using the iterator :)
-  for (std::vector<std::pair<std::string, int>>::iterator it = usage.begin(); it != usage.end(); it++) {
+  for (auto it = usage.begin(); it != usage.end(); it++) {
     std::cout << it-> first << "\t" << it -> second << std::endl;
   }
 }
