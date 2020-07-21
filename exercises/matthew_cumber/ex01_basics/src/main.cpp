@@ -70,7 +70,7 @@ void writeUniqueWordsToFile(std::vector<UniqueWord> const uniqueWords)
   for(auto w = uniqueWords.rbegin(); w != uniqueWords.rend(); ++w)
   {
     // Format the output to align count values
-    fieldWidth = (int) FIELD_WIDTH-w->getWord().length();
+    fieldWidth = FIELD_WIDTH-(int)w->getWord().length();
     if(fieldWidth <= 0) file << w->getWord() << " " << w->getCount() << std::endl;
     else file << w->getWord() << std::setw(fieldWidth) << w->getCount() << std::endl;
   }
