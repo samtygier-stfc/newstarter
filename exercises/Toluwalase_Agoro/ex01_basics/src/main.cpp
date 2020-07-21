@@ -11,7 +11,7 @@ void toLower(string &stringName) {
 	/* Function accepts a string and modifies string
 	by making it lowercase and returns nothing
 	*/
-	string PlaceHolderString{ "" };
+	string PlaceHolderString{  };
 	for (char Letter : stringName) 
 		PlaceHolderString += tolower(Letter);
 	
@@ -25,7 +25,7 @@ void removePunctuation(string &stringName) {
 	removing any occurence of ".,?'"!():" within word 
 	and returns nothing
 	*/
-	for (size_t i = 0; i < stringName.size();) {
+	for (int i = 0; i < stringName.size();) {
 		char a{ stringName[i] };
 		if (stringName[i] == '"'|| stringName[i] == '!' || stringName[i] == '(' 
 			|| stringName[i] == ')' || stringName[i] == ':' || stringName[i] == '\'' 
@@ -62,7 +62,7 @@ int findString(const string &SearchString, const vector <string> &SearchList) {
 	vector returns index at which it is found or -1 if it does not exist 
 	in vector
 	*/
-	for (size_t Index = 0; Index < SearchList.size(); Index++) {
+	for (int Index = 0; Index < SearchList.size(); Index++) {
 		if (SearchList[Index] == SearchString) {
 			return Index;
 		}
@@ -76,7 +76,7 @@ int findInt(const int &SearchInteger,const vector <int> &SearchList) {
 	vector returns index at which it is found or -1 if it does not exist
 	in vector
 	*/
-	for (size_t Index = 0; Index < SearchList.size(); Index++) {
+	for (int Index = 0; Index < SearchList.size(); Index++) {
 		if (SearchList[Index] == SearchInteger) {
 			return Index;
 		}
@@ -132,14 +132,14 @@ int main() {
 	}
 	FileToRead.close();
 
-	for (size_t i = 0; i < VectorOfWords.size(); i++) {
+	for (int i = 0; i < VectorOfWords.size(); i++) {
 		/*This for block produces a vector called VectorOfOrderToRead which contains 
 		in order integers that correspond to the indexes in which VectorOfWords and
 		VectorOfCounts should be read in order to obtain list in descending order of count
 		*/
 		int MaxCount { 0 };
 		int Index{ 0};
-		for (size_t j = 0; j < VectorOfCounts.size(); j++) {
+		for (int j = 0; j < VectorOfCounts.size(); j++) {
 
 			if ( VectorOfCounts[j] > MaxCount && findInt(j,VectorOfOrderToRead)== -1) {
 				Index = j;
@@ -150,7 +150,7 @@ int main() {
 	}
 
 	cout << "First 8 words and count of each word" << endl ;
-	for (size_t i = 0; i < 8; i++) {
+	for (int i = 0; i < 8; i++) {
 		cout << left << setw(15) << VectorOfWords[VectorOfOrderToRead[i]];
 		cout<< setw(15) << VectorOfCounts[VectorOfOrderToRead[i]] <<endl;
 	}
