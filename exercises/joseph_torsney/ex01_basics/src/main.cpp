@@ -46,12 +46,12 @@ std::string readFile(const std::string filepath)
  */
 std::string removePunct(std::string str)
 {
-  for (int i = 0, len = str.size(); i < len; i++) {
+  for (int i = 0, len = (int) str.size(); i < len; i++) {
     if (myIsPunct(str[i])) {
       // if this char is punctuation, reduce i by 1, remove it, and
       // reevaluate the string size.
       str.erase(i--, 1);
-      len = str.size();
+      len = (int) str.size();
     }
   }
   return(str);
