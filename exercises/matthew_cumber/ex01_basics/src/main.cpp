@@ -11,10 +11,7 @@
 #include <unistd.h>
 #include "UniqueWord.h"
 
-auto HOME = ""; // Will store users home directory path
-
-// Path to code
-constexpr auto PATH = "/STFC Placement/C++ Introduction/newstarter/exercises/matthew_cumber/ex01_basics/";
+std::string PATH = ""; // Will store the path of the file to be read
 
 /** Tests if a word has already been found the increments it's count
  * @param uniqueWords The vector of existing unique words found
@@ -43,8 +40,7 @@ bool inUniqueWords(std::vector<UniqueWord> &uniqueWords, const std::string &word
 void writeUniqueWordsToFile(const std::vector<UniqueWord> &uniqueWords)
 {
   // Try to open the output file
-  std::string filePath = std::string(HOME) + std::string(PATH)+"/src/output.txt";
-  std::ofstream file(filePath);
+  std::ofstream file("output.txt");
   if(!file.is_open())
   {
     std::cout << "Error opening file \"output.txt\", exiting ..." << std::endl;
@@ -74,45 +70,27 @@ void writeUniqueWordsToFile(const std::vector<UniqueWord> &uniqueWords)
 
 int main(int argc, char const **argv)
 {
-  // Try getenv (works on Unix)
-  HOME = getenv("HOME");
-  if(HOME == nullptr)
-  {
-    // Windows alternative
-    struct passwd *pwd = getpwuid(getuid());
-    if(pwd != nullptr) HOME = pwd->pw_dir;
-  }
-
-  if(HOME == nullptr)
-  {
-    std::cout << "Error retrieving HOME directory, exiting ..." << std::endl;
-  }
-
   std::vector<UniqueWord> uniqueWords; // Stores words and counts as objects in a vector
 
   // Check a file path has been provided as an argument on cl
   if(argc < 2)
   {
-    std::cout << "Please provide a path to the file to be read as a command line argument." << std::endl;
-    std::cout << "Example usage:" << std::endl;
-    std::cout << "  ./WordCounter \"example.txt\"" << std::endl;
-    return 1;
+    std::cout << "Please provide a path to the file to be read, or q to exit:" << std::endl;
+    std::cin >> PATH;
+    if(PATH == "q") return 0;
   }
 
-  // Try to open file from current directory, then try as if path passed as argument
-  std::string filePath = std::string(HOME) + std::string(PATH)+"/tst_files/"+argv[1];
-  std::ifstream file(filePath);
+  else PATH = argv[1];
+
+  // Try to open file from given path
+  std::ifstream file(PATH);
   if(!file.is_open())
   {
-    file.open(argv[1]);
-    if(!file.is_open())
-    {
-      std::cout << "Error opening file \"" + std::string(argv[1]) + "\", exiting ..." << std::endl;
-      return 1;
-    }
+    std::cout << "Error opening file \"" + PATH + "\", exiting ..." << std::endl;
+    return 1;
   }
   
-  std::cout << "Reading file " + std::string(argv[1]) << std::endl;
+  std::cout << "Reading file \"" + PATH + "\"" << std::endl;
 
   std::string word;
 
