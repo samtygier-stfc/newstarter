@@ -22,3 +22,9 @@ builds/*
 *.exe
 *.out
 *.app
+
+# Testing text files etc
+*.txt
+
+# Setup and debug JSON files
+.vscode/*

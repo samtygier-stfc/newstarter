@@ -10,7 +10,6 @@
 #include <string.h>
 #include <vector>
 #include <map>
-using namespace std;
 
 /**
  * Function to return a string filepath from user input
@@ -28,14 +27,14 @@ std::string getInputFn() {
  * len <4, and converted to lower case
  */
 
-std::vector<std::string> splitByDelim(const std::string& s, char delim) {
+std::vector<std::string> splitByDelim(const std::string& s, const char delim) {
   
   std::vector<std::string> tokens;
   std::string token;
   std::istringstream tokenStream(s);
   
   while (std::getline(tokenStream, token, delim)) {
-    if(token.size() < 4) {
+    if(token.size() <= 4) {
       continue;
     }
 
@@ -43,20 +42,57 @@ std::vector<std::string> splitByDelim(const std::string& s, char delim) {
     [](unsigned char c){ return std::tolower(c);});
     
     tokens.push_back(token);
-    //cout << token << endl;
   }
 
   return tokens;
 }
 
+/** Returns different integer values to classify an input char as
+ *  either non-punctuation, puntuation to be removed or to be
+ *  replaced with whitespace.
+ *  Specified punctuation to be removed: .,?'"!()
+ *  Specified punctuation to be replaced with whitespace: -
+ * 
+ *  @param c - Reference to the character in question
+ *  @return int 0 if non-punct, 1 if punct to remove, 2 if punct to
+ *  replace
+ */
+
+int specPunct(char c) {
+
+  const char charRemove [8] = {'.', ',', '?', '\'', '\"', '!', '(', ')'};
+  const char charReplace [1] = {'-'};
+
+  auto findResult = std::find(std::begin(charRemove), std::end(charRemove), c);
+  if(findResult != std::end(charRemove)) {
+    return 1;
+  }
+  else {
+    findResult = std::find(std::begin(charReplace), std::end(charReplace), c);
+     if(findResult != std::end(charReplace)) {
+      return 2;
+      }
+      else {
+        return 0;
+      }
+  }
+}
+
 /**
- * Function to replace puncuation with whitespace in a string
+ * Function to remove most punctuation, and replace hyphens with
+ * whitespace
  */
 
 void depunctuate(std::string& line) {
 
   std::replace_if(line.begin() , line.end(), 
-  [] (const char& c) { return std::ispunct(c) ;},' ');
+  [] (const char& c) { return specPunct(c)==2;},' ');
+
+  line.erase(
+    std::remove_if(line.begin() , line.end(), 
+    [] (const char& c) { return specPunct(c)==1;}),
+  line.end());
+  
 }
 
 /**
@@ -68,7 +104,7 @@ std::vector<std::string> inputToVector() {
 
   std::ifstream inFile;
   std::string fin = getInputFn();
-  inFile.open(fin, ios::in);
+  inFile.open(fin, std::ios::in);
   if (!inFile) {
     std::cout << "Unable to open the file.";
     exit(1);
@@ -90,15 +126,15 @@ std::vector<std::string> inputToVector() {
  * occurrences for an input vector of single word strings
  */ 
 
-void fillMap(std::map<std::string, int>& wordCountMap, std::vector<std::string>& words) {
+void fillMap(std::map<std::string, int>& wordCountMap, const std::vector<std::string>& words) {
 
-  typedef vector<std::string>::size_type vec_sz;
-  vec_sz words_size = words.size();
+  typedef std::vector<std::string>::size_type VecSz;
+  VecSz words_size = words.size();
   if(words_size == 0){
-    throw domain_error("Empty words vector");
+    throw std::domain_error("Empty words vector");
   }
 
-  for(vec_sz i = 0; i < words_size; i++) {
+  for(VecSz i = 0; i < words_size; i++) {
     std::string currentWord = words[i];
     wordCountMap[currentWord] ++;
   }
@@ -107,7 +143,7 @@ void fillMap(std::map<std::string, int>& wordCountMap, std::vector<std::string>&
 /**
  * Function to compare vector pairs by second value
  */ 
-bool compareSecond(const pair<std::string, int> &a, const pair<std::string, int> &b) {
+bool compareSecond(const std::pair<std::string, int> &a, const std::pair<std::string, int> &b) {
   return a.second > b.second;
 }
 
@@ -122,14 +158,14 @@ void printOrderedMap(std::map<std::string, int> wordCountMap) {
   sort(freq_vect.begin(), freq_vect.end(), compareSecond);
 
   std::ofstream outFile;
-  outFile.open("Results.txt", ios::out);
+  outFile.open("Results.txt", std::ios::out);
   if (!outFile) {
     std::cout << "Unable to open the file.";
     exit(1);
   }
   size_t size = freq_vect.size();
 
-  outFile << "Word           Usage" << endl << endl;
+  outFile << "Word           Usage" << std::endl << std::endl;
   for(int i = 0; i < size; i++) {
     std::string outString = freq_vect[i].first;
     size_t noToPad = 15 - outString.length();
@@ -137,7 +173,7 @@ void printOrderedMap(std::map<std::string, int> wordCountMap) {
     for(int i = 0; i < noToPad; i++) {
       outFile << " ";
     }
-    outFile << freq_vect[i].second << endl;
+    outFile << freq_vect[i].second << std::endl;
   }
   outFile.close();
 }
