@@ -55,9 +55,9 @@ void UniqueWord::incrementCount()
   return;
 }
 
-/** Overide definition of < operator to compare object member count value
+/** Override definition of < operator to compare object member count value
  * @param w The second UniqueWord object which is being compared to the implied this object
- * @return A boolean true if this->count is less than w.count, false otherwsie
+ * @return A boolean true if this->count is less than w.count, false otherwise
  */
 bool UniqueWord::operator<(const UniqueWord &w) const
 {

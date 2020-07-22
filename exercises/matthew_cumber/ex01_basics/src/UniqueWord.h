@@ -1,16 +1,15 @@
 #pragma once
 
 // Gap between writing in output file
-int const FIELD_WIDTH = 15;
+const int FIELD_WIDTH = 15;
 
 // Punctuation to be removed from the text
-int const PUNCTUATION_COUNT = 9;
-char const PUNCTUATION[PUNCTUATION_COUNT] = {'.',',','?','\'','\"','!','(',')',':'};
+const char PUNCTUATION[9] = {'.',',','?','\'','\"','!','(',')',':'};
 
 /*
  * Stores data for each unique word found in a txt file
  * word : Stores the string of the word
- * count : Stores the number of occurences of word in the file
+ * count : Stores the number of occurrences of word in the file
  */
 class UniqueWord
 {
@@ -38,5 +37,5 @@ public:
 
 private:
   std::string word;
-  int count; // The number of occurences of word in a text file
+  int count; // The number of occurrences of word in a text file
 };
