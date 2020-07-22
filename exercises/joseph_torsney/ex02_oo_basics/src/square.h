@@ -6,7 +6,7 @@
 class Square: public Rect {
 
   public:
-    Square(int side): Rect(side, side) {}
+    Square(double side): Rect(side, side) {}
 };
 
 #endif

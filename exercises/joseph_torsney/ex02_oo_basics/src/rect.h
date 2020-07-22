@@ -4,17 +4,17 @@
 #include "shape.h"
 
 class Rect: public Shape {
-  int side1;
-  int side2;
+  double side1;
+  double side2;
 
   public:
-    Rect(int a, int b): Shape("rect") {
+    Rect(double a, double b): Shape("rect") {
       side1 = a;
       side2 = b;
     }
 
     double getPerimeter() {
-      return (double) (2*side1 + 2*side2);
+      return (2*side1 + 2*side2);
     }
 };
 
