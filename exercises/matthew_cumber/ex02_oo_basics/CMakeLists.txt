@@ -18,10 +18,20 @@ include ( CommonSetup )
 
 set ( SRC_FILES
   src/main.cpp
+  src/Square.cpp
+  src/Circle.cpp
+  src/Triangle.cpp
+  src/Rectangle.cpp
   # add any additional source files here
 )
 
 set ( HDR_FILES
+  src/Shape.h
+  src/Square.h
+  src/Circle.h
+  src/Triangle.h
+  src/Rectangle.h
+  src/ShapeSorter.h
   # add any additional header files here
 )
 
