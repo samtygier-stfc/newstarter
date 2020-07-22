@@ -8,7 +8,7 @@ class Circle: public Shape {
   double radius;
 
   public:
-    Circle(double r): Shape("circle") {
+    Circle(double r): Shape("circle", 1) {
       radius = r;
     } 
 

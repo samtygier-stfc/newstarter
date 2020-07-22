@@ -16,9 +16,9 @@ int main(int, char **)
   std::vector<Shape*> shapes = { myRect, mySquare, myCircle, myTriangle };
 
   std::cout 
-    << myRect->getArea() << std::endl
-    << mySquare->getArea() << std::endl
-    << myCircle->getArea() << std::endl
-    << myTriangle->getArea() << std::endl
+    << myRect->getSides() << std::endl
+    << mySquare->getSides() << std::endl
+    << myCircle->getSides() << std::endl
+    << myTriangle->getSides() << std::endl
     << std::endl;
 }

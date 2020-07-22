@@ -9,7 +9,7 @@ class Triangle: public Shape {
   double height;
 
   public:
-    Triangle(double b, double h): Shape("triangle") {
+    Triangle(double b, double h): Shape("triangle", 3) {
       base = b;
       height = h;
     }

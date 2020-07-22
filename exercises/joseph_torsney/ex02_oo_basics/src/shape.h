@@ -5,11 +5,16 @@
 
 class Shape {
   public:
-    Shape(std::string typeName) {
-      type = typeName;
+    Shape(std::string t, int s) {
+      sides = s;
+      type = t;
     }
 
-    std::string getSides() {
+    int getSides() {
+      return sides;
+    }
+
+    std::string getType() {
       return type;
     }
 
@@ -19,6 +24,7 @@ class Shape {
   
   protected:
     std::string type;
+    int sides;
 };
 
 #endif

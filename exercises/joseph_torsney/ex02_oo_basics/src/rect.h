@@ -8,11 +8,11 @@ class Rect: public Shape {
   double side2;
 
   public:
-    Rect(double a, double b): Shape("rect") {
+    Rect(double a, double b): Shape("rect", 4) {
       side1 = a;
       side2 = b;
     }
-    
+
     double getArea() {
       return (side1 * side2);
     }
