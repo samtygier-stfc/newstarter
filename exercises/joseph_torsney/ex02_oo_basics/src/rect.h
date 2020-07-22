@@ -4,13 +4,13 @@
 #include "shape.h"
 
 class Rect: public Shape {
-  int a;
-  int b;
+  int side1;
+  int side2;
 
   public:
-    Rect(int a, int b): Shape(2) {
-      a = a;
-      b = b;
+    Rect(int side1, int side2): Shape("rect") {
+      side1 = side1;
+      side2 = side2;
     }
 };
 
