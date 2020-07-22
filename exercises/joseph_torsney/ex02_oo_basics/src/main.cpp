@@ -17,4 +17,6 @@ int main(int, char **)
   ShapeSorter* sorter = new ShapeSorter(
     { myRect, mySquare, myCircle, myTriangle }
   );
+  sorter->printMatching("triangle");
+  sorter->printSides(4);
 }

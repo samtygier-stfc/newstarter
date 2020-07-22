@@ -2,6 +2,7 @@
 #define SHAPESORTER_H
 
 #include "shape.h"
+#include <iostream>
 #include <vector>
 
 class ShapeSorter {
@@ -15,7 +16,11 @@ class ShapeSorter {
    * @param type the type of shapes to print
    */
   void printMatching(std::string type) {
-    
+    for (auto it = shapes.begin(); it != shapes.end(); it++) {
+      if (type == (*it)->getType()) {
+        std::cout << (*it)->toString() << std::endl;
+      }
+    }
   }
 
   /** Prints the shape objects that have a given number of sides
@@ -23,7 +28,11 @@ class ShapeSorter {
    * @param sides the number of sides of shapes to print
    */
   void printSides(int sides) {
-
+    for (auto it = shapes.begin(); it != shapes.end(); it++) {
+      if (sides == (*it)->getSides()) {
+        std::cout << (*it)->toString() << std::endl;
+      }
+    }
   }
 
   /** Prints the areas of the shapes in descending order
