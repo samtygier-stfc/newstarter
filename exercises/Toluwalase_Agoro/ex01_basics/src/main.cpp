@@ -9,8 +9,9 @@
 
 std::string getWord(std::ifstream& stream) {
   /* Function accept an input stream object and return a string from
-  input stream by reading stream 1 character at a time and concatenating
-  it to a string until a space ,newline or '-'  character.
+  input stream by reading stream 1 character at a time  and formats it  
+  by making it lowercase and removing punctuation marks then 
+  concatenates it to a string until a space ,newline or '-'  character.
   */
   std::string outputString{};
   char inputCharacter{};
@@ -104,8 +105,8 @@ int main() {
     std::cout << std::setw(15) << vectorOfCounts[vectorOfOrderToRead[i]] << std::endl;
   }
   /*This block asks user to give a filepath to output file
-  and outputs the word and counts in descending order of c
-  counts*/
+  and outputs the word and counts in descending order of 
+  counts into file*/
 
   std::cout << "Please input a file path to output file :";
   char filePathToOutput[100];

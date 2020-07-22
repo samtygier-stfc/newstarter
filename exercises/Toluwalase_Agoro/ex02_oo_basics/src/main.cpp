@@ -6,7 +6,14 @@ class Rectangle {
 
 };
 
-class 
+class Triangle {
+
+};
+
+class ShapeSorter {
+
+};
+
 int main(int, char **)
 {
 }
