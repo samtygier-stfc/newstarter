@@ -23,12 +23,25 @@ bool myIsPunct(char c) {
   );
 }
 
+/** Transforms a string to lower case.
+ * 
+ * @param str the string to transform
+ * @return std::string the string in lower case
+ */
+std::string toLowerStr(std::string str) {
+  std::transform(str.begin(), str.end(), str.begin(), 
+    [](unsigned char c){ return std::tolower(c); }
+  );
+
+  return str;
+}
+
 /** Reads the contents of a .txt file at filepath
  * 
  * @param filepath the path to the file
  * @return std::string of the file contents
  */
-std::string readFile(const std::string filepath)
+std::string readFile(const std::string& filepath)
 {
   std::ifstream ifs(filepath);
   std::string text(
@@ -54,7 +67,7 @@ std::string removePunct(std::string str)
       len = (int) str.size();
     }
   }
-  return(str);
+  return str;
 }
 
 /** Splits a string by spaces and hyphens into a string vector.
@@ -92,7 +105,7 @@ std::vector<std::string> split(const std::string& s)
     }
   }
 
-  return(ret);
+  return ret;
 }
 
 /** Counts the number of times a word appears (usage) in a given string vector.
@@ -100,7 +113,8 @@ std::vector<std::string> split(const std::string& s)
  * @param words the string vector to count
  * @return std::map<std::string, int> maps each word to the number of usages.
  */
-std::map<std::string, int> countWords(std::vector<std::string> words) {
+std::map<std::string, int> countWords(const std::vector<std::string>& words) 
+{
   std::map<std::string, int> usage;
   std::map<std::string, int>::iterator it;
 
@@ -114,7 +128,7 @@ std::map<std::string, int> countWords(std::vector<std::string> words) {
     }
     it->second++;
   }
-  return(usage);
+  return usage;
 }
 
 /** Sorts a map by its second value descending into a pair vector.
@@ -122,8 +136,8 @@ std::map<std::string, int> countWords(std::vector<std::string> words) {
  * @param map the map to sort
  * @return std::vector<std::pair<std::string, int>> sorted key, value pairs from map.
  */
-std::vector<std::pair<std::string, int>> sortByValue(std::map<std::string, int> map) {
-
+std::vector<std::pair<std::string, int>> sortByValue(std::map<std::string, int> map) 
+{
   // declare and create a vector of pairs
   std::vector<std::pair<std::string, int>> v;
   for (auto& it : map) {
@@ -137,13 +151,22 @@ std::vector<std::pair<std::string, int>> sortByValue(std::map<std::string, int> 
     }
   );
 
-  return(v);
+  return v;
 }
 
 int main(int argc, const char** argv)
 { 
+  // check correct command line arguments
+  if (argc < 3) {
+    std::cout 
+      << "Incorrect number of args\nUsage: ./WordCounter <input filepath> <output filepath>"
+      << std::endl;
+    return 0;
+  }
+
   std::string text = readFile(argv[1]);
   text = removePunct(text);
+  text = toLowerStr(text);
 
   std::vector<std::string> words = split(text);
 
