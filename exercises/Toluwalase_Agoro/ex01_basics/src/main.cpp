@@ -91,7 +91,8 @@ int main() {
     int index = vectorOfCounts[i] - 1;
     vectorForSort[index].push_back(i);
   }
-  for (int i = vectorForSort.size() - 1; i >= 0; i--) {
+  
+  for (int i = int (vectorForSort.size()) - 1; i >= 0; i--) {
     for (auto& order : vectorForSort[i]) {
       vectorOfOrderToRead.push_back(order);
     }
