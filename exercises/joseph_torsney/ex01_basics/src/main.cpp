@@ -119,14 +119,7 @@ std::map<std::string, int> countWords(const std::vector<std::string>& words)
   std::map<std::string, int>::iterator it;
 
   for (int i = 0; i < words.size(); i++) {
-    it = usage.find(words[i]);
-
-    // if we haven't seen this world already, add it to the count.
-    if (it == usage.end()) {
-      usage.insert(std::make_pair(words[i], 1));
-      continue;
-    }
-    it->second++;
+    usage[words[i]]++;
   }
   return usage;
 }
