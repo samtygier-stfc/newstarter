@@ -7,10 +7,13 @@
 #include <vector>
 #include <ctype.h>
 #include <regex>
+#include <pwd.h>
+#include <unistd.h>
 #include "UniqueWord.h"
 
-// Default path for output file reading files from
-const auto HOME = std::getenv("HOME"); // MACOS home directory, unsure on how to get windows
+auto HOME = ""; // Will store users home directory path
+
+// Path to code
 constexpr auto PATH = "/STFC Placement/C++ Introduction/newstarter/exercises/matthew_cumber/ex01_basics/";
 
 /** Tests if a word has already been found the increments it's count
@@ -71,7 +74,19 @@ void writeUniqueWordsToFile(const std::vector<UniqueWord> &uniqueWords)
 
 int main(int argc, char const **argv)
 {
-  // HOME = _dupenv_s(&HOME, 0, "HOME");
+  // Try getenv (works on Unix)
+  HOME = getenv("HOME");
+  if(HOME == nullptr)
+  {
+    // Windows alternative
+    struct passwd *pwd = getpwuid(getuid());
+    if(pwd != nullptr) HOME = pwd->pw_dir;
+  }
+
+  if(HOME == nullptr)
+  {
+    std::cout << "Error retrieving HOME directory, exiting ..." << std::endl;
+  }
 
   std::vector<UniqueWord> uniqueWords; // Stores words and counts as objects in a vector
 
