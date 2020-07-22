@@ -7,8 +7,6 @@
 #include <vector>
 #include <ctype.h>
 #include <regex>
-#include <pwd.h>
-#include <unistd.h>
 #include "UniqueWord.h"
 
 std::string PATH = ""; // Will store the path of the file to be read
