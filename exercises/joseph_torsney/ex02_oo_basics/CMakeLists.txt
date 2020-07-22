@@ -22,6 +22,8 @@ set ( SRC_FILES
 )
 
 set ( HDR_FILES
+  src/rect.h
+  src/shape.h
   # add any additional header files here
 )
 
