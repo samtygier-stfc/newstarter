@@ -12,6 +12,10 @@ class Circle: public Shape {
       radius = r;
     } 
 
+    double getArea() {
+      return M_PI*pow(radius, 2);
+    }
+
     double getPerimeter() {
       return 2*M_PI*radius;
     }

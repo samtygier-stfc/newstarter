@@ -12,6 +12,10 @@ class Rect: public Shape {
       side1 = a;
       side2 = b;
     }
+    
+    double getArea() {
+      return (side1 * side2);
+    }
 
     double getPerimeter() {
       return (2*side1 + 2*side2);

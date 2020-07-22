@@ -4,6 +4,7 @@
 #include "triangle.h"
 
 #include <iostream>
+#include <vector>
 
 int main(int, char **)
 {
@@ -12,10 +13,12 @@ int main(int, char **)
   Circle* myCircle = new Circle(10);
   Triangle* myTriangle = new Triangle(10, 20);
 
+  std::vector<Shape*> shapes = { myRect, mySquare, myCircle, myTriangle };
+
   std::cout 
-    << myRect->getPerimeter() << std::endl
-    << mySquare->getPerimeter() << std::endl
-    << myCircle->getPerimeter() << std::endl
-    << myTriangle->getPerimeter() << std::endl
+    << myRect->getArea() << std::endl
+    << mySquare->getArea() << std::endl
+    << myCircle->getArea() << std::endl
+    << myTriangle->getArea() << std::endl
     << std::endl;
 }

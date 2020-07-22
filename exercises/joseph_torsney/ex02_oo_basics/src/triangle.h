@@ -14,6 +14,10 @@ class Triangle: public Shape {
       height = h;
     }
 
+    double getArea() {
+      return 0.5 * base * height;
+    }
+
     double getPerimeter() {
       return base + 2*sqrt(pow(height, 2) + (pow(base, 2) / 4));
     }

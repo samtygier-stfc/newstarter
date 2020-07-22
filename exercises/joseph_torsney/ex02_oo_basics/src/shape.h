@@ -13,6 +13,8 @@ class Shape {
       return type;
     }
 
+    virtual double getArea() { return 0; }
+
     virtual double getPerimeter() { return 0; }
   
   protected:
