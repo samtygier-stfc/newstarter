@@ -1,7 +1,9 @@
 #pragma once
 
 /*
- Abstract class for all shapes for common members and methods
+ * Abstract class for all shapes for common members and methods
+ * type : The type of shape determined by derived class
+ * numSides : The number of sides the shape has determined by derived class
  */
 class Shape
 {
