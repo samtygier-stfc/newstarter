@@ -12,13 +12,13 @@ class Rectangle : public Shape
 {
 public:
   /// Constructor of rectangle
-  Rectangle(float _width, float _height);
+  Rectangle(double _width, double _height);
 
   /// implementation of area and perimeter for a rectangle (virtual in Shape class)
-  float area();
-  float perimeter();
+  double area();
+  double perimeter();
 
 private:
-  float width;
-  float height;
+  double width;
+  double height;
 };

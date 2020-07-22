@@ -11,12 +11,12 @@ class Square : public Shape
 {
 public:
   /// Constructor of triangle
-  Square(float _lengthSides);
+  Square(double _lengthSides);
 
   /// implementation of area and perimeter for a square (virtual in Shape class)
-  float area();
-  float perimeter();
+  double area();
+  double perimeter();
 
 private:
-  float lengthSides;
+  double lengthSides;
 };

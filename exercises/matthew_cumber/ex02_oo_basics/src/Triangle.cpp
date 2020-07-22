@@ -7,7 +7,7 @@
  * @param _height Value of the height of the triangle
  * @param _base Value of the base of the triangle 
  */
-Triangle::Triangle(float _height, float _base)
+Triangle::Triangle(double _height, double _base)
 {
   height = _height;
   base = _base;
@@ -18,7 +18,7 @@ Triangle::Triangle(float _height, float _base)
 /** Calculates the area of a triangle
  * @return Value of area
  */
-float Triangle::area()
+double Triangle::area()
 {
   return (height*base)/2.0;
 }
@@ -26,9 +26,9 @@ float Triangle::area()
 /** Calculates the perimeter of a triangle
  * @return Value of perimeter
  */
-float Triangle::perimeter()
+double Triangle::perimeter()
 {
-  float baseSquaredOverFour = pow(base,2)/4.0;
-  float root = sqrt(pow(height,2) + baseSquaredOverFour);
+  double baseSquaredOverFour = pow(base,2)/4.0;
+  double root = sqrt(pow(height,2) + baseSquaredOverFour);
   return base + 2.0*root;
 }

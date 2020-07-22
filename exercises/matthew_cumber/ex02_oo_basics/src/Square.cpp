@@ -5,7 +5,7 @@
 /** Creates an instance of a Square 
  * @param _lengthSides The value of the length of all the sides
  */
-Square::Square(float _lengthSides)
+Square::Square(double _lengthSides)
 {
   lengthSides = _lengthSides;
   type = "Square";
@@ -15,7 +15,7 @@ Square::Square(float _lengthSides)
 /** Calculates the area of a square
  * @return Value of area
  */
-float Square::area()
+double Square::area()
 {
   return lengthSides*lengthSides;
 }
@@ -23,7 +23,7 @@ float Square::area()
 /** Calculates the perimeter of a square
  * @return Value of perimeter
  */
-float Square::perimeter()
+double Square::perimeter()
 {
   return lengthSides*4;
 }

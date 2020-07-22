@@ -6,7 +6,7 @@
  * @param _width The value of the  width of the rectangle
  * @param _height The value of the height of the rectangle
  */
-Rectangle::Rectangle(float _width, float _height)
+Rectangle::Rectangle(double _width, double _height)
 {
   width = _width;
   height = _height;
@@ -17,7 +17,7 @@ Rectangle::Rectangle(float _width, float _height)
 /** Calculates the area of a rectangle
  * @return Value of area
  */
-float Rectangle::area()
+double Rectangle::area()
 {
   return width*height;
 }
@@ -25,7 +25,7 @@ float Rectangle::area()
 /** Calculates the perimeter of a rectangle
  * @return Value of perimeter
  */
-float Rectangle::perimeter()
+double Rectangle::perimeter()
 {
   return width*2 + height*2;
 }

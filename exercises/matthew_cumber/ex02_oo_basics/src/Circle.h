@@ -11,12 +11,12 @@ class Circle : public Shape
 {
 public:
   /// Constructor of circle
-  Circle(float _radius);
+  Circle(double _radius);
 
   /// implementation of area and perimeter for a circle (virtual in Shape class)
-  float area();
-  float perimeter();
+  double area();
+  double perimeter();
 
 private:
-  float radius;
+  double radius;
 };

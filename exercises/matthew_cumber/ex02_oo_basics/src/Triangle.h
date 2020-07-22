@@ -12,13 +12,13 @@ class Triangle : public Shape
 {
 public:
   /// Constructor of triangle
-  Triangle(float _height, float _base);
+  Triangle(double _height, double _base);
 
   /// implementation of area and perimeter for a triangle (virtual in Shape class)
-  float area();
-  float perimeter();
+  double area();
+  double perimeter();
 
 private:
-  float height;
-  float base;
+  double height;
+  double base;
 };
