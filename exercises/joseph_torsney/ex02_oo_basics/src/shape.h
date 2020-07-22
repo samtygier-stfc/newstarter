@@ -12,6 +12,8 @@ class Shape {
     std::string getSides() {
       return type;
     }
+
+    virtual double getPerimeter() { return 0; }
   
   protected:
     std::string type;

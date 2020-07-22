@@ -8,9 +8,13 @@ class Rect: public Shape {
   int side2;
 
   public:
-    Rect(int side1, int side2): Shape("rect") {
-      side1 = side1;
-      side2 = side2;
+    Rect(int a, int b): Shape("rect") {
+      side1 = a;
+      side2 = b;
+    }
+
+    double getPerimeter() {
+      return (double) (2*side1 + 2*side2);
     }
 };
 
