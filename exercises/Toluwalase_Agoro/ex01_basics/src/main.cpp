@@ -5,16 +5,49 @@
 #include <iomanip>
 #include <algorithm>
 
+/**implements a variation of counting  sort by modifying vector in place.
+  *
+  *@param vectorOfPairs a vector containing  pairs of integers and strings respectively
+  *@returns nothing
+  *
+*/
 
+void countingSort(std::vector<std::pair< int ,std::string > > &vectorOfPairs) {
+  int maxCount{0};
+  
+  for (auto& pair : vectorOfPairs) {
+    if (pair.first > maxCount) {
+      maxCount = pair.first;
+    }
+  }
+  std::vector <std::vector <int>> vectorForSort;
+  for (int i = 0; i < maxCount; i++) {
+    std::vector <int> emptyVector;
+    vectorForSort.push_back(emptyVector);
+  }
 
-std::string getWord(std::ifstream& stream) {
-  /* Function accept an input stream object and return a string from
-  input stream by reading stream 1 character at a time  and formats it  
-  by making it lowercase and removing punctuation marks then 
-  concatenates it to a string until a space ,newline or '-'  character.
+  for (int i = 0; i < vectorOfPairs.size(); i++) {
+    int index = vectorOfPairs[i].first - 1;
+    vectorForSort[index].push_back(i);
+  }
+  std::vector <std::pair<int, std::string>> sortedVector;
+  for (int i = int(vectorForSort.size()) - 1; i >= 0; i--) {
+    for (auto& order : vectorForSort[i]) {
+      sortedVector.push_back(vectorOfPairs[order]);
+    }
+  }
+  vectorOfPairs = sortedVector;
+}
+
+/**returns a formatted word from input file
+  *
+  *@param stream the ifstream object to read from
+  *returns a formatted string
   */
-  std::string outputString{};
-  char inputCharacter{};
+std::string getWord(std::ifstream& stream) {
+  
+  std::string outputString;
+  char inputCharacter;
 
   while (true) {
     stream.get(inputCharacter);
@@ -35,22 +68,28 @@ int main() {
   and gets input from user so a to open
   input file
   */
-  std::vector <std::string> vectorOfWords{};
-  std::vector <int> vectorOfCounts{};
-  std::vector <int> vectorOfOrderToRead{};
-  char filePathToInput[100];
+  
+
+  char filePathToInput[150];
   std::cout << "Please input a file path to input file :";
-  std::cin.getline(filePathToInput, 100);
+  std::cin.getline(filePathToInput, 150);
   std::ifstream fileToRead;
   fileToRead.open(filePathToInput);
+  std::vector <std::pair<int, std::string>> vectorOfCountsAndWords;
 
   if (!fileToRead) {
     /* This if block checks if file was opened correctly
-    and if it was not program is terminated
+    and if not program is terminated
     */
     std::cout << "File could not be opened" << std::endl;
     std::cout << "Ensure that file path is valid" << std::endl;
   }
+  std::string holderString;
+  auto myPredictor = [&holderString](std::pair<int, std::string>& pairOfCountAndWord)
+  {
+    return (pairOfCountAndWord.second == holderString);
+  };
+
   while (!fileToRead.eof()) {
     /* This while block reads input file and adds formatted words to
     VectorOfWords until the end of file has been reached. This block
@@ -58,65 +97,43 @@ int main() {
     4 letters and already exists in VectorOfWords. if it does it increments
     the count in VectorOfCounts otherwise it is added to VectorOfWords
     */
-    std::string holderString{ };
+    
     holderString = getWord(fileToRead);
-    auto location = std::find(vectorOfWords.begin(), vectorOfWords.end(), holderString);
-    if (holderString.size() > 4 && location == vectorOfWords.end()) {
-      vectorOfWords.push_back(holderString);
-      vectorOfCounts.push_back(1);
+    auto location = std::find_if(vectorOfCountsAndWords.begin(),vectorOfCountsAndWords.end(), myPredictor);
+    if (holderString.size() > 4 && location == vectorOfCountsAndWords.end()) {
+      vectorOfCountsAndWords.push_back(std::make_pair(1,holderString));
     }
     else {
-      if (holderString.size() > 4 && location != vectorOfWords.end())
+      if (holderString.size() > 4 && location != vectorOfCountsAndWords.end())
       {
-        vectorOfCounts[std::distance(vectorOfWords.begin(), location)] += 1;
+        vectorOfCountsAndWords[std::distance(vectorOfCountsAndWords.begin(), location)].first += 1;
       }
     }
   }
   fileToRead.close();
-  int maxCount{ 0 };
-  /*Next Block of code implements a variation of counting
-  sort  on vectorOfCounts to produce filled vectorOfOrderToRead*/
-  for (auto& count : vectorOfCounts) {
-    if (count > maxCount) {
-      maxCount = count;
-    }
-  }
-  std::vector <std::vector <int>> vectorForSort;
-  for (int i = 0; i < maxCount; i++) {
-    std::vector <int> emptyVector;
-    vectorForSort.push_back(emptyVector);
-  }
+  //countingSort(vectorOfCountsAndWords);
 
-  for (int i = 0; i < vectorOfCounts.size(); i++) {
-    int index = vectorOfCounts[i] - 1;
-    vectorForSort[index].push_back(i);
-  }
-  
-  for (int i = int (vectorForSort.size()) - 1; i >= 0; i--) {
-    for (auto& order : vectorForSort[i]) {
-      vectorOfOrderToRead.push_back(order);
-    }
-  }
+  std::sort(vectorOfCountsAndWords.rbegin(), vectorOfCountsAndWords.rend());
   /*Block of code displays first 8  words and count
   of words in sorted order
   */
   std::cout << "First 8 words and count of each word" << std::endl;
   for (int i = 0; i < 8; i++) {
-    std::cout << std::left << std::setw(15) << vectorOfWords[vectorOfOrderToRead[i]];
-    std::cout << std::setw(15) << vectorOfCounts[vectorOfOrderToRead[i]] << std::endl;
-  }
+    std::cout << std::left << std::setw(15) << vectorOfCountsAndWords[i].second;
+    std::cout << std::setw(15) << vectorOfCountsAndWords[i].first << std::endl;
+  } 
   /*This block asks user to give a filepath to output file
   and outputs the word and counts in descending order of 
   counts into file*/
 
   std::cout << "Please input a file path to output file :";
-  char filePathToOutput[100];
-  std::cin.getline(filePathToOutput, 100);
+  char filePathToOutput[150];
+  std::cin.getline(filePathToOutput, 150);
   std::ofstream fileToWrite;
   fileToWrite.open(filePathToOutput, std::ios::app);
   if (!fileToWrite) {
     /* This if block checks if file was opened correctly
-    and if it was not program is terminated
+    and if not program is terminated
     */
     std::cout << "File could not be opened" << std::endl;
     std::cout << "Ensure that file path is valid" << std::endl;
@@ -124,10 +141,10 @@ int main() {
   }
   fileToWrite << std::left << std::setw(15) << "Word";
   fileToWrite << std::setw(15) << "Count" << std::endl;
-  for (int i = 0; i < vectorOfWords.size(); i++) {
+  for (int i = 0; i < vectorOfCountsAndWords.size(); i++) {
 
-    fileToWrite << std::left << std::setw(15) << vectorOfWords[vectorOfOrderToRead[i]];
-    fileToWrite << std::setw(15) << vectorOfCounts[vectorOfOrderToRead[i]] << std::endl;
+    fileToWrite << std::left << std::setw(15) << vectorOfCountsAndWords[i].second;
+    fileToWrite << std::setw(15) << vectorOfCountsAndWords[i].first << std::endl;
   }
   std::cout << "Data appended to file" << std::endl;
 
