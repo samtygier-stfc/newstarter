@@ -1,9 +1,10 @@
 #include "Shapesorter.h"
 #include <iostream>
 #include <algorithm>
+#include <vector>
 
 //ShapeSorter constructor
-ShapeSorter::ShapeSorter(std::vector<Shape *> shpVect) {
+ShapeSorter::ShapeSorter(std::vector<Shape> shpVect) {
   m_shpVect = shpVect;
   m_vecLen = shpVect.size();
 }
@@ -32,10 +33,10 @@ const void ShapeSorter::printShapesType(const std::string type) {
  *  message if no shapes of that type are found
  *  @param int sides for no of sides
  */ 
-const void ShapeSorter::printShapesSides(const int sides) {
+const void ShapeSorter::printShapesSides(int sides) {
   bool flag = false;
   for(VecSz i = 0; i < getVecLen(); ++i) {
-    if(*(m_shpVect[i]).getSides() == sides) {
+    if(m_shpVect[i].getSides() == sides) {
       m_shpVect[i].shapeToString();
       flag = true;
     }

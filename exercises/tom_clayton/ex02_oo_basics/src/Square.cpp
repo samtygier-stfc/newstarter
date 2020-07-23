@@ -1,10 +1,12 @@
 #include "Square.h"
-#include "Shape.h"
 
 //Square constructor
 Square::Square(double side1) {
   m_side1 = side1;
-  Shape {side1*4, side1*side1, "Square", 4};
+  m_type = "Square";
+  m_area = side1*side1;
+  m_perimeter = side1*4;
+  m_sides = 4;
 }
 
 //Mutator methods

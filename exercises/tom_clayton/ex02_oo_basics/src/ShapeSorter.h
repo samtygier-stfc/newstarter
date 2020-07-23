@@ -1,18 +1,22 @@
-#include "Shape.cpp"
-#include "Square.cpp"
-#include "Rectangle.cpp"
-#include "Circle.cpp"
-#include "Triangle.cpp"
+#ifndef SHAPESORTER_H_
+#define SHAPESORTER_H_
+
+#include "Shape.h"
+#include "Square.h"
+#include "Rectangle.h"
+#include "Circle.h"
+#include "Triangle.h"
 #include <vector>
+#include <memory>
 
 class ShapeSorter
 {
   private: 
-    std::vector<Shape *> m_shpVect;
+    std::vector<Shape> m_shpVect;
     int m_vecLen;
     
   public:
-    ShapeSorter(std::vector<Shape *> shpVect);
+    ShapeSorter(std::vector<Shape> shpVect);
 
     const void printShapesType(std::string);
 
@@ -32,3 +36,5 @@ class ShapeSorter
 
     void setShpVect(std::vector<Shape> shpVect);
 };
+
+#endif /* SHAPESORTER_H_ */

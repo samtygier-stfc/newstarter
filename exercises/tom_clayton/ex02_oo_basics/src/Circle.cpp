@@ -1,5 +1,4 @@
 #include "Circle.h"
-#include "Shape.h"
 #include <cmath>
 
 const double PI = 2 * acos(0.0);
@@ -7,7 +6,10 @@ const double PI = 2 * acos(0.0);
 //Circle constructor
 Circle::Circle(double radius) {
   m_radius = radius;
-  Shape {(2*PI*radius), (PI*radius*radius), "Circle", 0};
+  m_perimeter = (2*PI*radius);
+  m_area = (PI*radius*radius);
+  m_type = "Circle";
+  m_sides = 0;
 }
 
 //Mutator methods

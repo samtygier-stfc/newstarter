@@ -2,12 +2,12 @@
 #include <string.h>
 
 //Shape constructor
-Shape::Shape(double perimeter=0, double area=0, std::string type="", int sides=0) {
+Shape::Shape(/*double perimeter=0, double area=0, std::string type="", int sides=0*/) {/*
   m_perimeter = perimeter;
   m_area = area;
   m_type = type;
   m_sides = sides;
-}
+*/}
 
 /** Return a string containing information for a given shape
  *  @return shape string
@@ -39,18 +39,18 @@ void Shape::setSides(int sides) {
 }
 
 //Accessor methods
-const double Shape::getPerimeter() {
+double Shape::getPerimeter() {
   return m_perimeter;
 }
 
-const double Shape::getArea() {
+double Shape::getArea() {
   return m_area;
 }
 
-const std::string Shape::getType(){
+std::string Shape::getType(){
   return m_type;
 }
 
-const int Shape::getSides() {
+int Shape::getSides() {
   return m_sides;
 }  

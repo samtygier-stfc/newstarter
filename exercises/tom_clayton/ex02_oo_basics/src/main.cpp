@@ -3,10 +3,10 @@
 
 int main(int argc, const char** argv) {
 
-  std::vector<std::unique_ptr<Shape>> shp_vect;
+  std::vector<Shape> shp_vect;
 
-  shp_vect.push_back(std::make_unique<Square>(3));
-  shp_vect.push_back(std::make_unique<Square>(25));
+  shp_vect.push_back(Square(3));
+  /*shp_vect.push_back(std::make_unique<Square>(25));
   shp_vect.push_back(std::make_unique<Square>(5.765));
   shp_vect.push_back(std::make_unique<Square>(463435));
   shp_vect.push_back(std::make_unique<Square>(2345.4523));
@@ -24,7 +24,9 @@ int main(int argc, const char** argv) {
   shp_vect.push_back(std::make_unique<Triangle>(545.54,24));
   shp_vect.push_back(std::make_unique<Triangle>(345,5345));
   shp_vect.push_back(std::make_unique<Triangle>(7.54,0.346256));
-  shp_vect.push_back(std::make_unique<Triangle>(354,54275));
+  shp_vect.push_back(std::make_unique<Triangle>(354,54275));*/
 
   ShapeSorter ss(shp_vect);
+
+  ss.printShapesType("Square");
 }

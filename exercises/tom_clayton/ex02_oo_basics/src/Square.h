@@ -1,3 +1,6 @@
+#ifndef SQUARE_H_
+#define SQUARE_H_
+
 #include "Shape.h"
 
 class Square : public Shape
@@ -14,3 +17,5 @@ class Square : public Shape
       return m_side1;
     }
 };
+
+#endif /* SQUARE_H_ */

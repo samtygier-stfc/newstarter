@@ -1,3 +1,6 @@
+#ifndef TRIANGLE_H_
+#define TRIANGLE_H_
+
 #include "Shape.h"
 
 class Triangle : public Shape
@@ -24,3 +27,5 @@ class Triangle : public Shape
       return m_height;
     }
 };
+
+#endif /* TRIANGLE_H_ */

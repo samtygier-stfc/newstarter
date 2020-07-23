@@ -1,3 +1,6 @@
+#ifndef RECTANGLE_H_
+#define RECTANGLE_H_
+
 #include "Shape.h"
 
 class Rectangle : public Shape
@@ -13,7 +16,6 @@ class Rectangle : public Shape
 
     void setSide2(double side2);
 
-
     //Accessor methods
     double getSide1() {
       return m_side1;
@@ -23,3 +25,5 @@ class Rectangle : public Shape
       return m_side2;
     }
 };
+
+#endif /* RECTANGLE_H_ */
