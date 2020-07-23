@@ -1,5 +1,4 @@
-#ifndef SHAPESORTER_H
-#define SHAPESORTER_H
+#pragma once 
 
 #include <vector>
 #include "shape.h"
@@ -38,5 +37,3 @@ class ShapeSorter {
      */
     void printAll();
 };
-
-#endif

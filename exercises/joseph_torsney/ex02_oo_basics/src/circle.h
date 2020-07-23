@@ -1,5 +1,4 @@
-#ifndef CIRCLE_H
-#define CIRCLE_H
+#pragma once
 
 #include <math.h>
 #include "shape.h"
@@ -15,5 +14,3 @@ class Circle: public Shape {
   private:
     double radius;
 };
-
-#endif

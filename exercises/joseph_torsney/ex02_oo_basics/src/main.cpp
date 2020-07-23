@@ -1,4 +1,3 @@
-#include "rect.h"
 #include "square.h"
 #include "circle.h"
 #include "triangle.h"

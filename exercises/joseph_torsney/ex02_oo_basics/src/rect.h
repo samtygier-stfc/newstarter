@@ -1,5 +1,4 @@
-#ifndef RECT_H
-#define RECT_H
+#pragma once
 
 #include "shape.h"
 
@@ -16,5 +15,3 @@ class Rect: public Shape {
     double side1;
     double side2;
 };
-
-#endif

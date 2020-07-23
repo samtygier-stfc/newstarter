@@ -1,6 +1,5 @@
-#ifndef SHAPE_H
-#define SHAPE_H
- 
+#pragma once
+
 #include <string>
 
 class Shape {
@@ -21,5 +20,3 @@ class Shape {
     std::string type;
     int sides;
 };
-
-#endif

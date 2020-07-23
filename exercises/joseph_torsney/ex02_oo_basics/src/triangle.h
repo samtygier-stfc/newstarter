@@ -1,5 +1,4 @@
-#ifndef TRIANGLE_H
-#define TRIANGLE_H
+#pragma once
 
 #include "math.h"
 #include "shape.h"
@@ -17,5 +16,3 @@ class Triangle: public Shape {
     double height;
 
 };
-
-#endif

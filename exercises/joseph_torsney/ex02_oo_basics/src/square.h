@@ -1,5 +1,4 @@
-#ifndef SQUARE_H
-#define SQUARE_H
+#pragma once
 
 #include "rect.h"
 
@@ -10,5 +9,3 @@ class Square: public Rect {
       type = "square";
     }
 };
-
-#endif
