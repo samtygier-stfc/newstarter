@@ -5,7 +5,5 @@
 class Square: public Rect {
 
   public:
-    Square(double side): Rect(side, side) {
-      type = "square";
-    }
+    Square(double side);
 };
