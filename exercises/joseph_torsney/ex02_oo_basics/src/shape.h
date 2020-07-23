@@ -5,31 +5,17 @@
 
 class Shape {
   public:
-    Shape(std::string t, int s) {
-      sides = s;
-      type = t;
-    }
+    Shape(std::string t, int s);
 
-    int getSides() {
-      return sides;
-    }
+    int getSides();
 
-    std::string getType() {
-      return type;
-    }
+    std::string getType();
 
     virtual double getArea() { return 0; }
 
     virtual double getPerimeter() { return 0; }
 
-    std::string toString() {
-      return (
-        "Type: " + type + 
-        ", Sides: " + std::to_string(sides) + 
-        ", Area: " + std::to_string(getArea()) + 
-        ", Perimeter: " + std::to_string(getPerimeter())
-      );
-    }
+    std::string toString();
 
   protected:
     std::string type;

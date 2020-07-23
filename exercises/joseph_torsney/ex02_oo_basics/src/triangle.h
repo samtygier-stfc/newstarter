@@ -5,22 +5,17 @@
 #include "shape.h"
 
 class Triangle: public Shape {
-  double base;
-  double height;
-
   public:
-    Triangle(double b, double h): Shape("triangle", 3) {
-      base = b;
-      height = h;
-    }
+    Triangle(double b, double h);
 
-    double getArea() {
-      return 0.5 * base * height;
-    }
+    double getArea();
 
-    double getPerimeter() {
-      return base + 2*sqrt(pow(height, 2) + (pow(base, 2) / 4));
-    }
+    double getPerimeter();
+
+  private:
+    double base;
+    double height;
+
 };
 
 #endif

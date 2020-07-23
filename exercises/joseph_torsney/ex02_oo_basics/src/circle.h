@@ -5,20 +5,15 @@
 #include "shape.h"
 
 class Circle: public Shape {
-  double radius;
-
   public:
-    Circle(double r): Shape("circle", 1) {
-      radius = r;
-    } 
+    Circle(double r);
 
-    double getArea() {
-      return M_PI*pow(radius, 2);
-    }
+    double getArea();
 
-    double getPerimeter() {
-      return 2*M_PI*radius;
-    }
+    double getPerimeter();
+
+  private:
+    double radius;
 };
 
 #endif
