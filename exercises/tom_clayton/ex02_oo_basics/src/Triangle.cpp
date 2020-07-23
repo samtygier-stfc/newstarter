@@ -1,5 +1,5 @@
 #include "Triangle.h"
-#include "Shape.cpp"
+#include "Shape.h"
 #include <math.h> 
 
 //Triangle constructor

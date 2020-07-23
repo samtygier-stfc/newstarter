@@ -1,5 +1,5 @@
 #include "Circle.h"
-#include "Shape.cpp"
+#include "Shape.h"
 #include <cmath>
 
 const double PI = 2 * acos(0.0);

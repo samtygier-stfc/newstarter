@@ -1,5 +1,5 @@
 #include "Square.h"
-#include "Shape.cpp"
+#include "Shape.h"
 
 //Square constructor
 Square::Square(double side1) {

@@ -1,5 +1,5 @@
 #include "Rectangle.h"
-#include "Shape.cpp"
+#include "Shape.h"
 
 //Rectangle constructor
 Rectangle::Rectangle(double side1, double side2) {
