@@ -1,6 +1,8 @@
 # Builds directory
 builds/*
 
+exercises/tom_clayton/ex01_basics/*
+
 # Compiled Object files
 *.slo
 *.lo
