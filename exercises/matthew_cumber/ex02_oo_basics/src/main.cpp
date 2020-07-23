@@ -3,7 +3,6 @@
 #include <vector>
 #include <algorithm>
 #include <memory>
-#include <iomanip>
 
 #include "Shape.h"
 #include "Square.h"
@@ -29,35 +28,36 @@ int main(int argc, char **argv)
   shapes.push_back(std::make_unique<Triangle>(3,5));
   shapes.push_back(std::make_unique<Triangle>(5,2));
 
+  std::cout << "=========================" << std::endl;
+  std::cout << "========ALLSHAPES========" << std::endl;
+  std::cout << "=========================" << std::endl << std::endl;
+
   // Print all shapes
   for(const auto &shape : shapes)
   {
     std::cout << "=========================" << std::endl;
-    std::cout << "Shape Type : " << shape->getType() << std::endl;
-    std::cout << "Shape Number of Sides : " << shape->getNumSides() << std::endl;
-    std::cout << "Shape Area : " << shape->area() << std::endl;
-    std::cout << "Shape Perimeter" << shape->perimeter() << std::endl;
+    std::cout << shape->toString();
   }
-  std::cout << "=========================" << std::endl;
+  std::cout << "=========================" << std::endl << std::endl;
 
   // Create a shape sorter and test it's methods
   ShapeSorter<Shape> sorter;
 
-  std::cout << "Find Squares" << std::endl;
+  std::cout << "=======Find Squares=======" << std::endl;
   sorter.findType(shapes, "Square");
   std::cout << std::endl;
-  std::cout << "Find Circles" << std::endl;
+  std::cout << "=======Find Circles=======" << std::endl;
   sorter.findType(shapes, "Circle");
   std::cout << std::endl;
-  std::cout << "Find 3 Sides" << std::endl;
+  std::cout << "=======Find 3 Sides=======" << std::endl;
   sorter.findSides(shapes, 3);
   std::cout << std::endl;
-  std::cout << "Find 4 Sides" << std::endl;
+  std::cout << "=======Find 4 Sides=======" << std::endl;
   sorter.findSides(shapes, 4);
   std::cout << std::endl;
-  std::cout << "Order by Perimeter" << std::endl;
-  sorter.printOrderPerimeter(shapes);
-  std::cout << std::endl;
-  std::cout << "Order by Area" << std::endl;
+  std::cout << "=======Order by Area=======" << std::endl;
   sorter.printOrderArea(shapes);
+  std::cout << std::endl;
+  std::cout << "=======Order by Perimeter=======" << std::endl;
+  sorter.printOrderPerimeter(shapes);
 }

@@ -34,7 +34,7 @@ public:
     for(const auto &shape : shapes)
     {
       if(shape->getType() == type)
-        std::cout << shape->getType() << std::endl;
+        std::cout << shape->toString() << std::endl;
     }
 
     return;
@@ -50,7 +50,7 @@ public:
     for(const auto &shape : shapes)
     {
       if(shape->getNumSides() == numSides)
-        std::cout << shape->getType() << std::endl;
+        std::cout << shape->toString() << std::endl;
     }
     return;
   }
@@ -67,7 +67,7 @@ public:
 
     for(const auto &shape : shapes)
     {
-      std::cout << shape->area() << std::endl;
+      std::cout << shape->toString() << std::endl;
     }
 
     return;
@@ -85,7 +85,7 @@ public:
 
     for(const auto &shape : shapes)
     {
-      std::cout << shape->perimeter() << std::endl;
+      std::cout << shape->toString() << std::endl;
     }
 
     return;

@@ -5,18 +5,19 @@
 /*
  * Stores data for a circle shape
  * Inherits from class Shape
- * radius : Stores the radius of the circle
+ * m_radius : Stores the radius of the circle
  */
 class Circle : public Shape
 {
 public:
   /// Constructor of circle
-  Circle(double _radius);
+  Circle(double radius);
 
-  /// implementation of area and perimeter for a circle (virtual in Shape class)
-  double area();
-  double perimeter();
+  /// implementation of area, perimeter and to string for a circle (virtual in Shape class)
+  double area() const override;
+  double perimeter() const override;
+  std::string toString() const override;
 
 private:
-  double radius;
+  double m_radius;
 };

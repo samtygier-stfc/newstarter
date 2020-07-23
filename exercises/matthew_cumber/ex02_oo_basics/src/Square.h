@@ -11,12 +11,13 @@ class Square : public Shape
 {
 public:
   /// Constructor of triangle
-  Square(double _lengthSides);
+  Square(double lengthSides);
 
-  /// implementation of area and perimeter for a square (virtual in Shape class)
-  double area();
-  double perimeter();
+  /// implementation of area, perimeter and to string for a square (virtual in Shape class)
+  double area() const override;
+  double perimeter() const override;
+  std::string toString() const override;
 
 private:
-  double lengthSides;
+  double m_lengthSides;
 };

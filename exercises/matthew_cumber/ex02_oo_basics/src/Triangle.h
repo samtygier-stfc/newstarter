@@ -12,13 +12,14 @@ class Triangle : public Shape
 {
 public:
   /// Constructor of triangle
-  Triangle(double _height, double _base);
+  Triangle(double height, double base);
 
-  /// implementation of area and perimeter for a triangle (virtual in Shape class)
-  double area();
-  double perimeter();
+  /// implementation of area, perimeter and to string for a triangle (virtual in Shape class)
+  double area() const override;
+  double perimeter() const override;
+  std::string toString() const override;
 
 private:
-  double height;
-  double base;
+  double m_height;
+  double m_base;
 };
