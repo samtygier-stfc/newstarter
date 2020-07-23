@@ -18,6 +18,7 @@ include ( CommonSetup )
 
 set ( SRC_FILES
   src/shapeSorter.cpp
+  src/square.cpp
   src/triangle.cpp
   src/circle.cpp
   src/rect.cpp
@@ -28,6 +29,7 @@ set ( SRC_FILES
 
 set ( HDR_FILES
   src/shapeSorter.h
+  src/square.h
   src/triangle.h
   src/circle.h
   src/rect.h

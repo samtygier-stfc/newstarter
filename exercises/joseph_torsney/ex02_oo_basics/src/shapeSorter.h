@@ -30,7 +30,7 @@ class ShapeSorter {
     void printPerimeters();
 
   private:
-    std::vector<Shape*> shapes;
+    std::vector<Shape*> m_shapes;
 
     /** Prints the entire shapes vector
      * 

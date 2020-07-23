@@ -12,6 +12,6 @@ class Rect: public Shape {
     double getPerimeter();
   
   private:
-    double side1;
-    double side2;
+    double m_side1;
+    double m_side2;
 };

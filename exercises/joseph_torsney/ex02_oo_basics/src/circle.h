@@ -12,5 +12,5 @@ class Circle: public Shape {
     double getPerimeter();
 
   private:
-    double radius;
+    double m_radius;
 };
