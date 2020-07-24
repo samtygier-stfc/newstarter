@@ -82,6 +82,7 @@ void depunctuate(std::string& line) {
           return true;
         }
       }
+      return false;
     }),
   line.end());
 }
