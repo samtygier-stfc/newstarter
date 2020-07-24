@@ -3,6 +3,26 @@
 #include <algorithm>
 #include <vector>
 
+/** Comparator function to return true if s1 area > s2 area
+ *  @param s1 reference to the first shape
+ *  @param s2 reference to the second shape
+ * 
+ *  @return boolean to determine larger area
+ */ 
+static bool areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
+  return (s1->getArea() > s2->getArea());
+}
+
+/** Comparator function to return true if s1 perimeter > s2 perimeter
+ *  @param s1 reference to the first shape
+ *  @param s2 reference to the second shape
+ * 
+ *  @return boolean to determine larger perimeter
+ */ 
+static bool periCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
+  return (s1->getPerimeter() > s2->getPerimeter());
+}
+
 //ShapeSorter constructor
 ShapeSorter::ShapeSorter(std::vector<std::shared_ptr<Shape>> shpVect) {
   m_shpVect = shpVect;
@@ -72,26 +92,6 @@ void ShapeSorter::printSortShapesByPerimeter() {
   for(auto &shape : m_shpVect) {
     std::cout << shape->shapeToString() << std::endl;
   }
-}
-
-/** Comparator function to return true if s1 area > s2 area
- *  @param s1 reference to the first shape
- *  @param s2 reference to the second shape
- * 
- *  @return boolean to determine larger area
- */ 
-static bool areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
-  return (s1->getArea() > s2->getArea());
-}
-
-/** Comparator function to return true if s1 perimeter > s2 perimeter
- *  @param s1 reference to the first shape
- *  @param s2 reference to the second shape
- * 
- *  @return boolean to determine larger perimeter
- */ 
-static bool periCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
-  return (s1->getPerimeter() > s2->getPerimeter());
 }
 
 //

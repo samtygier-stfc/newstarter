@@ -20,10 +20,6 @@ class ShapeSorter
 
     void printSortShapesByPerimeter();
 
-    //static bool areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2);
-
-    //static bool periCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2);
-
     //Member variable accessors and mutators
     std::vector<std::shared_ptr<Shape>> getShpVect();
     int getVecLen();
