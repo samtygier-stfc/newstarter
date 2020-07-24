@@ -11,11 +11,10 @@
 
 
 
-void ShapeSorter::addShape(BaseShape& newShape) {
-  newShape.calculateArea();
-  newShape.calculatePerimeter();
-  std::unique_ptr<BaseShape> shapeUniquePointer{ &newShape };
-  m_allShapes.push_back(shapeUniquePointer);
+void ShapeSorter::addShape(std::shared_ptr<BaseShape> newShape) {
+  newShape-> calculateArea();
+  newShape-> calculatePerimeter();
+  m_allShapes.emplace_back(newShape);
 
 }
 
@@ -51,7 +50,7 @@ void ShapeSorter::displayByArea() {
           maxArea = m_allShapes[j]->m_area;
         }
       }
-      m_orderToReadArea.push_back(index);
+      m_orderToReadArea.emplace_back(index);
     }
   }
   for (int i = 0; i < m_orderToReadArea.size(); i++) {
@@ -79,7 +78,7 @@ void ShapeSorter::displayByPerimeter() {
           maxPerimeter = m_allShapes[j]->m_perimeter;
         }
       }
-      m_orderToReadPerimeter.push_back(index);
+      m_orderToReadPerimeter.emplace_back(index);
     }
   }
   for (int i = 0; i < m_orderToReadPerimeter.size(); i++) {
@@ -108,7 +107,7 @@ void ShapeSorter::displayByNumberOfSides() {
           maxNumberOfSides = m_allShapes[j]->m_numberOfSides;
         }
       }
-      m_orderToReadNumberOfSides.push_back(index);
+      m_orderToReadNumberOfSides.emplace_back(index);
     }
   }
   for (int i = 0; i < m_orderToReadNumberOfSides.size(); i++) {

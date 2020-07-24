@@ -1,3 +1,0 @@
-C:/Users/Tolu/Documents/Work/newstarter/exercises/Toluwalase_Agoro/ex02_oo_basics/out/build/x64-Debug (default)/CMakeFiles/Shapes.dir
-C:/Users/Tolu/Documents/Work/newstarter/exercises/Toluwalase_Agoro/ex02_oo_basics/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
-C:/Users/Tolu/Documents/Work/newstarter/exercises/Toluwalase_Agoro/ex02_oo_basics/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
