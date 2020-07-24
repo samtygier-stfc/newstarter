@@ -7,7 +7,7 @@
 ShapeSorter::ShapeSorter(std::vector<std::shared_ptr<Shape>> v) : m_shapes(v) {};
 
 void ShapeSorter::printMatching(const std::string &type) {
-  for (auto it : m_shapes) {
+  for (const auto &it : m_shapes) {
     if (type == it->getType()) {
       std::cout << it->toString() << std::endl;
     }
@@ -15,7 +15,7 @@ void ShapeSorter::printMatching(const std::string &type) {
 }
 
 void ShapeSorter::printSides(const int &sides) {
-  for (auto it : m_shapes) {
+  for (const auto &it : m_shapes) {
     if (sides == it->getSides()) {
       std::cout << it->toString() << std::endl;
     }
@@ -41,7 +41,7 @@ void ShapeSorter::printPerimeters() {
 }
 
 void ShapeSorter::printAll() {
-  for (auto it : m_shapes) {
+  for (const auto &it : m_shapes) {
     std::cout << it->toString() << std::endl;
   }
 }

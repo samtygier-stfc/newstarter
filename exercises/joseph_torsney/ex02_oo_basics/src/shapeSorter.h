@@ -32,7 +32,7 @@ class ShapeSorter {
     void printPerimeters();
 
   private:
-    const std::vector<std::shared_ptr<Shape>> m_shapes;
+    std::vector<std::shared_ptr<Shape>> m_shapes;
 
     /** Prints the entire shapes vector
      * 
