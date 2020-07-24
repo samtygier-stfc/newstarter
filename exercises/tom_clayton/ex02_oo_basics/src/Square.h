@@ -1,6 +1,4 @@
-#ifndef SQUARE_H_
-#define SQUARE_H_
-
+#pragma once
 #include "Shape.h"
 
 class Square : public Shape
@@ -11,11 +9,15 @@ class Square : public Shape
   public:
     Square(double side1);
 
+    // Implementation of Shape virtual functions
+    double calcPerimeter() override;
+
+    double calcArea() override;
+
+    // Accessor/mutator methods
     void setSide1(double side1);
 
     double getSide1() {
       return m_side1;
     }
 };
-
-#endif /* SQUARE_H_ */

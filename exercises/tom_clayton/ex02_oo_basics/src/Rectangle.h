@@ -1,6 +1,4 @@
-#ifndef RECTANGLE_H_
-#define RECTANGLE_H_
-
+#pragma once
 #include "Shape.h"
 
 class Rectangle : public Shape
@@ -12,18 +10,17 @@ class Rectangle : public Shape
   public:
     Rectangle(double side1, double side2);
 
+    // Implementation of Shape virtual functions
+    double calcPerimeter() override;
+
+    double calcArea() override;
+
+    // Accessor/mutator methods
     void setSide1(double side1);
 
     void setSide2(double side2);
 
-    //Accessor methods
-    double getSide1() {
-      return m_side1;
-    }
+    double getSide1();
 
-    double getSide2() {
-      return m_side2;
-    }
+    double getSide2();
 };
-
-#endif /* RECTANGLE_H_ */

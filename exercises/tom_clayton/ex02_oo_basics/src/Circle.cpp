@@ -6,13 +6,29 @@ const double PI = 2 * acos(0.0);
 //Circle constructor
 Circle::Circle(double radius) {
   m_radius = radius;
-  m_perimeter = (2*PI*radius);
-  m_area = (PI*radius*radius);
-  m_type = "Circle";
-  m_sides = 0;
+  Shape::setPerimeter(calcPerimeter());
+  Shape::setArea(calcArea());
+  Shape::setType("Circle");
+  Shape::setSides(0);
 }
 
-//Mutator methods
+
+// Implementation of Shape virtual functions
+double Circle::calcPerimeter() {
+  double r = getRadius();
+  return 2*PI*r;
+}
+
+double Circle::calcArea() {
+  double r = getRadius();
+  return PI*r*r;
+}
+
+// Accessor/mutator methods
+double Circle::getRadius() {
+  return m_radius;
+}
+
 void Circle::setRadius(double radius) {
   m_radius = radius;
 }

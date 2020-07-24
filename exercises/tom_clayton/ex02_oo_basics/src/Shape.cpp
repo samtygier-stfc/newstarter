@@ -1,14 +1,6 @@
 #include "Shape.h"
 #include <string.h>
 
-//Shape constructor
-Shape::Shape(/*double perimeter=0, double area=0, std::string type="", int sides=0*/) {/*
-  m_perimeter = perimeter;
-  m_area = area;
-  m_type = type;
-  m_sides = sides;
-*/}
-
 /** Return a string containing information for a given shape
  *  @return shape string
  */ 

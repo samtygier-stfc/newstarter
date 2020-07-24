@@ -1,24 +1,20 @@
-#ifndef SHAPE_H_
-#define SHAPE_H_
-
+#pragma once
 #include <string>
 
 class Shape
 {
-  protected: 
+  private: 
     double m_perimeter;
     double m_area;
     std::string m_type;
     int m_sides;
     
   public:
-    Shape();
-
     std::string shapeToString();
 
     //Virtual functions
-    virtual double calcPerimeter(double h, double b);
-    virtual double calcArea(double h, double b);
+    virtual double calcPerimeter() = 0;
+    virtual double calcArea() = 0;
 
     //Member variable accessors and mutators
     double getPerimeter();
@@ -31,5 +27,3 @@ class Shape
     void setType(std::string type);
     void setSides(int sides);
 };
-
-#endif /* SHAPE_H_ */

@@ -1,3 +1,4 @@
+#pragma once
 #include "Shape.h"
 
 class Circle : public Shape
@@ -8,10 +9,13 @@ class Circle : public Shape
   public:
     Circle(double radius);
 
-    void setRadius(double radius);
+    // Implementation of Shape virtual functions
+    double calcPerimeter() override;
 
-    //Accessor methods
-    double getRadius() {
-      return m_radius;
-    }
+    double calcArea() override;
+
+    // Accessor/mutator methods
+    double getRadius();
+
+    void setRadius(double radius);
 };

@@ -5,32 +5,40 @@
 Triangle::Triangle(double height, double base) {
   m_height = height;
   m_base = base;
-  m_perimeter = calcPerimeter(height, base);
-  m_area = calcArea(height, base);
-  m_sides = 3;
-  m_type = "Triangle";
+  Shape::setPerimeter(calcPerimeter());
+  Shape::setArea(calcArea());
+  Shape::setType("Triangle");
+  Shape::setSides(3);
 }
 
 /** Calculate the perimeter of an isoceles triangle
- *  @param h height - the height of the triangle
- *  @param b base - the base of the triangle
  *  @return the perimeter of the triangle 
  */ 
-double calcPerimeter(double h, double b) {
+double Triangle::calcPerimeter() {
+  double h = getHeight();
+  double b = getBase();
   double toSqrt = h*h + (b*h/4);
   return b + 2*(sqrt(toSqrt));
 }
 
 /** Calculate the area of an isoceles triangle
- *  @param h height - the height of the triangle
- *  @param b base - the base of the triangle
  *  @return the area of the triangle 
  */ 
-double calcArea(double h, double b) {
+double Triangle::calcArea() {
+  double h = getHeight();
+  double b = getBase();
   return h*b/2;
 }
 
-//Mutator methods
+// Accessor/mutator methods
+double Triangle::getBase() {
+  return m_base;
+}
+
+double Triangle::getHeight() {
+  return m_height;
+}
+
 void Triangle::setBase(double base) {
   m_base = base;
 }

@@ -17,14 +17,14 @@ typedef std::vector<Shape>::size_type VecSz;
  *  @param string type for type of string
  */ 
 const void ShapeSorter::printShapesType(const std::string type) {
-  bool flag = false;
-  for(VecSz i = 0; i < getVecLen(); ++i) {
-    if(m_shpVect[i].getType().compare(type) == 0) {
-      m_shpVect[i].shapeToString();
-      flag = true;
+  bool shapeTypeFound = false;
+  for(auto &shape : m_shpVect) {
+    if(shape.getType().compare(type) == 0) {
+      std::cout << shape.shapeToString() << std::endl;
+      shapeTypeFound = true;
     }
   }
-  if(!flag) {
+  if(!shapeTypeFound) {
     std::cout << "No shapes found of type " << type << std::endl;
   }
 }
@@ -34,14 +34,14 @@ const void ShapeSorter::printShapesType(const std::string type) {
  *  @param int sides for no of sides
  */ 
 const void ShapeSorter::printShapesSides(int sides) {
-  bool flag = false;
-  for(VecSz i = 0; i < getVecLen(); ++i) {
-    if(m_shpVect[i].getSides() == sides) {
-      m_shpVect[i].shapeToString();
-      flag = true;
+  bool shapeTypeFound = false;
+  for(auto &shape : m_shpVect) {
+    if(shape.getSides() == sides) {
+      std::cout << shape.shapeToString() << std::endl;
+      shapeTypeFound = true;
     }
   }
-  if(!flag) {
+  if(!shapeTypeFound) {
     std::cout << "No shapes with " << std::to_string(sides) << " found" << std::endl;
   }
 }
@@ -55,8 +55,8 @@ void ShapeSorter::printSortShapesByArea() {
     return;
   }
   std::sort(m_shpVect.begin(), m_shpVect.end(), areaCompare);
-  for(VecSz i = 0; i < getVecLen(); ++i) {
-    m_shpVect[i].shapeToString();
+  for(auto &shape : m_shpVect) {
+    std::cout << shape.shapeToString() << std::endl;
   }
 }
 
@@ -69,8 +69,8 @@ void ShapeSorter::printSortShapesByPerimeter() {
     return;
   }
   std::sort(m_shpVect.begin(), m_shpVect.end(), periCompare);
-  for(VecSz i = 0; i < getVecLen(); ++i) {
-    m_shpVect[i].shapeToString();
+  for(auto &shape : m_shpVect) {
+    std::cout << shape.shapeToString() << std::endl;
   }
 }
 

@@ -1,6 +1,4 @@
-#ifndef TRIANGLE_H_
-#define TRIANGLE_H_
-
+#pragma once
 #include "Shape.h"
 
 class Triangle : public Shape
@@ -12,20 +10,17 @@ class Triangle : public Shape
   public:
     Triangle(double height, double base);
 
+    // Implementation of Shape virtual functions
+    double calcArea() override;
+    
+    double calcPerimeter() override;
+
+    // Accessor/mutator methods
+    double getBase();
+
+    double getHeight();
+
     void setBase(double base);
 
     void setHeight(double height);
-
-    double calcPerimeter(double height, double base);
-
-    //Accessor methods
-    double getBase() {
-      return m_base;
-    }
-
-    double getHeight() {
-      return m_height;
-    }
 };
-
-#endif /* TRIANGLE_H_ */

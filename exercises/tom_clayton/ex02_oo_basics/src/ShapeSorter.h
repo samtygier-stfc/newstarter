@@ -1,11 +1,5 @@
-#ifndef SHAPESORTER_H_
-#define SHAPESORTER_H_
-
+#pragma once
 #include "Shape.h"
-#include "Square.h"
-#include "Rectangle.h"
-#include "Circle.h"
-#include "Triangle.h"
 #include <vector>
 #include <memory>
 
@@ -36,5 +30,3 @@ class ShapeSorter
 
     void setShpVect(std::vector<Shape> shpVect);
 };
-
-#endif /* SHAPESORTER_H_ */
