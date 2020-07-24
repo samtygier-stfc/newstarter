@@ -17,7 +17,6 @@ include ( CommonSetup )
 ###############################################################################
 
 set ( SRC_FILES
-  src/main.cpp
   # add any additional source files here
 )
 
