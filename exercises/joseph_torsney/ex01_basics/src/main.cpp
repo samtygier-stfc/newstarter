@@ -37,22 +37,6 @@ std::string toLowerStr(std::string str) {
   return str;
 }
 
-/** Reads the contents of a .txt file at filepath
- * 
- * @param filepath the path to the file
- * @return std::string of the file contents
- */
-std::string readFile(const std::string& filepath)
-{
-  std::ifstream ifs(filepath);
-  std::string text(
-    (std::istreambuf_iterator<char>(ifs)),
-    (std::istreambuf_iterator<char>())
-  );
-  
-  return(text);
-}
-
 /** Removes punctuation from a string
  * 
  * @param str the string to process
@@ -64,42 +48,28 @@ std::string removePunct(std::string str)
   return str;
 }
 
-/** Splits a string by spaces and hyphens into a string vector.
+/** Reads the contents of a .txt file at filepath 
+ * into a string vector split by whitespace, omitting punctuations
+ * and strings less than length four.
  * 
- * @param s the string to split
- * @return std::vector<std::string> of 'words' contained in s.
+ * @param filepath the path to the file
+ * @return std::vector<std::string> of the file contents
  */
-std::vector<std::string> split(const std::string& s)
-{
-  std::vector<std::string> ret;
-  typedef std::string::size_type string_size;
-  string_size i = 0;
+std::vector<std::string> processFile(const std::string& filepath)
+{ 
+  std::vector<std::string> words;
+  std::ifstream file(filepath);
 
-  // process characters of s
-  while (i != s.size()) {
-
-    // ignore whitespace
-    while(i != s.size() && (isspace(s[i]) || s[i] == '-')) {
-      i++;
+  std::string word;
+  while(file >> word) {
+    word = toLowerStr(removePunct(word));
+    if (word.size() <= 4) {
+      continue;
     }
-
-    // otherwise, we are at the start of a word.
-    string_size j = i;
-
-    // find the position of the next space.
-    while (j != s.size() && !(isspace(s[j]) || s[j] == '-')) {
-      j++;
-    }
-
-    // If we have found a word
-    if (i != j) {
-      // copy substring from i, taking j - i chars.
-      ret.push_back(s.substr(i, j - i));
-      i = j;
-    }
+    words.push_back(word);
   }
-
-  return ret;
+  
+  return words;
 }
 
 /** Counts the number of times a word appears (usage) in a given string vector.
@@ -158,11 +128,7 @@ int main(int argc, const char** argv)
     return 0;
   }
 
-  std::string text = readFile(argv[1]);
-  text = removePunct(text);
-  text = toLowerStr(text);
-
-  std::vector<std::string> words = split(text);
+  std::vector<std::string> words = processFile(argv[1]);
 
   // count and sort the usage
   auto usage = sortByValue(countWords(words));
