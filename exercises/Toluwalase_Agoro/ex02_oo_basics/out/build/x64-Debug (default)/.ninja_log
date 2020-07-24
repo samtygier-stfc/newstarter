@@ -1,0 +1,10 @@
+# ninja log v5
+21	1184	617299741	CMakeFiles/Shapes.dir/src/Rectangle.cpp.obj	930a3af273a2f114
+27	1167	617299741	CMakeFiles/Shapes.dir/src/Circle.cpp.obj	ad7ec52cfbabee42
+12	1174	617299741	CMakeFiles/Shapes.dir/src/Square.cpp.obj	447e46e853670619
+7	1182	617299741	CMakeFiles/Shapes.dir/src/Triangle.cpp.obj	646d369fcb61f940
+0	14	0	clean	9992afb1f91dc381
+22	1356	617299902	CMakeFiles/Shapes.dir/src/Circle.cpp.obj	ad7ec52cfbabee42
+7	1363	617299902	CMakeFiles/Shapes.dir/src/Triangle.cpp.obj	646d369fcb61f940
+12	1364	617299902	CMakeFiles/Shapes.dir/src/Square.cpp.obj	447e46e853670619
+17	1400	617299902	CMakeFiles/Shapes.dir/src/Rectangle.cpp.obj	930a3af273a2f114

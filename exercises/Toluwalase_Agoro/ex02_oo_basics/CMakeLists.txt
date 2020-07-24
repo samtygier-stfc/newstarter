@@ -18,6 +18,23 @@ include ( CommonSetup )
 
 set ( SRC_FILES
   src/main.cpp
+  "src/BaseShape.h"
+  "src/Square.h"
+  "src/Rectangle.h"
+  "src/Triangle.h"
+  "src/Circle.h"
+  "src/Square.cpp"
+  "src/Triangle.cpp"
+  "src/Rectangle.cpp"
+  "src/Circle.cpp"
+  "src/ShapeSorter.h"
+  "src/ShapeSorter.cpp"
+
+
+
+
+  
+
   # add any additional source files here
 )
 

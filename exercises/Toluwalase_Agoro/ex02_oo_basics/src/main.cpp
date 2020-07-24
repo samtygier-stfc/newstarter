@@ -1,4 +1,12 @@
-#include "Shapes.h"
+#pragma once
+#include "BaseShape.h"
+#include "Triangle.h"
+#include "Rectangle.h"
+#include "Square.h"
+#include "Circle.h"
+#include "ShapeSorter.h"
+#include <memory>
+
 
 int main(int, char **)
 {
@@ -6,7 +14,7 @@ int main(int, char **)
   Square largeSquare{ 6 };
   Square largerSquare{ 8 };
   Square largestSquare{ 10 };
- // std::cout << largeSquare.calculateArea() << "   " << largeSquare.calculatePerimeter();
+
   Triangle smallTriangle{ 3,4 };
   Triangle largeTriangle{ 6,8 };
   Triangle largestTriangle{ 10,12 };
@@ -15,22 +23,36 @@ int main(int, char **)
   Rectangle largeRectangle{ 4,5 };
   Rectangle largerRectangle{ 6,7 };
   Rectangle largestRectangle{ 8,10 };
+  Circle smallCircle{ 3 };
+  Circle largeCircle{ 7 };
+  Circle largestCircle{ 10 };
 
-  std::vector < BaseShape*> allShapes;
-  allShapes.push_back(&smallSquare);
-  allShapes.push_back(&smallRectangle);
-  allShapes.push_back(&smallTriangle);
-  allShapes.push_back(&largeSquare);
-  allShapes.push_back(&largeTriangle);
-  allShapes.push_back(&largeRectangle);
-  allShapes.push_back(&largerSquare);
-  allShapes.push_back(&largerRectangle);
-  allShapes.push_back(&largestSquare);
-  allShapes.push_back(&largestTriangle);
-  allShapes.push_back(&largestRectangle);
+  
   
   //std::cout << allShapes[1]->type;
-  ShapeSorter varietyOfShapes{ allShapes };
+  ShapeSorter varietyOfShapes{  };
+  varietyOfShapes.addShape(smallSquare);
+  varietyOfShapes.addShape(smallRectangle);
+  varietyOfShapes.addShape(smallTriangle);
+  varietyOfShapes.addShape(smallCircle);
+  varietyOfShapes.addShape(largeSquare);
+  varietyOfShapes.addShape(largeTriangle);
+  varietyOfShapes.addShape(largeCircle);
+  varietyOfShapes.addShape(largeRectangle);
+  varietyOfShapes.addShape(largerRectangle);
+  varietyOfShapes.addShape(largerSquare);
+  varietyOfShapes.addShape(largestCircle);
+  varietyOfShapes.addShape(largestRectangle);
+  varietyOfShapes.addShape(largestSquare);
+  varietyOfShapes.addShape(largestTriangle);
+
+
+
+
+
+
+
+
   Square squareShape{ 20 };
   varietyOfShapes.addShape(squareShape);
   Rectangle rectangleShape{ 20,15 };
@@ -38,11 +60,11 @@ int main(int, char **)
   Triangle triangleShape{ 20,20 };
   varietyOfShapes.addShape(triangleShape);
   std::cout << "---------------------------------------Squares---------------------------------------------------" << std::endl;
-  varietyOfShapes.displayByType("Square");
+  varietyOfShapes.displayByType(std::string{ "Square" });
   std::cout << "---------------------------------------Rectangles---------------------------------------------------" << std::endl;
-  varietyOfShapes.displayByType("Rectangle");
+  varietyOfShapes.displayByType(std::string{ "Rectangle" });
   std::cout << "---------------------------------------Triangles---------------------------------------------------" << std::endl;
-  varietyOfShapes.displayByType("Triangle");
+  varietyOfShapes.displayByType(std::string{ "Triangle" });
   std::cout << "---------------------------------------By Area---------------------------------------------------" << std::endl ;
   varietyOfShapes.displayByArea();
   std::cout << "-----------------------------------------By Perimeter-------------------------------------------------" << std::endl ;
