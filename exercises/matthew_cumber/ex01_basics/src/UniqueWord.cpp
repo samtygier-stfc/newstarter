@@ -1,65 +1,69 @@
-#include <iostream>
-#include <string>
 #include "UniqueWord.h"
+#include <iostream>
 
 /** Creates an instance of UniqueWord with given initial values
- * @param _word the initial string to set word to for the object
- * @param _count the initial count for the word (usually one)
+ * @param word the initial string to set m_ to for the object
+ * @param count the initial count for the word (usually one)
  */
-UniqueWord::UniqueWord(std::string _word, int _count)
+UniqueWord::UniqueWord(const std::string &word, const int &count)
 {
-  word = _word;
-  count = _count;
+  m_word = word;
+  m_count = count;
 }
 
-/** Sets the value of word, cannot be empty
- * @param _word The new string to set word to
+/** Sets the value of m_word, cannot be empty
+ * @param word The new string to set word to
  * @return No return value
  */
-void UniqueWord::setWord(std::string _word) 
+void UniqueWord::setWord(const std::string &word) 
 {
-  if(_word.length() == 0)
+  if(word.length() == 0)
   {
     std::cout << "Invalid string, cannot be empty." << std::endl;
   } 
   else
   {
-    word = _word; 
+    m_word = word; 
   }
   return;
 }
 
-/** Sets the value of count, cannot be less than 0
- * @param _count The new int value to set count to
+/** Sets the value of m_count, cannot be less than 0
+ * @param count The new int value to set count to
  * @return No return value
  */
-void UniqueWord::setCount(int _count)
+void UniqueWord::setCount(const int &count)
 {
-  if(_count < 0) 
+  if(count < 0) 
   { 
     std::cout << "Invalid count, less than 0." << std::endl; 
   }
   else 
   { 
-    count = _count; 
+    m_count = count; 
   }
   return;
 }
 
-/** Increments the count value by +1
+/** Increments m_count value by +1
  * @return No return value
  */
 void UniqueWord::incrementCount() 
 { 
-  ++count; 
+  ++m_count; 
   return;
 }
 
 /** Override definition of < operator to compare object member count value
  * @param w The second UniqueWord object which is being compared to the implied this object
- * @return A boolean true if this->count is less than w.count, false otherwise
+ * @return A boolean true if count of this is less than count of w, false otherwise
  */
 bool UniqueWord::operator<(const UniqueWord &w) const
 {
   return getCount() < w.getCount();
+}
+
+bool UniqueWord::operator==(const std::string &w) const
+{
+  return getWord() == w;
 }

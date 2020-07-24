@@ -1,3 +1,5 @@
+#include "UniqueWord.h"
+
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
@@ -6,29 +8,31 @@
 #include <sstream>
 #include <vector>
 #include <ctype.h>
-#include <regex>
-#include "UniqueWord.h"
 
-std::string PATH = ""; // Will store the path of the file to be read
-
-/** Tests if a word has already been found the increments it's count
+/** Checks if a word already exists in the vector or words, then increments it's count if found,
+ * otherwise create a new word and add to vector
+ *
  * @param uniqueWords The vector of existing unique words found
- * @param word The word that is being tested
- * @return A boolean, true if a word already exists, false otherwise
+ * @param word The word being tested
+ * @return No return value 
  */
-bool inUniqueWords(std::vector<UniqueWord> &uniqueWords, const std::string &word)
+void incrementCountOrAddNewWord(std::vector<UniqueWord> &uniqueWords, const std::string &word)
 {
-  // Loop unique words, if word exists increment it's count
-  for(auto &w : uniqueWords)
+  // Attempt to find word in the vector uniqueWords
+  auto it = std::find_if(uniqueWords.begin(), uniqueWords.end(), [&word](const UniqueWord &obj){return obj.getWord() == word;});
+
+  // If not at end, then word has already been found in input file and is stored in the vector, so increment count
+  if(it != uniqueWords.end())
+    it->incrementCount();
+
+  // Else the word has not been found previously, so create a new instance and add it to the vector 
+  else 
   {
-    if(word == w.getWord())
-    {
-      w.incrementCount();
-      return true;
-    }
+    auto newWord = UniqueWord(word, 1);
+    uniqueWords.push_back(newWord);
   }
 
-  return false;
+  return;
 }
 
 /** Writes the unique words to an output file "UniqueWords.txt"
@@ -68,6 +72,8 @@ void writeUniqueWordsToFile(const std::vector<UniqueWord> &uniqueWords)
 
 int main(int argc, char const **argv)
 {
+
+  std::string PATH = ""; // Store the path of the file to be read
   std::vector<UniqueWord> uniqueWords; // Stores words and counts as objects in a vector
 
   // Check a file path has been provided as an argument on cl
@@ -95,17 +101,14 @@ int main(int argc, char const **argv)
   // Loop file word by word, reads characters separated by spaces
   while(file >> word)
   {
-    // Loop punctuation characters and using regex replace 1 or more occurrences with ""
+    // Loop punctuation characters and erase them from word
     for(const char &p : PUNCTUATION)
-    {
-      std::string expression = "[\\"+std::string(1,p)+"]+";
-      word = std::regex_replace(word, std::regex(expression), "");
-    }
+      word.erase(std::remove(word.begin(), word.end(), p), word.end());
 
-    // Convert all letters to lower case
+    // Convert all letters in word to lower case
     std::transform(word.begin(), word.end(), word.begin(), ::tolower);
 
-    // Now read all words hyphen separated
+    // Now separate original word into words split by hyphens
     std::istringstream ss(word);
     std::string wordWithoutHyphens;
     while(std::getline(ss, wordWithoutHyphens, '-'))
@@ -113,12 +116,8 @@ int main(int argc, char const **argv)
       // Skip words less than 5 characters
       if(wordWithoutHyphens.length() < 5) continue;
 
-      // Else if not in found words already, create new word
-      if(!inUniqueWords(uniqueWords,wordWithoutHyphens))
-      {
-        auto newWord = UniqueWord(wordWithoutHyphens,1);
-        uniqueWords.push_back(newWord);
-      }
+      // Else check if word has been found already and increment it's count or create a new word
+      incrementCountOrAddNewWord(uniqueWords,wordWithoutHyphens);
     }
   }
 
