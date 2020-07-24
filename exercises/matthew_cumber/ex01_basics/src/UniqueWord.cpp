@@ -62,8 +62,3 @@ bool UniqueWord::operator<(const UniqueWord &w) const
 {
   return getCount() < w.getCount();
 }
-
-bool UniqueWord::operator==(const std::string &w) const
-{
-  return getWord() == w;
-}
