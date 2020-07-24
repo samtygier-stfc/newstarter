@@ -11,13 +11,13 @@ class ShapeSorter {
      * 
      * @param type the type of shapes to print
      */
-    void printMatching(std::string type);
+    void printMatching(const std::string &type);
     
     /** Prints the shape objects that have a given number of sides
      * 
      * @param sides the number of sides of shapes to print
      */
-    void printSides(int sides);
+    void printSides(const int &sides);
 
     /** Prints the shapes in descending order by areas
      * 

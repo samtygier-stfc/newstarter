@@ -6,7 +6,7 @@
 
 ShapeSorter::ShapeSorter(std::vector<Shape*> v) : m_shapes(v) {};
 
-void ShapeSorter::printMatching(std::string type) {
+void ShapeSorter::printMatching(const std::string &type) {
   for (auto it = m_shapes.begin(); it != m_shapes.end(); it++) {
     if (type == (*it)->getType()) {
       std::cout << (*it)->toString() << std::endl;
@@ -14,7 +14,7 @@ void ShapeSorter::printMatching(std::string type) {
   }
 }
 
-void ShapeSorter::printSides(int sides) {
+void ShapeSorter::printSides(const int &sides) {
   for (auto it = m_shapes.begin(); it != m_shapes.end(); it++) {
     if (sides == (*it)->getSides()) {
       std::cout << (*it)->toString() << std::endl;
