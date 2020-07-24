@@ -7,13 +7,9 @@ class Square: public Shape {
   public:
     Square(double side);
 
-    const double getArea() {
-      return m_side*m_side;
-    }
+    double getArea() const override;
 
-    const double getPerimeter() {
-      return 4*m_side;
-    }
+    double getPerimeter() const override;
 
   private:
     const int m_side;

@@ -10,9 +10,9 @@ class Shape {
 
     std::string getType();
 
-    const virtual double getArea() = 0;
+    virtual double getArea() const = 0;
 
-    const virtual double getPerimeter() = 0;
+    virtual double getPerimeter() const = 0;
 
     std::string toString();
 

@@ -7,9 +7,9 @@ class Circle: public Shape {
   public:
     Circle(double r);
 
-    const double getArea() override;
+    double getArea() const override;
 
-    const double getPerimeter() override;
+    double getPerimeter() const override;
 
   private:
     const double m_radius;

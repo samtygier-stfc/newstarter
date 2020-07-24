@@ -10,10 +10,10 @@
 
 int main(int, char **)
 {
-  std::shared_ptr<Rect> myRect(new Rect(10, 200) );
-  std::shared_ptr<Square> mySquare(new Square(10));
-  std::shared_ptr<Circle> myCircle(new Circle(10));
-  std::shared_ptr<Triangle> myTriangle(new Triangle(10, 200));
+  std::shared_ptr<Rect> myRect = std::make_shared<Rect>(10, 10);
+  std::shared_ptr<Square> mySquare = std::make_shared<Square>(10);
+  std::shared_ptr<Circle> myCircle = std::make_shared<Circle>(10);
+  std::shared_ptr<Triangle> myTriangle = std::make_shared<Triangle>(10, 10);
 
   ShapeSorter sorter = ShapeSorter(
     { myRect, mySquare, myCircle, myTriangle }

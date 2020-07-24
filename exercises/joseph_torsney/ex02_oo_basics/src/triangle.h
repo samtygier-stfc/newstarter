@@ -7,9 +7,9 @@ class Triangle: public Shape {
   public:
     Triangle(double b, double h);
 
-    const double getArea() override;
+    double getArea() const override;
 
-    const double getPerimeter() override;
+    double getPerimeter() const override;
 
   private:
     const double m_base;

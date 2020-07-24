@@ -7,9 +7,9 @@ class Rect: public Shape {
   public:
     Rect(double a, double b);
 
-    const double getArea() override; 
+    double getArea() const override; 
 
-    const double getPerimeter() override;
+    double getPerimeter() const override;
   
   private:
     const double m_side1;

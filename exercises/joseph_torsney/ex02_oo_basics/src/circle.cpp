@@ -4,10 +4,10 @@
 
 Circle::Circle(double r) : Shape("circle", 1), m_radius(r) {};
 
-const double Circle::getArea()  {
+double Circle::getArea() const {
   return M_PI*pow(m_radius, 2);
 }
 
-const double Circle::getPerimeter() {
+double Circle::getPerimeter() const {
   return 2*M_PI*m_radius;
 }
