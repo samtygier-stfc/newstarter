@@ -1,6 +1,5 @@
 # Builds directory
 builds/*
-exercises/tom_clayton_ex02_oo_basics/*
 
 # Compiled Object files
 *.slo
