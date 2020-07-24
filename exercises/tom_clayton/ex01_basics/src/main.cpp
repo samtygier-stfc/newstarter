@@ -11,8 +11,8 @@
 #include <vector>
 #include <map>
 
-/**
- * Function to return a string filepath from user input
+/** Returns a string filepath from user input
+ *  @return string filepath
  */
 
 std::string getInputFn() {
@@ -22,9 +22,12 @@ std::string getInputFn() {
   return fin;
 }
 
-/**
- * Function to split up a string and return a vector of words with
- * len <4, and converted to lower case
+/** Split up a string and return a vector of words with
+ *  len <=4, and converted to lower case
+ *  @param s, reference to string s
+ *  @param delim, character to use as delimiter
+ * 
+ *  @return vector of strings as split by chosen delimiter
  */
 
 std::vector<std::string> splitByDelim(const std::string& s, const char delim) {
@@ -58,46 +61,35 @@ std::vector<std::string> splitByDelim(const std::string& s, const char delim) {
  *  replace
  */
 
-int specPunct(char c) {
-
-  const char charRemove [8] = {'.', ',', '?', '\'', '\"', '!', '(', ')'};
-  const char charReplace [1] = {'-'};
-
-  auto findResult = std::find(std::begin(charRemove), std::end(charRemove), c);
-  if(findResult != std::end(charRemove)) {
-    return 1;
-  }
-  else {
-    findResult = std::find(std::begin(charReplace), std::end(charReplace), c);
-     if(findResult != std::end(charReplace)) {
-      return 2;
-      }
-      else {
-        return 0;
-      }
-  }
-}
-
-/**
- * Function to remove most punctuation, and replace hyphens with
- * whitespace
+/** Removes most puntuation from a string, and replaces hyphens
+ *  with whitespace
+ *  @param line - string to be depunctuated
  */
 
 void depunctuate(std::string& line) {
 
+  const int cRSize = 8;
+  const char charRemove [cRSize] = {'.', ',', '?', '\'', '\"', '!', '(', ')'};
+
   std::replace_if(line.begin() , line.end(), 
-  [] (const char& c) { return specPunct(c)==2;},' ');
+  [] (const char& c) { return c == '-';},' ');
 
   line.erase(
     std::remove_if(line.begin() , line.end(), 
-    [] (const char& c) { return specPunct(c)==1;}),
+    [charRemove] (const char& c) {
+      for(int i = 0; i < cRSize; ++i) {
+        if(c == charRemove[i]) {
+          return true;
+        }
+      }
+    }),
   line.end());
-  
 }
 
-/**
- * Function to read lines from an input and return a vector of
- * depunctuated, lower case words of length>=4
+/** Reads in lines from input file and returns a vector of
+ *  depunctuated, lower case words of length >= 4. Prints error
+ *  message and exits program if file not found
+ *  @return vector of strings
  */
 
 std::vector<std::string> inputToVector() {
@@ -121,35 +113,37 @@ std::vector<std::string> inputToVector() {
   return words;
 }
 
-/**
- * Function to populate a map with key=word, value=no of
- * occurrences for an input vector of single word strings
+/** Populate a map with key=word, value=no of occurrences for an
+ *  input vector of single word strings
+ *  @param wordCountMap - map of strings to int occurrences
+ *  @param words - vector of string words to be processed
  */ 
 
 void fillMap(std::map<std::string, int>& wordCountMap, const std::vector<std::string>& words) {
 
-  typedef std::vector<std::string>::size_type VecSz;
-  VecSz words_size = words.size();
-  if(words_size == 0){
+  if(words.size() == 0){
     throw std::domain_error("Empty words vector");
   }
 
-  for(VecSz i = 0; i < words_size; i++) {
-    std::string currentWord = words[i];
+  for(auto& currentWord : words) {
     wordCountMap[currentWord] ++;
   }
 }
 
-/**
- * Function to compare vector pairs by second value
+/** Compare vector pairs by second (int) value
+ *  @param a - string to be compared against
+ *  @param b - string to compare
+ * 
+ *  @return boolean value to determing which is larger
  */ 
 bool compareSecond(const std::pair<std::string, int> &a, const std::pair<std::string, int> &b) {
   return a.second > b.second;
 }
 
-/**
- * Function to print to file in order the keys of a map by descending
- * int value. The map is first assigned into a vector of pairs
+/** Print to file in order the keys of a map by descending
+ *  int value. The map is first assigned into a vector of pairs
+ *  @param wordCountMap - map of string to int representing
+ *  words/occurrences
  */
 
 void printOrderedMap(std::map<std::string, int> wordCountMap) {
@@ -178,8 +172,11 @@ void printOrderedMap(std::map<std::string, int> wordCountMap) {
   outFile.close();
 }
 
-/**
- * Main function to operate and test the program
+/** Main function to operate and test the program
+ *  @param int - command line arguments?
+ *  @param char** - command line arguments?
+ * 
+ *  @return integer exit code value
  */
 
 int main(int, char **)
@@ -191,4 +188,6 @@ int main(int, char **)
   fillMap(wordCountMap, words);
 
   printOrderedMap(wordCountMap);
+
+  return 0;
 }
