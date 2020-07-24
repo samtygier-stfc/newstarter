@@ -54,7 +54,7 @@ void ShapeSorter::printSortShapesByArea() {
     std::cout << "Vector empty, no shapes to show" << std::endl;
     return;
   }
-  std::sort(m_shpVect.begin(), m_shpVect.end(), areaCompare);
+  std::sort(m_shpVect.begin(), m_shpVect.end(), ShapeSorter::areaCompare);
   for(auto &shape : m_shpVect) {
     std::cout << shape->shapeToString() << std::endl;
   }
@@ -68,7 +68,7 @@ void ShapeSorter::printSortShapesByPerimeter() {
     std::cout << "Vector empty, no shapes to show" << std::endl;
     return;
   }
-  std::sort(m_shpVect.begin(), m_shpVect.end(), periCompare);
+  std::sort(m_shpVect.begin(), m_shpVect.end(), ShapeSorter::periCompare);
   for(auto &shape : m_shpVect) {
     std::cout << shape->shapeToString() << std::endl;
   }
@@ -80,7 +80,7 @@ void ShapeSorter::printSortShapesByPerimeter() {
  * 
  *  @return boolean to determine larger area
  */ 
-bool ShapeSorter::areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
+static bool areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
   return (s1->getArea() > s2->getArea());
 }
 
@@ -90,7 +90,7 @@ bool ShapeSorter::areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> 
  * 
  *  @return boolean to determine larger perimeter
  */ 
-bool ShapeSorter::periCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
+static bool periCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
   return (s1->getPerimeter() > s2->getPerimeter());
 }
 

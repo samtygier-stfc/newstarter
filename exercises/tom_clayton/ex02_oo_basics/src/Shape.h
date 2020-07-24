@@ -3,7 +3,7 @@
 
 class Shape
 {
-  private: 
+  protected: 
     double m_perimeter;
     double m_area;
     std::string m_type;

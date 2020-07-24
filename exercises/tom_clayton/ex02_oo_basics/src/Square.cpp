@@ -3,9 +3,9 @@
 //Square constructor
 Square::Square(double side1) {
   m_side1 = side1;
-  Shape::setPerimeter(calcPerimeter());
+  m_perimeter = calcPerimeter());
   Shape::setArea(calcArea());
-  Shape::setType("Square");
+  m_type = ("Square");
   Shape::setSides(4);
 }
 

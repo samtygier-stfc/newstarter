@@ -3,7 +3,7 @@
 
 class Square : public Shape
 {
-  private: 
+  protected: 
     double m_side1;
 
   public:
