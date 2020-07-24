@@ -6,11 +6,11 @@
 class ShapeSorter
 {
   private: 
-    std::vector<Shape> m_shpVect;
+    std::vector<std::shared_ptr<Shape>> m_shpVect;
     int m_vecLen;
     
   public:
-    ShapeSorter(std::vector<Shape> shpVect);
+    ShapeSorter(std::vector<std::shared_ptr<Shape>> shpVect);
 
     const void printShapesType(std::string);
 
@@ -20,13 +20,13 @@ class ShapeSorter
 
     void printSortShapesByPerimeter();
 
-    bool areaCompare(Shape& s1, Shape& s2);
+    bool areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2);
 
-    bool periCompare(Shape& s1, Shape& s2);
+    bool periCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2);
 
     //Member variable accessors and mutators
-    std::vector<Shape> getShpVect();
+    std::vector<std::shared_ptr<Shape>> getShpVect();
     int getVecLen();
 
-    void setShpVect(std::vector<Shape> shpVect);
+    void setShpVect(std::vector<std::shared_ptr<Shape>> shpVect);
 };

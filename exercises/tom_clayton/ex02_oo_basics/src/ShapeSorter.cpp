@@ -4,13 +4,13 @@
 #include <vector>
 
 //ShapeSorter constructor
-ShapeSorter::ShapeSorter(std::vector<Shape> shpVect) {
+ShapeSorter::ShapeSorter(std::vector<std::shared_ptr<Shape>> shpVect) {
   m_shpVect = shpVect;
   m_vecLen = shpVect.size();
 }
 
 // Typedef to be used to iterate through the vector
-typedef std::vector<Shape>::size_type VecSz;
+typedef std::vector<std::shared_ptr<Shape>>::size_type VecSz;
 
 /** Print out all shapes of a given type, or an error message if no
  *  shapes of that type are found
@@ -19,8 +19,8 @@ typedef std::vector<Shape>::size_type VecSz;
 const void ShapeSorter::printShapesType(const std::string type) {
   bool shapeTypeFound = false;
   for(auto &shape : m_shpVect) {
-    if(shape.getType().compare(type) == 0) {
-      std::cout << shape.shapeToString() << std::endl;
+    if(shape->getType().compare(type) == 0) {
+      std::cout << shape->shapeToString() << std::endl;
       shapeTypeFound = true;
     }
   }
@@ -36,8 +36,8 @@ const void ShapeSorter::printShapesType(const std::string type) {
 const void ShapeSorter::printShapesSides(int sides) {
   bool shapeTypeFound = false;
   for(auto &shape : m_shpVect) {
-    if(shape.getSides() == sides) {
-      std::cout << shape.shapeToString() << std::endl;
+    if(shape->getSides() == sides) {
+      std::cout << shape->shapeToString() << std::endl;
       shapeTypeFound = true;
     }
   }
@@ -56,7 +56,7 @@ void ShapeSorter::printSortShapesByArea() {
   }
   std::sort(m_shpVect.begin(), m_shpVect.end(), areaCompare);
   for(auto &shape : m_shpVect) {
-    std::cout << shape.shapeToString() << std::endl;
+    std::cout << shape->shapeToString() << std::endl;
   }
 }
 
@@ -70,7 +70,7 @@ void ShapeSorter::printSortShapesByPerimeter() {
   }
   std::sort(m_shpVect.begin(), m_shpVect.end(), periCompare);
   for(auto &shape : m_shpVect) {
-    std::cout << shape.shapeToString() << std::endl;
+    std::cout << shape->shapeToString() << std::endl;
   }
 }
 
@@ -80,8 +80,8 @@ void ShapeSorter::printSortShapesByPerimeter() {
  * 
  *  @return boolean to determine larger area
  */ 
-bool ShapeSorter::areaCompare(Shape &s1, Shape &s2) {
-  return (s1.getArea() > s2.getArea());
+bool ShapeSorter::areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
+  return (s1->getArea() > s2->getArea());
 }
 
 /** Comparator function to return true if s1 perimeter > s2 perimeter
@@ -90,21 +90,21 @@ bool ShapeSorter::areaCompare(Shape &s1, Shape &s2) {
  * 
  *  @return boolean to determine larger perimeter
  */ 
-bool ShapeSorter::periCompare(Shape& s1, Shape& s2) {
-  return (s1.getPerimeter() > s2.getPerimeter());
+bool ShapeSorter::periCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
+  return (s1->getPerimeter() > s2->getPerimeter());
 }
 
 //
 //Mutator methods
 //
-void ShapeSorter::setShpVect(std::vector<Shape> shpVect) {
+void ShapeSorter::setShpVect(std::vector<std::shared_ptr<Shape>> shpVect) {
   m_shpVect = shpVect;
 }
 
 //
 //Accessor methods
 //
-std::vector<Shape> ShapeSorter::getShpVect() {
+std::vector<std::shared_ptr<Shape>> ShapeSorter::getShpVect() {
   return m_shpVect;
 }
 
