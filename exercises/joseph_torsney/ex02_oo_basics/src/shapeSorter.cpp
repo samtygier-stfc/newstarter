@@ -4,7 +4,7 @@
 #include <vector>
 #include <algorithm>
 
-ShapeSorter::ShapeSorter(std::vector<Shape*> v) : m_shapes(v) {};
+ShapeSorter::ShapeSorter(std::vector<std::shared_ptr<Shape>> v) : m_shapes(v) {};
 
 void ShapeSorter::printMatching(const std::string &type) {
   for (auto it : m_shapes) {

@@ -1,11 +1,13 @@
 #pragma once 
 
 #include <vector>
+#include <memory>
+
 #include "shape.h"
 
 class ShapeSorter {
   public:
-    ShapeSorter(std::vector<Shape*> v);
+    ShapeSorter(std::vector<std::shared_ptr<Shape>> v);
   
     /** Prints the shape objects that match a given type
      * 
@@ -30,7 +32,7 @@ class ShapeSorter {
     void printPerimeters();
 
   private:
-    std::vector<Shape*> m_shapes;
+    std::vector<std::shared_ptr<Shape>> m_shapes;
 
     /** Prints the entire shapes vector
      * 

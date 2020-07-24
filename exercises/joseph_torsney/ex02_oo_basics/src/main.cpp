@@ -6,13 +6,14 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 
 int main(int, char **)
 {
-  Rect* myRect = new Rect(10, 200); // why do these have to be pointers?
-  Square* mySquare = new Square(10);
-  Circle* myCircle = new Circle(10);
-  Triangle* myTriangle = new Triangle(10, 200);
+  std::shared_ptr<Rect> myRect(new Rect(10, 200) );
+  std::shared_ptr<Square> mySquare(new Square(10));
+  std::shared_ptr<Circle> myCircle(new Circle(10));
+  std::shared_ptr<Triangle> myTriangle(new Triangle(10, 200));
 
   ShapeSorter* sorter = new ShapeSorter(
     { myRect, mySquare, myCircle, myTriangle }
