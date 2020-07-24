@@ -12,6 +12,6 @@ class Rect: public Shape {
     const double getPerimeter() override;
   
   private:
-    double m_side1;
-    double m_side2;
+    const double m_side1;
+    const double m_side2;
 };

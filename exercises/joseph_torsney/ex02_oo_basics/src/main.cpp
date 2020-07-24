@@ -15,15 +15,15 @@ int main(int, char **)
   std::shared_ptr<Circle> myCircle(new Circle(10));
   std::shared_ptr<Triangle> myTriangle(new Triangle(10, 200));
 
-  ShapeSorter* sorter = new ShapeSorter(
+  ShapeSorter sorter = ShapeSorter(
     { myRect, mySquare, myCircle, myTriangle }
   );
 
-  sorter->printMatching("rect");
+  sorter.printMatching("rect");
   std::cout << std::endl;
-  sorter->printSides(4);
+  sorter.printSides(4);
   std::cout << std::endl;
-  sorter->printAreas();
+  sorter.printAreas();
   std::cout << std::endl;
-  sorter->printPerimeters();
+  sorter.printPerimeters();
 }

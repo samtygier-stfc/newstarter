@@ -12,5 +12,5 @@ class Circle: public Shape {
     const double getPerimeter() override;
 
   private:
-    double m_radius;
+    const double m_radius;
 };

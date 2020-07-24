@@ -17,6 +17,6 @@ class Shape {
     std::string toString();
 
   protected:
-    std::string m_type;
-    int m_sides;
+    const std::string m_type;
+    const int m_sides;
 };

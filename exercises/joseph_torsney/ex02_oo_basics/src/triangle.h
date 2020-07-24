@@ -12,7 +12,7 @@ class Triangle: public Shape {
     const double getPerimeter() override;
 
   private:
-    double m_base;
-    double m_height;
+    const double m_base;
+    const double m_height;
 
 };

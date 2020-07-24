@@ -8,13 +8,13 @@ class Square: public Shape {
     Square(double side);
 
     const double getArea() {
-      return m_side1*m_side1;
+      return m_side*m_side;
     }
 
     const double getPerimeter() {
-      return 4*m_side1;
+      return 4*m_side;
     }
 
   private:
-    int m_side1;
+    const int m_side;
 };
