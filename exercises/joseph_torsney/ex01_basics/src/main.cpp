@@ -123,7 +123,7 @@ int main(int argc, const char** argv)
 
   outdata << "Word\tUsage\n" << std::endl;
   // print everything out using the iterator :)
-  for (auto it = usage.begin(); it != usage.end(); it++) {
-    outdata << it->first << "\t" << it ->second << std::endl;
+  for (auto it : usageVector) {
+    outdata << it.first << "\t" << it.second << std::endl;
   }
 }
