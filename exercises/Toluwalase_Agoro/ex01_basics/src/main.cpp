@@ -23,17 +23,17 @@ void countingSort(std::vector<std::pair< int ,std::string > > &vectorOfPairs) {
   std::vector <std::vector <int>> vectorForSort;
   for (int i = 0; i < maxCount; i++) {
     std::vector <int> emptyVector;
-    vectorForSort.push_back(emptyVector);
+    vectorForSort.emplace_back(emptyVector);
   }
 
   for (int i = 0; i < vectorOfPairs.size(); i++) {
     int index = vectorOfPairs[i].first - 1;
-    vectorForSort[index].push_back(i);
+    vectorForSort[index].emplace_back(i);
   }
   std::vector <std::pair<int, std::string>> sortedVector;
   for (int i = int(vectorForSort.size()) - 1; i >= 0; i--) {
     for (auto& order : vectorForSort[i]) {
-      sortedVector.push_back(vectorOfPairs[order]);
+      sortedVector.emplace_back(vectorOfPairs[order]);
     }
   }
   vectorOfPairs = sortedVector;
@@ -85,7 +85,7 @@ int main() {
     std::cout << "Ensure that file path is valid" << std::endl;
   }
   std::string holderString;
-  auto myPredictor = [&holderString](std::pair<int, std::string>& pairOfCountAndWord)
+  auto myPredicator = [&holderString](std::pair<int, std::string>& pairOfCountAndWord)
   {
     return (pairOfCountAndWord.second == holderString);
   };
@@ -99,20 +99,23 @@ int main() {
     */
     
     holderString = getWord(fileToRead);
-    auto location = std::find_if(vectorOfCountsAndWords.begin(),vectorOfCountsAndWords.end(), myPredictor);
-    if (holderString.size() > 4 && location == vectorOfCountsAndWords.end()) {
-      vectorOfCountsAndWords.push_back(std::make_pair(1,holderString));
+    auto location = std::find_if(vectorOfCountsAndWords.begin(),vectorOfCountsAndWords.end(), myPredicator);
+    if (holderString.size() > 4){
+    if (location == vectorOfCountsAndWords.end()) {
+      vectorOfCountsAndWords.emplace_back(1,holderString);
     }
     else {
-      if (holderString.size() > 4 && location != vectorOfCountsAndWords.end())
-      {
+      
         vectorOfCountsAndWords[std::distance(vectorOfCountsAndWords.begin(), location)].first += 1;
       }
     }
   }
   fileToRead.close();
-  //countingSort(vectorOfCountsAndWords);
-
+  /*
+  Counting sort method has been implemented that is faster than most std::sort 
+  implementions.
+  countingSort(vectorOfCountsAndWords);
+  */
   std::sort(vectorOfCountsAndWords.rbegin(), vectorOfCountsAndWords.rend());
   /*Block of code displays first 8  words and count
   of words in sorted order
