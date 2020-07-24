@@ -9,7 +9,7 @@
 #include <vector>
 #include <ctype.h>
 
-/** Checks if a word already exists in the vector or words, then increments it's count if found,
+/** Checks if a word already exists in the vector or words, then increments its count if found,
  * otherwise create a new word and add to vector
  *
  * @param uniqueWords The vector of existing unique words found
@@ -26,11 +26,7 @@ void incrementCountOrAddNewWord(std::vector<UniqueWord> &uniqueWords, const std:
     it->incrementCount();
 
   // Else the word has not been found previously, so create a new instance and add it to the vector 
-  else 
-  {
-    auto newWord = UniqueWord(word, 1);
-    uniqueWords.push_back(newWord);
-  }
+  else uniqueWords.emplace_back(word,1);
 
   return;
 }
@@ -116,7 +112,7 @@ int main(int argc, char const **argv)
       // Skip words less than 5 characters
       if(wordWithoutHyphens.length() < 5) continue;
 
-      // Else check if word has been found already and increment it's count or create a new word
+      // Else check if word has been found already and increment its count or create a new word
       incrementCountOrAddNewWord(uniqueWords,wordWithoutHyphens);
     }
   }
