@@ -1,6 +1,7 @@
 # Builds directory
 builds/*
 
+.vscode/*
 
 # Compiled Object files
 *.slo
