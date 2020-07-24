@@ -4,6 +4,7 @@
 #include <map>
 #include <algorithm>
 #include <string>
+#include <sstream>
 
 /** Checks whether a character is punctuation
  * 
@@ -49,41 +50,33 @@ std::string removePunct(std::string str)
 }
 
 /** Reads the contents of a .txt file at filepath 
- * into a string vector split by whitespace, omitting punctuations
- * and strings less than length four.
+ * into a map of word usage, omitting punctuation and case.
  * 
  * @param filepath the path to the file
- * @return std::vector<std::string> of the file contents
+ * @return std::map<std::string, int> of the usage of each word
  */
-std::vector<std::string> processFile(const std::string& filepath)
+std::map<std::string, int> wordUsageFromFile(const std::string& filepath)
 { 
-  std::vector<std::string> words;
+  std::map<std::string, int> usage;
   std::ifstream file(filepath);
 
+  // read characters between whitespace
   std::string word;
   while(file >> word) {
-    word = toLowerStr(removePunct(word));
-    if (word.size() <= 4) {
+    // split word by hyphens
+    std::istringstream ss(word);
+    std::string wordWithoutHyphens;
+    while(std::getline(ss, wordWithoutHyphens, '-')); 
+
+    wordWithoutHyphens = toLowerStr(removePunct(wordWithoutHyphens));
+
+    if (wordWithoutHyphens.size() <= 4) {
       continue;
     }
-    words.push_back(word);
+ 
+    usage[wordWithoutHyphens]++;
   }
   
-  return words;
-}
-
-/** Counts the number of times a word appears (usage) in a given string vector.
- * 
- * @param words the string vector to count
- * @return std::map<std::string, int> maps each word to the number of usages.
- */
-std::map<std::string, int> countWords(const std::vector<std::string>& words) 
-{
-  std::map<std::string, int> usage;
-
-  for (int i = 0; i < words.size(); i++) {
-    usage[words[i]]++; 
-  }
   return usage;
 }
 
@@ -120,10 +113,10 @@ int main(int argc, const char** argv)
     return 0;
   }
 
-  std::vector<std::string> words = processFile(argv[1]);
+  auto usage = wordUsageFromFile(argv[1]);
 
-  // count and sort the usage
-  auto usage = sortByValue(countWords(words));
+  // count and sort the usage map into vector of pairs
+  auto usageVector = sortByValue(usage);
 
   std::ofstream outdata;
   outdata.open(argv[2]);
@@ -131,6 +124,6 @@ int main(int argc, const char** argv)
   outdata << "Word\tUsage\n" << std::endl;
   // print everything out using the iterator :)
   for (auto it = usage.begin(); it != usage.end(); it++) {
-    outdata << it-> first << "\t" << it -> second << std::endl;
+    outdata << it->first << "\t" << it ->second << std::endl;
   }
 }
