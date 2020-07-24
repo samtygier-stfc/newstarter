@@ -76,7 +76,7 @@ void depunctuate(std::string& line) {
 
   line.erase(
     std::remove_if(line.begin() , line.end(), 
-    [charRemove] (const char& c) {
+    [charRemove, cRSize] (const char& c) {
       for(int i = 0; i < cRSize; ++i) {
         if(c == charRemove[i]) {
           return true;
