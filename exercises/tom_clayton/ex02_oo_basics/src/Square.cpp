@@ -3,7 +3,7 @@
 //Square constructor
 Square::Square(double side1) {
   m_side1 = side1;
-  m_perimeter = calcPerimeter());
+  m_perimeter = calcPerimeter();
   Shape::setArea(calcArea());
   m_type = ("Square");
   Shape::setSides(4);

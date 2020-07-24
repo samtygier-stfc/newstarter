@@ -54,7 +54,7 @@ void ShapeSorter::printSortShapesByArea() {
     std::cout << "Vector empty, no shapes to show" << std::endl;
     return;
   }
-  std::sort(m_shpVect.begin(), m_shpVect.end(), ShapeSorter::areaCompare);
+  std::sort(m_shpVect.begin(), m_shpVect.end(), areaCompare);
   for(auto &shape : m_shpVect) {
     std::cout << shape->shapeToString() << std::endl;
   }
@@ -68,7 +68,7 @@ void ShapeSorter::printSortShapesByPerimeter() {
     std::cout << "Vector empty, no shapes to show" << std::endl;
     return;
   }
-  std::sort(m_shpVect.begin(), m_shpVect.end(), ShapeSorter::periCompare);
+  std::sort(m_shpVect.begin(), m_shpVect.end(), periCompare);
   for(auto &shape : m_shpVect) {
     std::cout << shape->shapeToString() << std::endl;
   }
