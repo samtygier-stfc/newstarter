@@ -9,7 +9,7 @@
  * 
  *  @return boolean to determine larger area
  */ 
-static bool areaCompare(std::shared_ptr<Shape> s1, std::shared_ptr<Shape> s2) {
+static bool areaCompare(std::shared_ptr<Shape>& s1, std::shared_ptr<Shape>& s2) {
   return (s1->getArea() > s2->getArea());
 }
 
@@ -38,9 +38,9 @@ typedef std::vector<std::shared_ptr<Shape>>::size_type VecSz;
  */ 
 const void ShapeSorter::printShapesType(const std::string type) {
   bool shapeTypeFound = false;
-  for(auto &shape : m_shpVect) {
-    if(shape->getType().compare(type) == 0) {
-      std::cout << shape->shapeToString() << std::endl;
+  for(auto shape_ptr : m_shpVect) {
+    if(shape_ptr->getType().compare(type) == 0) {
+      std::cout << shape_ptr->shapeToString() << std::endl;
       shapeTypeFound = true;
     }
   }
@@ -55,9 +55,9 @@ const void ShapeSorter::printShapesType(const std::string type) {
  */ 
 const void ShapeSorter::printShapesSides(int sides) {
   bool shapeTypeFound = false;
-  for(auto &shape : m_shpVect) {
-    if(shape->getSides() == sides) {
-      std::cout << shape->shapeToString() << std::endl;
+  for(auto shape_ptr : m_shpVect) {
+    if(shape_ptr->getSides() == sides) {
+      std::cout << shape_ptr->shapeToString() << std::endl;
       shapeTypeFound = true;
     }
   }
