@@ -11,6 +11,7 @@ double Circle::calculateArea() {
   return m_area;
 }
 
+
 double Circle::calculatePerimeter() {
   if (m_perimeter == 0) {
     m_perimeter = ( 2 * M_PI*m_radius);
