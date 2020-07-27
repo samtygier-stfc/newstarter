@@ -45,18 +45,19 @@ int main(int, char **)
     varietyOfShapes.addShape(std::make_shared<Square>(largestSquare));
     varietyOfShapes.addShape(std::make_shared<Triangle>(largestTriangle));
     
+    std::vector <std::string> shapeTypes{"Square","Rectangle","Triangle","Circle"};
 
     std::cout << "---------------------------------------Squares---------------------------------------------------" << std::endl;
-    varietyOfShapes.displayByType(std::string{ "Square" });
+    varietyOfShapes.displayByType(shapeTypes[0]);
 
     std::cout << "---------------------------------------Rectangles---------------------------------------------------" << std::endl;
-    varietyOfShapes.displayByType(std::string{ "Rectangle" });
+    varietyOfShapes.displayByType(shapeTypes[1]);
 
     std::cout << "---------------------------------------Triangles---------------------------------------------------" << std::endl;
-    varietyOfShapes.displayByType(std::string{ "Triangle" });
+    varietyOfShapes.displayByType(shapeTypes[2]);
 
     std::cout << "---------------------------------------Circle---------------------------------------------------" << std::endl;
-    varietyOfShapes.displayByType(std::string{ "Circle" });
+    varietyOfShapes.displayByType(shapeTypes[3]);
 
     std::cout << "---------------------------------------By Area---------------------------------------------------" << std::endl;
     varietyOfShapes.displayByArea();
