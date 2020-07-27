@@ -99,13 +99,13 @@ int main() {
     */
     
     holderString = getWord(fileToRead);
-    auto location = std::find_if(vectorOfCountsAndWords.begin(),vectorOfCountsAndWords.end(), myPredicator);
+    
     if (holderString.size() > 4){
+      auto location = std::find_if(vectorOfCountsAndWords.begin(), vectorOfCountsAndWords.end(), myPredicator);
     if (location == vectorOfCountsAndWords.end()) {
       vectorOfCountsAndWords.emplace_back(1,holderString);
     }
     else {
-      
         vectorOfCountsAndWords[std::distance(vectorOfCountsAndWords.begin(), location)].first += 1;
       }
     }
