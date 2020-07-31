@@ -1,12 +1,10 @@
 #include "Square.h"
 
 //Square constructor
-Square::Square(double side1) {
+Square::Square(double side1) : Shape("Square", 4) {
   m_side1 = side1;
-  m_perimeter = calcPerimeter();
+  Shape::setPerimeter(calcPerimeter());
   Shape::setArea(calcArea());
-  m_type = ("Square");
-  Shape::setSides(4);
 }
 
 // Implementation of Shape virtual functions

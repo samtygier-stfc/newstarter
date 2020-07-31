@@ -10,6 +10,10 @@ class Shape
     int m_sides;
     
   public:
+
+    Shape(std::string type, int sides);
+    virtual ~Shape();
+
     std::string shapeToString();
 
     //Virtual functions

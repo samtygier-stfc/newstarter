@@ -1,5 +1,10 @@
 #include "Shape.h"
-#include <string.h>
+
+// Shape constructor
+Shape::Shape(std::string stype, int sides) {
+  m_type = stype;
+  m_sides = sides;
+}
 
 /** Return a string containing information for a given shape
  *  @return shape string

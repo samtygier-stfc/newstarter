@@ -1,6 +1,8 @@
 # Builds directory
 builds/*
 
+tom_clayton/ex01_basics/*
+
 .vscode/*
 
 # Compiled Object files

@@ -8,8 +8,9 @@ int main(int argc, const char** argv) {
 
   std::vector<std::shared_ptr<Shape>> shp_vect;
   
-  shp_vect.push_back(std::make_shared<Square>(3));
+  std::shared_ptr<Square> sq1 = std::make_shared<Square>(3);
+  shp_vect.push_back(sq1);
 
-  ShapeSorter ss(shp_vect);
-  ss.printShapesType("Square");
+  //ShapeSorter ss(shp_vect);
+  //ss.printShapesType("Square");
 }
