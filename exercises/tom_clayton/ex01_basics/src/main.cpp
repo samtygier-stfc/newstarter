@@ -23,7 +23,7 @@ std::string getInputFn() {
 }
 
 /** Split up a string and return a vector of words with
- *  len <=4, and converted to lower case
+ *  len > 4, and converted to lower case
  *  @param s, reference to string s
  *  @param delim, character to use as delimiter
  * 
@@ -49,17 +49,6 @@ std::vector<std::string> splitByDelim(const std::string& s, const char delim) {
 
   return tokens;
 }
-
-/** Returns different integer values to classify an input char as
- *  either non-punctuation, puntuation to be removed or to be
- *  replaced with whitespace.
- *  Specified punctuation to be removed: .,?'"!()
- *  Specified punctuation to be replaced with whitespace: -
- * 
- *  @param c - Reference to the character in question
- *  @return int 0 if non-punct, 1 if punct to remove, 2 if punct to
- *  replace
- */
 
 /** Removes most puntuation from a string, and replaces hyphens
  *  with whitespace

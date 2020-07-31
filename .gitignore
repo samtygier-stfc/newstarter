@@ -28,3 +28,4 @@ builds/*
 
 # Setup and debug JSON files
 .vscode/*
+*.JSON
