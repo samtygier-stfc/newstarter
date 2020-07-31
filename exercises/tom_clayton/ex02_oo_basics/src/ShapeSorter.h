@@ -5,9 +5,12 @@
 
 class ShapeSorter
 {
+
+  typedef std::vector<std::shared_ptr<Shape>>::size_type VecSz;
+
   private: 
     std::vector<std::shared_ptr<Shape>> m_shpVect;
-    size_t m_vecLen;
+    VecSz m_vecLen;
     
   public:
     ShapeSorter(std::vector<std::shared_ptr<Shape>> shpVect);
@@ -22,7 +25,7 @@ class ShapeSorter
 
     //Member variable accessors and mutators
     std::vector<std::shared_ptr<Shape>> getShpVect();
-    int getVecLen();
+    VecSz getVecLen();
 
     void setShpVect(std::vector<std::shared_ptr<Shape>> shpVect);
 };

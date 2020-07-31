@@ -105,7 +105,7 @@ std::vector<std::shared_ptr<Shape>> ShapeSorter::getShpVect() {
   return m_shpVect;
 }
 
-int ShapeSorter::getVecLen() {
+ShapeSorter::VecSz ShapeSorter::getVecLen() {
   return m_vecLen;
 }
 
