@@ -4,12 +4,10 @@
 const double PI = 2 * acos(0.0);
 
 //Circle constructor
-Circle::Circle(double radius) {
+Circle::Circle(double radius) : Shape("Circle", 0) {
   m_radius = radius;
   Shape::setPerimeter(calcPerimeter());
   Shape::setArea(calcArea());
-  Shape::setType("Circle");
-  Shape::setSides(0);
 }
 
 

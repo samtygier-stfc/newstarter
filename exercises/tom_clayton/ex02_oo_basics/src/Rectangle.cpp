@@ -1,13 +1,11 @@
 #include "Rectangle.h"
 
 //Rectangle constructor
-Rectangle::Rectangle(double side1, double side2) {
+Rectangle::Rectangle(double side1, double side2) : Shape("Rectangle", 4) {
   m_side1 = side1;
   m_side2 = side2;
   Shape::setPerimeter(calcPerimeter());
   Shape::setArea(calcArea());
-  Shape::setType("Rectangle");
-  Shape::setSides(4);
 }
 
 // Implementation of Shape virtual functions

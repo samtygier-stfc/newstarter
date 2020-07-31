@@ -29,9 +29,6 @@ ShapeSorter::ShapeSorter(std::vector<std::shared_ptr<Shape>> shpVect) {
   m_vecLen = shpVect.size();
 }
 
-// Typedef to be used to iterate through the vector
-typedef std::vector<std::shared_ptr<Shape>>::size_type VecSz;
-
 /** Print out all shapes of a given type, or an error message if no
  *  shapes of that type are found
  *  @param string type for type of string

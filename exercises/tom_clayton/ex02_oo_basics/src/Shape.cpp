@@ -6,6 +6,8 @@ Shape::Shape(std::string stype, int sides) {
   m_sides = sides;
 }
 
+Shape::~Shape() {};
+
 /** Return a string containing information for a given shape
  *  @return shape string
  */ 

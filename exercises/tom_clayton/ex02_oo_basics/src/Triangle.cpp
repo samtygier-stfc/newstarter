@@ -2,13 +2,11 @@
 #include <math.h> 
 
 //Triangle constructor
-Triangle::Triangle(double height, double base) {
+Triangle::Triangle(double height, double base) : Shape("Triangle", 3){
   m_height = height;
   m_base = base;
   Shape::setPerimeter(calcPerimeter());
   Shape::setArea(calcArea());
-  Shape::setType("Triangle");
-  Shape::setSides(3);
 }
 
 /** Calculate the perimeter of an isoceles triangle
