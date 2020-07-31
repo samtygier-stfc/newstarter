@@ -12,5 +12,5 @@ class Square: public Shape {
     double getPerimeter() const override;
 
   private:
-    const int m_side;
+    const double m_side;
 };
