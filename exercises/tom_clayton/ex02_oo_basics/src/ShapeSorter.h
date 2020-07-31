@@ -7,7 +7,7 @@ class ShapeSorter
 {
   private: 
     std::vector<std::shared_ptr<Shape>> m_shpVect;
-    int m_vecLen;
+    size_t m_vecLen;
     
   public:
     ShapeSorter(std::vector<std::shared_ptr<Shape>> shpVect);
