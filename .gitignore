@@ -6,6 +6,7 @@ builds/*
 *.lo
 *.o
 *.obj
+*.opendb
 
 # Compiled Dynamic libraries
 *.so

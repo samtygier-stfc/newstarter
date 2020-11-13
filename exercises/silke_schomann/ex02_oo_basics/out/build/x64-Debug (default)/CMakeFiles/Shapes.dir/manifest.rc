@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Users/sscho/source/git/exercises/silke_schomann/ex02_oo_basics/out/build/x64-Debug (default)/CMakeFiles/Shapes.dir/embed.manifest"

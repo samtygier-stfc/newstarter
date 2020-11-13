@@ -1,0 +1,5 @@
+# ninja log v5
+1	1570	626903908	CMakeFiles/WordCounter.dir/src/main.cpp.obj	d7783ed82937a057
+1571	2533	626903909	bin/WordCounter.exe	49bb9b16b6f63b6d
+1	1534	626903968	CMakeFiles/WordCounter.dir/src/main.cpp.obj	d7783ed82937a057
+1535	2027	626903968	bin/WordCounter.exe	49bb9b16b6f63b6d
