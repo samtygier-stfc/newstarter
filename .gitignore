@@ -1,5 +1,6 @@
 # Builds directory
 builds/*
+out/*
 
 # Compiled Object files
 *.slo
