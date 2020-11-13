@@ -6,13 +6,25 @@
  */
 
 #include <iostream>
+#include <memory>
+#include <vector>
 
 #include "shape.h"
 #include "circle.h"
+#include "rectangle.h"
+#include "square.h"
+#include "triangle.h"
 
 int main(int, char **)
 {
-	Circle c1(3);
-	std::cout << c1.getType() << " " << c1.getSides() << " " << c1.getPerimeter() << " " << c1.getArea() << std::endl;
-	std::cout << c1 << std::endl;
+	std::vector<std::unique_ptr<Shape>> shapes;
+	shapes.push_back(std::make_unique<Circle>(3));
+	shapes.push_back(std::make_unique<Rectangle>(2,4));
+	shapes.push_back(std::make_unique<Square>(1.414));
+	shapes.push_back(std::make_unique<Triangle>(5,6));
+	
+	for(auto &s: shapes)
+	{
+		std::cout << *s << std::endl;
+	}
 }
