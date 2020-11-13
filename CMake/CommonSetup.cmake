@@ -15,6 +15,10 @@ set_property ( GLOBAL PROPERTY USE_FOLDERS ON )
 set ( CMAKE_CXX_STANDARD 17 )
 set ( CMAKE_CXX_STANDARD_REQUIRED ON )
 
-add_compile_options(-Wall -Wextra -pedantic -Werror)
+if (MSVC)
+    add_compile_options(/W4 /WX)
+else()
+    add_compile_options(-Wall -Wextra -pedantic -Werror)
+endif()
 
 add_definitions ( -D_USE_MATH_DEFINES )
