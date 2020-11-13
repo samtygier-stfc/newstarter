@@ -1,0 +1,3 @@
+C:/Users/sscho/source/git/exercises/silke_schomann/ex01_basics/out/build/x64-Debug (default)/CMakeFiles/WordCounter.dir
+C:/Users/sscho/source/git/exercises/silke_schomann/ex01_basics/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+C:/Users/sscho/source/git/exercises/silke_schomann/ex01_basics/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
