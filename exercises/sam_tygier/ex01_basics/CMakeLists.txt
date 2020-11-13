@@ -18,10 +18,12 @@ include ( CommonSetup )
 
 set ( SRC_FILES
   src/main.cpp
+  src/words.cpp
   # add any additional source files here
 )
 
 set ( HDR_FILES
+  src/words.h
   # add any additional header files here
 )
 
