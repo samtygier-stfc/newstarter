@@ -6,6 +6,7 @@
 
 class Shape{
 public:
+	virtual ~Shape() {}
 	virtual std::string getType() const = 0;
 	virtual signed int getSides() const = 0;
 	virtual double getPerimeter() const = 0;

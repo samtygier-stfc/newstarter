@@ -12,7 +12,7 @@ std::string normaliseWord(const std::string& word)
 {
 	std::string normWord = word; 
 	std::transform(normWord.begin(), normWord.end(), normWord.begin(),
-	[](unsigned char c){ return std::tolower(c); });
+	[](unsigned char c){ return (unsigned char) std::tolower(c); });
 	
 	normWord.erase(std::remove_if(normWord.begin(), normWord.end(),
 	[](unsigned char c){ return PUNCT.find(c) != std::string::npos; }), normWord.end());
