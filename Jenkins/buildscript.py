@@ -64,7 +64,7 @@ def run_cmake(cmakelists_path):
         generator = 'Visual Studio 16 2019'
         arch = 'x64'
         cmd = [cmake_exe, "-G", generator, "-A", arch, cmakelists_path]
-        print("Running '%s'" % " ".join(cmd))
+        print(f"Running '{' '.join(cmd)}'")
     else:
         try:
             cmake_exe = "cmake3"
@@ -74,7 +74,7 @@ def run_cmake(cmakelists_path):
         generator = '\'Unix Makefiles\''
         cmd = [cmake_exe, "-G", str(generator), str(cmakelists_path)]
         cmd = make_scl_command(cmd)
-        print("Running '%s'" % cmd)
+        print(f"Running '{cmd}'")
     status = subp.call(cmd, shell=True)
 
 
@@ -88,7 +88,7 @@ def generate_project(src_root, build_root):
         os.chdir(build_root)
         run_cmake(src_root)
     except Exception as exc:
-        print("Error: %s" % str(exc))
+        print(f"Error: {str(exc)}")
     # Get back to where we started
     os.chdir(saveddir)
 
@@ -102,7 +102,7 @@ def build(build_root):
                "/verbosity:minimal", "/p:Configuration=Release"]
     else:
         cmd = make_scl_command(["make", "-C", build_root])
-    print("Running '%s'" % cmd)
+    print(f"Running '{cmd}'")
     return subp.call(cmd, shell=True)
 
 
@@ -120,9 +120,9 @@ def check_build_is_sane():
 
 # Always perform a clean build
 if os.path.exists(BUILDS_ROOT):
-    print("Removing %s" % BUILDS_ROOT)
+    print(f"Removing {BUILDS_ROOT}")
     shutil.rmtree(BUILDS_ROOT)
-print("Making %s" % BUILDS_ROOT)
+print(f"Making {BUILDS_ROOT}")
 os.mkdir(BUILDS_ROOT)
 
 dirnames = os.listdir(PROJECTS_ROOT)
