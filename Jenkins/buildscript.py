@@ -19,7 +19,7 @@ import sys
 try:
   WORKSPACE = os.environ["WORKSPACE"]
 except KeyError:
-  print "WORKSPACE environment variable not found.\nThe build script assumes that a WORKSPACE environment variable points at the root of the source directory."
+  print("WORKSPACE environment variable not found.\nThe build script assumes that a WORKSPACE environment variable points at the root of the source directory.")
   sys.exit(1)
 
 PROJECTS_ROOT = os.path.join(WORKSPACE, "exercises")
@@ -60,7 +60,7 @@ def run_cmake(cmakelists_path):
         generator = 'Visual Studio 16 2019'
         arch = 'x64'
         cmd = [cmake_exe, "-G", generator, "-A", arch, cmakelists_path]
-        print "Running '%s'" % " ".join(cmd)
+        print("Running '%s'" % " ".join(cmd))
     else:
         try:
             cmake_exe = "cmake3"
@@ -70,7 +70,7 @@ def run_cmake(cmakelists_path):
         generator = '\'Unix Makefiles\''
         cmd = [cmake_exe, "-G", str(generator), str(cmakelists_path)]
         cmd = make_scl_command(cmd)
-        print "Running '%s'" % cmd
+        print("Running '%s'" % cmd)
     status = subp.call(cmd, shell=True)
 
 def generate_project(src_root, build_root):
@@ -82,8 +82,8 @@ def generate_project(src_root, build_root):
     try:
         os.chdir(build_root)
         run_cmake(src_root)
-    except Exception, exc:
-        print "Error: %s" % str(exc)
+    except Exception as exc:
+        print("Error: %s" % str(exc))
     # Get back to where we started
     os.chdir(saveddir)
 
@@ -96,16 +96,16 @@ def build(build_root):
                "/verbosity:minimal", "/p:Configuration=Release"]
     else:
         cmd = make_scl_command(["make", "-C", build_root])
-    print "Running '%s'" % cmd
+    print("Running '%s'" % cmd)
     return subp.call(cmd, shell=True)
 
 ################### Main #########################################################
 
 # Always perform a clean build
 if os.path.exists(BUILDS_ROOT):
-    print "Removing %s" % BUILDS_ROOT
+    print("Removing %s" % BUILDS_ROOT)
     shutil.rmtree(BUILDS_ROOT)
-print "Making %s" % BUILDS_ROOT
+print("Making %s" % BUILDS_ROOT)
 os.mkdir(BUILDS_ROOT)
 
 dirnames = os.listdir(PROJECTS_ROOT)
@@ -115,12 +115,12 @@ if len(dirnames) == 0:
 
 statuses = []
 for dirname in dirnames:
-    print "Building",dirname
+    print("Building",dirname)
     src_root = os.path.join(PROJECTS_ROOT, dirname)
     build_root = os.path.join(BUILDS_ROOT, dirname)
     os.mkdir(build_root)
     generate_project(src_root, build_root)
     statuses.append(build(build_root))
     ##
-all_passed = all(map(lambda x: x == 0, statuses))
+all_passed = all([x == 0 for x in statuses])
 sys.exit(0 if all_passed else 1)
