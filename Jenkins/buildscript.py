@@ -17,13 +17,14 @@ import sys
 
 # Common variables
 try:
-  WORKSPACE = os.environ["WORKSPACE"]
+    WORKSPACE = os.environ["WORKSPACE"]
 except KeyError:
-  print("WORKSPACE environment variable not found.\nThe build script assumes that a WORKSPACE environment variable points at the root of the source directory.")
-  sys.exit(1)
+    print("WORKSPACE environment variable not found.\nThe build script assumes that a WORKSPACE environment variable points at the root of the source directory.")
+    sys.exit(1)
 
-PROJECTS_ROOT = os.path.join(WORKSPACE, "exercises")
-TEMPLATE_DIR_NAME = "template" #skip this directory
+PROJECTS_ROOT = os.path.abspath(os.path.join(WORKSPACE, "exercises"))
+HELLO_WORLD_DIR_NAME = "hello_world"
+TEMPLATE_DIR_NAME = "template"  # skip this directory
 
 # Build directory structure
 #   builds/
@@ -31,28 +32,31 @@ TEMPLATE_DIR_NAME = "template" #skip this directory
 #         dirname2/
 #         ...
 # where dirname1 etc are the directories under PROJECTS_ROOT
-BUILDS_ROOT = os.path.join(WORKSPACE, "builds")
+BUILDS_ROOT = os.path.abspath(os.path.join(WORKSPACE, "builds"))
 
 ################### Functions #########################################################
 
+
 def make_scl_command(command_list):
-  dist = platform.linux_distribution()
-  command_str = " ".join(command_list)
-  quoted_command_str = "\"{0}\"".format(command_str)
-  if dist[0] in ('Red Hat', 'CentOS Linux'):
-    if dist[1].startswith('6') or dist[1].startswith('7'):
-      devtoolset = '7' if dist[1].startswith('7') else '2'
-      return " ".join(["scl", "enable", "devtoolset-{0}".format(devtoolset), "{0}".format(quoted_command_str)])
+    dist = platform.linux_distribution()
+    command_str = " ".join(command_list)
+    quoted_command_str = "\"{0}\"".format(command_str)
+    if dist[0] in ('Red Hat', 'CentOS Linux'):
+        if dist[1].startswith('6') or dist[1].startswith('7'):
+            devtoolset = '7' if dist[1].startswith('7') else '2'
+            return " ".join(["scl", "enable", "devtoolset-{0}".format(devtoolset), "{0}".format(quoted_command_str)])
+        else:
+            return command_str
     else:
-      return command_str
-  else:
-    return command_str
+        return command_str
+
 
 def is_windows():
     if sys.platform == "win32":
         return True
     else:
         return False
+
 
 def run_cmake(cmakelists_path):
     if is_windows():
@@ -73,6 +77,7 @@ def run_cmake(cmakelists_path):
         print("Running '%s'" % cmd)
     status = subp.call(cmd, shell=True)
 
+
 def generate_project(src_root, build_root):
     """
     Run cmake in the given build_root., assuming there is a CMakeLists.txt file
@@ -87,6 +92,7 @@ def generate_project(src_root, build_root):
     # Get back to where we started
     os.chdir(saveddir)
 
+
 def build(build_root):
     """
     Build the code in the build_root directory
@@ -99,7 +105,18 @@ def build(build_root):
     print("Running '%s'" % cmd)
     return subp.call(cmd, shell=True)
 
+
+def check_build_is_sane():
+    src_dir = os.path.join(PROJECTS_ROOT, HELLO_WORLD_DIR_NAME)
+    dest_dir = os.path.join(BUILDS_ROOT, HELLO_WORLD_DIR_NAME)
+    os.mkdir(dest_dir)
+    generate_project(src_dir, dest_dir)
+    print("Checking a sample project can be built")
+    if build(dest_dir) != 0:
+        raise RuntimeError("Cannot build sample project")
+
 ################### Main #########################################################
+
 
 # Always perform a clean build
 if os.path.exists(BUILDS_ROOT):
@@ -110,14 +127,18 @@ os.mkdir(BUILDS_ROOT)
 
 dirnames = os.listdir(PROJECTS_ROOT)
 dirnames.remove(TEMPLATE_DIR_NAME)
+dirnames.remove(HELLO_WORLD_DIR_NAME)
+
+check_build_is_sane()
+
 if len(dirnames) == 0:
     raise RuntimeError("No projects found to build")
 
 statuses = []
 for dirname in dirnames:
-    print("Building",dirname)
-    src_root = os.path.abspath(os.path.join(PROJECTS_ROOT, dirname))
-    build_root = os.path.abspath(os.path.join(BUILDS_ROOT, dirname))
+    print("Building", dirname)
+    src_root = os.path.join(PROJECTS_ROOT, dirname)
+    build_root = os.path.join(BUILDS_ROOT, dirname)
     os.mkdir(build_root)
     generate_project(src_root, build_root)
     statuses.append(build(build_root))
