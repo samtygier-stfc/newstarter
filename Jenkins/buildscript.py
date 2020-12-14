@@ -39,7 +39,7 @@ def make_scl_command(command_list):
   dist = platform.linux_distribution()
   command_str = " ".join(command_list)
   quoted_command_str = "\"{0}\"".format(command_str)
-  if 'Red Hat' in dist[0]:
+  if dist[0] in ('Red Hat', 'CentOS Linux'):
     if dist[1].startswith('6') or dist[1].startswith('7'):
       devtoolset = '7' if dist[1].startswith('7') else '2'
       return " ".join(["scl", "enable", "devtoolset-{0}".format(devtoolset), "{0}".format(quoted_command_str)])
@@ -64,7 +64,7 @@ def run_cmake(cmakelists_path):
     else:
         try:
             cmake_exe = "cmake3"
-            subp.check_call([cmake_exe, "-h"])
+            subp.check_call([cmake_exe, "--version"])
         except OSError:
             cmake_exe = "cmake"
         generator = '\'Unix Makefiles\''
@@ -116,8 +116,8 @@ if len(dirnames) == 0:
 statuses = []
 for dirname in dirnames:
     print("Building",dirname)
-    src_root = os.path.join(PROJECTS_ROOT, dirname)
-    build_root = os.path.join(BUILDS_ROOT, dirname)
+    src_root = os.path.abspath(os.path.join(PROJECTS_ROOT, dirname))
+    build_root = os.path.abspath(os.path.join(BUILDS_ROOT, dirname))
     os.mkdir(build_root)
     generate_project(src_root, build_root)
     statuses.append(build(build_root))
