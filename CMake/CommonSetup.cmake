@@ -14,5 +14,14 @@ set_property ( GLOBAL PROPERTY USE_FOLDERS ON )
 
 set ( CMAKE_CXX_STANDARD 17 )
 set ( CMAKE_CXX_STANDARD_REQUIRED ON )
+set ( CMAKE_CXX_EXTENSIONS OFF )
+
+# Enable warnings in all subprojects
+if(MSVC)
+  add_compile_options(/W3 /WX)  # W3 avoids std lib warnings
+else()
+  add_compile_options(-Wall -Wextra -pedantic -Werror)
+endif()
+
 
 add_definitions ( -D_USE_MATH_DEFINES )
