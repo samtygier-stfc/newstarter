@@ -8,15 +8,15 @@
 #include "shape.h"
 
 
-std::string Shape::get_type()
+std::string Shape::getType()
 {
   return m_type;
 }
-int Shape::get_sides()
+int Shape::getSides()
 {
   return m_sides;
 }
-int Shape::get_ID()
+int Shape::getID()
 {
   return m_ID;
 }
@@ -26,11 +26,11 @@ std::unique_ptr<Shape> Triangle::clone()
 {
   return std::make_unique<Triangle>(*this);
 }
-double Triangle::get_area()
+double Triangle::getArea()
 {
   return 0.5 * m_base * m_height;;
 }
-double Triangle::get_perimeter()
+double Triangle::getPerimeter()
 {
   return m_base + 2*sqrt(pow(m_height,2) + (pow(m_base,2)/4));
 }
@@ -40,11 +40,11 @@ std::unique_ptr<Shape> Square::clone()
 {
   return std::make_unique<Square>(*this);
 }
-double Square::get_area()
+double Square::getArea()
 {
   return pow(m_side1,2);
 }
-double Square::get_perimeter()
+double Square::getPerimeter()
 {
   return m_side1*4;
 }
@@ -54,11 +54,11 @@ std::unique_ptr<Shape> Rectangle::clone()
 {
   return std::make_unique<Rectangle>(*this);
 }
-double Rectangle::get_area()
+double Rectangle::getArea()
 {
   return m_side1 * m_side2;
 }
-double Rectangle::get_perimeter()
+double Rectangle::getPerimeter()
 {
   return (2*m_side1) + (2*m_side2);
 }
@@ -68,40 +68,40 @@ std::unique_ptr<Shape> Circle::clone()
 {
   return std::make_unique<Circle>(*this);
 }
-double Circle::get_area()
+double Circle::getArea()
 {
   return M_PI * pow(m_radius,2);
 }
-double Circle::get_perimeter()
+double Circle::getPerimeter()
 {
   return 2 * M_PI * m_radius;
 }
 
 
-void ShapeSorter::add_new(std::unique_ptr<Shape> new_shape)
+void ShapeSorter::addNew(std::unique_ptr<Shape> newShape)
 {
-  shapes.emplace_back(std::move(new_shape));
+  m_shapes.emplace_back(std::move(newShape));
 }
 
-void ShapeSorter::all_of_one_type(std::string type_requested)
+void ShapeSorter::allOneType(std::string typeRequested)
 {
-  std::vector<int> type_vec;
-  for (auto const& el : shapes)
+  std::vector<int> typeVec;
+  for (auto const& el : m_shapes)
   {
-    std::string shape_type = el->get_type();
-    if (shape_type == type_requested)
+    std::string shapeType = el->getType();
+    if (shapeType == typeRequested)
     {
-      type_vec.push_back(el->get_ID());
+      typeVec.push_back(el->getID());
     }
   }
-  if (type_vec.size() == 0)
+  if (typeVec.size() == 0)
   {
-    std::cout << "None of shape type " << type_requested << " were found.";
+    std::cout << "None of shape type " << typeRequested << " were found.";
   }
   else
   {
-    std::cout << "The shapes of type " << type_requested << " are:  ";
-    for (auto const& el: type_vec)
+    std::cout << "The shapes of type " << typeRequested << " are:  ";
+    for (auto const& el: typeVec)
     {
       std::cout << el << "  ";
     }
@@ -109,30 +109,30 @@ void ShapeSorter::all_of_one_type(std::string type_requested)
   std::cout << "\n";
 }
 
-void ShapeSorter::match_number_of_sides(int sides_requested)
+void ShapeSorter::matchSideNumber(int sidesRequested)
 {
   std::string plural = "sides";
-  if (sides_requested == 1)
+  if (sidesRequested == 1)
   {
     plural = "side";
   }
-  std::vector<int> side_vec;
-  for (auto const& el: shapes)
+  std::vector<int> sideVec;
+  for (auto const& el: m_shapes)
   {
-    int num_sides = el->get_sides();
-    if (num_sides == sides_requested)
+    int numSides = el->getSides();
+    if (numSides == sidesRequested)
     {
-      side_vec.push_back(el->get_ID());
+      sideVec.push_back(el->getID());
     }
   }
-  if (side_vec.size() == 0)
+  if (sideVec.size() == 0)
   {
-    std::cout << "No shapes with " << sides_requested << " sides were found.";
+    std::cout << "No shapes with " << sidesRequested << " sides were found.";
   }
   else
   {
-    std::cout << "The shapes with " << sides_requested << " " << plural << " are:  ";
-    for (auto const& el: side_vec)
+    std::cout << "The shapes with " << sidesRequested << " " << plural << " are:  ";
+    for (auto const& el: sideVec)
     {
       std::cout << el << "  ";
     }
@@ -140,65 +140,53 @@ void ShapeSorter::match_number_of_sides(int sides_requested)
   std::cout << "\n";
 }
 
-void ShapeSorter::area_descending()
+void ShapeSorter::areaDescending()
 {
   std::cout << "\nShape Number      Area / sq u \n";
   std::cout << "############      ###########\n\n";
 
-  std::vector<std::unique_ptr<Shape>> shapes_by_area;
-  shapes_by_area.reserve(shapes.size());
-  for (const auto& el : shapes)
-    shapes_by_area.emplace_back(el->clone());
+  std::vector<std::unique_ptr<Shape>> shapesByArea;
+  shapesByArea.reserve(m_shapes.size());
+  for (const auto& el : m_shapes)
+    shapesByArea.emplace_back(el->clone());
 
-  struct {
-      bool operator()(std::unique_ptr<Shape>& a, std::unique_ptr<Shape>& b) const
-      {   
-          return a->get_area() > b->get_area();
-      }   
+  std::sort(shapesByArea.begin(), shapesByArea.end(), 
+    [](std::unique_ptr<Shape>& a, std::unique_ptr<Shape>& b)
+    { return a->getArea() > b->getArea();} );
 
-  } descending_area;
-
-  std::sort(shapes_by_area.begin(), shapes_by_area.end(), descending_area);
-
-  for (auto const&  el : shapes_by_area)
+  for (auto const&  el : shapesByArea)
   {
-    int ID = el->get_ID();
-    double area = el->get_area();
-    size_t ID_len = std::to_string(ID).length();
-    size_t area_len = std::to_string(area).length();
-    std::cout << std::string(7-ID_len, ' ') << ID << std::string(25-area_len, ' ') << area << "\n";
+    int ID = el->getID();
+    double area = el->getArea();
+    size_t lenID = std::to_string(ID).length();
+    size_t lenArea = std::to_string(area).length();
+    std::cout << std::string(7-lenID, ' ') << ID << std::string(25-lenArea, ' ') << area << "\n";
   }
 
   std::cout << "\n";
 }
 
-void ShapeSorter::perimeter_descending()
+void ShapeSorter::perimeterDescending()
 {
   std::cout << "\nShape Number      Perimeter / u \n";
   std::cout << "############      #############\n\n";
 
-  std::vector<std::unique_ptr<Shape>> shapes_by_perimeter;
-  shapes_by_perimeter.reserve(shapes.size());
-  for (const auto& el : shapes)
-    shapes_by_perimeter.emplace_back(el->clone());
+  std::vector<std::unique_ptr<Shape>> shapesByPerimeter;
+  shapesByPerimeter.reserve(m_shapes.size());
+  for (const auto& el : m_shapes)
+    shapesByPerimeter.emplace_back(el->clone());
 
-  struct {
-    bool operator()(std::unique_ptr<Shape>& a, std::unique_ptr<Shape>& b) const
-    {   
-        return a->get_perimeter() > b->get_perimeter();
-    }   
+  std::sort(shapesByPerimeter.begin(), shapesByPerimeter.end(),
+    [](std::unique_ptr<Shape>& a, std::unique_ptr<Shape>& b)
+    { return a->getPerimeter() > b->getPerimeter();} );
 
-  } descending_perimeter;
-
-  std::sort(shapes_by_perimeter.begin(), shapes_by_perimeter.end(), descending_perimeter);
-
-  for (auto const&  el : shapes_by_perimeter)
+  for (auto const&  el : shapesByPerimeter)
   {
-    int ID = el->get_ID();
-    double perimeter = el->get_perimeter();
-    size_t ID_len = std::to_string(ID).length();
-    size_t perimeter_len = std::to_string(perimeter).length();
-    std::cout << std::string(7-ID_len, ' ') << ID << std::string(25-perimeter_len, ' ') << perimeter << "\n";
+    int ID = el->getID();
+    double perimeter = el->getPerimeter();
+    size_t lenID = std::to_string(ID).length();
+    size_t lenPerimeter = std::to_string(perimeter).length();
+    std::cout << std::string(7-lenID, ' ') << ID << std::string(25-lenPerimeter, ' ') << perimeter << "\n";
   }
 
   std::cout << "\n";
