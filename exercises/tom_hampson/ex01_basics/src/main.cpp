@@ -1,5 +1,6 @@
 /**
- * Skeleton main routine
+ * Read text file and count instances of words with >= 4 letters, then save the information to a file.
+ * 
  */
 #include <iostream>
 #include <string>
@@ -9,9 +10,41 @@
 #include <algorithm>
 #include <map>
 
-bool compareWordCount(std::pair<std::string, int> wordA, std::pair<std::string, int> wordB)
+/** Compare number of instances of two words.
+ * @param wordA 
+ * @param wordB 
+ * @return True if wordA has higher count than wordB
+*/
+bool compareWordCount(const std::pair<std::string, int>& wordA, const std::pair<std::string, int>& wordB)
 {
 	return wordA.second > wordB.second;
+}
+
+/** Write the words and their counts to file.
+ *
+ * @param wordCounts 
+ * @param fileName 
+ * @return False if the file doesn't open.
+*/
+bool writeWordCountsToFile(std::vector<std::pair<std::string, int>>& wordCounts, const std::string& fileName)
+{
+	std::ofstream outputFile(fileName);
+
+	if (!outputFile)
+	{
+		return false;
+	}
+
+	outputFile << "Word " << "Usage" <<std::endl;
+
+	for (auto wordCount : wordCounts)
+	{
+		outputFile << wordCount.first << " " << wordCount.second << std::endl;
+	}
+
+	outputFile.close();
+
+	return true;
 }
 
 int main(int, char **)
@@ -76,8 +109,10 @@ int main(int, char **)
 
 	std::sort(sortedWordCounts.begin(), sortedWordCounts.end(), compareWordCount);
 
-	for (auto wordCount : sortedWordCounts) {
-		std::cout << wordCount.first << ": " << wordCount.second << std::endl;
+	if (!writeWordCountsToFile(sortedWordCounts, "output.txt"))
+	{
+		std::cout << "Error encountered while writing file.";
+		return 1;
 	}
 
 	return 0;
