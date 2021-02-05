@@ -51,3 +51,12 @@ void Info_UniqueWords :: AppendElement(string NewElement){
     Element.push_back(NewElement);
     Count.push_back(1);
 }
+
+void Info_UniqueWords :: AccountForElement(string InputElement){
+    int Idx = GetElementIdx(InputElement);
+    if (Idx == -1){
+       AppendElement(InputElement);
+    } else{
+       IncrElementCount(InputElement);
+   }
+}
