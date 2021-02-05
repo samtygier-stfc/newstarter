@@ -20,6 +20,7 @@ class Info_UniqueWords{
     string GetElementValue(int);
     int GetElementIdx(string);
     int GetElementCount(string);
+    void IncrElementCount(string);
 
 
 };
