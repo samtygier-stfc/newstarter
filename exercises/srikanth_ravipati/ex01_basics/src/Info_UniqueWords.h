@@ -15,5 +15,6 @@ class Info_UniqueWords{
     public: // Access specifier
     
     Info_UniqueWords();
+    ~Info_UniqueWords();
 
 };
