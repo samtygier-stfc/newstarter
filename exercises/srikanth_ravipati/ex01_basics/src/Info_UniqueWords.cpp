@@ -18,3 +18,7 @@ Info_UniqueWords :: ~Info_UniqueWords(){
     Count.clear();
     Count.shrink_to_fit();
 }
+
+int Info_UniqueWords :: GetSize(){
+    return Size;
+}
