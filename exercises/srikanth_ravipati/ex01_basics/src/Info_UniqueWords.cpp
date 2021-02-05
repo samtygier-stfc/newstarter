@@ -26,3 +26,14 @@ int Info_UniqueWords :: GetSize(){
 string Info_UniqueWords :: GetElementValue(int Idx){
     return Element[Idx];
 }
+
+int Info_UniqueWords :: GetElementIdx(string InputElement){
+   int Idx = -1;
+   for (int i=0; i < Size; i++){
+       if (Element[i] == InputElement){
+          Idx = i;
+          break;
+       }
+   }
+   return Idx;
+}
