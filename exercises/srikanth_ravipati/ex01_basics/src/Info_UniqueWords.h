@@ -23,6 +23,7 @@ class Info_UniqueWords{
     void IncrElementCount(string);
     void AppendElement(string);
     void AccountForElement(string);
+    void Print(void);
 
 
 };
