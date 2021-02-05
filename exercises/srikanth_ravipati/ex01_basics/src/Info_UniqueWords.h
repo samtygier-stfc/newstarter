@@ -11,4 +11,9 @@ class Info_UniqueWords{
     vector<string> Element;
     vector<int>    Count;
 
+    // Declaration of member functions
+    public: // Access specifier
+    
+    Info_UniqueWords();
+
 };
