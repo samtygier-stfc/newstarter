@@ -6,6 +6,7 @@
 
 int main(){
     Info_UniqueWords UniqueWords;
+    UniqueWords.AppendElement("Test");
 
 
     return 0;
