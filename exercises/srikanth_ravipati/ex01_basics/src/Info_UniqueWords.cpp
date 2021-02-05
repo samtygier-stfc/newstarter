@@ -37,3 +37,7 @@ int Info_UniqueWords :: GetElementIdx(string InputElement){
    }
    return Idx;
 }
+
+int Info_UniqueWords :: GetElementCount(string InputElement){
+    return Count[GetElementIdx(InputElement)];
+}
