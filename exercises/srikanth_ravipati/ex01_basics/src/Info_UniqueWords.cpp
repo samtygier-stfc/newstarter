@@ -41,3 +41,7 @@ int Info_UniqueWords :: GetElementIdx(string InputElement){
 int Info_UniqueWords :: GetElementCount(string InputElement){
     return Count[GetElementIdx(InputElement)];
 }
+
+void Info_UniqueWords :: IncrElementCount(string InputElement){
+    Count[GetElementIdx(InputElement)] += 1;
+}
