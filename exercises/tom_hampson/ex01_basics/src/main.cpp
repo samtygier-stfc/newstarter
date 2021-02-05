@@ -47,12 +47,31 @@ bool writeWordCountsToFile(std::vector<std::pair<std::string, int>>& wordCounts,
 	return true;
 }
 
-int main(int, char **)
+/** Read text file and count instances of words with >= 4 letters, then save the information to a file.
+ * @param argc 
+ * @param argv - user must supply an input file name, and optionally an output file name.
+ * @return 
+*/
+int main(int argc, char* argv[])
 {
-	//For now, just hard code the holmes file.
-	std::string inputFileName = "C:/workdir/newstarter/exercises/tom_hampson/ex01_basics/testData/Holmes.txt";
+	//Check that there are either 2 or 3 arguments. User must specify an input file name,
+	//and optionally they can specify and output file name.
+	if (argc < 2 || argc > 3)
+	{
+		std::cout << "Please provide arguments for input file (and optionally output file)." << std::endl;
+		return 1;
+	}
 
-  
+	//Input file is the first argument.
+	std::string inputFileName = argv[1];
+
+	//If there was an output file name specified, use that. Otherwise default to output.txt.
+	std::string outputFileName = "output.txt";
+	if (argc == 3)
+	{
+		outputFileName = argv[2];
+	}
+
 	std::ifstream inputFile(inputFileName);
 
 	if (!inputFile)
@@ -109,10 +128,15 @@ int main(int, char **)
 
 	std::sort(sortedWordCounts.begin(), sortedWordCounts.end(), compareWordCount);
 
-	if (!writeWordCountsToFile(sortedWordCounts, "output.txt"))
+	//Save the sorted words to the output file.
+	if (!writeWordCountsToFile(sortedWordCounts, outputFileName))
 	{
-		std::cout << "Error encountered while writing file.";
+		std::cout << "Error encountered while writing to file " << outputFileName << std::endl;
 		return 1;
+	}
+	else
+	{
+		std::cout << "Output successfully written to file " << outputFileName << std::endl;
 	}
 
 	return 0;
