@@ -45,3 +45,9 @@ int Info_UniqueWords :: GetElementCount(string InputElement){
 void Info_UniqueWords :: IncrElementCount(string InputElement){
     Count[GetElementIdx(InputElement)] += 1;
 }
+
+void Info_UniqueWords :: AppendElement(string NewElement){
+    Size += 1;
+    Element.push_back(NewElement);
+    Count.push_back(1);
+}
