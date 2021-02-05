@@ -6,4 +6,9 @@ using namespace std;
 
 class Info_UniqueWords{
 
+    // Data Members
+    int Size;
+    vector<string> Element;
+    vector<int>    Count;
+
 };
