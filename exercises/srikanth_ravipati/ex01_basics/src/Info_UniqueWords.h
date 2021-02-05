@@ -19,6 +19,7 @@ class Info_UniqueWords{
     int GetSize(void);
     string GetElementValue(int);
     int GetElementIdx(string);
+    int GetElementCount(string);
 
 
 };
