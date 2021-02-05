@@ -16,5 +16,7 @@ class Info_UniqueWords{
     
     Info_UniqueWords();
     ~Info_UniqueWords();
+    int GetSize(void);
+
 
 };
