@@ -60,3 +60,10 @@ void Info_UniqueWords :: AccountForElement(string InputElement){
        IncrElementCount(InputElement);
    }
 }
+
+void Info_UniqueWords :: Print(){
+    cout << "Size " << "\t" << Size << "\n";
+    for (int i=0; i < Size; i++){
+        cout << "Word: " << Element[i] << "\t" << "Count: " << Count[i] << "\n";
+    }
+}
