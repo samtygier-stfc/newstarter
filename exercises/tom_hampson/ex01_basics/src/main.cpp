@@ -9,6 +9,8 @@
 #include <regex>
 #include <algorithm>
 #include <map>
+#include <iomanip>
+#include <cmath>
 
 /** Compare number of instances of two words.
  * @param wordA 
@@ -35,11 +37,46 @@ bool writeWordCountsToFile(std::vector<std::pair<std::string, int>>& wordCounts,
 		return false;
 	}
 
-	outputFile << "Word " << "Usage" <<std::endl;
+	//Something is wrong if there aren't any words.
+	if (wordCounts.size() == 0)
+	{
+		return false;
+	}
+
+	//Find length of longest word so that we can add padding to align everything nicely.
+	int longestWordLength = 0;
+	for (auto wordCount : wordCounts)
+	{
+		if (wordCount.first.length() > longestWordLength)
+		{
+			longestWordLength = static_cast<int>(wordCount.first.length());
+		}
+	}
+
+	//Find number of digits in the count of the most frequent word. In the very unlikely case
+	//that the longest word has the highest count, we want everthing to still be nicely aligned,
+	//Use the test file Holmes_withLotsOfLongestWord.txt to check this.
+	//The word counts are sorted, so the first will be the longest.
+	int maxDigits = 0;
+	if (wordCounts[0].second > 0)
+	{
+		maxDigits = static_cast<int>(log10(static_cast<double>(wordCounts[0].second)) + 1);
+	}
+
+	//If the number of digits in the biggest count is less than 5, just use 5 so that the
+	//count column lines up with the "usage" column header.
+	maxDigits = std::max(5, maxDigits);
+
+	//Separation between the headers. The 4 is subtracted because that's the length of the first header ("Word").
+	int headerPadding = 1 + longestWordLength + maxDigits - 4;
+	outputFile << "Word" << std::setw(headerPadding) << "Usage" <<std::endl << std::endl;
 
 	for (auto wordCount : wordCounts)
 	{
-		outputFile << wordCount.first << " " << wordCount.second << std::endl;
+		//Calcluate a padding size so that the columns are aligned nicely.
+		//Add one so that there's always a gap between the longest word and the count.
+		int paddingSize = 1 + longestWordLength + maxDigits - static_cast<int>(wordCount.first.length());
+		outputFile << wordCount.first << std::setw(paddingSize) << wordCount.second << std::endl;
 	}
 
 	outputFile.close();
@@ -119,6 +156,13 @@ int main(int argc, char* argv[])
 			//Increment the count of the word.
 			wordCounts[newWord]++;
 		}
+	}
+
+	//If there are no words, don't do anything else.
+	if (wordCounts.size() == 0)
+	{
+		std::cout << "No valid words found in file " << inputFileName << std::endl;
+		return 1;
 	}
 
 	//Container to store the word counts sorted by count.
