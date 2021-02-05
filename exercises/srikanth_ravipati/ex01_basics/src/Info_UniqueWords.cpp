@@ -10,3 +10,11 @@ Info_UniqueWords :: Info_UniqueWords(){
     Element;
     Count;
 }
+
+Info_UniqueWords :: ~Info_UniqueWords(){
+    Size = 0;
+    Element.clear();
+    Element.shrink_to_fit();
+    Count.clear();
+    Count.shrink_to_fit();
+}
