@@ -15,6 +15,7 @@ int main(){
     assert (UniqueWords.GetElementIdx("Random") == -1);
 
     UniqueWords.IncrElementCount("Test");
+    assert (UniqueWords.GetElementCount("Test") == 2);
 
     return 0;
 }
