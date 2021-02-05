@@ -22,3 +22,7 @@ Info_UniqueWords :: ~Info_UniqueWords(){
 int Info_UniqueWords :: GetSize(){
     return Size;
 }
+
+string Info_UniqueWords :: GetElementValue(int Idx){
+    return Element[Idx];
+}
