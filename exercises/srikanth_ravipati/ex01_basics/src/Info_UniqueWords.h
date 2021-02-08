@@ -1,26 +1,26 @@
 #include <iostream>
 #include <vector>
 
-class Info_UniqueWords{
+class infoUniqueWords{
 
     // Data Members
-    int Size;
-    std::vector<std::string> Element;
-    std::vector<int>    Count;
+    int size;
+    std::vector<std::string> element;
+    std::vector<int>    count;
 
     // Declaration of member functions
     public: // Access specifier
     
-    Info_UniqueWords();
-    ~Info_UniqueWords();
-    int GetSize(void);
-    std::string GetElementValue(int);
-    int GetElementIdx(std::string);
-    int GetElementCount(std::string);
-    void IncrElementCount(std::string);
-    void AppendElement(std::string);
-    void AccountForElement(std::string);
-    void Print(void);
+    infoUniqueWords();
+    ~infoUniqueWords();
+    int getSize(void);
+    std::string getElementValue(int);
+    int getElementIdx(std::string);
+    int getElementCount(std::string);
+    void incrElementCount(std::string);
+    void appendElement(std::string);
+    void accountForElement(std::string);
+    void print(void);
 
 
 };
