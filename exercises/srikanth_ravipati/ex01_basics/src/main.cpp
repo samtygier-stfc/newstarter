@@ -15,5 +15,12 @@ int main(int argc, char** argv)
     std::cout << "File to be processed: "  << argv[1] << "\n";
     }
 
+    auto nameInFile = argv[1];
+
+    std::string delimiters = "'\".,?!(): -}";
+    std::string line;
+
+    infoUniqueWords uniqueWords;
+
     return 0;
 }
