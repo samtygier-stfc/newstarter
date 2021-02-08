@@ -39,6 +39,10 @@ int infoUniqueWords :: getElementCount(std::string inputElement){
     return count[getElementIdx(inputElement)];
 }
 
+int infoUniqueWords :: getElementCount(int idx){
+    return count[idx];
+}
+
 void infoUniqueWords :: incrElementCount(std::string inputElement){
     Count[getElementIdx(inputElement)] += 1;
 }
