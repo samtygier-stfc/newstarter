@@ -2,10 +2,10 @@
 #include <assert.h>
 
 int main(){
-    string delimiters = "'\".,?!():}";
+    std::string delimiters = "'\".,?!():}";
 
-    string str1 = "test";
-    string str2 = "H";
+    std::string str1 = "test";
+    std::string str2 = "H";
     appendLowerCaseChar(str1, str2[0]);
 
     str2 = "'";
