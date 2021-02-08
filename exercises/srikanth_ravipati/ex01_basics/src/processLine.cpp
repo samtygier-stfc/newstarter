@@ -13,7 +13,7 @@ void processLine(const std::string& lineInput, const std::string& delimiters, in
         if (isDelimiter){
 
            if (word.size() > 4){
-              uniqueWords.appendElement(word);
+              uniqueWords.accountForElement(word);
            }
            word = "";
 
