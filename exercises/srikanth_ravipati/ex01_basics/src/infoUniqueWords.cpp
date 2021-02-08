@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "Info_UniqueWords.h"
+#include "infoUniqueWords.h"
 
 infoUniqueWords :: infoUniqueWords(){
     size = 0;
