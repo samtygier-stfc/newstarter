@@ -37,7 +37,6 @@ int main(int argc, char** argv)
 
     std::string nameOutFile = "outfile.txt";
     std::ofstream outputFile;
-    int idx;
 
     outputFile.open(nameOutFile, std::ios::out);
     if (outputFile.is_open()){
