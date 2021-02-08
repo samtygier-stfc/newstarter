@@ -43,8 +43,8 @@ int infoUniqueWords :: getElementCount(int idx){
     return count[idx];
 }
 
-void infoUniqueWords :: incrElementCount(std::string inputElement){
-    count[getElementIdx(inputElement)] += 1;
+void infoUniqueWords :: incrElementCount(int idx){
+    count[idx] += 1;
 }
 
 void infoUniqueWords :: appendElement(std::string newElement){
@@ -58,7 +58,7 @@ void infoUniqueWords :: accountForElement(std::string inputElement){
     if (idx == -1){
        appendElement(inputElement);
     } else{
-       incrElementCount(inputElement);
+       incrElementCount(idx);
    }
 }
 
