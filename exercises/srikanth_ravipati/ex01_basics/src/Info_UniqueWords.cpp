@@ -1,9 +1,6 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include "Info_UniqueWords.h"
-
-using namespace std;
 
 Info_UniqueWords :: Info_UniqueWords(){
     Size = 0;
@@ -23,11 +20,11 @@ int Info_UniqueWords :: GetSize(){
     return Size;
 }
 
-string Info_UniqueWords :: GetElementValue(int Idx){
+std::string Info_UniqueWords :: GetElementValue(int Idx){
     return Element[Idx];
 }
 
-int Info_UniqueWords :: GetElementIdx(string InputElement){
+int Info_UniqueWords :: GetElementIdx(std::string InputElement){
    int Idx = -1;
    for (int i=0; i < Size; i++){
        if (Element[i] == InputElement){
@@ -38,21 +35,21 @@ int Info_UniqueWords :: GetElementIdx(string InputElement){
    return Idx;
 }
 
-int Info_UniqueWords :: GetElementCount(string InputElement){
+int Info_UniqueWords :: GetElementCount(std::string InputElement){
     return Count[GetElementIdx(InputElement)];
 }
 
-void Info_UniqueWords :: IncrElementCount(string InputElement){
+void Info_UniqueWords :: IncrElementCount(std::string InputElement){
     Count[GetElementIdx(InputElement)] += 1;
 }
 
-void Info_UniqueWords :: AppendElement(string NewElement){
+void Info_UniqueWords :: AppendElement(std::string NewElement){
     Size += 1;
     Element.push_back(NewElement);
     Count.push_back(1);
 }
 
-void Info_UniqueWords :: AccountForElement(string InputElement){
+void Info_UniqueWords :: AccountForElement(std::string InputElement){
     int Idx = GetElementIdx(InputElement);
     if (Idx == -1){
        AppendElement(InputElement);
@@ -62,8 +59,8 @@ void Info_UniqueWords :: AccountForElement(string InputElement){
 }
 
 void Info_UniqueWords :: Print(){
-    cout << "Size " << "\t" << Size << "\n";
+    std::cout << "Size " << "\t" << Size << "\n";
     for (int i=0; i < Size; i++){
-        cout << "Word: " << Element[i] << "\t" << "Count: " << Count[i] << "\n";
+        std::cout << "Word: " << Element[i] << "\t" << "Count: " << Count[i] << "\n";
     }
 }
