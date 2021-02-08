@@ -44,7 +44,7 @@ int infoUniqueWords :: getElementCount(int idx){
 }
 
 void infoUniqueWords :: incrElementCount(std::string inputElement){
-    Count[getElementIdx(inputElement)] += 1;
+    count[getElementIdx(inputElement)] += 1;
 }
 
 void infoUniqueWords :: appendElement(std::string newElement){
