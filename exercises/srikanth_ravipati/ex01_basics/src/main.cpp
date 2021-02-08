@@ -3,6 +3,7 @@
  */
 
 #include <iostream>
+#include <string>
 #include <fstream>
 #include "processLine.h"
 
@@ -21,6 +22,18 @@ int main(int argc, char** argv)
     std::string line;
 
     infoUniqueWords uniqueWords;
+
+    std::ifstream inputFile;
+    inputFile.open(nameInFile, std::ios::in);
+
+    if (inputFile.is_open()){
+        while (getline(inputFile, line)){
+//              std::cout << "line: " << "\t" << line << "\n";
+              processLine(line, delimiters, uniqueWords);
+        }
+    }
+
+    inputFile.close();
 
     return 0;
 }
