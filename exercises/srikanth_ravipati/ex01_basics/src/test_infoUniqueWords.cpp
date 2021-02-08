@@ -1,6 +1,6 @@
 #include <iostream>
 #include <assert.h>
-#include "Info_UniqueWords.h"
+#include "infoUniqueWords.h"
 
 int main(){
     infoUniqueWords uniqueWords;

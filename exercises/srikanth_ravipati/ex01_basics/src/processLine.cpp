@@ -1,6 +1,6 @@
 #include <iostream>
 #include "utils.h"
-#include "Info_UniqueWords.h"
+#include "infoUniqueWords.h"
 
 void processLine(const std::string& lineInput, const std::string& delimiters, infoUniqueWords& uniqueWords){
     bool isDelimiter;
