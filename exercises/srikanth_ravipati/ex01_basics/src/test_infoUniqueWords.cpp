@@ -12,7 +12,7 @@ int main(){
     assert (uniqueWords.getElementCount("Test") == 1);
     assert (uniqueWords.getElementIdx("Random") == -1);
 
-    uniqueWords.incrElementCount("Test");
+    uniqueWords.accountForElement("Test");
     assert (uniqueWords.getElementCount("Test") == 2);
 
     return 0;
