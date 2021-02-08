@@ -2,7 +2,7 @@
 #include "processLine.h"
 
 int main(){
-    string delimiters = "'\".,?!():}";
+    string delimiters = "'\".,?!(): -}";
     infoUniqueWords uniqueWords;
 
     string x = "Hello, World. I am a new-born(child)";
@@ -11,10 +11,10 @@ int main(){
 
     assert (uniqueWords.getElementValue(0) == "hello");
     assert (uniqueWords.getElementCount("hello") == 1);
-    assert (uniqueWords.getElementValue(1) == " world");
-    assert (uniqueWords.getElementCount(" world") == 1);
-    assert (uniqueWords.getElementValue(2) == " i am a new-born");
-    assert (uniqueWords.getElementCount(" i am a new-born") == 1);
+    assert (uniqueWords.getElementValue(1) == "world");
+    assert (uniqueWords.getElementCount("world") == 1);
+    assert (uniqueWords.getElementValue(2) == "born");
+    assert (uniqueWords.getElementCount("born") == 1);
     assert (uniqueWords.getElementValue(3) == "child");
     assert (uniqueWords.getElementCount("child") == 1);
 
