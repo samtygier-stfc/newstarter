@@ -1,15 +1,12 @@
 #include <iostream>
-#include <string>
 #include <vector>
-
-using namespace std;
 
 class Info_UniqueWords{
 
     // Data Members
     int Size;
-    vector<string> Element;
-    vector<int>    Count;
+    std::vector<std::string> Element;
+    std::vector<int>    Count;
 
     // Declaration of member functions
     public: // Access specifier
@@ -17,12 +14,12 @@ class Info_UniqueWords{
     Info_UniqueWords();
     ~Info_UniqueWords();
     int GetSize(void);
-    string GetElementValue(int);
-    int GetElementIdx(string);
-    int GetElementCount(string);
-    void IncrElementCount(string);
-    void AppendElement(string);
-    void AccountForElement(string);
+    std::string GetElementValue(int);
+    int GetElementIdx(std::string);
+    int GetElementCount(std::string);
+    void IncrElementCount(std::string);
+    void AppendElement(std::string);
+    void AccountForElement(std::string);
     void Print(void);
 
 
