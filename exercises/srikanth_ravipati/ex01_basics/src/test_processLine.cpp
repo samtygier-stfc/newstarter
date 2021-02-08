@@ -2,10 +2,10 @@
 #include "processLine.h"
 
 int main(){
-    string delimiters = "'\".,?!(): -}";
+    std::string delimiters = "'\".,?!(): -}";
     infoUniqueWords uniqueWords;
 
-    string x = "Hello, World. I am a new-born(child)";
+    std::string x = "Hello, World. I am a new-born(child)";
 
     processLine(x, delimiters, uniqueWords);
 
