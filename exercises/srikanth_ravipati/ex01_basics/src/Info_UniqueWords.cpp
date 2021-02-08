@@ -2,65 +2,65 @@
 #include <vector>
 #include "Info_UniqueWords.h"
 
-Info_UniqueWords :: Info_UniqueWords(){
-    Size = 0;
-    Element;
-    Count;
+infoUniqueWords :: infoUniqueWords(){
+    size = 0;
+    element;
+    count;
 }
 
-Info_UniqueWords :: ~Info_UniqueWords(){
-    Size = 0;
-    Element.clear();
-    Element.shrink_to_fit();
-    Count.clear();
-    Count.shrink_to_fit();
+infoUniqueWords :: ~infoUniqueWords(){
+    size = 0;
+    element.clear();
+    element.shrink_to_fit();
+    count.clear();
+    count.shrink_to_fit();
 }
 
-int Info_UniqueWords :: GetSize(){
-    return Size;
+int infoUniqueWords :: getSize(){
+    return size;
 }
 
-std::string Info_UniqueWords :: GetElementValue(int Idx){
-    return Element[Idx];
+std::string infoUniqueWords :: getElementValue(int idx){
+    return element[idx];
 }
 
-int Info_UniqueWords :: GetElementIdx(std::string InputElement){
-   int Idx = -1;
-   for (int i=0; i < Size; i++){
-       if (Element[i] == InputElement){
-          Idx = i;
+int infoUniqueWords :: getElementIdx(std::string inputElement){
+   int idx = -1;
+   for (int i=0; i < size; i++){
+       if (element[i] == inputElement){
+          idx = i;
           break;
        }
    }
-   return Idx;
+   return idx;
 }
 
-int Info_UniqueWords :: GetElementCount(std::string InputElement){
-    return Count[GetElementIdx(InputElement)];
+int infoUniqueWords :: getElementCount(std::string inputElement){
+    return count[getElementIdx(inputElement)];
 }
 
-void Info_UniqueWords :: IncrElementCount(std::string InputElement){
-    Count[GetElementIdx(InputElement)] += 1;
+void infoUniqueWords :: incrElementCount(std::string inputElement){
+    Count[getElementIdx(inputElement)] += 1;
 }
 
-void Info_UniqueWords :: AppendElement(std::string NewElement){
-    Size += 1;
-    Element.push_back(NewElement);
-    Count.push_back(1);
+void infoUniqueWords :: appendElement(std::string newElement){
+    size += 1;
+    element.push_back(newElement);
+    count.push_back(1);
 }
 
-void Info_UniqueWords :: AccountForElement(std::string InputElement){
-    int Idx = GetElementIdx(InputElement);
-    if (Idx == -1){
-       AppendElement(InputElement);
+void infoUniqueWords :: accountForElement(std::string inputElement){
+    int idx = getElementIdx(inputElement);
+    if (idx == -1){
+       appendElement(inputElement);
     } else{
-       IncrElementCount(InputElement);
+       incrElementCount(inputElement);
    }
 }
 
-void Info_UniqueWords :: Print(){
-    std::cout << "Size " << "\t" << Size << "\n";
-    for (int i=0; i < Size; i++){
-        std::cout << "Word: " << Element[i] << "\t" << "Count: " << Count[i] << "\n";
+void infoUniqueWords :: print(){
+    std::cout << "size " << "\t" << size << "\n";
+    for (int i=0; i < size; i++){
+        std::cout << "word: " << element[i] << "\t" << "count: " << count[i] << "\n";
     }
 }
