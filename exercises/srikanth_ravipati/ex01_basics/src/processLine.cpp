@@ -12,7 +12,7 @@ void processLine(const std::string& lineInput, const std::string& delimiters, in
 
         // Second condition accounts for a word at the end of line
         // that does end with any of the specified delimiter.
-        if (isDelimiter | i == lineInput.size()){
+        if (isDelimiter | (i == lineInput.size())){
 
            if (word.size() > 4){
               uniqueWords.accountForElement(word);
