@@ -24,6 +24,7 @@ set ( SRC_FILES
   src/Square.cpp
   src/Rectangle.cpp
   src/Triangle.cpp
+  src/ShapeSorter.cpp
 )
 
 set ( HDR_FILES
@@ -33,6 +34,7 @@ set ( HDR_FILES
   src/Square.h
   src/Rectangle.h
   src/Triangle.h
+  src/ShapeSorter.h
 )
 
 add_executable ( Shapes ${SRC_FILES} ${HDR_FILES}   )

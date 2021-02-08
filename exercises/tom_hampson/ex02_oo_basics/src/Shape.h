@@ -15,6 +15,11 @@ public:
 
   virtual void print() const;
 
+  const std::string& shapeType() const;
+  int nSides() const;
+  double area() const;
+  double perimeter() const;
+
 protected:
   virtual void calculateArea() = 0;
   virtual void calculatePerimeter() = 0;
@@ -22,8 +27,7 @@ protected:
   double m_perimeter;
 
 private:
-  double m_nSides;
-
+  int m_nSides;
   std::string m_shapeType;
 };
 

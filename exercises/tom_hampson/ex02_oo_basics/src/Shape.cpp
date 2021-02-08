@@ -18,3 +18,23 @@ void Shape::print() const
     << ", area = " << m_area
     << std::endl;
 }
+
+const std::string& Shape::shapeType() const
+{
+    return m_shapeType;
+}
+
+int Shape::nSides() const
+{
+  return m_nSides;
+}
+
+double Shape::area() const
+{
+  return m_area;
+}
+
+double Shape::perimeter() const
+{
+  return m_perimeter;
+}
