@@ -82,6 +82,7 @@ void infoUniqueWords :: accountForElement(std::string inputElement){
        appendElement(inputElement);
     } else{
        incrElementCount(idx);
+       reorder(idx);
    }
 }
 
