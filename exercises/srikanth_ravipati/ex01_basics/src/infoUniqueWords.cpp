@@ -53,6 +53,17 @@ void infoUniqueWords :: appendElement(std::string newElement){
     count.push_back(1);
 }
 
+void infoUniqueWords :: swap(int i, int j){
+    std::string value = element[i];
+    int counter = count[i];
+
+    element[i] = element[j];
+    count[i]   = count[j];
+
+    element[j] = value;
+    count[j]   = counter;
+}
+
 void infoUniqueWords :: accountForElement(std::string inputElement){
     int idx = getElementIdx(inputElement);
     if (idx == -1){
