@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 class infoUniqueWords{
@@ -24,6 +25,5 @@ class infoUniqueWords{
     void appendElement(std::string);
     void accountForElement(std::string);
     void print(void);
-
-
+    void printToFile(std::ofstream& outputFile);
 };

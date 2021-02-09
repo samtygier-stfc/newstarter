@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
 #include "processLine.h"
 
 int main(int argc, char** argv)
@@ -39,12 +38,7 @@ int main(int argc, char** argv)
     std::ofstream outputFile;
 
     outputFile.open(nameOutFile, std::ios::out);
-    if (outputFile.is_open()){
-       outputFile << "Word" << "\t" << "Usage" << "\n";
-       for (int i=0; i < uniqueWords.getSize(); i++){
-           outputFile << uniqueWords.getElementValue(i) << "\t" << uniqueWords.getElementCount(i) << "\n";
-       }
-    }
+    uniqueWords.printToFile(outputFile);
     outputFile.close();
 
     return 0;

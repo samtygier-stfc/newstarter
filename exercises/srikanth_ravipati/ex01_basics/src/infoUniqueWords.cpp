@@ -92,3 +92,13 @@ void infoUniqueWords :: print(){
         std::cout << "word: " << element[i] << "\t" << "count: " << count[i] << "\n";
     }
 }
+
+void infoUniqueWords :: printToFile(std::ofstream& outputFile){
+    if (outputFile.is_open()){
+       outputFile << "word" << "\t" << "usage" << "\n";
+       outputFile << "\n";
+       for (int i=0; i < size; i++){
+           outputFile << element[i] << "\t" << count[i] << "\n";
+       }
+    }
+}
