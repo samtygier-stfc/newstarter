@@ -34,5 +34,34 @@ int main(){
     assert (uniqueWords.getElementCount(0) == 1);
     assert (uniqueWords.getElementCount("Second") == 1);
 
+    uniqueWords.reorder(1);
+
+    assert (uniqueWords.getElementValue(0) == "Test");
+    assert (uniqueWords.getElementIdx("Test") == 0);
+    assert (uniqueWords.getElementCount(0) == 2);
+    assert (uniqueWords.getElementCount("Test") == 2);
+
+    assert (uniqueWords.getElementValue(1) == "Second");
+    assert (uniqueWords.getElementIdx("Second") == 1);
+    assert (uniqueWords.getElementCount(1) == 1);
+    assert (uniqueWords.getElementCount("Second") == 1);
+
+    uniqueWords.accountForElement("Second");
+
+    assert (uniqueWords.getElementCount(1) == 2);
+    assert (uniqueWords.getElementCount("Second") == 2);
+
+    uniqueWords.accountForElement("Second");
+
+    assert (uniqueWords.getElementValue(0) == "Second");
+    assert (uniqueWords.getElementIdx("Second") == 0);
+    assert (uniqueWords.getElementCount(0) == 3);
+    assert (uniqueWords.getElementCount("Second") == 3);
+
+    assert (uniqueWords.getElementValue(1) == "Test");
+    assert (uniqueWords.getElementIdx("Test") == 1);
+    assert (uniqueWords.getElementCount(1) == 2);
+    assert (uniqueWords.getElementCount("Test") == 2);
+
     return 0;
 }
