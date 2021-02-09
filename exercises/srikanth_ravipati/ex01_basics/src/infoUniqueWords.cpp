@@ -64,6 +64,18 @@ void infoUniqueWords :: swap(int i, int j){
     count[j]   = counter;
 }
 
+void infoUniqueWords :: reorder(int idx){
+    if (idx > 0){
+        while (count[idx] > count[idx-1]){
+            swap(idx, idx-1);
+            idx--;
+            if (idx == 0){
+                break;
+            }
+        }
+    }
+}
+
 void infoUniqueWords :: accountForElement(std::string inputElement){
     int idx = getElementIdx(inputElement);
     if (idx == -1){
