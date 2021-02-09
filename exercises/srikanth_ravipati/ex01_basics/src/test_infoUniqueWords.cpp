@@ -22,5 +22,17 @@ int main(){
     assert (uniqueWords.getElementCount(1) == 1);
     assert (uniqueWords.getElementCount("Second") == 1);
 
+    uniqueWords.swap(0,1);
+
+    assert (uniqueWords.getElementValue(1) == "Test");
+    assert (uniqueWords.getElementIdx("Test") == 1);
+    assert (uniqueWords.getElementCount(1) == 2);
+    assert (uniqueWords.getElementCount("Test") == 2);
+
+    assert (uniqueWords.getElementValue(0) == "Second");
+    assert (uniqueWords.getElementIdx("Second") == 0);
+    assert (uniqueWords.getElementCount(0) == 1);
+    assert (uniqueWords.getElementCount("Second") == 1);
+
     return 0;
 }
