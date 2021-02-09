@@ -15,5 +15,12 @@ int main(){
     uniqueWords.accountForElement("Test");
     assert (uniqueWords.getElementCount("Test") == 2);
 
+    uniqueWords.appendElement("Second");
+
+    assert (uniqueWords.getElementValue(1) == "Second");
+    assert (uniqueWords.getElementIdx("Second") == 1);
+    assert (uniqueWords.getElementCount(1) == 1);
+    assert (uniqueWords.getElementCount("Second") == 1);
+
     return 0;
 }
