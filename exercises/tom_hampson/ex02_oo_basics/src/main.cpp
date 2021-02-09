@@ -21,13 +21,13 @@ int main(int, char **)
   //rectangle.print();
 
   ShapeSorter sorter;
-  sorter.addShape(new Circle(3));
-  sorter.addShape(new Square(5));
-  sorter.addShape(new Triangle(5,4));
-  sorter.addShape(new Triangle(6,4));
-  sorter.addShape(new Triangle(7,4));
-  sorter.addShape(new Rectangle(2,4));
-  sorter.addShape(new Rectangle(5,1));
+  sorter.addShape(std::make_shared<Circle>(3));
+  sorter.addShape(std::make_shared<Square>(5));
+  sorter.addShape(std::make_shared<Triangle>(5,4));
+  sorter.addShape(std::make_shared<Triangle>(6,4));
+  sorter.addShape(std::make_shared<Triangle>(7,4));
+  sorter.addShape(std::make_shared<Rectangle>(2,4));
+  sorter.addShape(std::make_shared<Rectangle>(5,1));
 
   sorter.printShapesOfType("rectangle");
   sorter.printShapesWithNSides(4);

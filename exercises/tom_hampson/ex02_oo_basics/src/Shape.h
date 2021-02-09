@@ -2,8 +2,8 @@
 
 #include <string>
 /**
- * @brief Base class for shapes. We store the area and perimeter rather than calculate it on the fly
- * because it's more efficient.
+ * @brief Base class for shapes. We calculate the area and perimeter at time of
+ * object creation rather than calculate it on the fly because it's more efficient.
 */
 class Shape
 {
@@ -21,6 +21,9 @@ public:
   double perimeter() const;
 
 protected:
+  //Call these functions inside derived class constructors to set the
+  //values for area and perimeter so we don't have to calculate them
+  //on the fly.
   virtual void calculateArea() = 0;
   virtual void calculatePerimeter() = 0;
   double m_area;

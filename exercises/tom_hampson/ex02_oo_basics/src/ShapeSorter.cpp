@@ -5,12 +5,12 @@
 
 ShapeSorter::~ShapeSorter()
 {
-  for (auto shape : m_shapes)
-  {
-    delete shape;
-  }
 }
 
+/**
+ * @brief Print all shapes with specified shape type (e.g. "circle").
+ * @param shapeType 
+*/
 void ShapeSorter::printShapesOfType(const std::string& shapeType) const
 {
   std::cout << "Shapes of type \"" << shapeType << "\":" << std::endl;
@@ -24,6 +24,10 @@ void ShapeSorter::printShapesOfType(const std::string& shapeType) const
   }
 }
 
+/**
+ * @brief Print all shapes with n sides.
+ * @param n 
+*/
 void ShapeSorter::printShapesWithNSides(const int n) const
 {
   std::cout << "Shapes with " << n << " sides:" << std::endl;
@@ -36,10 +40,13 @@ void ShapeSorter::printShapesWithNSides(const int n) const
   }
 }
 
+/**
+ * @brief Print all shapes by area in descending order.
+*/
 void ShapeSorter::printShapesAreaDescending() const
 {
   //Make a copy of the shapes vector so we preserve the order of the member shape vector.
-  std::vector<Shape*> sortedShapes = m_shapes;
+  std::vector<std::shared_ptr<Shape>> sortedShapes = m_shapes;
   std::sort(sortedShapes.begin(), sortedShapes.end(), compareArea);
 
   std::cout << "Shapes ordered by area:" << std::endl;
@@ -49,10 +56,13 @@ void ShapeSorter::printShapesAreaDescending() const
   }
 }
 
+/**
+ * @brief Print all shapes in descending order of perimeter size.
+*/
 void ShapeSorter::printShapesPerimeterDescending() const
 {
   //Make a copy of the shapes vector so we preserve the order of the member shape vector.
-  std::vector<Shape*> sortedShapes = m_shapes;
+  std::vector<std::shared_ptr<Shape>> sortedShapes = m_shapes;
   std::sort(sortedShapes.begin(), sortedShapes.end(), comparePerimeter);
 
   std::cout << "Shapes ordered by perimeter:" << std::endl;
@@ -62,7 +72,11 @@ void ShapeSorter::printShapesPerimeterDescending() const
   }
 }
 
-void ShapeSorter::addShape(Shape* shape)
+/**
+ * @brief Add a shape to the shape sorter.
+ * @param shape 
+*/
+void ShapeSorter::addShape(std::shared_ptr<Shape> shape)
 {
   if (nullptr != shape)
   {
@@ -70,7 +84,11 @@ void ShapeSorter::addShape(Shape* shape)
   }
 }
 
-void ShapeSorter::removeShape(Shape* shape)
+/**
+ * @brief Remove a shape from the shape sorter.
+ * @param shape 
+*/
+void ShapeSorter::removeShape(std::shared_ptr<Shape> shape)
 {
   if (nullptr != shape)
   {
@@ -79,19 +97,30 @@ void ShapeSorter::removeShape(Shape* shape)
       if (*it == shape)
       {
         m_shapes.erase(it);
-        delete shape;
         return;
       }
     }
   }
 }
 
-bool ShapeSorter::compareArea(const Shape* shapeA, const Shape* shapeB)
+/**
+ * @brief Static function for comparing two shapes based on area.
+ * @param shapeA 
+ * @param shapeB 
+ * @return true if shapeA has larger area than shapeB.
+*/
+bool ShapeSorter::compareArea(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB)
 {
   return shapeA->area() > shapeB->area();
 }
 
-bool ShapeSorter::comparePerimeter(const Shape* shapeA, const Shape* shapeB)
+/**
+ * @brief Static function for comparing two shapes based on perimeter size
+ * @param shapeA 
+ * @param shapeB 
+ * @return true if shapeA has a larger perimeter than shapeB
+*/
+bool ShapeSorter::comparePerimeter(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB)
 {
   return shapeA->perimeter() > shapeB->perimeter();
 }

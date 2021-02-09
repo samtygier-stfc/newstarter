@@ -2,6 +2,7 @@
 #include "Shape.h"
 
 #include <vector>
+#include <memory>
 
 /**
  * @brief "Shape sorter" class that stores a vector of shapes and contains
@@ -18,12 +19,12 @@ public:
   void printShapesAreaDescending() const;
   void printShapesPerimeterDescending() const;
   
-  void addShape(Shape* shape);
-  void removeShape(Shape* shape);
+  void addShape(std::shared_ptr<Shape>);
+  void removeShape(std::shared_ptr<Shape>);
 
-  static bool compareArea(const Shape* shapeA, const Shape* shapeB);
-  static bool comparePerimeter(const Shape* shapeA, const Shape* shapeB);
+  static bool compareArea(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB);
+  static bool comparePerimeter(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB);
 
 private:
-  std::vector<Shape*> m_shapes;
+  std::vector<std::shared_ptr<Shape>> m_shapes;
 };
