@@ -19,6 +19,7 @@ class infoUniqueWords{
     int getElementCount(std::string);
     int getElementCount(int);
     void incrElementCount(int);
+    void swap(int, int);
     void appendElement(std::string);
     void accountForElement(std::string);
     void print(void);
