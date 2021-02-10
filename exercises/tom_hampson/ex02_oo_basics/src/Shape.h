@@ -20,6 +20,10 @@ public:
   double area() const;
   double perimeter() const;
 
+private:
+  std::string m_shapeType;
+  int m_nSides;
+
 protected:
   //Call these functions inside derived class constructors to set the
   //values for area and perimeter so we don't have to calculate them
@@ -28,9 +32,5 @@ protected:
   virtual void calculatePerimeter() = 0;
   double m_area;
   double m_perimeter;
-
-private:
-  int m_nSides;
-  std::string m_shapeType;
 };
 
