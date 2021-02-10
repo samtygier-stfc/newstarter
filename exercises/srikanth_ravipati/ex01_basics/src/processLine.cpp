@@ -1,26 +1,35 @@
-#include <iostream>
-#include "utils.h"
-#include "infoUniqueWords.h"
+#include "processLine.h"
 
-void processLine(const std::string& lineInput, const std::string& delimiters, infoUniqueWords& uniqueWords){
+void accountForWord(std::map<std::string,int>& inputMap, const std::string& inputWord){
+    auto it = inputMap.find(inputWord);
+    if (it != inputMap.end()){
+       it->second++;
+    } else {
+    inputMap.insert(std::pair<std::string,int>(inputWord,1));
+    }
+}
+
+void processLine(const std::string& lineInput, const std::vector<char>& delimiters, std::map<std::string,int>& inputMap){
     bool isDelimiter;
     std::string word;
+    char tmpChar;
 
     for (int i=0; i <= lineInput.size(); i++){
 
-        isDelimiter = isInputCharDelimiter(lineInput[i], delimiters);
+        tmpChar = lineInput[i];
+        isDelimiter = std::any_of(delimiters.begin(), delimiters.end(), [tmpChar](auto &c){return (c == tmpChar);});
 
-        // Second condition accounts for a word at the end of line
-        // that does end with any of the specified delimiter.
-        if (isDelimiter | (i == lineInput.size())){
-
+        // Second condition to account for a word at the end of line 
+        // that does not have any of the specified delimiter.
+        if (isDelimiter | i == lineInput.size()){
+//           std::cout << "word: " << word << "\n";
            if (word.size() > 4){
-              uniqueWords.accountForElement(word);
+              accountForWord(inputMap, word);
            }
            word = "";
 
         } else {
-           appendLowerCaseChar(word, lineInput[i]);
+           word += static_cast<char>(std::tolower(tmpChar));
         }
     }
 }

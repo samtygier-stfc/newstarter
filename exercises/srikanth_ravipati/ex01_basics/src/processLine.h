@@ -1,4 +1,9 @@
 #include <iostream>
-#include "infoUniqueWords.h"
+#include <cctype>
+#include <vector>
+#include <map>
+#include <iterator>
+#include <algorithm>
 
-void processLine(const std::string&, const std::string&, infoUniqueWords&);
+void accountForWord(std::map<std::string,int>&, const std::string&);
+void processLine(const std::string&, const std::vector<char>&, std::map<std::string,int>&);
