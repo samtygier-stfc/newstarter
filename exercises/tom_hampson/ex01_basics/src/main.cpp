@@ -11,6 +11,7 @@
 #include <map>
 #include <iomanip>
 #include <cmath>
+#include <cctype>
 
  /** Compare number of instances of two words.
   * @param wordA
@@ -151,7 +152,7 @@ int main(int argc, char* argv[])
       }
 
       //Convert word to lower case.
-      std::transform(newWord.begin(), newWord.end(), newWord.begin(), ::tolower);
+      std::transform(newWord.begin(), newWord.end(), newWord.begin(), [](char c) { return static_cast<char>(std::tolower(c)); });
 
       //Increment the count of the word.
       wordCounts[newWord]++;
