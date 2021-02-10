@@ -13,7 +13,7 @@ void processLine(const std::string& lineInput, const std::vector<char>& delimite
     bool isDelimiter;
     std::string word;
     char tmpChar;
-    auto lineSize = lineInput.size();
+    auto lineSize = static_cast<int>(lineInput.size());
 
     for (auto i=0; i <= lineSize; i++){
 
