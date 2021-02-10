@@ -45,12 +45,12 @@ bool writeWordCountsToFile(std::vector<std::pair<std::string, int>>& wordCounts,
   }
 
   //Find length of longest word so that we can add padding to align everything nicely.
-  int longestWordLength = 0;
+  unsigned int longestWordLength = 0;
   for (auto wordCount : wordCounts)
   {
     if (wordCount.first.length() > longestWordLength)
     {
-      longestWordLength = static_cast<int>(wordCount.first.length());
+      longestWordLength = static_cast<unsigned int>(wordCount.first.length());
     }
   }
 
@@ -69,14 +69,14 @@ bool writeWordCountsToFile(std::vector<std::pair<std::string, int>>& wordCounts,
   maxDigits = std::max(5, maxDigits);
 
   //Separation between the headers. The 4 is subtracted because that's the length of the first header ("Word").
-  int headerPadding = 1 + longestWordLength + maxDigits - 4;
+  unsigned int headerPadding = 1 + longestWordLength + maxDigits - 4;
   outputFile << "Word" << std::setw(headerPadding) << "Usage" << std::endl << std::endl;
 
   for (auto wordCount : wordCounts)
   {
     //Calcluate a padding size so that the columns are aligned nicely.
     //Add one so that there's always a gap between the longest word and the count.
-    int paddingSize = 1 + longestWordLength + maxDigits - static_cast<int>(wordCount.first.length());
+    unsigned int paddingSize = 1 + longestWordLength + maxDigits - static_cast<int>(wordCount.first.length());
     outputFile << wordCount.first << std::setw(paddingSize) << wordCount.second << std::endl;
   }
 
