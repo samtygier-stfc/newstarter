@@ -14,7 +14,7 @@ void processLine(const std::string& lineInput, const std::vector<char>& delimite
     std::string word;
     char tmpChar;
 
-    for (int i=0; i <= lineInput.size(); i++){
+    for (auto i=0; i <= lineInput.size(); i++){
 
         tmpChar = lineInput[i];
         isDelimiter = std::any_of(delimiters.begin(), delimiters.end(), [tmpChar](auto &c){return (c == tmpChar);});
