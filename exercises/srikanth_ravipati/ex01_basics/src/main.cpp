@@ -1,13 +1,11 @@
-/**
- * Skeleton main routine
- */
-
 #include <iostream>
-#include <string>
+#include <fstream>
 #include "processLine.h"
+
 
 int main(int argc, char** argv)
 {
+
     if (argc < 2){
        std::cout << "Atleast one argument (filename) should be passed." << "\n";
        return 1;
@@ -17,29 +15,31 @@ int main(int argc, char** argv)
 
     auto nameInFile = argv[1];
 
-    std::string delimiters = "'\".,?!(): -}";
-    std::string line;
-
-    infoUniqueWords uniqueWords;
+    std::vector<char> delimiters = {'\'','\"','.',',','?','!','(',')',':',' ','-','}'};
+    std::map<std::string,int> mapWordCounter;
 
     std::ifstream inputFile;
     inputFile.open(nameInFile, std::ios::in);
 
+    std::string line;
     if (inputFile.is_open()){
         while (getline(inputFile, line)){
-//              std::cout << "line: " << "\t" << line << "\n";
-              processLine(line, delimiters, uniqueWords);
+              processLine(line, delimiters, mapWordCounter);
         }
     }
-
     inputFile.close();
+
+    std::vector<std::pair<std::string,int>> vecWordCounter;
+    for (auto& itr : mapWordCounter){
+        vecWordCounter.push_back(itr);
+    }
+
+    sort(vecWordCounter.begin(), vecWordCounter.end(), [](auto& a, auto& b){ return a.second > b.second;});
 
     std::string nameOutFile = "outfile.txt";
     std::ofstream outputFile;
-
     outputFile.open(nameOutFile, std::ios::out);
-    uniqueWords.printToFile(outputFile);
+    for_each(vecWordCounter.cbegin(), vecWordCounter.cend(), [&outputFile](auto& itr) {outputFile << itr.first << "\t" << itr.second << "\n";});
     outputFile.close();
 
-    return 0;
 }
