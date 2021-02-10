@@ -22,7 +22,7 @@ void processLine(const std::string& lineInput, const std::vector<char>& delimite
 
         // Second condition to account for a word at the end of line 
         // that does not have any of the specified delimiter.
-        if (isDelimiter | (i == lineInput.size())){
+        if (isDelimiter | (i == lineSize)){
 //           std::cout << "word: " << word << "\n";
            if (word.size() > 4){
               accountForWord(inputMap, word);
