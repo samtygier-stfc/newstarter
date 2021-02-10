@@ -21,8 +21,8 @@ public:
   double perimeter() const;
 
 private:
-  std::string m_shapeType;
   int m_nSides;
+  std::string m_shapeType;
 
 protected:
   //Call these functions inside derived class constructors to set the
