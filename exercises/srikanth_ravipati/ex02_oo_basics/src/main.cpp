@@ -4,6 +4,7 @@
 
 #include "Shape.h"
 #include <vector>
+#include <memory>
 
 
 int main(void){
