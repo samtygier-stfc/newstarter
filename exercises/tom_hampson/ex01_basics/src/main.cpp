@@ -46,7 +46,7 @@ bool writeWordCountsToFile(std::vector<std::pair<std::string, int>>& wordCounts,
 
   //Find length of longest word so that we can add padding to align everything nicely.
   unsigned int longestWordLength = 0;
-  for (auto wordCount : wordCounts)
+  for (const auto& wordCount : wordCounts)
   {
     if (wordCount.first.length() > longestWordLength)
     {
@@ -72,7 +72,7 @@ bool writeWordCountsToFile(std::vector<std::pair<std::string, int>>& wordCounts,
   unsigned int headerPadding = 1 + longestWordLength + maxDigits - 4;
   outputFile << "Word" << std::setw(headerPadding) << "Usage" << std::endl << std::endl;
 
-  for (auto wordCount : wordCounts)
+  for (const auto& wordCount : wordCounts)
   {
     //Calcluate a padding size so that the columns are aligned nicely.
     //Add one so that there's always a gap between the longest word and the count.
@@ -168,8 +168,11 @@ int main(int argc, char* argv[])
 
   //Container to store the word counts sorted by count.
   std::vector<std::pair<std::string, int>> sortedWordCounts;
+  //Reserve size of vector since we know what it is already, it will avoid unnecessary re-allocations.
+  sortedWordCounts.reserve(wordCounts.size());
 
-  std::copy(wordCounts.begin(), wordCounts.end(), std::back_inserter(sortedWordCounts));
+  //Move rather than copy because we don't need to use the map again.
+  std::move(wordCounts.begin(), wordCounts.end(), std::back_inserter(sortedWordCounts));
 
   std::sort(sortedWordCounts.begin(), sortedWordCounts.end(), compareWordCount);
 
