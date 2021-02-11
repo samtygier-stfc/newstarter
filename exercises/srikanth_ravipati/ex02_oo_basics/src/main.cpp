@@ -5,6 +5,7 @@
 #include "Shape.h"
 #include <vector>
 #include <memory>
+#include <algorithm>
 
 
 int main(void){
@@ -16,6 +17,9 @@ int main(void){
     vecShape.push_back(std::make_unique<Circle>("Circle", 1, 3.0));
     vecShape.push_back(std::make_unique<Triangle>("Triangle", 2, 3.0, 4.0));
     vecShape.push_back(std::make_unique<Rectangle>("Rectangle", 2, 5.0, 4.0));
+
+    for_each(vecShape.begin(), vecShape.end(), [](auto& itrShape){itrShape->calculateInfo();});
+    for_each(vecShape.begin(), vecShape.end(), [](const auto& itrShape){itrShape->printInfo();});
 
     return 0;
 }
