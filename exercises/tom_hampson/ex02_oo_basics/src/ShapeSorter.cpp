@@ -15,7 +15,7 @@ void ShapeSorter::printShapesOfType(const std::string& shapeType) const
 {
   std::cout << "Shapes of type \"" << shapeType << "\":" << std::endl;
 
-  for (auto shape : m_shapes)
+  for (const auto& shape : m_shapes)
   {
     if (shape->shapeType() == shapeType)
     {
@@ -31,7 +31,7 @@ void ShapeSorter::printShapesOfType(const std::string& shapeType) const
 void ShapeSorter::printShapesWithNSides(const int n) const
 {
   std::cout << "Shapes with " << n << " sides:" << std::endl;
-  for (auto shape : m_shapes)
+  for (const auto& shape : m_shapes)
   {
     if (shape->nSides() == n)
     {
@@ -50,7 +50,7 @@ void ShapeSorter::printShapesAreaDescending() const
   std::sort(sortedShapes.begin(), sortedShapes.end(), compareArea);
 
   std::cout << "Shapes ordered by area:" << std::endl;
-  for (auto shape : sortedShapes)
+  for (const auto& shape : sortedShapes)
   {
     shape->print();
   }
@@ -66,7 +66,7 @@ void ShapeSorter::printShapesPerimeterDescending() const
   std::sort(sortedShapes.begin(), sortedShapes.end(), comparePerimeter);
 
   std::cout << "Shapes ordered by perimeter:" << std::endl;
-  for (auto shape : sortedShapes)
+  for (const auto& shape : sortedShapes)
   {
     shape->print();
   }
@@ -109,7 +109,7 @@ void ShapeSorter::removeShape(std::shared_ptr<Shape> shape)
  * @param shapeB 
  * @return true if shapeA has larger area than shapeB.
 */
-bool ShapeSorter::compareArea(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB)
+bool ShapeSorter::compareArea(const std::shared_ptr<const Shape>& shapeA, const std::shared_ptr<const Shape>& shapeB)
 {
   return shapeA->area() > shapeB->area();
 }
@@ -120,7 +120,7 @@ bool ShapeSorter::compareArea(std::shared_ptr<const Shape> shapeA, std::shared_p
  * @param shapeB 
  * @return true if shapeA has a larger perimeter than shapeB
 */
-bool ShapeSorter::comparePerimeter(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB)
+bool ShapeSorter::comparePerimeter(const std::shared_ptr<const Shape>& shapeA, const std::shared_ptr<const Shape>& shapeB)
 {
   return shapeA->perimeter() > shapeB->perimeter();
 }

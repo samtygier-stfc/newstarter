@@ -22,8 +22,8 @@ public:
   void addShape(std::shared_ptr<Shape>);
   void removeShape(std::shared_ptr<Shape>);
 
-  static bool compareArea(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB);
-  static bool comparePerimeter(std::shared_ptr<const Shape> shapeA, std::shared_ptr<const Shape> shapeB);
+  static bool compareArea(const std::shared_ptr<const Shape>& shapeA, const std::shared_ptr<const Shape>& shapeB);
+  static bool comparePerimeter(const std::shared_ptr<const Shape>& shapeA, const std::shared_ptr<const Shape>& shapeB);
 
 private:
   std::vector<std::shared_ptr<Shape>> m_shapes;
