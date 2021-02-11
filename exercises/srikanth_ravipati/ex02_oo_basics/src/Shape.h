@@ -23,7 +23,7 @@ class Shape{
         double getArea() const { return area; }
 
         bool isSameType(const std::string& inputType) const { return type == inputType;}
-        bool hasEqual_N_Sides(const int& input_N_Sides) const { return nSides == input_N_Sides;}
+        bool hasEqual_N_Sides(const unsigned int& input_N_Sides) const { return nSides == input_N_Sides;}
 
         void printInfo() const;
 };
