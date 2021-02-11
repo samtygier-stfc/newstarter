@@ -35,6 +35,7 @@ class Rectangle : public Shape{
 
     public:
         Rectangle(const std::string&, const unsigned int&, const double&, const double&);
+        Rectangle(const std::string&, const unsigned int&, const double&);
         void calculatePerimeter() override { perimeter = 2 * (side1 + side2); }
         void calculateArea() override { area = side1 * side2; }
 };
