@@ -49,3 +49,14 @@ class Circle : public Shape{
         void calculatePerimeter() override { perimeter = 2.0 * M_PI * radius; }
         void calculateArea() override { area = M_PI * radius  * radius; }
 };
+
+class Triangle : public Shape{
+
+    private:
+        double base, height;
+
+    public:
+        Triangle(const std::string& inputType, const unsigned int&, const double&, const double&);
+        void calculatePerimeter() override { perimeter = base + 2 * sqrt(height * height + (base * base) / 4); }
+        void calculateArea() override { area = 0.5 * base * height; }
+};
