@@ -38,3 +38,14 @@ class Rectangle : public Shape{
         void calculatePerimeter() override { perimeter = 2 * (side1 + side2); }
         void calculateArea() override { area = side1 * side2; }
 };
+
+class Circle : public Shape{
+
+    private:
+        double radius;
+
+    public:
+        Circle(const std::string&, const unsigned int&, const double&);
+        void calculatePerimeter() override { perimeter = 2.0 * M_PI * radius; }
+        void calculateArea() override { area = M_PI * radius  * radius; }
+};
