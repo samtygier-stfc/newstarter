@@ -2,10 +2,7 @@
  * Skeleton main routine
  */
 
-#include "Shape.h"
-#include <vector>
-#include <memory>
-#include <algorithm>
+#include "ShapeSorter.h"
 
 
 int main(void){
@@ -20,6 +17,12 @@ int main(void){
 
     for_each(vecShape.begin(), vecShape.end(), [](auto& itrShape){itrShape->calculateInfo();});
     for_each(vecShape.begin(), vecShape.end(), [](const auto& itrShape){itrShape->printInfo();});
+
+    std::unique_ptr<ShapeSorter> objShapeSorter = std::make_unique<ShapeSorter>();
+    objShapeSorter->equal_N_Sides(vecShape, 1);
+    objShapeSorter->sameType(vecShape, "Rectangle");
+    objShapeSorter->perimeterDescent(vecShape);
+    objShapeSorter->areaDescent(vecShape);
 
     return 0;
 }
