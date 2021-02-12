@@ -7,7 +7,7 @@ int main(int argc, char** argv)
 {
 
     if (argc < 2){
-       std::cout << "Atleast one argument (filename) should be passed." << "\n";
+       throw std::runtime_error("Atleast one argument (filename) should be passed. USAGE: ./a.out inputFileName");
        return 1;
     } else {
     std::cout << "File to be processed: "  << argv[1] << "\n";
