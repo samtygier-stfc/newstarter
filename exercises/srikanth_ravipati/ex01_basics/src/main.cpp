@@ -35,7 +35,7 @@ int main(int argc, char** argv){
         vecWordCounter.push_back(itr);
     }
 
-    sort(vecWordCounter.begin(), vecWordCounter.end(),
+    std::sort(vecWordCounter.begin(), vecWordCounter.end(),
          [](auto& a, auto& b){ return a.second > b.second;});
 
     std::string nameOutFile = "outfile.txt";
