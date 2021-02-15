@@ -3,9 +3,9 @@
 #include "processLine.h"
 
 
-int main(int argc, char** argv){
+int main(int argc, char** argv) {
 
-    if (argc < 2){
+    if (argc < 2) {
         throw std::runtime_error("Atleast one argument (filename) should be "
                                  "passed. USAGE: ./a.out inputFileName");
         return 1;
@@ -23,25 +23,25 @@ int main(int argc, char** argv){
     inputFile.open(nameInFile, std::ios::in);
 
     std::string line;
-    if (inputFile.is_open()){
-        while (getline(inputFile, line)){
+    if (inputFile.is_open()) {
+        while (getline(inputFile, line)) {
             processLine(line, delimiters, mapWordCounter);
         }
     }
     inputFile.close();
 
     std::vector<std::pair<std::string, int>> vecWordCounter;
-    for (auto &itr : mapWordCounter){
+    for (auto &itr : mapWordCounter) {
         vecWordCounter.push_back(itr);
     }
 
     std::sort(vecWordCounter.begin(), vecWordCounter.end(),
-         [](auto& a, auto& b){ return a.second > b.second;});
+        [](auto& a, auto& b){ return a.second > b.second;});
 
     std::string nameOutFile = "outfile.txt";
     std::ofstream outputFile;
     outputFile.open(nameOutFile, std::ios::out);
-    for (auto &vecElement : vecWordCounter){
+    for (auto &vecElement : vecWordCounter) {
         outputFile << vecElement.first << "\t" << vecElement.second << "\n";
     }
     outputFile.close();
