@@ -9,7 +9,8 @@ void accountForWord(std::map<std::string, int> &inputMap, const std::string &inp
     }
 }
 
-void processLine(const std::string &lineInput, const std::vector<char> &delimiters, std::map<std::string, int> &inputMap){
+void processLine(const std::string &lineInput, const std::vector<char> &delimiters, 
+                 std::map<std::string, int> &inputMap){
     bool isDelimiter;
     std::string word;
     char tmpChar;
@@ -18,7 +19,8 @@ void processLine(const std::string &lineInput, const std::vector<char> &delimite
     for (size_t i=0; i <= lineSize; i++){
 
         tmpChar = lineInput[i];
-        isDelimiter = std::any_of(delimiters.begin(), delimiters.end(), [tmpChar](auto &c){return (c == tmpChar);});
+        isDelimiter = std::any_of(delimiters.begin(), delimiters.end(), 
+                                  [tmpChar](auto &c){return (c == tmpChar);});
 
         // Second condition to account for a word at the end of line 
         // that does not have any of the specified delimiter.
