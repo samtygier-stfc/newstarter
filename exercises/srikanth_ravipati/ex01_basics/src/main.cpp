@@ -3,20 +3,19 @@
 #include "processLine.h"
 
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv){
 
     if (argc < 2){
-       throw std::runtime_error("Atleast one argument (filename) should be passed. USAGE: ./a.out inputFileName");
-       return 1;
+        throw std::runtime_error("Atleast one argument (filename) should be passed. USAGE: ./a.out inputFileName");
+        return 1;
     } else {
-    std::cout << "File to be processed: "  << argv[1] << "\n";
+        std::cout << "File to be processed: "  << argv[1] << "\n";
     }
 
     auto nameInFile = argv[1];
 
-    std::vector<char> delimiters = {'\'','\"','.',',','?','!','(',')',':',' ','-','}'};
-    std::map<std::string,int> mapWordCounter;
+    std::vector<char> delimiters = {'\'', '\"', '.', ',', '?', '!', '(', ')', ':', ' ', '-', '}'};
+    std::map<std::string, int> mapWordCounter;
 
     std::ifstream inputFile;
     inputFile.open(nameInFile, std::ios::in);
@@ -24,13 +23,13 @@ int main(int argc, char** argv)
     std::string line;
     if (inputFile.is_open()){
         while (getline(inputFile, line)){
-              processLine(line, delimiters, mapWordCounter);
+            processLine(line, delimiters, mapWordCounter);
         }
     }
     inputFile.close();
 
-    std::vector<std::pair<std::string,int>> vecWordCounter;
-    for (auto& itr : mapWordCounter){
+    std::vector<std::pair<std::string, int>> vecWordCounter;
+    for (auto &itr : mapWordCounter){
         vecWordCounter.push_back(itr);
     }
 
