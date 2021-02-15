@@ -41,8 +41,9 @@ int main(int argc, char** argv){
     std::string nameOutFile = "outfile.txt";
     std::ofstream outputFile;
     outputFile.open(nameOutFile, std::ios::out);
-    for_each(vecWordCounter.cbegin(), vecWordCounter.cend(),
-             [&outputFile](auto& itr) {outputFile << itr.first << "\t" << itr.second << "\n";});
+    for (auto &vecElement : vecWordCounter){
+        outputFile << vecElement.first << "\t" << vecElement.second << "\n";
+    }
     outputFile.close();
 
 }
