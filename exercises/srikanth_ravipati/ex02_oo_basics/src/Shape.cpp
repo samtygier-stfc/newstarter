@@ -1,6 +1,7 @@
 #include "Shape.h"
 
-Shape::Shape(const std::string &inputType, const unsigned int &input_N_Sides)
+Shape::Shape(const std::string &inputType,
+             const unsigned int &input_N_Sides)
   : type { inputType }, nSides { input_N_Sides }
 {
 }
