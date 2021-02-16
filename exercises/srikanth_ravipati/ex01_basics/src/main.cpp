@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include "processLine.h"
 
 
@@ -42,7 +43,9 @@ int main(int argc, char** argv) {
     std::ofstream outputFile;
     outputFile.open(nameOutFile, std::ios::out);
     for (auto &vecElement : vecWordCounter) {
-        outputFile << vecElement.first << "\t" << vecElement.second << "\n";
+        outputFile << std::left << std::setw(20) << vecElement.first
+                   << std::left << std::setw(20) << vecElement.second
+                   << "\n";
     }
     outputFile.close();
 
