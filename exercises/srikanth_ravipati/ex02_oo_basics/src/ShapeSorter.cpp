@@ -2,7 +2,7 @@
 
 void ShapeSorter::areaDescent(std::vector<std::unique_ptr<Shape>> &vecShape) {
   std::cout << "\n" << "Sort and print shapes in the order of area descent " << "\n";
-  sort(vecShape.begin(), vecShape.end(), [] (auto &itrShape1, auto &itrShape2) 
+  std::sort(vecShape.begin(), vecShape.end(), [] (auto &itrShape1, auto &itrShape2)
     { return itrShape1->getArea() > itrShape2->getArea(); });
   for_each(vecShape.begin(), vecShape.end(), 
     [] (const auto &itrShape) { itrShape->printInfo(); });
@@ -10,7 +10,7 @@ void ShapeSorter::areaDescent(std::vector<std::unique_ptr<Shape>> &vecShape) {
 
 void ShapeSorter::perimeterDescent(std::vector<std::unique_ptr<Shape>> &vecShape) {
   std::cout << "\n" << "Sort and print shapes in the order of perimeter descent " << "\n";
-  sort(vecShape.begin(), vecShape.end(), [] (auto &itrShape1, auto &itrShape2) 
+  std::sort(vecShape.begin(), vecShape.end(), [] (auto &itrShape1, auto &itrShape2)
     { return itrShape1->getPerimeter() > itrShape2->getPerimeter(); } );
   for_each(vecShape.begin(), vecShape.end(), 
     [] (const auto &itrShape) { itrShape->printInfo(); });
