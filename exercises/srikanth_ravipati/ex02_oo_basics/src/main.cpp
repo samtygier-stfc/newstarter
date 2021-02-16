@@ -1,3 +1,6 @@
+#include "Rectangle.h"
+#include "Circle.h"
+#include "Triangle.h"
 #include "ShapeSorter.h"
 
 int main(void) {
