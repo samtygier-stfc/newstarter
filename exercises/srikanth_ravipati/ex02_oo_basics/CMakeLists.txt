@@ -28,6 +28,9 @@ set ( SRC_FILES
 
 set ( HDR_FILES
   src/Shape.h
+  src/Rectangle.h
+  src/Circle.h
+  src/Triangle.h
   src/ShapeSorter.h
   # add any additional header files here
 )
