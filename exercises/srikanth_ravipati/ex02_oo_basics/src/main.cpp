@@ -1,11 +1,6 @@
-/**
- * Skeleton main routine
- */
-
 #include "ShapeSorter.h"
 
-
-int main(void){
+int main(void) {
 
     std::vector<std::unique_ptr<Shape>> vecShape;
     vecShape.push_back(std::make_unique<Rectangle>("Rectangle", 2, 3.0, 4.0));
