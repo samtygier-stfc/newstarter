@@ -1,4 +1,3 @@
-#pragma once
 #include "Rectangle.h"
 #include "Circle.h"
 #include "Triangle.h"
