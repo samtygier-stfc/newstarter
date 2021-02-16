@@ -13,8 +13,8 @@ protected:
 public:
   Shape(const std::string &, const unsigned int &);
 
-  virtual void calculatePerimeter(){}
-  virtual void calculateArea(){}
+  virtual void calculatePerimeter() {}
+  virtual void calculateArea() {}
   void calculateInfo();
 
   std::string getType() const { return type; }
