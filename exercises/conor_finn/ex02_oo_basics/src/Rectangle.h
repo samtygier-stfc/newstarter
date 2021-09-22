@@ -2,15 +2,15 @@
 // Created by Conor Finn on 21/09/2021.
 //
 
-#ifndef EX02_OO_BASICS_RECTANGLE_H
-#define EX02_OO_BASICS_RECTANGLE_H
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 
 #include "Shape.h"
 
 class Rectangle : public Shape {
 private:
-    const int m_side1;
-    const int m_side2;
+    const double m_side1;
+    const double m_side2;
 
 public:
     Rectangle(int s1, int s2);
@@ -19,4 +19,4 @@ public:
 };
 
 
-#endif //EX02_OO_BASICS_RECTANGLE_H
+#endif //RECTANGLE_H
