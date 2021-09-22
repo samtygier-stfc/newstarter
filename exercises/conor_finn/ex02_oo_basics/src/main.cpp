@@ -21,9 +21,13 @@ int main() {
     shapes.push_back(tria1);
     shapes.push_back(circ1);
 
+    std::cout << "\nPrinting shapes with 4 sides:\n";
     ShapeSorter::printSides(shapes, 4);
+    std::cout << "\nPrinting rectangles:\n";
     ShapeSorter::printTypes(shapes, "rectangle");
+    std::cout << "\nPrinting shapes ordered by perimeter:\n";
     ShapeSorter::printOrderedPerimeter(shapes);
+    std::cout << "\nPrinting Shapes ordered by area:\n";
     ShapeSorter::printOrderedArea(shapes);
 
     for(Shape *s : shapes) {
