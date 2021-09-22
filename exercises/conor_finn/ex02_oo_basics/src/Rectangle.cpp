@@ -4,10 +4,10 @@
 
 #include "Rectangle.h"
 
-Rectangle::Rectangle(int s1, int s2) : Shape(4, "Rectangle"), m_side1(s1), m_side2(s2){}
+Rectangle::Rectangle(double s1, double s2) : Shape(4, "rectangle"), m_side1(s1), m_side2(s2){}
 
 double Rectangle::perimeter() const {
-    return m_side1 * 2 + m_side1 * 2;
+    return m_side1 * 2 + m_side2 * 2;
 }
 
 double Rectangle::area() const {

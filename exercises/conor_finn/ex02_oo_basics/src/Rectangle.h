@@ -13,7 +13,7 @@ private:
     const double m_side2;
 
 public:
-    Rectangle(int s1, int s2);
+    Rectangle(double s1, double s2);
     double perimeter() const override;
     double area() const override;
 };

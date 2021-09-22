@@ -17,12 +17,24 @@ include ( CommonSetup )
 ###############################################################################
 
 set ( SRC_FILES
-  src/main.cpp
-  # add any additional source files here
+        src/main.cpp
+        src/Triangle.cpp
+        src/Square.cpp
+        src/Circle.cpp
+        src/ShapeSorter.cpp
+        src/Shape.cpp
+        src/Rectangle.cpp
+        # add any additional source files here
 )
 
 set ( HDR_FILES
   # add any additional header files here
-        src/Triangle.cpp src/Triangle.h src/Square.cpp src/Square.h src/Circle.cpp src/Circle.h)
+        src/Shape.h
+        src/Rectangle.h
+        src/Triangle.h
+        src/Square.h
+        src/Circle.h
+        src/ShapeSorter.h
+)
 
 add_executable ( Shapes ${SRC_FILES} ${HDR_FILES} )

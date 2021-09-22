@@ -7,7 +7,7 @@
 #include <utility>
 #include <iostream>
 
-Shape::Shape(int sides, std::string name): m_sides(sides), m_name(std::move(name)) {}
+Shape::Shape(int sides, std::string name): m_sides(sides), m_name(name) {}
 
 int Shape::getNumberOfSides() const { return m_sides;}
 
