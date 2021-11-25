@@ -12,7 +12,7 @@ jobs:
         id: example-data
         with:
           path: ~/files
-          key: example-data
+          key: example-data-1
 
       - name: Download example data
         if: steps.example-data.outputs.cache-hit != 'true'
@@ -22,4 +22,5 @@ jobs:
 
       - name: Run Python tests
         run: |
+          ls -lh ~/files
           python3 ${GITHUB_WORKSPACE}/tests/test_python.py
