@@ -27,7 +27,7 @@ user_source_dir = source_dirs[0]
 user_ex1_main = user_source_dir / "ex01_basics" /"main.py"
 user_ex2_main = user_source_dir / "ex02_oo_basics" /"main.py"
 
-TEST_FILE = "/tmp/Holmes.txt"
+TEST_FILE = "~/files/Holmes.txt"
 
 
 class TestEx(unittest.TestCase):
